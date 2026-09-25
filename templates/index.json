@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero_botanical": {
@@ -95,9 +104,17 @@
         "heading": "Got Questions? We've Got Answers.",
         "subheading": "Everything you need to know about our organic botanical drops, application techniques, and delivery guarantees."
       }
+    },
+    "header_horizon_DrFzc4": {
+      "type": "header-horizon",
+      "name": "Header Horizon",
+      "settings": {
+        "menu": "main-menu"
+      }
     }
   },
   "order": [
+    "header_horizon_DrFzc4",
     "hero_botanical",
     "feature_organic_story",
     "pain_points_grid",
