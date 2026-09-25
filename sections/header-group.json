@@ -1,0 +1,25 @@
+{
+  "type": "header",
+  "name": "Header",
+  "sections": {
+    "announcement_bar": {
+      "type": "announcement-bar-horizon",
+      "settings": {
+        "show_announcement": true,
+        "text": "Free shipping on orders over $50 | 100% Satisfaction Guarantee",
+        "bg_color": "#257942",
+        "text_color": "#ffffff"
+      }
+    },
+    "header_horizon": {
+      "type": "header-horizon",
+      "settings": {
+        "menu": "main-menu"
+      }
+    }
+  },
+  "order": [
+    "announcement_bar",
+    "header_horizon"
+  ]
+}

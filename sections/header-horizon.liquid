@@ -1,0 +1,66 @@
+{{ 'horizon-botanical.css' | asset_url | stylesheet_tag }}
+
+<header class="hb-header-nav">
+  <div class="hb-container">
+    <div class="hb-header-inner">
+      <nav class="hb-nav" aria-label="Main Navigation">
+        <ul class="hb-nav-links">
+          {% for link in section.settings.menu.links %}
+            <li><a href="{{ link.url }}" class="{% if link.current %}active{% endif %}">{{ link.title }}</a></li>
+          {% else %}
+            <li><a href="/" class="active">Home</a></li>
+            <li><a href="/collections/all">All Products</a></li>
+            <li><a href="/pages/contact">Contact</a></li>
+          {% endfor %}
+        </ul>
+      </nav>
+
+      <div class="hb-header-brand">
+        <a href="{{ routes.root_url }}">
+          {% if section.settings.logo != blank %}
+            <img src="{{ section.settings.logo | image_url: width: 220 }}" alt="{{ shop.name }}" width="150" height="38">
+          {% else %}
+            <img src="{{ 'horizon-logo.svg' | asset_url }}" alt="{{ shop.name }}" width="150" height="38">
+          {% endif %}
+        </a>
+      </div>
+
+      <div class="hb-header-actions">
+        <a href="{{ routes.search_url }}" class="hb-icon-btn" aria-label="Search">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </a>
+        <a href="{{ routes.account_url }}" class="hb-icon-btn" aria-label="Account">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+        </a>
+        <a href="{{ routes.cart_url }}" class="hb-icon-btn" aria-label="Cart">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+          <span class="hb-cart-count">{{ cart.item_count }}</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header Horizon",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Header Horizon"
+    }
+  ]
+}
+{% endschema %}

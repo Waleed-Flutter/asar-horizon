@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TIERA BOTANICALS — Plant-Powered Everyday Comfort | Built on Shopify Horizon</title>
+  <meta name="description" content="Experience natural comfort with our handcrafted herbal drops made with pure organic botanicals. Built natively on Shopify Horizon theme architecture.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Horizon Botanical Theme Stylesheet -->
+  <link rel="stylesheet" href="../assets/horizon-botanical.css">
+
+  <style>
+    /* Slide-out Cart Drawer Styling */
+    .cart-drawer-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(18, 28, 20, 0.45);
+      backdrop-filter: blur(6px);
+      z-index: 10001;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    .cart-drawer-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .cart-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      max-width: 420px;
+      background: #ffffff;
+      box-shadow: -10px 0 40px rgba(0, 0, 0, 0.15);
+      z-index: 10002;
+      display: flex;
+      flex-direction: column;
+      transform: translateX(100%);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .cart-drawer.active {
+      transform: translateX(0);
+    }
+    .cart-drawer-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid #eef2ee;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .cart-drawer-header h3 {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #111827;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .cart-drawer-close {
+      background: #f3f5f3;
+      border: none;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: #374151;
+      transition: all 0.2s ease;
+    }
+    .cart-drawer-close:hover {
+      background: #e5ece6;
+      color: #111827;
+    }
+    .cart-drawer-body {
+      padding: 24px;
+      flex-grow: 1;
+      overflow-y: auto;
+    }
+    .cart-item {
+      display: flex;
+      gap: 16px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #f0f3f0;
+      align-items: center;
+    }
+    .cart-item img {
+      width: 72px;
+      height: 72px;
+      border-radius: 12px;
+      object-fit: cover;
+      background: #f5f8f5;
+    }
+    .cart-item-details {
+      flex-grow: 1;
+    }
+    .cart-item-title {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: #111827;
+      margin-bottom: 4px;
+    }
+    .cart-item-price {
+      color: #257942;
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+    .cart-drawer-footer {
+      padding: 24px;
+      border-top: 1px solid #eef2ee;
+      background: #fafbfa;
+    }
+    .cart-subtotal {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: #111827;
+      margin-bottom: 16px;
+    }
+    .shipping-bar {
+      background: #e8f5e9;
+      border-radius: 9999px;
+      height: 6px;
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+    .shipping-progress {
+      background: #257942;
+      height: 100%;
+      width: 100%;
+      border-radius: 9999px;
+    }
+    .shipping-text {
+      font-size: 0.82rem;
+      color: #257942;
+      font-weight: 700;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body class="hb-wrapper">
+
+  <!-- 1. ANNOUNCEMENT BAR -->
+  <div class="hb-announcement">
+    <div class="hb-container">
+      Free shipping on orders over $50 | 100% Satisfaction Guarantee
+    </div>
+  </div>
+
+  <!-- 2. STICKY HEADER -->
+  <header class="hb-header-nav">
+    <div class="hb-container">
+      <div class="hb-header-inner">
+        <!-- Navigation Links -->
+        <nav class="hb-nav" aria-label="Main Navigation">
+          <ul class="hb-nav-links">
+            <li><a href="#" class="active">Home</a></li>
+            <li><a href="#spotlight">All Products</a></li>
+            <li><a href="#faq">Contact</a></li>
+          </ul>
+        </nav>
+
+        <!-- Brand Logo -->
+        <div class="hb-header-brand">
+          <a href="#">
+            <img src="../assets/horizon-logo.svg" alt="TIERA BOTANICALS" width="160" height="38">
+          </a>
+        </div>
+
+        <!-- Action Icons -->
+        <div class="hb-header-actions">
+          <button class="hb-icon-btn" aria-label="Search">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          </button>
+          <button class="hb-icon-btn" aria-label="Account">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+          </button>
+          <button class="hb-icon-btn" id="openCartBtn" aria-label="Shopping Cart">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+            <span class="hb-cart-count" id="cartCount">1</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- 3. HERO SECTION -->
+  <section class="hb-hero-section">
+    <div class="hb-container">
+      <div class="hb-hero-grid">
+        <div class="hb-hero-content">
+          <div class="hb-eyebrow-pill">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+            PLANT-POWERED WELLNESS
+          </div>
+
+          <h1>Everyday Comfort, Thoughtfully Made.</h1>
+          <p class="hb-hero-desc">
+            Experience natural balance with our handcrafted herbal drops made with pure, organic botanical extracts for deep, restorative muscle and joint comfort.
+          </p>
+
+          <div class="hb-hero-features">
+            <div class="hb-hero-feature-item">
+              <span class="hb-hero-feature-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+              </span>
+              <span>Pure Ingredients</span>
+            </div>
+            <div class="hb-hero-feature-item">
+              <span class="hb-hero-feature-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </span>
+              <span>Gentle Formula</span>
+            </div>
+            <div class="hb-hero-feature-item">
+              <span class="hb-hero-feature-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </span>
+              <span>Made in Small Batches</span>
+            </div>
+          </div>
+
+          <div class="hb-hero-actions">
+            <a href="#spotlight" class="hb-btn-primary" id="heroBuyBtn">Shop Best Sellers</a>
+            <a href="#story" class="hb-btn-link">Explore Our Blends &rarr;</a>
+          </div>
+        </div>
+
+        <div class="hb-hero-image-wrap">
+          <img src="../assets/horizon-hero-bottle.jpg" alt="TIERA Organic Relief Dropper on Volcanic Stone" width="480" height="480">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. SCIENCE OF NATURE / ORGANIC STORY -->
+  <section class="hb-story-section" id="story">
+    <div class="hb-container">
+      <div class="hb-story-grid">
+        <div class="hb-story-visual">
+          <img src="../assets/horizon-leaf-dew.jpg" alt="100% Organic Botanical Leaf with Dew" width="440" height="440">
+          <div class="hb-story-badge">
+            <img src="../assets/horizon-organic-badge.svg" alt="100% Organic Certified Badge" width="110" height="110">
+          </div>
+        </div>
+
+        <div class="hb-story-content">
+          <span class="hb-eyebrow">THE SCIENCE OF NATURE</span>
+          <h2>Wellness Should Be Part of Everyday Life</h2>
+          <p>
+            We believe natural relief should be simple, effective, and accessible. Our proprietary cold-pressed extraction preserves vital botanical compounds for maximum comfort and deep cellular absorption.
+          </p>
+          <p>
+            From morning mobility to post-workout relaxation, our clean plant formula absorbs smoothly without greasy residue or artificial fragrances, working seamlessly with your body's natural chemistry.
+          </p>
+          <a href="#ingredients" class="hb-btn-link" style="padding-left: 0;">Discover Our Story &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. TARGET PAIN POINTS GRID (3x2) -->
+  <section class="hb-pain-section" id="pain-points">
+    <div class="hb-container">
+      <div class="hb-section-header">
+        <span class="hb-eyebrow">REAL RELIEF FOR REAL LIFE</span>
+        <h2>Your Day Doesn't Stop When Your Body Feels Tired.</h2>
+        <p>Formulated for targeted comfort where tension and discomfort build up most throughout your daily life.</p>
+      </div>
+
+      <div class="hb-pain-grid">
+        <!-- 1. Desk Worker -->
+        <div class="hb-pain-card">
+          <div class="hb-pain-media">
+            <img src="../assets/pain-desk-worker.jpg" alt="Desk Worker Shoulder Pain" width="400" height="300">
+            <div class="hb-pain-tag-pill">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+              Upper Body
+            </div>
+          </div>
+          <div class="hb-pain-body">
+            <h3>LOWER BACK & SHOULDER TENSION</h3>
+            <p>Calms tight trapezius muscles and neck stiffness after hours seated at the desk, monitor, or computer.</p>
+          </div>
+        </div>
+
+        <!-- 2. Active Knee -->
+        <div class="hb-pain-card">
+          <div class="hb-pain-media">
+            <img src="../assets/pain-knee-runner.jpg" alt="Active Runner Knee Soreness" width="400" height="300">
+            <div class="hb-pain-tag-pill">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+              Active Recovery
+            </div>
+          </div>
+          <div class="hb-pain-body">
+            <h3>RUNNING & JOINT DISCOMFORT</h3>
+            <p>Restores smooth flexion and eases stressed knee joints and ligaments after high-impact training.</p>
+          </div>
+        </div>
+
+        <!-- 3. Lumbar Spine -->
+        <div class="hb-pain-card">
+          <div class="hb-pain-media">
+            <img src="../assets/pain-lower-back.jpg" alt="Lumbar Spine Discomfort" width="400" height="300">
+            <div class="hb-pain-tag-pill">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M13 3h-2v10h2V3zm4.83 2.17l-1.42 1.42C17.99 7.86 19 9.81 19 12c0 3.87-3.13 7-7 7s-7-3.13-7-7c0-2.19 1.01-4.14 2.58-5.42L6.17 5.17C4.23 6.82 3 9.26 3 12c0 4.97 4.03 9 9 9s9-4.03 9-9c0-2.74-1.23-5.18-3.17-6.83z"/></svg>
+              Lumbar Relief
+            </div>
+          </div>
+          <div class="hb-pain-body">
+            <h3>LUMBAR & SPINE STIFFNESS</h3>
+            <p>Soothes deep muscular tightness along spinal erectors and sacral joints for effortless, confident posture.</p>
+          </div>
+        </div>
+
+        <!-- 4. Posture Family -->
+        <div class="hb-pain-card">
+          <div class="hb-pain-media">
+            <img src="../assets/pain-family-posture.jpg" alt="Floor Sitting & Everyday Strain" width="400" height="300">
+            <div class="hb-pain-tag-pill">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+              Everyday Life
+            </div>
+          </div>
+          <div class="hb-pain-body">
+            <h3>POSTURE & EVERYDAY STRAIN</h3>
+            <p>Relieves soreness from lifting children, sitting on carpet floors, or awkward body twists.</p>
+          </div>
+        </div>
+
+        <!-- 5. Chores & Ironing -->
+        <div class="hb-pain-card">
+          <div class="hb-pain-media">
+            <img src="../assets/pain-chores-ironing.jpg" alt="Household Chores Fatigue" width="400" height="300">
+            <div class="hb-pain-tag-pill">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+              Domestic Chores
+            </div>
+          </div>
+          <div class="hb-pain-body">
+            <h3>DAILY CHORES & BENDING FATIGUE</h3>
+            <p>Provides soothing comfort from hours of continuous standing, domestic chores, and lifting heavy laundry.</p>
+          </div>
+        </div>
+
+        <!-- 6. Driving Seat -->
+        <div class="hb-pain-card">
+          <div class="hb-pain-media">
+            <img src="../assets/pain-driving-seat.jpg" alt="Long Drives & Travel Tension" width="400" height="300">
+            <div class="hb-pain-tag-pill">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.85 7h10.29l1.04 3H5.81l1.04-3zM19 17H5v-4.66l.12-.34h13.77l.11.34V17z"/></svg>
+              Travel & Commute
+            </div>
+          </div>
+          <div class="hb-pain-body">
+            <h3>LONG DRIVES & TRAVEL FATIGUE</h3>
+            <p>Counteracts stiffness and spinal compression from bumper-to-bumper commutes and cramped flights.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. PRODUCT SPOTLIGHT (TRIO DROPPERS) -->
+  <section class="hb-spotlight-section" id="spotlight">
+    <div class="hb-container">
+      <div class="hb-spotlight-grid">
+        <div class="hb-spotlight-visual">
+          <img src="../assets/horizon-bottles-trio.jpg" alt="Botanical Care Trio Droppers" width="480" height="480">
+        </div>
+
+        <div class="hb-spotlight-content">
+          <span class="hb-eyebrow">DAILY RELIEF BLENDS</span>
+          <h2>Botanical Care for Everyday Movement</h2>
+          <p>
+            Targeted botanical formulas designed to calm tension and restore flexibility naturally without greasy residue or harsh synthetic ingredients.
+          </p>
+
+          <div class="hb-spotlight-features">
+            <div class="hb-spotlight-feature">
+              <div class="hb-spotlight-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </div>
+              <div>
+                <h4>Non-Toxic</h4>
+                <span>100% clean botanical extracts</span>
+              </div>
+            </div>
+
+            <div class="hb-spotlight-feature">
+              <div class="hb-spotlight-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              </div>
+              <div>
+                <h4>Fast Absorbing</h4>
+                <span>Deep transdermal delivery</span>
+              </div>
+            </div>
+
+            <div class="hb-spotlight-feature">
+              <div class="hb-spotlight-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+              </div>
+              <div>
+                <h4>Targeted Relief</h4>
+                <span>Calms sore joints & muscles</span>
+              </div>
+            </div>
+
+            <div class="hb-spotlight-feature">
+              <div class="hb-spotlight-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+              </div>
+              <div>
+                <h4>Clean Formula</h4>
+                <span>Cruelty-free & filler-free</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hb-hero-actions">
+            <button class="hb-btn-primary" id="spotlightAddBtn">Shop the Collection</button>
+            <a href="#ingredients" class="hb-btn-link">See Ingredients &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. INGREDIENTS SHOWCASE (10 ROUND BADGES) -->
+  <section class="hb-ingredients-section" id="ingredients">
+    <div class="hb-container">
+      <div class="hb-section-header">
+        <span class="hb-eyebrow">WHAT'S INSIDE</span>
+        <h2>Powered by Botanicals. Created with Purpose.</h2>
+        <p>Every ingredient is chosen with intention, verified for purity, and sustainably sourced.</p>
+      </div>
+
+      <div class="hb-ingredients-grid">
+        <!-- 1 -->
+        <div class="hb-ingredient-card">
+          <div class="hb-ingredient-circle">
+            <img src="../assets/ingredient-wintergreen.jpg" alt="Wintergreen" width="104" height="104">
+          </div>
+          <div class="hb-ingredient-title">Wintergreen</div>
+          <div class="hb-ingredient-desc">Natural methyl salicylate for cooling relief</div>
+        </div>
+
+        <!-- 2 -->
+        <div class="hb-ingredient-card">
+          <div class="hb-ingredient-circle">
+            <img src="../assets/ingredient-lipids.jpg" alt="Pure Lipids" width="104" height="104">
+          </div>
+          <div class="hb-ingredient-title">Pure Lipids</div>
+          <div class="hb-ingredient-desc">Bio-identical carrier for deep transdermal delivery</div>
+        </div>
+
+        <!-- 3 -->
+        <div class="hb-ingredient-card">
+          <div class="hb-ingredient-circle">
+            <img src="../assets/ingredient-peppermint.jpg" alt="Peppermint" width="104" height="104">
+          </div>
+          <div class="hb-ingredient-title">Peppermint</div>
+          <div class="hb-ingredient-desc">Cooling menthol that calms acute tension</div>
+        </div>
+
+        <!-- 4 -->
+        <div class="hb-ingredient-card">
+          <div class="hb-ingredient-circle">
+            <img src="../assets/ingredient-arnica.jpg" alt="Arnica Montana" width="104" height="104">
+          </div>
+          <div class="hb-ingredient-title">Arnica</div>
+          <div class="hb-ingredient-desc">Traditional restorative flower for bruising & joints</div>
+        </div>
+
+        <!-- 5 -->
+        <div class="hb-ingredient-card">
+          <div class="hb-ingredient-circle">
+            <img src="../assets/ingredient-camphor.jpg" alt="Camphor" width="104" height="104">
+          </div>
+          <div class="hb-ingredient-title">Camphor</div>
+          <div class="hb-ingredient-desc">Stimulates micro-circulation for soothing warmth</div>
+        </div>
+
+        <!-- 6 -->
+        <div class="hb-ingredient-card">
+          <div class="hb-ingredient-circle">
+            <img src="../assets/ingredient-eucalyptus.jpg" alt="Eucalyptus" width="104" height="104">
+          </div>
+          <div class="hb-ingredient-title">Eucalyptus</div>
+          <div class="hb-ingredient-desc">Purifying cineole compounds to ease stiffness</div>
+        </div>
+
+        <!-- 7 -->
+        <div class="hb-ingredient-card">
+          <div class="hb-ingredient-circle">
+            <img src="../assets/ingredient-ginger.jpg" alt="Ginger Root" width="104" height="104">
+          </div>
+          <div class="hb-ingredient-title">Ginger Root</div>
+          <div class="hb-ingredient-desc">Natural gingerols that melt joint tightness</div>
+        </div>
+
+        <!-- 8 -->
+        <div class="hb-ingredient-card">
+          <div class="hb-ingredient-circle">
+            <img src="../assets/ingredient-frankincense.jpg" alt="Frankincense" width="104" height="104">
+          </div>
+          <div class="hb-ingredient-title">Frankincense</div>
+          <div class="hb-ingredient-desc">Ancient Boswellia resin that soothes joints</div>
+        </div>
+
+        <!-- 9 -->
+        <div class="hb-ingredient-card">
+          <div class="hb-ingredient-circle">
+            <img src="../assets/ingredient-cloves.jpg" alt="Clove Bud" width="104" height="104">
+          </div>
+          <div class="hb-ingredient-title">Clove Bud</div>
+          <div class="hb-ingredient-desc">Eugenol-rich flower buds for deep ache comfort</div>
+        </div>
+
+        <!-- 10 -->
+        <div class="hb-ingredient-card">
+          <div class="hb-ingredient-circle">
+            <img src="../assets/ingredient-rosemary.jpg" alt="Rosemary" width="104" height="104">
+          </div>
+          <div class="hb-ingredient-title">Rosemary</div>
+          <div class="hb-ingredient-desc">Rosmarinic acid supporting cellular tissue recovery</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. DAILY ROUTINE 3-STEP GUIDE -->
+  <section class="hb-routine-section" id="routine">
+    <div class="hb-container">
+      <div class="hb-section-header">
+        <span class="hb-eyebrow">EASY 3 STEPS</span>
+        <h2>Simple Enough for Every Day.</h2>
+        <p>Incorporate soothing botanical nourishment into your day in three effortless steps.</p>
+      </div>
+
+      <div class="hb-routine-grid">
+        <!-- 01 Apply -->
+        <div class="hb-routine-card">
+          <div class="hb-routine-img">
+            <img src="../assets/routine-step-apply.jpg" alt="Step 01 Apply" width="400" height="400">
+          </div>
+          <div class="hb-routine-body">
+            <span class="hb-routine-step-num">STEP 01</span>
+            <h3 class="hb-routine-title">Apply</h3>
+            <p class="hb-routine-desc">Dispense 3 to 5 drops directly onto the targeted joint, shoulder, or muscle area.</p>
+          </div>
+        </div>
+
+        <!-- 02 Massage -->
+        <div class="hb-routine-card">
+          <div class="hb-routine-img">
+            <img src="../assets/routine-step-massage.jpg" alt="Step 02 Massage" width="400" height="400">
+          </div>
+          <div class="hb-routine-body">
+            <span class="hb-routine-step-num">STEP 02</span>
+            <h3 class="hb-routine-title">Massage</h3>
+            <p class="hb-routine-desc">Massage with gentle, firm circular motions for 30 to 60 seconds until absorbed.</p>
+          </div>
+        </div>
+
+        <!-- 03 Feel Relief -->
+        <div class="hb-routine-card">
+          <div class="hb-routine-img">
+            <img src="../assets/routine-step-relief.jpg" alt="Step 03 Feel Relief" width="400" height="400">
+          </div>
+          <div class="hb-routine-body">
+            <span class="hb-routine-step-num">STEP 03</span>
+            <h3 class="hb-routine-title">Feel Relief</h3>
+            <p class="hb-routine-desc">Notice gentle soothing warmth and calming relief spread through tight fibers in 10-15 minutes.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="hb-routine-trust-bar">
+        <div class="hb-routine-trust-item">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>Fast absorption in under 90 seconds</span>
+        </div>
+        <div class="hb-routine-trust-item">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>Non-greasy, silky finish</span>
+        </div>
+        <div class="hb-routine-trust-item">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>100% Plant-powered aroma</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. WHY CHOOSE US (TRUST PILLARS) -->
+  <section class="hb-trust-section">
+    <div class="hb-container">
+      <div class="hb-section-header">
+        <span class="hb-eyebrow">WHY US</span>
+        <h2>Natural Wellness, Without the Guesswork.</h2>
+        <p>We bring clinical transparency and organic purity to every step of our formulation process.</p>
+      </div>
+
+      <div class="hb-trust-grid">
+        <div class="hb-trust-card">
+          <div class="hb-trust-icon-box">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3>Clean & Safe Formulas</h3>
+          <p>100% free of petroleum, mineral oil, synthetic fragrances, and artificial chemicals. Safe for sensitive skin.</p>
+        </div>
+
+        <div class="hb-trust-card">
+          <div class="hb-trust-icon-box">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+          </div>
+          <h3>Transparent Sourcing</h3>
+          <p>Every botanical harvest is traceable to ethical organic growers with batch certificates of analysis.</p>
+        </div>
+
+        <div class="hb-trust-card">
+          <div class="hb-trust-icon-box">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          </div>
+          <h3>Third-Party Tested</h3>
+          <p>Every single batch is independently analyzed for heavy metals, pesticides, and absolute microbial purity.</p>
+        </div>
+
+        <div class="hb-trust-card">
+          <div class="hb-trust-icon-box">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+          </div>
+          <h3>Eco-Friendly Bottling</h3>
+          <p>Amber UV-blocking glass preserves volatile essential plant molecules, packaged in sustainable recyclable cartons.</p>
+        </div>
+
+        <div class="hb-trust-card">
+          <div class="hb-trust-icon-box">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
+          <h3>Cruelty-Free Always</h3>
+          <p>Never tested on animals. Ethically formulated with kindness and deep respect for our natural world.</p>
+        </div>
+
+        <div class="hb-trust-card">
+          <div class="hb-trust-icon-box">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          </div>
+          <h3>Fast Reliable Shipping</h3>
+          <p>Dispatched within 24 hours with live tracking and our worry-free 30-day money back satisfaction guarantee.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. FAQ ACCORDION -->
+  <section class="hb-faq-section" id="faq">
+    <div class="hb-container">
+      <div class="hb-section-header">
+        <span class="hb-eyebrow">FREQUENTLY ASKED QUESTIONS</span>
+        <h2>Got Questions? We've Got Answers.</h2>
+        <p>Everything you need to know about our organic botanical drops, application techniques, and guarantees.</p>
+      </div>
+
+      <div class="hb-faq-list">
+        <div class="hb-faq-item active">
+          <button class="hb-faq-question" type="button">
+            <span>How often should I apply the botanical oil?</span>
+            <span class="hb-faq-toggle-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            </span>
+          </button>
+          <div class="hb-faq-answer">
+            <p>For best results, apply 3 to 5 drops 2 to 3 times daily directly to the area of discomfort. We recommend applying in the morning before starting your day, and at night before bed for deep overnight muscular relaxation.</p>
+          </div>
+        </div>
+
+        <div class="hb-faq-item">
+          <button class="hb-faq-question" type="button">
+            <span>How quickly will I feel relief after application?</span>
+            <span class="hb-faq-toggle-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            </span>
+          </button>
+          <div class="hb-faq-answer">
+            <p>Most customers report an initial soothing cooling sensation within 60 to 90 seconds, followed by gentle, deep therapeutic warming and tension relief within 10 to 15 minutes as the botanical lipids absorb transdermally.</p>
+          </div>
+        </div>
+
+        <div class="hb-faq-item">
+          <button class="hb-faq-question" type="button">
+            <span>Will it leave a greasy residue or stain clothing?</span>
+            <span class="hb-faq-toggle-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            </span>
+          </button>
+          <div class="hb-faq-answer">
+            <p>No! Our proprietary micro-filtered formulation is bio-identical to human dermal lipids, allowing it to penetrate completely within 60 to 90 seconds. Once gently massaged in, it leaves skin silky-smooth with zero sticky film or residue.</p>
+          </div>
+        </div>
+
+        <div class="hb-faq-item">
+          <button class="hb-faq-question" type="button">
+            <span>Can this be used on both joints and tight muscles?</span>
+            <span class="hb-faq-toggle-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            </span>
+          </button>
+          <div class="hb-faq-answer">
+            <p>Yes. The formula combines joint-supporting boswellia and arnica with muscle-relaxing wintergreen and peppermint, making it equally effective for knee, hip, shoulder, lower back, and neck tension.</p>
+          </div>
+        </div>
+
+        <div class="hb-faq-item">
+          <button class="hb-faq-question" type="button">
+            <span>Are the ingredients 100% natural and safe for daily use?</span>
+            <span class="hb-faq-toggle-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            </span>
+          </button>
+          <div class="hb-faq-answer">
+            <p>Absolutely. Every bottle contains 100% pure botanical oils and lipid extracts, free of NSAIDs, steroids, mineral oil, artificial scents, or parabens. It is non-habit forming and designed for continuous daily therapy.</p>
+          </div>
+        </div>
+
+        <div class="hb-faq-item">
+          <button class="hb-faq-question" type="button">
+            <span>What is your return and guarantee policy?</span>
+            <span class="hb-faq-toggle-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            </span>
+          </button>
+          <div class="hb-faq-answer">
+            <p>We stand behind our blends with a 30-Day 100% Satisfaction Guarantee. If you do not experience noticeable relief and comfort, contact our support team for a hassle-free refund or replacement.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11. FOOTER -->
+  <footer class="hb-footer">
+    <div class="hb-container">
+      <div class="hb-footer-grid">
+        <div class="hb-footer-col">
+          <div class="hb-footer-brand">
+            <img src="../assets/horizon-logo.svg" alt="TIERA BOTANICALS" width="160" height="38">
+          </div>
+          <p class="hb-footer-about">
+            Pure, plant-powered botanical drops formulated for natural everyday comfort, restorative joint care, and effortless daily movement.
+          </p>
+        </div>
+
+        <div class="hb-footer-col">
+          <h4>Quick Links</h4>
+          <ul class="hb-footer-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#spotlight">All Products</a></li>
+            <li><a href="#ingredients">Our Ingredients</a></li>
+            <li><a href="#faq">Frequently Asked</a></li>
+            <li><a href="#">Track My Order</a></li>
+          </ul>
+        </div>
+
+        <div class="hb-footer-col">
+          <h4>Customer Care</h4>
+          <ul class="hb-footer-links">
+            <li><a href="#">Shipping Policy</a></li>
+            <li><a href="#">Refund & Return Policy</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Support Center</a></li>
+          </ul>
+        </div>
+
+        <div class="hb-footer-col">
+          <h4>Contact Us</h4>
+          <ul class="hb-footer-links">
+            <li>hello@tierabotanicals.com</li>
+            <li>Mon – Fri: 9:00 AM – 6:00 PM</li>
+            <li>Tracked Nationwide Express Delivery</li>
+            <li>100% Eco-Sustainable Packaging</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="hb-footer-bottom">
+        <div>&copy; 2026 TIERA BOTANICALS. All rights reserved. Built on Shopify Horizon.</div>
+        <div class="hb-payment-badges">
+          <svg width="38" height="24" viewBox="0 0 38 24" fill="none"><rect width="38" height="24" rx="3" fill="#ffffff" stroke="#e0e0e0"/><path d="M15 17L17 7H20L18 17H15Z" fill="#1434CB"/><path d="M25 7.2C24.3 7 23.3 6.8 22.1 6.8C19.3 6.8 17.3 8.3 17.3 10.4C17.3 12 18.7 12.8 19.8 13.3C20.9 13.8 21.3 14.2 21.3 14.7C21.3 15.5 20.3 15.9 19.4 15.9C18.1 15.9 17.3 15.6 16.5 15.2L16.1 15L15.7 17.2C16.4 17.5 17.7 17.8 19.1 17.8C22.1 17.8 24 16.3 24 14.1C24 12.8 23.2 11.8 21.5 11C20.5 10.5 19.9 10.2 19.9 9.6C19.9 9.1 20.5 8.6 21.7 8.6C22.6 8.6 23.4 8.8 23.9 9.1L24.2 9.2L25 7.2Z" fill="#1434CB"/></svg>
+          <svg width="38" height="24" viewBox="0 0 38 24" fill="none"><rect width="38" height="24" rx="3" fill="#ffffff" stroke="#e0e0e0"/><circle cx="15" cy="12" r="7" fill="#EB001B"/><circle cx="23" cy="12" r="7" fill="#F79E1B" fill-opacity="0.8"/></svg>
+          <svg width="38" height="24" viewBox="0 0 38 24" fill="none"><rect width="38" height="24" rx="3" fill="#ffffff" stroke="#e0e0e0"/><rect x="6" y="8" width="26" height="8" rx="2" fill="#257942"/><text x="19" y="14" font-size="6" font-weight="700" fill="#ffffff" text-anchor="middle" font-family="sans-serif">COD</text></svg>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SLIDE-OUT CART DRAWER -->
+  <div class="cart-drawer-overlay" id="cartOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Your Cart">
+    <div class="cart-drawer-header">
+      <h3>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+        Your Bag (<span id="drawerCount">1</span>)
+      </h3>
+      <button class="cart-drawer-close" id="closeCartBtn" aria-label="Close Cart">&times;</button>
+    </div>
+
+    <div class="cart-drawer-body">
+      <div class="shipping-text">🎉 You unlocked FREE Shipping!</div>
+      <div class="shipping-bar">
+        <div class="shipping-progress"></div>
+      </div>
+
+      <div class="cart-item">
+        <img src="../assets/horizon-hero-bottle.jpg" alt="TIERA Organic Relief Dropper">
+        <div class="cart-item-details">
+          <div class="cart-item-title">Everyday Comfort Botanical Dropper</div>
+          <div style="font-size: 0.8rem; color: #6b7280; margin-bottom: 4px;">Size: 30ml (Approx. 600 drops)</div>
+          <div class="cart-item-price">$38.00</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cart-drawer-footer">
+      <div class="cart-subtotal">
+        <span>Subtotal</span>
+        <span>$38.00</span>
+      </div>
+      <button class="hb-btn-primary" style="width: 100%; justify-content: center; padding: 15px;" onclick="alert('Proceeding to Official Shopify Secure Checkout...');">
+        Secure Checkout &rarr;
+      </button>
+      <div style="text-align: center; margin-top: 12px; font-size: 0.78rem; color: #6b7280;">
+        🔒 Encrypted 256-Bit SSL Checkout • 30-Day Guarantee
+      </div>
+    </div>
+  </aside>
+
+  <!-- Interactive Scripts -->
+  <script>
+    // FAQ Accordion
+    document.querySelectorAll('.hb-faq-question').forEach(button => {
+      button.addEventListener('click', () => {
+        const item = button.parentElement;
+        const isActive = item.classList.contains('active');
+        document.querySelectorAll('.hb-faq-item').forEach(i => i.classList.remove('active'));
+        if (!isActive) {
+          item.classList.add('active');
+        }
+      });
+    });
+
+    // Cart Drawer Toggle
+    const cartDrawer = document.getElementById('cartDrawer');
+    const cartOverlay = document.getElementById('cartOverlay');
+    const openCartBtn = document.getElementById('openCartBtn');
+    const closeCartBtn = document.getElementById('closeCartBtn');
+    const heroBuyBtn = document.getElementById('heroBuyBtn');
+    const spotlightAddBtn = document.getElementById('spotlightAddBtn');
+
+    function openCart() {
+      cartDrawer.classList.add('active');
+      cartOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeCart() {
+      cartDrawer.classList.remove('active');
+      cartOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    openCartBtn.addEventListener('click', openCart);
+    closeCartBtn.addEventListener('click', closeCart);
+    cartOverlay.addEventListener('click', closeCart);
+
+    if (spotlightAddBtn) {
+      spotlightAddBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        openCart();
+      });
+    }
+
+    // Smooth scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>

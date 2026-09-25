@@ -1,0 +1,134 @@
+{{ 'horizon-botanical.css' | asset_url | stylesheet_tag }}
+
+<section class="hb-ingredients-section" id="ingredients">
+  <div class="hb-container">
+    <div class="hb-section-header">
+      <span class="hb-eyebrow">{{ section.settings.eyebrow }}</span>
+      <h2>{{ section.settings.heading }}</h2>
+      <p>{{ section.settings.subheading }}</p>
+    </div>
+
+    <div class="hb-ingredients-grid">
+      <!-- 1. Wintergreen -->
+      <div class="hb-ingredient-card">
+        <div class="hb-ingredient-circle">
+          <img src="{{ 'ingredient-wintergreen.jpg' | asset_url }}" alt="Wintergreen" width="104" height="104" loading="lazy">
+        </div>
+        <div class="hb-ingredient-title">Wintergreen</div>
+        <div class="hb-ingredient-desc">Natural methyl salicylate for cooling comfort</div>
+      </div>
+
+      <!-- 2. Botanical Lipids -->
+      <div class="hb-ingredient-card">
+        <div class="hb-ingredient-circle">
+          <img src="{{ 'ingredient-lipids.jpg' | asset_url }}" alt="Pure Lipids" width="104" height="104" loading="lazy">
+        </div>
+        <div class="hb-ingredient-title">Pure Lipids</div>
+        <div class="hb-ingredient-desc">Deep bio-identical carrier for rapid cellular delivery</div>
+      </div>
+
+      <!-- 3. Peppermint -->
+      <div class="hb-ingredient-card">
+        <div class="hb-ingredient-circle">
+          <img src="{{ 'ingredient-peppermint.jpg' | asset_url }}" alt="Peppermint" width="104" height="104" loading="lazy">
+        </div>
+        <div class="hb-ingredient-title">Peppermint</div>
+        <div class="hb-ingredient-desc">Cooling menthol that calms acute muscle strain</div>
+      </div>
+
+      <!-- 4. Arnica Montana -->
+      <div class="hb-ingredient-card">
+        <div class="hb-ingredient-circle">
+          <img src="{{ 'ingredient-arnica.jpg' | asset_url }}" alt="Arnica Montana" width="104" height="104" loading="lazy">
+        </div>
+        <div class="hb-ingredient-title">Arnica Montana</div>
+        <div class="hb-ingredient-desc">Traditional restorative for joint and soft-tissue care</div>
+      </div>
+
+      <!-- 5. Camphor -->
+      <div class="hb-ingredient-card">
+        <div class="hb-ingredient-circle">
+          <img src="{{ 'ingredient-camphor.jpg' | asset_url }}" alt="Camphor" width="104" height="104" loading="lazy">
+        </div>
+        <div class="hb-ingredient-title">Camphor</div>
+        <div class="hb-ingredient-desc">Stimulates micro-circulation for soothing warmth</div>
+      </div>
+
+      <!-- 6. Eucalyptus -->
+      <div class="hb-ingredient-card">
+        <div class="hb-ingredient-circle">
+          <img src="{{ 'ingredient-eucalyptus.jpg' | asset_url }}" alt="Eucalyptus" width="104" height="104" loading="lazy">
+        </div>
+        <div class="hb-ingredient-title">Eucalyptus</div>
+        <div class="hb-ingredient-desc">Purifying cineole compounds to ease stiffness</div>
+      </div>
+
+      <!-- 7. Ginger Root -->
+      <div class="hb-ingredient-card">
+        <div class="hb-ingredient-circle">
+          <img src="{{ 'ingredient-ginger.jpg' | asset_url }}" alt="Ginger Root" width="104" height="104" loading="lazy">
+        </div>
+        <div class="hb-ingredient-title">Ginger Root</div>
+        <div class="hb-ingredient-desc">Natural gingerols that warm tight muscle knots</div>
+      </div>
+
+      <!-- 8. Frankincense -->
+      <div class="hb-ingredient-card">
+        <div class="hb-ingredient-circle">
+          <img src="{{ 'ingredient-frankincense.jpg' | asset_url }}" alt="Frankincense" width="104" height="104" loading="lazy">
+        </div>
+        <div class="hb-ingredient-title">Frankincense</div>
+        <div class="hb-ingredient-desc">Ancient Boswellia resin that soothes joint inflammation</div>
+      </div>
+
+      <!-- 9. Clove Bud -->
+      <div class="hb-ingredient-card">
+        <div class="hb-ingredient-circle">
+          <img src="{{ 'ingredient-cloves.jpg' | asset_url }}" alt="Clove Bud" width="104" height="104" loading="lazy">
+        </div>
+        <div class="hb-ingredient-title">Clove Bud</div>
+        <div class="hb-ingredient-desc">Eugenol-rich flower buds for sustained relief</div>
+      </div>
+
+      <!-- 10. Rosemary -->
+      <div class="hb-ingredient-card">
+        <div class="hb-ingredient-circle">
+          <img src="{{ 'ingredient-rosemary.jpg' | asset_url }}" alt="Rosemary" width="104" height="104" loading="lazy">
+        </div>
+        <div class="hb-ingredient-title">Rosemary</div>
+        <div class="hb-ingredient-desc">Rosmarinic acid antioxidant supporting tissue vigor</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Botanical Ingredients",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Text",
+      "default": "WHAT'S INSIDE"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Powered by Botanicals. Created with Purpose."
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Every botanical extract is carefully selected for therapeutic efficacy, sustainability, and absolute purity."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Botanical Ingredients"
+    }
+  ]
+}
+{% endschema %}

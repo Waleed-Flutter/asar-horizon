@@ -1,0 +1,69 @@
+{{ 'horizon-botanical.css' | asset_url | stylesheet_tag }}
+
+<footer class="hb-footer">
+  <div class="hb-container">
+    <div class="hb-footer-grid">
+      <div class="hb-footer-col">
+        <div class="hb-footer-brand">
+          <img src="{{ 'horizon-logo.svg' | asset_url }}" alt="{{ shop.name }}" width="150" height="38">
+        </div>
+        <p class="hb-footer-about">
+          Pure, plant-powered botanical drops formulated for natural everyday comfort, restorative joint care, and effortless daily movement.
+        </p>
+      </div>
+
+      <div class="hb-footer-col">
+        <h4>Quick Links</h4>
+        <ul class="hb-footer-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/collections/all">All Products</a></li>
+          <li><a href="#ingredients">Our Ingredients</a></li>
+          <li><a href="#faq">Frequently Asked</a></li>
+          <li><a href="/pages/track-order">Track My Order</a></li>
+        </ul>
+      </div>
+
+      <div class="hb-footer-col">
+        <h4>Customer Care</h4>
+        <ul class="hb-footer-links">
+          <li><a href="/pages/shipping">Shipping Policy</a></li>
+          <li><a href="/pages/refunds">Refund & Return Policy</a></li>
+          <li><a href="/pages/privacy">Privacy Policy</a></li>
+          <li><a href="/pages/terms">Terms of Service</a></li>
+          <li><a href="/pages/faq">Support Center</a></li>
+        </ul>
+      </div>
+
+      <div class="hb-footer-col">
+        <h4>Contact Us</h4>
+        <ul class="hb-footer-links">
+          <li>hello@tierabotanicals.com</li>
+          <li>Mon – Fri: 9:00 AM – 6:00 PM</li>
+          <li>Direct Tracked Express Delivery</li>
+          <li>100% Eco-Sustainable Packaging</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="hb-footer-bottom">
+      <div>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved. Powered by Shopify Horizon.</div>
+      <div class="hb-payment-badges">
+        <svg width="38" height="24" viewBox="0 0 38 24" fill="none"><rect width="38" height="24" rx="3" fill="#ffffff" stroke="#e0e0e0"/><path d="M15 17L17 7H20L18 17H15Z" fill="#1434CB"/><path d="M25 7.2C24.3 7 23.3 6.8 22.1 6.8C19.3 6.8 17.3 8.3 17.3 10.4C17.3 12 18.7 12.8 19.8 13.3C20.9 13.8 21.3 14.2 21.3 14.7C21.3 15.5 20.3 15.9 19.4 15.9C18.1 15.9 17.3 15.6 16.5 15.2L16.1 15L15.7 17.2C16.4 17.5 17.7 17.8 19.1 17.8C22.1 17.8 24 16.3 24 14.1C24 12.8 23.2 11.8 21.5 11C20.5 10.5 19.9 10.2 19.9 9.6C19.9 9.1 20.5 8.6 21.7 8.6C22.6 8.6 23.4 8.8 23.9 9.1L24.2 9.2L25 7.2Z" fill="#1434CB"/></svg>
+        <svg width="38" height="24" viewBox="0 0 38 24" fill="none"><rect width="38" height="24" rx="3" fill="#ffffff" stroke="#e0e0e0"/><circle cx="15" cy="12" r="7" fill="#EB001B"/><circle cx="23" cy="12" r="7" fill="#F79E1B" fill-opacity="0.8"/></svg>
+        <svg width="38" height="24" viewBox="0 0 38 24" fill="none"><rect width="38" height="24" rx="3" fill="#ffffff" stroke="#e0e0e0"/><rect x="6" y="8" width="26" height="8" rx="2" fill="#257942"/><text x="19" y="14" font-size="6" font-weight="700" fill="#ffffff" text-anchor="middle" font-family="sans-serif">COD</text></svg>
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer Horizon",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Footer Horizon"
+    }
+  ]
+}
+{% endschema %}

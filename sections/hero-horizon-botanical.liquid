@@ -1,0 +1,133 @@
+{{ 'horizon-botanical.css' | asset_url | stylesheet_tag }}
+
+<section class="hb-hero-section">
+  <div class="hb-container">
+    <div class="hb-hero-grid">
+      <div class="hb-hero-content">
+        {% if section.settings.badge_text != blank %}
+          <div class="hb-eyebrow-pill">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+            {{ section.settings.badge_text }}
+          </div>
+        {% endif %}
+
+        <h1>{{ section.settings.heading }}</h1>
+        <p class="hb-hero-desc">{{ section.settings.subtext }}</p>
+
+        <div class="hb-hero-features">
+          <div class="hb-hero-feature-item">
+            <span class="hb-hero-feature-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+            </span>
+            <span>{{ section.settings.feature_1 }}</span>
+          </div>
+          <div class="hb-hero-feature-item">
+            <span class="hb-hero-feature-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </span>
+            <span>{{ section.settings.feature_2 }}</span>
+          </div>
+          <div class="hb-hero-feature-item">
+            <span class="hb-hero-feature-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </span>
+            <span>{{ section.settings.feature_3 }}</span>
+          </div>
+        </div>
+
+        <div class="hb-hero-actions">
+          <a href="{{ section.settings.btn_primary_link | default: '/collections/all' }}" class="hb-btn-primary">
+            {{ section.settings.btn_primary_text }}
+          </a>
+          <a href="{{ section.settings.btn_secondary_link | default: '#story' }}" class="hb-btn-link">
+            {{ section.settings.btn_secondary_text }} &rarr;
+          </a>
+        </div>
+      </div>
+
+      <div class="hb-hero-image-wrap">
+        {% if section.settings.hero_image != blank %}
+          <img src="{{ section.settings.hero_image | image_url: width: 900 }}" alt="{{ section.settings.heading | escape }}" width="480" height="480" loading="eager">
+        {% else %}
+          <img src="{{ 'horizon-hero-bottle.jpg' | asset_url }}" alt="Everyday Comfort Botanical Dropper" width="480" height="480" loading="eager">
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero Botanical",
+  "settings": [
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge Text",
+      "default": "PLANT-POWERED WELLNESS"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Everyday Comfort, Thoughtfully Made."
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "Experience natural balance with our handcrafted herbal drops made with pure, organic botanical extracts for deep, restorative muscle and joint comfort."
+    },
+    {
+      "type": "text",
+      "id": "feature_1",
+      "label": "Feature 1",
+      "default": "Pure Ingredients"
+    },
+    {
+      "type": "text",
+      "id": "feature_2",
+      "label": "Feature 2",
+      "default": "Gentle Formula"
+    },
+    {
+      "type": "text",
+      "id": "feature_3",
+      "label": "Feature 3",
+      "default": "Made in Small Batches"
+    },
+    {
+      "type": "text",
+      "id": "btn_primary_text",
+      "label": "Primary Button Text",
+      "default": "Shop Best Sellers"
+    },
+    {
+      "type": "url",
+      "id": "btn_primary_link",
+      "label": "Primary Button Link"
+    },
+    {
+      "type": "text",
+      "id": "btn_secondary_text",
+      "label": "Secondary Button Text",
+      "default": "Explore Our Blends"
+    },
+    {
+      "type": "url",
+      "id": "btn_secondary_link",
+      "label": "Secondary Button Link"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Botanical"
+    }
+  ]
+}
+{% endschema %}

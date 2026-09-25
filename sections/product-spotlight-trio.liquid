@@ -1,0 +1,130 @@
+{{ 'horizon-botanical.css' | asset_url | stylesheet_tag }}
+
+<section class="hb-spotlight-section">
+  <div class="hb-container">
+    <div class="hb-spotlight-grid">
+      <div class="hb-spotlight-visual">
+        {% if section.settings.image != blank %}
+          <img src="{{ section.settings.image | image_url: width: 900 }}" alt="{{ section.settings.heading | escape }}" width="480" height="480" loading="lazy">
+        {% else %}
+          <img src="{{ 'horizon-bottles-trio.jpg' | asset_url }}" alt="Botanical Care Dropper Trio" width="480" height="480" loading="lazy">
+        {% endif %}
+      </div>
+
+      <div class="hb-spotlight-content">
+        <span class="hb-eyebrow">{{ section.settings.eyebrow }}</span>
+        <h2>{{ section.settings.heading }}</h2>
+        <p>{{ section.settings.description }}</p>
+
+        <div class="hb-spotlight-features">
+          <div class="hb-spotlight-feature">
+            <div class="hb-spotlight-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div>
+              <h4>Non-Toxic</h4>
+              <span>Pure natural extracts</span>
+            </div>
+          </div>
+
+          <div class="hb-spotlight-feature">
+            <div class="hb-spotlight-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            </div>
+            <div>
+              <h4>Fast Absorbing</h4>
+              <span>Sub-minute transdermal delivery</span>
+            </div>
+          </div>
+
+          <div class="hb-spotlight-feature">
+            <div class="hb-spotlight-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+            </div>
+            <div>
+              <h4>Targeted Relief</h4>
+              <span>Calms joint & muscle tension</span>
+            </div>
+          </div>
+
+          <div class="hb-spotlight-feature">
+            <div class="hb-spotlight-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+            </div>
+            <div>
+              <h4>Clean Formula</h4>
+              <span>Zero mineral oils or parabens</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hb-hero-actions">
+          <a href="{{ section.settings.primary_cta_link | default: '/collections/all' }}" class="hb-btn-primary">
+            {{ section.settings.primary_cta_text }}
+          </a>
+          <a href="{{ section.settings.secondary_cta_link | default: '#ingredients' }}" class="hb-btn-link">
+            {{ section.settings.secondary_cta_text }} &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product Spotlight Trio",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Text",
+      "default": "DAILY RELIEF BLENDS"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Botanical Care for Everyday Movement"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Targeted botanical formulas designed to calm tension and restore flexibility naturally without greasy residue or harsh synthetic ingredients."
+    },
+    {
+      "type": "text",
+      "id": "primary_cta_text",
+      "label": "Primary CTA Text",
+      "default": "Shop the Collection"
+    },
+    {
+      "type": "url",
+      "id": "primary_cta_link",
+      "label": "Primary CTA Link"
+    },
+    {
+      "type": "text",
+      "id": "secondary_cta_text",
+      "label": "Secondary CTA Text",
+      "default": "See Ingredients"
+    },
+    {
+      "type": "url",
+      "id": "secondary_cta_link",
+      "label": "Secondary CTA Link"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Spotlight Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Spotlight Trio"
+    }
+  ]
+}
+{% endschema %}

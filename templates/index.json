@@ -1,0 +1,110 @@
+{
+  "sections": {
+    "hero_botanical": {
+      "type": "hero-horizon-botanical",
+      "settings": {
+        "badge_text": "PLANT-POWERED WELLNESS",
+        "heading": "Everyday Comfort, Thoughtfully Made.",
+        "subtext": "Experience natural balance with our handcrafted herbal drops made with pure, organic botanical extracts for deep, restorative muscle and joint comfort.",
+        "feature_1": "Pure Ingredients",
+        "feature_2": "Gentle Formula",
+        "feature_3": "Made in Small Batches",
+        "btn_primary_text": "Shop Best Sellers",
+        "btn_primary_link": "/collections/all",
+        "btn_secondary_text": "Explore Our Blends",
+        "btn_secondary_link": "#story"
+      }
+    },
+    "feature_organic_story": {
+      "type": "feature-organic-story",
+      "settings": {
+        "eyebrow": "THE SCIENCE OF NATURE",
+        "heading": "Wellness Should Be Part of Everyday Life",
+        "paragraph_1": "We believe physical relief should be pure, natural, and accessible. Our bio-active extraction process preserves vital botanical terpenes and fatty acids for deep transdermal absorption.",
+        "paragraph_2": "From morning stiffness to post-activity recovery, our clean formula works with your body's natural physiology to calm tension at the source without synthetic blockers or greasy residue.",
+        "cta_text": "Discover Our Story",
+        "cta_link": "#ingredients"
+      }
+    },
+    "pain_points_grid": {
+      "type": "pain-points-grid",
+      "settings": {
+        "eyebrow": "REAL RELIEF FOR REAL LIFE",
+        "heading": "Your Day Doesn't Stop When Your Body Feels Tired.",
+        "subheading": "Formulated for targeted comfort where tension, fatigue, and soreness build up most during busy routines.",
+        "card_1_title": "LOWER BACK & SHOULDER TENSION",
+        "card_1_desc": "Calms tight trapezius muscles and neck stiffness caused by prolonged screen time, bad ergonomic chairs, and desk work.",
+        "card_2_title": "RUNNING & JOINT DISCOMFORT",
+        "card_2_desc": "Eases stressed knees and tight calf muscles after athletic workouts, running pavement, or high-intensity training sessions.",
+        "card_3_title": "LUMBAR & SPINE STIFFNESS",
+        "card_3_desc": "Soothes deep muscular tightness along lumbar vertebrae and sacral joints so you can stand and walk with effortless posture.",
+        "card_4_title": "POSTURE & EVERYDAY STRAIN",
+        "card_4_desc": "Relieves aches from picking up children, prolonged carpet floor sitting, or awkward twisting throughout the busy day.",
+        "card_5_title": "DAILY CHORES & BENDING FATIGUE",
+        "card_5_desc": "Provides soothing comfort from hours on your feet, repetitive bending, grocery carrying, and laundry chores.",
+        "card_6_title": "LONG DRIVES & TRAVEL FATIGUE",
+        "card_6_desc": "Counteracts lower back compression and hip tightness resulting from daily commutes, bumper-to-bumper traffic, and flight travel."
+      }
+    },
+    "product_spotlight_trio": {
+      "type": "product-spotlight-trio",
+      "settings": {
+        "eyebrow": "DAILY RELIEF BLENDS",
+        "heading": "Botanical Care for Everyday Movement",
+        "description": "Targeted botanical formulas designed to calm tension and restore flexibility naturally without greasy residue or harsh synthetic ingredients.",
+        "primary_cta_text": "Shop the Collection",
+        "primary_cta_link": "/collections/all",
+        "secondary_cta_text": "See Ingredients",
+        "secondary_cta_link": "#ingredients"
+      }
+    },
+    "ingredients_showcase": {
+      "type": "ingredients-botanical-showcase",
+      "settings": {
+        "eyebrow": "WHAT'S INSIDE",
+        "heading": "Powered by Botanicals. Created with Purpose.",
+        "subheading": "Every botanical extract is carefully selected for therapeutic efficacy, sustainability, and absolute purity."
+      }
+    },
+    "daily_routine_steps": {
+      "type": "daily-routine-steps",
+      "settings": {
+        "eyebrow": "EASY 3 STEPS",
+        "heading": "Simple Enough for Every Day.",
+        "subheading": "Incorporate soothing botanical nourishment into your morning routine or post-work relaxation in three effortless steps.",
+        "step_1_title": "Apply",
+        "step_1_desc": "Dispense 3 to 5 drops directly onto the targeted joint, shoulder, lower back, or muscle area.",
+        "step_2_title": "Massage",
+        "step_2_desc": "Massage with gentle, firm circular motions for 30 to 60 seconds until absorbed completely into the skin.",
+        "step_3_title": "Feel Relief",
+        "step_3_desc": "Notice gentle therapeutic warmth and calming relief spread through tight fibers within 10 to 15 minutes."
+      }
+    },
+    "why_choose_grid": {
+      "type": "why-choose-grid",
+      "settings": {
+        "eyebrow": "WHY US",
+        "heading": "Natural Wellness, Without the Guesswork.",
+        "subheading": "We bring clinical transparency and organic purity to every step of our formulation process."
+      }
+    },
+    "faq_accordion": {
+      "type": "faq-accordion",
+      "settings": {
+        "eyebrow": "FREQUENTLY ASKED QUESTIONS",
+        "heading": "Got Questions? We've Got Answers.",
+        "subheading": "Everything you need to know about our organic botanical drops, application techniques, and delivery guarantees."
+      }
+    }
+  },
+  "order": [
+    "hero_botanical",
+    "feature_organic_story",
+    "pain_points_grid",
+    "product_spotlight_trio",
+    "ingredients_showcase",
+    "daily_routine_steps",
+    "why_choose_grid",
+    "faq_accordion"
+  ]
+}

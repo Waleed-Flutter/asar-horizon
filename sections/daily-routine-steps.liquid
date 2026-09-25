@@ -1,0 +1,131 @@
+{{ 'horizon-botanical.css' | asset_url | stylesheet_tag }}
+
+<section class="hb-routine-section">
+  <div class="hb-container">
+    <div class="hb-section-header">
+      <span class="hb-eyebrow">{{ section.settings.eyebrow }}</span>
+      <h2>{{ section.settings.heading }}</h2>
+      <p>{{ section.settings.subheading }}</p>
+    </div>
+
+    <div class="hb-routine-grid">
+      <!-- Step 01: Apply -->
+      <div class="hb-routine-card">
+        <div class="hb-routine-img">
+          <img src="{{ 'routine-step-apply.jpg' | asset_url }}" alt="Step 01 Apply" width="400" height="400" loading="lazy">
+        </div>
+        <div class="hb-routine-body">
+          <span class="hb-routine-step-num">STEP 01</span>
+          <h3 class="hb-routine-title">{{ section.settings.step_1_title }}</h3>
+          <p class="hb-routine-desc">{{ section.settings.step_1_desc }}</p>
+        </div>
+      </div>
+
+      <!-- Step 02: Massage -->
+      <div class="hb-routine-card">
+        <div class="hb-routine-img">
+          <img src="{{ 'routine-step-massage.jpg' | asset_url }}" alt="Step 02 Massage" width="400" height="400" loading="lazy">
+        </div>
+        <div class="hb-routine-body">
+          <span class="hb-routine-step-num">STEP 02</span>
+          <h3 class="hb-routine-title">{{ section.settings.step_2_title }}</h3>
+          <p class="hb-routine-desc">{{ section.settings.step_2_desc }}</p>
+        </div>
+      </div>
+
+      <!-- Step 03: Feel Relief -->
+      <div class="hb-routine-card">
+        <div class="hb-routine-img">
+          <img src="{{ 'routine-step-relief.jpg' | asset_url }}" alt="Step 03 Feel Relief" width="400" height="400" loading="lazy">
+        </div>
+        <div class="hb-routine-body">
+          <span class="hb-routine-step-num">STEP 03</span>
+          <h3 class="hb-routine-title">{{ section.settings.step_3_title }}</h3>
+          <p class="hb-routine-desc">{{ section.settings.step_3_desc }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="hb-routine-trust-bar">
+      <div class="hb-routine-trust-item">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        <span>Fast absorption in under 90 seconds</span>
+      </div>
+      <div class="hb-routine-trust-item">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        <span>Non-greasy, silky finish</span>
+      </div>
+      <div class="hb-routine-trust-item">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        <span>100% Plant-powered therapeutic aroma</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Daily Routine Steps",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Text",
+      "default": "EASY 3 STEPS"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Simple Enough for Every Day."
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Incorporate soothing botanical nourishment into your morning routine or post-work relaxation in three effortless steps."
+    },
+    {
+      "type": "text",
+      "id": "step_1_title",
+      "label": "Step 1 Title",
+      "default": "Apply"
+    },
+    {
+      "type": "textarea",
+      "id": "step_1_desc",
+      "label": "Step 1 Description",
+      "default": "Dispense 3 to 5 drops directly onto the targeted joint, shoulder, lower back, or muscle area."
+    },
+    {
+      "type": "text",
+      "id": "step_2_title",
+      "label": "Step 2 Title",
+      "default": "Massage"
+    },
+    {
+      "type": "textarea",
+      "id": "step_2_desc",
+      "label": "Step 2 Description",
+      "default": "Massage with gentle, firm circular motions for 30 to 60 seconds until absorbed completely into the skin."
+    },
+    {
+      "type": "text",
+      "id": "step_3_title",
+      "label": "Step 3 Title",
+      "default": "Feel Relief"
+    },
+    {
+      "type": "textarea",
+      "id": "step_3_desc",
+      "label": "Step 3 Description",
+      "default": "Notice gentle therapeutic warmth and calming relief spread through tight fibers within 10 to 15 minutes."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Daily Routine Steps"
+    }
+  ]
+}
+{% endschema %}
