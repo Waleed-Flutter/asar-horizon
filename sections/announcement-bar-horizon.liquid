@@ -8,9 +8,12 @@
   </div>
 {% endif %}
 
-{% endschema %}
+{% schema %}
 {
   "name": "Announcement Bar",
+  "enabled_on": {
+    "groups": ["header"]
+  },
   "settings": [
     {
       "type": "checkbox",
