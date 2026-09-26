@@ -4,7 +4,52 @@
   "sections": {
     "footer_botanical": {
       "type": "footer-horizon-botanical",
-      "settings": {}
+      "blocks": {
+        "brand_info": {
+          "type": "brand_info",
+          "settings": {
+            "logo_width": 150,
+            "about_text": "Pure, plant-powered botanical drops formulated for natural everyday comfort, restorative joint care, and effortless daily movement."
+          }
+        },
+        "links_quick": {
+          "type": "link_column",
+          "settings": {
+            "heading": "Quick Links"
+          }
+        },
+        "links_care": {
+          "type": "link_column",
+          "settings": {
+            "heading": "Customer Care"
+          }
+        },
+        "contact_info": {
+          "type": "contact_column",
+          "settings": {
+            "heading": "Contact Us",
+            "email": "hello@tierabotanicals.com",
+            "hours": "Mon \u2013 Fri: 9:00 AM \u2013 6:00 PM",
+            "delivery_badge": "Direct Tracked Express Delivery",
+            "eco_badge": "100% Eco-Sustainable Packaging"
+          }
+        }
+      },
+      "block_order": [
+        "brand_info",
+        "links_quick",
+        "links_care",
+        "contact_info"
+      ],
+      "settings": {
+        "background_color": "#15331e",
+        "text_color": "#f2f7f3",
+        "show_payment_icons": true,
+        "show_cod_badge": true,
+        "copyright_text": "All rights reserved. Powered by Shopify Horizon.",
+        "padding_top": 64,
+        "padding_bottom": 40
+      }
     }
   },
   "order": [

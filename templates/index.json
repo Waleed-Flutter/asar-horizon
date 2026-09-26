@@ -1,27 +1,45 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
     "hero_botanical": {
       "type": "hero-horizon-botanical",
+      "blocks": {
+        "hero_feat_1": {
+          "type": "feature_highlight",
+          "settings": {
+            "icon": "leaf",
+            "text": "Pure Ingredients"
+          }
+        },
+        "hero_feat_2": {
+          "type": "feature_highlight",
+          "settings": {
+            "icon": "droplet",
+            "text": "Gentle Formula"
+          }
+        },
+        "hero_feat_3": {
+          "type": "feature_highlight",
+          "settings": {
+            "icon": "check",
+            "text": "Made in Small Batches"
+          }
+        }
+      },
+      "block_order": [
+        "hero_feat_1",
+        "hero_feat_2",
+        "hero_feat_3"
+      ],
       "settings": {
         "badge_text": "PLANT-POWERED WELLNESS",
         "heading": "Everyday Comfort, Thoughtfully Made.",
         "subtext": "Experience natural balance with our handcrafted herbal drops made with pure, organic botanical extracts for deep, restorative muscle and joint comfort.",
-        "feature_1": "Pure Ingredients",
-        "feature_2": "Gentle Formula",
-        "feature_3": "Made in Small Batches",
         "btn_primary_text": "Shop Best Sellers",
         "btn_primary_link": "/collections/all",
         "btn_secondary_text": "Explore Our Blends",
-        "btn_secondary_link": "#story"
+        "btn_secondary_link": "#story",
+        "padding_top": 80,
+        "padding_bottom": 80
       }
     },
     "feature_organic_story": {
@@ -32,31 +50,116 @@
         "paragraph_1": "We believe physical relief should be pure, natural, and accessible. Our bio-active extraction process preserves vital botanical terpenes and fatty acids for deep transdermal absorption.",
         "paragraph_2": "From morning stiffness to post-activity recovery, our clean formula works with your body's natural physiology to calm tension at the source without synthetic blockers or greasy residue.",
         "cta_text": "Discover Our Story",
-        "cta_link": "#ingredients"
+        "cta_link": "#ingredients",
+        "padding_top": 88,
+        "padding_bottom": 88
       }
     },
     "pain_points_grid": {
       "type": "pain-points-grid",
+      "blocks": {
+        "card_1": {
+          "type": "pain_card",
+          "settings": {
+            "category": "WORK FROM HOME",
+            "title": "LOWER BACK & SHOULDER TENSION",
+            "description": "Calms tight trapezius muscles and neck stiffness caused by prolonged screen time, bad ergonomic chairs, and desk work.",
+            "fallback_image": "pain-desk-worker.jpg"
+          }
+        },
+        "card_2": {
+          "type": "pain_card",
+          "settings": {
+            "category": "PHYSICAL TRAINING",
+            "title": "RUNNING & JOINT DISCOMFORT",
+            "description": "Eases stressed knees and tight calf muscles after athletic workouts, running pavement, or high-intensity training sessions.",
+            "fallback_image": "pain-knee-runner.jpg"
+          }
+        },
+        "card_3": {
+          "type": "pain_card",
+          "settings": {
+            "category": "ACTIVE DAYS",
+            "title": "LUMBAR & SPINE STIFFNESS",
+            "description": "Soothes deep muscular tightness along lumbar vertebrae and sacral joints so you can stand and walk with effortless posture.",
+            "fallback_image": "pain-lower-back.jpg"
+          }
+        },
+        "card_4": {
+          "type": "pain_card",
+          "settings": {
+            "category": "FAMILY LIFE",
+            "title": "POSTURE & EVERYDAY STRAIN",
+            "description": "Relieves aches from picking up children, prolonged carpet floor sitting, or awkward twisting throughout the busy day.",
+            "fallback_image": "pain-family-posture.jpg"
+          }
+        },
+        "card_5": {
+          "type": "pain_card",
+          "settings": {
+            "category": "HOUSEHOLD CHORES",
+            "title": "DAILY CHORES & BENDING FATIGUE",
+            "description": "Provides soothing comfort from hours on your feet, repetitive bending, grocery carrying, and laundry chores.",
+            "fallback_image": "pain-chores-ironing.jpg"
+          }
+        },
+        "card_6": {
+          "type": "pain_card",
+          "settings": {
+            "category": "COMMUTES & TRAVEL",
+            "title": "LONG DRIVES & TRAVEL FATIGUE",
+            "description": "Counteracts lower back compression and hip tightness resulting from daily commutes, bumper-to-bumper traffic, and flight travel.",
+            "fallback_image": "pain-driving-seat.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "card_1",
+        "card_2",
+        "card_3",
+        "card_4",
+        "card_5",
+        "card_6"
+      ],
       "settings": {
         "eyebrow": "REAL RELIEF FOR REAL LIFE",
         "heading": "Your Day Doesn't Stop When Your Body Feels Tired.",
         "subheading": "Formulated for targeted comfort where tension, fatigue, and soreness build up most during busy routines.",
-        "card_1_title": "LOWER BACK & SHOULDER TENSION",
-        "card_1_desc": "Calms tight trapezius muscles and neck stiffness caused by prolonged screen time, bad ergonomic chairs, and desk work.",
-        "card_2_title": "RUNNING & JOINT DISCOMFORT",
-        "card_2_desc": "Eases stressed knees and tight calf muscles after athletic workouts, running pavement, or high-intensity training sessions.",
-        "card_3_title": "LUMBAR & SPINE STIFFNESS",
-        "card_3_desc": "Soothes deep muscular tightness along lumbar vertebrae and sacral joints so you can stand and walk with effortless posture.",
-        "card_4_title": "POSTURE & EVERYDAY STRAIN",
-        "card_4_desc": "Relieves aches from picking up children, prolonged carpet floor sitting, or awkward twisting throughout the busy day.",
-        "card_5_title": "DAILY CHORES & BENDING FATIGUE",
-        "card_5_desc": "Provides soothing comfort from hours on your feet, repetitive bending, grocery carrying, and laundry chores.",
-        "card_6_title": "LONG DRIVES & TRAVEL FATIGUE",
-        "card_6_desc": "Counteracts lower back compression and hip tightness resulting from daily commutes, bumper-to-bumper traffic, and flight travel."
+        "columns_desktop": 3,
+        "padding_top": 88,
+        "padding_bottom": 88
       }
     },
     "product_spotlight_trio": {
       "type": "product-spotlight-trio",
+      "blocks": {
+        "spot_feat_1": {
+          "type": "feature",
+          "settings": {
+            "icon": "leaf",
+            "text": "100% Cold-Pressed Plant Actives"
+          }
+        },
+        "spot_feat_2": {
+          "type": "feature",
+          "settings": {
+            "icon": "droplet",
+            "text": "Fast Absorption in 90 Seconds"
+          }
+        },
+        "spot_feat_3": {
+          "type": "feature",
+          "settings": {
+            "icon": "shield",
+            "text": "Cruelty-Free & Lab Verified"
+          }
+        }
+      },
+      "block_order": [
+        "spot_feat_1",
+        "spot_feat_2",
+        "spot_feat_3"
+      ],
       "settings": {
         "eyebrow": "DAILY RELIEF BLENDS",
         "heading": "Botanical Care for Everyday Movement",
@@ -64,45 +167,326 @@
         "primary_cta_text": "Shop the Collection",
         "primary_cta_link": "/collections/all",
         "secondary_cta_text": "See Ingredients",
-        "secondary_cta_link": "#ingredients"
+        "secondary_cta_link": "#ingredients",
+        "padding_top": 88,
+        "padding_bottom": 88
       }
     },
     "ingredients_showcase": {
       "type": "ingredients-botanical-showcase",
+      "blocks": {
+        "ing_1": {
+          "type": "ingredient",
+          "settings": {
+            "title": "Wintergreen",
+            "description": "Natural methyl salicylate for cooling comfort",
+            "fallback_image": "ingredient-wintergreen.jpg"
+          }
+        },
+        "ing_2": {
+          "type": "ingredient",
+          "settings": {
+            "title": "Pure Lipids",
+            "description": "Deep bio-identical carrier for rapid cellular delivery",
+            "fallback_image": "ingredient-lipids.jpg"
+          }
+        },
+        "ing_3": {
+          "type": "ingredient",
+          "settings": {
+            "title": "Peppermint",
+            "description": "Cooling menthol that calms acute muscle strain",
+            "fallback_image": "ingredient-peppermint.jpg"
+          }
+        },
+        "ing_4": {
+          "type": "ingredient",
+          "settings": {
+            "title": "Arnica Montana",
+            "description": "Traditional restorative for joint and soft-tissue care",
+            "fallback_image": "ingredient-arnica.jpg"
+          }
+        },
+        "ing_5": {
+          "type": "ingredient",
+          "settings": {
+            "title": "Camphor",
+            "description": "Stimulates micro-circulation for soothing warmth",
+            "fallback_image": "ingredient-camphor.jpg"
+          }
+        },
+        "ing_6": {
+          "type": "ingredient",
+          "settings": {
+            "title": "Eucalyptus",
+            "description": "Purifying cineole compounds to ease stiffness",
+            "fallback_image": "ingredient-eucalyptus.jpg"
+          }
+        },
+        "ing_7": {
+          "type": "ingredient",
+          "settings": {
+            "title": "Ginger Root",
+            "description": "Natural gingerols that warm tight muscle knots",
+            "fallback_image": "ingredient-ginger.jpg"
+          }
+        },
+        "ing_8": {
+          "type": "ingredient",
+          "settings": {
+            "title": "Frankincense",
+            "description": "Ancient Boswellia resin that soothes joint inflammation",
+            "fallback_image": "ingredient-frankincense.jpg"
+          }
+        },
+        "ing_9": {
+          "type": "ingredient",
+          "settings": {
+            "title": "Clove Bud",
+            "description": "Eugenol-rich flower buds for sustained relief",
+            "fallback_image": "ingredient-cloves.jpg"
+          }
+        },
+        "ing_10": {
+          "type": "ingredient",
+          "settings": {
+            "title": "Rosemary",
+            "description": "Rosmarinic acid antioxidant supporting tissue vigor",
+            "fallback_image": "ingredient-rosemary.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "ing_1",
+        "ing_2",
+        "ing_3",
+        "ing_4",
+        "ing_5",
+        "ing_6",
+        "ing_7",
+        "ing_8",
+        "ing_9",
+        "ing_10"
+      ],
       "settings": {
         "eyebrow": "WHAT'S INSIDE",
         "heading": "Powered by Botanicals. Created with Purpose.",
-        "subheading": "Every botanical extract is carefully selected for therapeutic efficacy, sustainability, and absolute purity."
+        "subheading": "Every botanical extract is carefully selected for therapeutic efficacy, sustainability, and absolute purity.",
+        "columns_desktop": 5,
+        "padding_top": 88,
+        "padding_bottom": 88
       }
     },
     "daily_routine_steps": {
       "type": "daily-routine-steps",
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "step_number": "STEP 01",
+            "title": "Apply",
+            "description": "Dispense 3 to 5 drops directly onto the targeted joint, shoulder, lower back, or muscle area.",
+            "fallback_image": "routine-step-apply.jpg"
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "step_number": "STEP 02",
+            "title": "Massage",
+            "description": "Massage with gentle, firm circular motions for 30 to 60 seconds until absorbed completely into the skin.",
+            "fallback_image": "routine-step-massage.jpg"
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "step_number": "STEP 03",
+            "title": "Feel Relief",
+            "description": "Notice gentle therapeutic warmth and calming relief spread through tight fibers within 10 to 15 minutes.",
+            "fallback_image": "routine-step-relief.jpg"
+          }
+        },
+        "trust_1": {
+          "type": "trust_point",
+          "settings": {
+            "text": "Fast absorption in under 90 seconds"
+          }
+        },
+        "trust_2": {
+          "type": "trust_point",
+          "settings": {
+            "text": "Non-greasy, silky finish"
+          }
+        },
+        "trust_3": {
+          "type": "trust_point",
+          "settings": {
+            "text": "100% Plant-powered therapeutic aroma"
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3",
+        "trust_1",
+        "trust_2",
+        "trust_3"
+      ],
       "settings": {
         "eyebrow": "EASY 3 STEPS",
         "heading": "Simple Enough for Every Day.",
         "subheading": "Incorporate soothing botanical nourishment into your morning routine or post-work relaxation in three effortless steps.",
-        "step_1_title": "Apply",
-        "step_1_desc": "Dispense 3 to 5 drops directly onto the targeted joint, shoulder, lower back, or muscle area.",
-        "step_2_title": "Massage",
-        "step_2_desc": "Massage with gentle, firm circular motions for 30 to 60 seconds until absorbed completely into the skin.",
-        "step_3_title": "Feel Relief",
-        "step_3_desc": "Notice gentle therapeutic warmth and calming relief spread through tight fibers within 10 to 15 minutes."
+        "padding_top": 88,
+        "padding_bottom": 88
       }
     },
     "why_choose_grid": {
       "type": "why-choose-grid",
+      "blocks": {
+        "why_1": {
+          "type": "benefit",
+          "settings": {
+            "icon": "shield",
+            "title": "Clean & Safe Formulas",
+            "description": "100% free of petroleum, mineral oil, synthetic fragrances, and artificial chemicals. Gentle enough for sensitive skin."
+          }
+        },
+        "why_2": {
+          "type": "benefit",
+          "settings": {
+            "icon": "globe",
+            "title": "Transparent Sourcing",
+            "description": "Every botanical drop is traceable to ethical organic growers with batch certificates of analysis available on request."
+          }
+        },
+        "why_3": {
+          "type": "benefit",
+          "settings": {
+            "icon": "clipboard",
+            "title": "Third-Party Tested",
+            "description": "Every single harvest is rigorously verified for purity, potency, and zero contaminants by accredited independent laboratories."
+          }
+        },
+        "why_4": {
+          "type": "benefit",
+          "settings": {
+            "icon": "box",
+            "title": "Eco-Friendly Bottling",
+            "description": "Amber UV-blocking glass preserves volatile essential plant molecules, packaged in 100% recyclable, sustainable boxes."
+          }
+        },
+        "why_5": {
+          "type": "benefit",
+          "settings": {
+            "icon": "heart",
+            "title": "Cruelty-Free Always",
+            "description": "Never tested on animals. Ethically crafted with care, kindness, and deep reverence for nature and living beings."
+          }
+        },
+        "why_6": {
+          "type": "benefit",
+          "settings": {
+            "icon": "truck",
+            "title": "Fast Reliable Shipping",
+            "description": "Orders dispatched within 24 hours in secure, discreet packaging with real-time tracking and 30-day money-back satisfaction."
+          }
+        }
+      },
+      "block_order": [
+        "why_1",
+        "why_2",
+        "why_3",
+        "why_4",
+        "why_5",
+        "why_6"
+      ],
       "settings": {
         "eyebrow": "WHY US",
         "heading": "Natural Wellness, Without the Guesswork.",
-        "subheading": "We bring clinical transparency and organic purity to every step of our formulation process."
+        "subheading": "We bring clinical transparency and organic purity to every step of our formulation process.",
+        "columns_desktop": 3,
+        "padding_top": 88,
+        "padding_bottom": 88
       }
     },
     "faq_accordion": {
       "type": "faq-accordion",
+      "blocks": {
+        "faq_1": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How quickly can I expect to feel relief?",
+            "answer": "Most customers notice an immediate cooling and soothing sensation within 2 to 3 minutes of application, followed by deeper therapeutic warmth and muscle ease around 15 minutes.",
+            "open_by_default": true
+          }
+        },
+        "faq_2": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How many times a day should I apply the drops?",
+            "answer": "For optimal results, apply 3 to 5 drops 2 to 3 times daily. We recommend once in the morning to start your day loose and free, and once in the evening before bed to help muscles unwind.",
+            "open_by_default": false
+          }
+        },
+        "faq_3": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Will this leave an oily or sticky feeling on my skin or clothing?",
+            "answer": "No! Our proprietary micro-filtered formulation is bio-identical to human dermal lipids, allowing it to penetrate completely within 60 to 90 seconds. Once gently massaged in, it leaves skin silky-smooth with zero sticky film or residue.",
+            "open_by_default": false
+          }
+        },
+        "faq_4": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can this be used on both joints and tight muscles?",
+            "answer": "Yes. The formula combines joint-supporting boswellia and arnica with muscle-relaxing wintergreen and peppermint, making it equally effective for knee, hip, shoulder, lower back, and neck tension.",
+            "open_by_default": false
+          }
+        },
+        "faq_5": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Are the ingredients 100% natural and safe for daily use?",
+            "answer": "Absolutely. Every bottle contains 100% pure botanical oils and lipid extracts, free of NSAIDs, steroids, mineral oil, artificial scents, or parabens. It is non-habit forming and designed for continuous daily therapy.",
+            "open_by_default": false
+          }
+        },
+        "faq_6": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How long does one 30ml dropper bottle last?",
+            "answer": "Each 30ml bottle provides approximately 600 drops. When applying 8 to 10 drops daily across targeted joints or muscles, one bottle typically lasts 4 to 6 weeks of consistent use.",
+            "open_by_default": false
+          }
+        },
+        "faq_7": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What is your return and guarantee policy?",
+            "answer": "We stand behind our blends with a 30-Day 100% Satisfaction Guarantee. If you do not experience noticeable relief and comfort, contact our support team for a hassle-free refund or replacement.",
+            "open_by_default": false
+          }
+        }
+      },
+      "block_order": [
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5",
+        "faq_6",
+        "faq_7"
+      ],
       "settings": {
         "eyebrow": "FREQUENTLY ASKED QUESTIONS",
         "heading": "Got Questions? We've Got Answers.",
-        "subheading": "Everything you need to know about our organic botanical drops, application techniques, and delivery guarantees."
+        "subheading": "Everything you need to know about our organic botanical drops, application techniques, and delivery guarantees.",
+        "allow_multiple_open": false,
+        "padding_top": 88,
+        "padding_bottom": 88
       }
     }
   },

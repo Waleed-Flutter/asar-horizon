@@ -1,104 +1,76 @@
 {{ 'horizon-botanical.css' | asset_url | stylesheet_tag }}
 
-<section class="hb-pain-section">
+<section class="hb-pain-section" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; background-color: {{ section.settings.bg_color }};">
   <div class="hb-container">
     <div class="hb-section-header">
-      <span class="hb-eyebrow">{{ section.settings.eyebrow }}</span>
+      {% if section.settings.eyebrow != blank %}
+        <span class="hb-eyebrow">{{ section.settings.eyebrow }}</span>
+      {% endif %}
       <h2>{{ section.settings.heading }}</h2>
-      <p>{{ section.settings.subheading }}</p>
+      {% if section.settings.subheading != blank %}
+        <p>{{ section.settings.subheading }}</p>
+      {% endif %}
     </div>
 
-    <div class="hb-pain-grid">
-      <!-- Card 1: Desk Worker -->
-      <div class="hb-pain-card">
-        <div class="hb-pain-media">
-          <img src="{{ 'pain-desk-worker.jpg' | asset_url }}" alt="Lower Back and Shoulder Tension" width="400" height="300" loading="lazy">
-          <div class="hb-pain-tag-pill">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
-            Upper Body
-          </div>
-        </div>
-        <div class="hb-pain-body">
-          <h3>{{ section.settings.card_1_title }}</h3>
-          <p>{{ section.settings.card_1_desc }}</p>
-        </div>
-      </div>
+    <div class="hb-pain-grid hb-grid-cols-{{ section.settings.columns_desktop }}">
+      {% if section.blocks.size > 0 %}
+        {% for block in section.blocks %}
+          <div class="hb-pain-card" {{ block.shopify_attributes }}>
+            <div class="hb-pain-media">
+              {% if block.settings.image != blank %}
+                <img src="{{ block.settings.image | image_url: width: 600 }}" alt="{{ block.settings.title | escape }}" width="400" height="300" loading="lazy">
+              {% else %}
+                {% assign default_idx = forloop.index | modulo: 6 %}
+                {% case default_idx %}
+                  {% when 1 %}
+                    <img src="{{ 'pain-desk-worker.jpg' | asset_url }}" alt="{{ block.settings.title | escape }}" width="400" height="300" loading="lazy">
+                  {% when 2 %}
+                    <img src="{{ 'pain-knee-runner.jpg' | asset_url }}" alt="{{ block.settings.title | escape }}" width="400" height="300" loading="lazy">
+                  {% when 3 %}
+                    <img src="{{ 'pain-lower-back.jpg' | asset_url }}" alt="{{ block.settings.title | escape }}" width="400" height="300" loading="lazy">
+                  {% when 4 %}
+                    <img src="{{ 'pain-family-posture.jpg' | asset_url }}" alt="{{ block.settings.title | escape }}" width="400" height="300" loading="lazy">
+                  {% when 5 %}
+                    <img src="{{ 'pain-chores-ironing.jpg' | asset_url }}" alt="{{ block.settings.title | escape }}" width="400" height="300" loading="lazy">
+                  {% else %}
+                    <img src="{{ 'pain-driving-seat.jpg' | asset_url }}" alt="{{ block.settings.title | escape }}" width="400" height="300" loading="lazy">
+                {% endcase %}
+              {% endif %}
 
-      <!-- Card 2: Runner Knee -->
-      <div class="hb-pain-card">
-        <div class="hb-pain-media">
-          <img src="{{ 'pain-knee-runner.jpg' | asset_url }}" alt="Knee and Joint Discomfort" width="400" height="300" loading="lazy">
-          <div class="hb-pain-tag-pill">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-            Active Recovery
-          </div>
-        </div>
-        <div class="hb-pain-body">
-          <h3>{{ section.settings.card_2_title }}</h3>
-          <p>{{ section.settings.card_2_desc }}</p>
-        </div>
-      </div>
+              {% if block.settings.tag != blank %}
+                <div class="hb-pain-tag-pill">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                  {{ block.settings.tag }}
+                </div>
+              {% endif %}
+            </div>
 
-      <!-- Card 3: Lumbar Back -->
-      <div class="hb-pain-card">
-        <div class="hb-pain-media">
-          <img src="{{ 'pain-lower-back.jpg' | asset_url }}" alt="Lumbar and Spine Stiffness" width="400" height="300" loading="lazy">
-          <div class="hb-pain-tag-pill">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M13 3h-2v10h2V3zm4.83 2.17l-1.42 1.42C17.99 7.86 19 9.81 19 12c0 3.87-3.13 7-7 7s-7-3.13-7-7c0-2.19 1.01-4.14 2.58-5.42L6.17 5.17C4.23 6.82 3 9.26 3 12c0 4.97 4.03 9 9 9s9-4.03 9-9c0-2.74-1.23-5.18-3.17-6.83z"/></svg>
-            Lumbar Relief
+            <div class="hb-pain-body">
+              <h3>{{ block.settings.title }}</h3>
+              <p>{{ block.settings.description }}</p>
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <!-- Default Fallback Cards -->
+        <div class="hb-pain-card">
+          <div class="hb-pain-media">
+            <img src="{{ 'pain-desk-worker.jpg' | asset_url }}" alt="Desk Worker Shoulder Pain" width="400" height="300" loading="lazy">
+            <div class="hb-pain-tag-pill">Upper Body</div>
+          </div>
+          <div class="hb-pain-body">
+            <h3>LOWER BACK & SHOULDER TENSION</h3>
+            <p>Calms tight trapezius muscles and neck stiffness caused by screen time and desk work.</p>
           </div>
         </div>
-        <div class="hb-pain-body">
-          <h3>{{ section.settings.card_3_title }}</h3>
-          <p>{{ section.settings.card_3_desc }}</p>
-        </div>
-      </div>
-
-      <!-- Card 4: Posture & Floor sitting -->
-      <div class="hb-pain-card">
-        <div class="hb-pain-media">
-          <img src="{{ 'pain-family-posture.jpg' | asset_url }}" alt="Everyday Strain & Floor Sitting" width="400" height="300" loading="lazy">
-          <div class="hb-pain-tag-pill">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
-            Everyday Life
-          </div>
-        </div>
-        <div class="hb-pain-body">
-          <h3>{{ section.settings.card_4_title }}</h3>
-          <p>{{ section.settings.card_4_desc }}</p>
-        </div>
-      </div>
-
-      <!-- Card 5: Chores & Ironing -->
-      <div class="hb-pain-card">
-        <div class="hb-pain-media">
-          <img src="{{ 'pain-chores-ironing.jpg' | asset_url }}" alt="Household Chores & Bending Fatigue" width="400" height="300" loading="lazy">
-          <div class="hb-pain-tag-pill">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
-            Domestic Chores
-          </div>
-        </div>
-        <div class="hb-pain-body">
-          <h3>{{ section.settings.card_5_title }}</h3>
-          <p>{{ section.settings.card_5_desc }}</p>
-        </div>
-      </div>
-
-      <!-- Card 6: Driving & Commute -->
-      <div class="hb-pain-card">
-        <div class="hb-pain-media">
-          <img src="{{ 'pain-driving-seat.jpg' | asset_url }}" alt="Long Drives & Commuter Fatigue" width="400" height="300" loading="lazy">
-          <div class="hb-pain-tag-pill">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.85 7h10.29l1.04 3H5.81l1.04-3zM19 17H5v-4.66l.12-.34h13.77l.11.34V17z"/></svg>
-            Travel & Commute
-          </div>
-        </div>
-        <div class="hb-pain-body">
-          <h3>{{ section.settings.card_6_title }}</h3>
-          <p>{{ section.settings.card_6_desc }}</p>
-        </div>
-      </div>
+      {% endif %}
     </div>
+
+    {% if section.settings.bottom_note != blank %}
+      <div style="text-align: center; margin-top: 36px; font-size: 0.85rem; color: #6b7280;">
+        {{ section.settings.bottom_note }}
+      </div>
+    {% endif %}
   </div>
 </section>
 
@@ -126,80 +98,141 @@
     },
     {
       "type": "text",
-      "id": "card_1_title",
-      "label": "Card 1 Title",
-      "default": "LOWER BACK & SHOULDER TENSION"
+      "id": "bottom_note",
+      "label": "Bottom Footer Note",
+      "default": "Clinically informed botanicals designed for rapid cutaneous absorption."
     },
     {
-      "type": "textarea",
-      "id": "card_1_desc",
-      "label": "Card 1 Description",
-      "default": "Calms tight trapezius muscles and neck stiffness caused by prolonged screen time, bad ergonomic chairs, and desk work."
+      "type": "select",
+      "id": "columns_desktop",
+      "label": "Columns on Desktop",
+      "options": [
+        { "value": "2", "label": "2 Columns" },
+        { "value": "3", "label": "3 Columns" },
+        { "value": "4", "label": "4 Columns" }
+      ],
+      "default": "3"
     },
     {
-      "type": "text",
-      "id": "card_2_title",
-      "label": "Card 2 Title",
-      "default": "RUNNING & JOINT DISCOMFORT"
+      "type": "header",
+      "content": "Section Styling"
     },
     {
-      "type": "textarea",
-      "id": "card_2_desc",
-      "label": "Card 2 Description",
-      "default": "Eases stressed knees and tight calf muscles after athletic workouts, running pavement, or high-intensity training sessions."
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#fafbfa"
     },
     {
-      "type": "text",
-      "id": "card_3_title",
-      "label": "Card 3 Title",
-      "default": "LUMBAR & SPINE STIFFNESS"
+      "type": "range",
+      "id": "padding_top",
+      "min": 20,
+      "max": 140,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 96
     },
     {
-      "type": "textarea",
-      "id": "card_3_desc",
-      "label": "Card 3 Description",
-      "default": "Soothes deep muscular tightness along lumbar vertebrae and sacral joints so you can stand and walk with effortless posture."
-    },
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 20,
+      "max": 140,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 96
+    }
+  ],
+  "blocks": [
     {
-      "type": "text",
-      "id": "card_4_title",
-      "label": "Card 4 Title",
-      "default": "POSTURE & EVERYDAY STRAIN"
-    },
-    {
-      "type": "textarea",
-      "id": "card_4_desc",
-      "label": "Card 4 Description",
-      "default": "Relieves aches from picking up children, prolonged carpet floor sitting, or awkward twisting throughout the busy day."
-    },
-    {
-      "type": "text",
-      "id": "card_5_title",
-      "label": "Card 5 Title",
-      "default": "DAILY CHORES & BENDING FATIGUE"
-    },
-    {
-      "type": "textarea",
-      "id": "card_5_desc",
-      "label": "Card 5 Description",
-      "default": "Provides soothing comfort from hours on your feet, repetitive bending, grocery carrying, and laundry chores."
-    },
-    {
-      "type": "text",
-      "id": "card_6_title",
-      "label": "Card 6 Title",
-      "default": "LONG DRIVES & TRAVEL FATIGUE"
-    },
-    {
-      "type": "textarea",
-      "id": "card_6_desc",
-      "label": "Card 6 Description",
-      "default": "Counteracts lower back compression and hip tightness resulting from daily commutes, bumper-to-bumper traffic, and flight travel."
+      "type": "pain_card",
+      "name": "Pain Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Card Photo with Heat Indicator"
+        },
+        {
+          "type": "text",
+          "id": "tag",
+          "label": "Category Pill Tag",
+          "default": "Upper Body"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Card Title",
+          "default": "LOWER BACK & SHOULDER TENSION"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Card Description",
+          "default": "Calms tight trapezius muscles and neck stiffness after hours seated at the desk."
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Optional Card Link"
+        }
+      ]
     }
   ],
   "presets": [
     {
-      "name": "Pain Points Grid"
+      "name": "Pain Points Grid",
+      "blocks": [
+        {
+          "type": "pain_card",
+          "settings": {
+            "tag": "Upper Body",
+            "title": "LOWER BACK & SHOULDER TENSION",
+            "description": "Calms tight trapezius muscles and neck stiffness caused by prolonged screen time, bad ergonomic chairs, and desk work."
+          }
+        },
+        {
+          "type": "pain_card",
+          "settings": {
+            "tag": "Active Recovery",
+            "title": "RUNNING & JOINT DISCOMFORT",
+            "description": "Eases stressed knees and tight calf muscles after athletic workouts, running pavement, or high-intensity training sessions."
+          }
+        },
+        {
+          "type": "pain_card",
+          "settings": {
+            "tag": "Lumbar Relief",
+            "title": "LUMBAR & SPINE STIFFNESS",
+            "description": "Soothes deep muscular tightness along lumbar vertebrae and sacral joints so you can stand and walk with effortless posture."
+          }
+        },
+        {
+          "type": "pain_card",
+          "settings": {
+            "tag": "Everyday Life",
+            "title": "POSTURE & EVERYDAY STRAIN",
+            "description": "Relieves aches from picking up children, prolonged carpet floor sitting, or awkward twisting throughout the busy day."
+          }
+        },
+        {
+          "type": "pain_card",
+          "settings": {
+            "tag": "Domestic Chores",
+            "title": "DAILY CHORES & BENDING FATIGUE",
+            "description": "Provides soothing comfort from hours on your feet, repetitive bending, grocery carrying, and laundry chores."
+          }
+        },
+        {
+          "type": "pain_card",
+          "settings": {
+            "tag": "Travel & Commute",
+            "title": "LONG DRIVES & TRAVEL FATIGUE",
+            "description": "Counteracts lower back compression and hip tightness resulting from daily commutes, bumper-to-bumper traffic, and flight travel."
+          }
+        }
+      ]
     }
   ]
 }

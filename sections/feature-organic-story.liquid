@@ -1,8 +1,8 @@
 {{ 'horizon-botanical.css' | asset_url | stylesheet_tag }}
 
-<section class="hb-story-section" id="story">
+<section class="hb-story-section" id="story" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; background-color: {{ section.settings.bg_color }};">
   <div class="hb-container">
-    <div class="hb-story-grid">
+    <div class="hb-story-grid {% if section.settings.layout == 'image_second' %}hb-grid-reversed{% endif %}">
       <div class="hb-story-visual">
         {% if section.settings.image != blank %}
           <img src="{{ section.settings.image | image_url: width: 800 }}" alt="{{ section.settings.heading | escape }}" width="440" height="440" loading="lazy">
@@ -10,22 +10,31 @@
           <img src="{{ 'horizon-leaf-dew.jpg' | asset_url }}" alt="100% Organic Botanical Leaf" width="440" height="440" loading="lazy">
         {% endif %}
 
-        <div class="hb-story-badge">
-          <img src="{{ 'horizon-organic-badge.svg' | asset_url }}" alt="100% Organic Certified" width="110" height="110">
-        </div>
+        {% if section.settings.show_badge %}
+          <div class="hb-story-badge">
+            {% if section.settings.custom_badge != blank %}
+              <img src="{{ section.settings.custom_badge | image_url: width: 220 }}" alt="100% Organic Certified" width="110" height="110">
+            {% else %}
+              <img src="{{ 'horizon-organic-badge.svg' | asset_url }}" alt="100% Organic Certified" width="110" height="110">
+            {% endif %}
+          </div>
+        {% endif %}
       </div>
 
       <div class="hb-story-content">
-        <span class="hb-eyebrow">{{ section.settings.eyebrow }}</span>
-        <h2>{{ section.settings.heading }}</h2>
-        <p>{{ section.settings.paragraph_1 }}</p>
-        {% if section.settings.paragraph_2 != blank %}
-          <p>{{ section.settings.paragraph_2 }}</p>
+        {% if section.settings.eyebrow != blank %}
+          <span class="hb-eyebrow">{{ section.settings.eyebrow }}</span>
         {% endif %}
+        <h2>{{ section.settings.heading }}</h2>
+        <div class="hb-story-body">
+          {{ section.settings.body_text }}
+        </div>
 
-        <a href="{{ section.settings.cta_link | default: '/pages/about' }}" class="hb-btn-link" style="padding-left: 0;">
-          {{ section.settings.cta_text }} &rarr;
-        </a>
+        {% if section.settings.cta_text != blank %}
+          <a href="{{ section.settings.cta_link | default: '/pages/about' }}" class="hb-btn-link" style="padding-left: 0;">
+            {{ section.settings.cta_text }} &rarr;
+          </a>
+        {% endif %}
       </div>
     </div>
   </div>
@@ -35,6 +44,32 @@
 {
   "name": "Feature Organic Story",
   "settings": [
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Desktop Layout",
+      "options": [
+        { "value": "image_first", "label": "Image on Left" },
+        { "value": "image_second", "label": "Image on Right" }
+      ],
+      "default": "image_first"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Featured Botanical Image"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_badge",
+      "label": "Show Rotating Organic Badge",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "custom_badge",
+      "label": "Custom Badge Graphic (Optional)"
+    },
     {
       "type": "text",
       "id": "eyebrow",
@@ -48,16 +83,10 @@
       "default": "Wellness Should Be Part of Everyday Life"
     },
     {
-      "type": "textarea",
-      "id": "paragraph_1",
-      "label": "Paragraph 1",
-      "default": "We believe physical relief should be pure, natural, and accessible. Our bio-active extraction process preserves vital botanical terpenes and fatty acids for deep transdermal absorption."
-    },
-    {
-      "type": "textarea",
-      "id": "paragraph_2",
-      "label": "Paragraph 2",
-      "default": "From morning stiffness to post-activity recovery, our clean formula works with your body's natural physiology to calm tension at the source without synthetic blockers or greasy residue."
+      "type": "richtext",
+      "id": "body_text",
+      "label": "Story Body Copy",
+      "default": "<p>We believe physical relief should be pure, natural, and accessible. Our bio-active extraction process preserves vital botanical terpenes and fatty acids for deep transdermal absorption.</p><p>From morning stiffness to post-activity recovery, our clean plant formula works with your body's natural physiology to calm tension at the source without synthetic blockers or greasy residue.</p>"
     },
     {
       "type": "text",
@@ -71,9 +100,34 @@
       "label": "Link URL"
     },
     {
-      "type": "image_picker",
-      "id": "image",
-      "label": "Section Image"
+      "type": "header",
+      "content": "Section Styling"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 20,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 20,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 80
     }
   ],
   "presets": [

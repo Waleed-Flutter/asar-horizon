@@ -8,6 +8,63 @@
     "theme_support_url": "https://support.shopify.com/"
   },
   {
+    "name": "Botanical Wellness Branding",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Brand Colors"
+      },
+      {
+        "type": "color",
+        "id": "botanical_primary_color",
+        "label": "Primary Botanical Green",
+        "default": "#257942"
+      },
+      {
+        "type": "color",
+        "id": "botanical_dark_green",
+        "label": "Dark Forest Green",
+        "default": "#15331e"
+      },
+      {
+        "type": "color",
+        "id": "botanical_mint_color",
+        "label": "Mint Accent Background",
+        "default": "#f2f7f3"
+      },
+      {
+        "type": "color",
+        "id": "botanical_gold_color",
+        "label": "Gold Star / Badge Accent",
+        "default": "#c8963e"
+      },
+      {
+        "type": "header",
+        "content": "Shape & Corner Radii"
+      },
+      {
+        "type": "range",
+        "id": "botanical_card_radius",
+        "min": 0,
+        "max": 32,
+        "step": 2,
+        "unit": "px",
+        "label": "Card Border Radius",
+        "default": 16
+      },
+      {
+        "type": "range",
+        "id": "botanical_button_radius",
+        "min": 0,
+        "max": 50,
+        "step": 2,
+        "unit": "px",
+        "label": "Button Border Radius",
+        "default": 30
+      }
+    ]
+  },
+  {
     "name": "t:names.logo_and_favicon",
     "settings": [
       {

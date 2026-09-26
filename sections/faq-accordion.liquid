@@ -1,122 +1,79 @@
 {{ 'horizon-botanical.css' | asset_url | stylesheet_tag }}
 
-<section class="hb-faq-section" id="faq">
+<section class="hb-faq-section" id="faq" style="background-color: {{ section.settings.background_color | default: '#ffffff' }}; padding-top: {{ section.settings.padding_top | default: 88 }}px; padding-bottom: {{ section.settings.padding_bottom | default: 88 }}px;">
   <div class="hb-container">
-    <div class="hb-section-header">
-      <span class="hb-eyebrow">{{ section.settings.eyebrow }}</span>
-      <h2>{{ section.settings.heading }}</h2>
-      <p>{{ section.settings.subheading }}</p>
-    </div>
-
-    <div class="hb-faq-list">
-      <!-- FAQ 1 -->
-      <div class="hb-faq-item active">
-        <button class="hb-faq-question" type="button" aria-expanded="true">
-          <span>How often should I apply the botanical oil?</span>
-          <span class="hb-faq-toggle-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-          </span>
-        </button>
-        <div class="hb-faq-answer">
-          <p>For best results, apply 3 to 5 drops 2 to 3 times daily directly to the area of discomfort. We recommend applying in the morning before starting your day, and at night before bed for deep overnight muscular relaxation.</p>
-        </div>
+    {% if section.settings.heading != blank or section.settings.eyebrow != blank %}
+      <div class="hb-section-header">
+        {% if section.settings.eyebrow != blank %}
+          <span class="hb-eyebrow">{{ section.settings.eyebrow }}</span>
+        {% endif %}
+        {% if section.settings.heading != blank %}
+          <h2>{{ section.settings.heading }}</h2>
+        {% endif %}
+        {% if section.settings.subheading != blank %}
+          <p>{{ section.settings.subheading }}</p>
+        {% endif %}
       </div>
+    {% endif %}
 
-      <!-- FAQ 2 -->
-      <div class="hb-faq-item">
-        <button class="hb-faq-question" type="button" aria-expanded="false">
-          <span>How quickly will I feel relief after application?</span>
-          <span class="hb-faq-toggle-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-          </span>
-        </button>
-        <div class="hb-faq-answer">
-          <p>Most customers report an initial soothing cooling sensation within 60 to 90 seconds, followed by gentle, deep therapeutic warming and tension relief within 10 to 15 minutes as the botanical lipids absorb transdermally.</p>
+    <div class="hb-faq-list" data-allow-multiple="{{ section.settings.allow_multiple_open }}">
+      {% for block in section.blocks %}
+        <div class="hb-faq-item{% if block.settings.open_by_default %} active{% endif %}" {{ block.shopify_attributes }}>
+          <button class="hb-faq-question" type="button" aria-expanded="{% if block.settings.open_by_default %}true{% else %}false{% endif %}">
+            <span>{{ block.settings.question }}</span>
+            <span class="hb-faq-toggle-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            </span>
+          </button>
+          <div class="hb-faq-answer">
+            <div class="hb-faq-answer-inner">
+              <p>{{ block.settings.answer }}</p>
+            </div>
+          </div>
         </div>
-      </div>
-
-      <!-- FAQ 3 -->
-      <div class="hb-faq-item">
-        <button class="hb-faq-question" type="button" aria-expanded="false">
-          <span>Will it leave a greasy residue or stain clothing?</span>
-          <span class="hb-faq-toggle-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-          </span>
-        </button>
-        <div class="hb-faq-answer">
-          <p>No! Our proprietary micro-filtered formulation is bio-identical to human dermal lipids, allowing it to penetrate completely within 60 to 90 seconds. Once gently massaged in, it leaves skin silky-smooth with zero sticky film or residue.</p>
-        </div>
-      </div>
-
-      <!-- FAQ 4 -->
-      <div class="hb-faq-item">
-        <button class="hb-faq-question" type="button" aria-expanded="false">
-          <span>Can this be used on both joints and tight muscles?</span>
-          <span class="hb-faq-toggle-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-          </span>
-        </button>
-        <div class="hb-faq-answer">
-          <p>Yes. The formula combines joint-supporting boswellia and arnica with muscle-relaxing wintergreen and peppermint, making it equally effective for knee, hip, shoulder, lower back, and neck tension.</p>
-        </div>
-      </div>
-
-      <!-- FAQ 5 -->
-      <div class="hb-faq-item">
-        <button class="hb-faq-question" type="button" aria-expanded="false">
-          <span>Are the ingredients 100% natural and safe for daily use?</span>
-          <span class="hb-faq-toggle-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-          </span>
-        </button>
-        <div class="hb-faq-answer">
-          <p>Absolutely. Every bottle contains 100% pure botanical oils and lipid extracts, free of NSAIDs, steroids, mineral oil, artificial scents, or parabens. It is non-habit forming and designed for continuous daily therapy.</p>
-        </div>
-      </div>
-
-      <!-- FAQ 6 -->
-      <div class="hb-faq-item">
-        <button class="hb-faq-question" type="button" aria-expanded="false">
-          <span>How long does one 30ml dropper bottle last?</span>
-          <span class="hb-faq-toggle-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-          </span>
-        </button>
-        <div class="hb-faq-answer">
-          <p>Each 30ml bottle provides approximately 600 drops. When applying 8 to 10 drops daily across targeted joints or muscles, one bottle typically lasts 4 to 6 weeks of consistent use.</p>
-        </div>
-      </div>
-
-      <!-- FAQ 7 -->
-      <div class="hb-faq-item">
-        <button class="hb-faq-question" type="button" aria-expanded="false">
-          <span>What is your return and guarantee policy?</span>
-          <span class="hb-faq-toggle-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-          </span>
-        </button>
-        <div class="hb-faq-answer">
-          <p>We stand behind our blends with a 30-Day 100% Satisfaction Guarantee. If you do not experience noticeable relief and comfort, contact our support team for a hassle-free refund or replacement.</p>
-        </div>
-      </div>
+      {% endfor %}
     </div>
   </div>
 </section>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const faqItems = document.querySelectorAll('.hb-faq-item');
-    faqItems.forEach(item => {
-      const btn = item.querySelector('.hb-faq-question');
-      btn.addEventListener('click', () => {
-        const isActive = item.classList.contains('active');
-        faqItems.forEach(i => i.classList.remove('active'));
-        if (!isActive) {
-          item.classList.add('active');
-        }
+  (function() {
+    function initFaq(section) {
+      if (!section) return;
+      const list = section.querySelector('.hb-faq-list');
+      if (!list) return;
+      const allowMultiple = list.getAttribute('data-allow-multiple') === 'true';
+      const items = section.querySelectorAll('.hb-faq-item');
+
+      items.forEach(item => {
+        const btn = item.querySelector('.hb-faq-question');
+        if (!btn || btn.dataset.faqBound) return;
+        btn.dataset.faqBound = 'true';
+
+        btn.addEventListener('click', () => {
+          const isActive = item.classList.contains('active');
+          if (!allowMultiple) {
+            items.forEach(i => {
+              if (i !== item) {
+                i.classList.remove('active');
+                const b = i.querySelector('.hb-faq-question');
+                if (b) b.setAttribute('aria-expanded', 'false');
+              }
+            });
+          }
+          item.classList.toggle('active', !isActive);
+          btn.setAttribute('aria-expanded', !isActive ? 'true' : 'false');
+        });
       });
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('.hb-faq-section').forEach(initFaq);
     });
-  });
+    document.addEventListener('shopify:section:load', function(e) {
+      if (e.target.classList.contains('hb-faq-section')) initFaq(e.target);
+    });
+  })();
 </script>
 
 {% schema %}
@@ -140,11 +97,121 @@
       "id": "subheading",
       "label": "Subheading",
       "default": "Everything you need to know about our organic botanical drops, application techniques, and delivery guarantees."
+    },
+    {
+      "type": "checkbox",
+      "id": "allow_multiple_open",
+      "label": "Allow multiple items open simultaneously",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 20,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 88
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 20,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 88
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq_item",
+      "name": "FAQ Question",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "How quickly can I expect to feel relief?"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Answer",
+          "default": "Most customers notice an immediate cooling and soothing sensation within 2 to 3 minutes of application, followed by deeper therapeutic warmth and muscle ease around 15 minutes."
+        },
+        {
+          "type": "checkbox",
+          "id": "open_by_default",
+          "label": "Open by default",
+          "default": false
+        }
+      ]
     }
   ],
   "presets": [
     {
-      "name": "FAQ Accordion"
+      "name": "FAQ Accordion",
+      "blocks": [
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "How quickly can I expect to feel relief?",
+            "answer": "Most customers notice an immediate cooling and soothing sensation within 2 to 3 minutes of application, followed by deeper therapeutic warmth and muscle ease around 15 minutes.",
+            "open_by_default": true
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "How many times a day should I apply the drops?",
+            "answer": "For optimal results, apply 3 to 5 drops 2 to 3 times daily. We recommend once in the morning to start your day loose and free, and once in the evening before bed to help muscles unwind."
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Will this leave an oily or sticky feeling on my skin or clothing?",
+            "answer": "No! Our proprietary micro-filtered formulation is bio-identical to human dermal lipids, allowing it to penetrate completely within 60 to 90 seconds. Once gently massaged in, it leaves skin silky-smooth with zero sticky film or residue."
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can this be used on both joints and tight muscles?",
+            "answer": "Yes. The formula combines joint-supporting boswellia and arnica with muscle-relaxing wintergreen and peppermint, making it equally effective for knee, hip, shoulder, lower back, and neck tension."
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Are the ingredients 100% natural and safe for daily use?",
+            "answer": "Absolutely. Every bottle contains 100% pure botanical oils and lipid extracts, free of NSAIDs, steroids, mineral oil, artificial scents, or parabens. It is non-habit forming and designed for continuous daily therapy."
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "How long does one 30ml dropper bottle last?",
+            "answer": "Each 30ml bottle provides approximately 600 drops. When applying 8 to 10 drops daily across targeted joints or muscles, one bottle typically lasts 4 to 6 weeks of consistent use."
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "What is your return and guarantee policy?",
+            "answer": "We stand behind our blends with a 30-Day 100% Satisfaction Guarantee. If you do not experience noticeable relief and comfort, contact our support team for a hassle-free refund or replacement."
+          }
+        }
+      ]
     }
   ]
 }

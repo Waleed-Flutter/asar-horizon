@@ -1,6 +1,6 @@
 {{ 'horizon-botanical.css' | asset_url | stylesheet_tag }}
 
-<section class="hb-spotlight-section">
+<section class="hb-spotlight-section" id="spotlight" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; background-color: {{ section.settings.bg_color }};">
   <div class="hb-container">
     <div class="hb-spotlight-grid">
       <div class="hb-spotlight-visual">
@@ -12,59 +12,73 @@
       </div>
 
       <div class="hb-spotlight-content">
-        <span class="hb-eyebrow">{{ section.settings.eyebrow }}</span>
+        {% if section.settings.eyebrow != blank %}
+          <span class="hb-eyebrow">{{ section.settings.eyebrow }}</span>
+        {% endif %}
         <h2>{{ section.settings.heading }}</h2>
-        <p>{{ section.settings.description }}</p>
+        <div class="hb-spotlight-desc">
+          {{ section.settings.description }}
+        </div>
 
+        <!-- Dynamic Feature Highlights -->
         <div class="hb-spotlight-features">
-          <div class="hb-spotlight-feature">
-            <div class="hb-spotlight-icon">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          {% if section.blocks.size > 0 %}
+            {% for block in section.blocks %}
+              <div class="hb-spotlight-feature" {{ block.shopify_attributes }}>
+                <div class="hb-spotlight-icon">
+                  {% case block.settings.icon %}
+                    {% when 'shield' %}
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    {% when 'bolt' %}
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                    {% when 'target' %}
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+                    {% when 'droplet' %}
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+                    {% when 'star' %}
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    {% else %}
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                  {% endcase %}
+                </div>
+                <div>
+                  <h4>{{ block.settings.title }}</h4>
+                  <span>{{ block.settings.subtitle }}</span>
+                </div>
+              </div>
+            {% endfor %}
+          {% else %}
+            <!-- Defaults -->
+            <div class="hb-spotlight-feature">
+              <div class="hb-spotlight-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+              <div><h4>Non-Toxic</h4><span>Pure natural extracts</span></div>
             </div>
-            <div>
-              <h4>Non-Toxic</h4>
-              <span>Pure natural extracts</span>
+            <div class="hb-spotlight-feature">
+              <div class="hb-spotlight-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+              <div><h4>Fast Absorbing</h4><span>Sub-minute transdermal delivery</span></div>
             </div>
-          </div>
-
-          <div class="hb-spotlight-feature">
-            <div class="hb-spotlight-icon">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            <div class="hb-spotlight-feature">
+              <div class="hb-spotlight-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
+              <div><h4>Targeted Relief</h4><span>Calms joint & muscle tension</span></div>
             </div>
-            <div>
-              <h4>Fast Absorbing</h4>
-              <span>Sub-minute transdermal delivery</span>
+            <div class="hb-spotlight-feature">
+              <div class="hb-spotlight-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div>
+              <div><h4>Clean Formula</h4><span>Zero mineral oils or parabens</span></div>
             </div>
-          </div>
-
-          <div class="hb-spotlight-feature">
-            <div class="hb-spotlight-icon">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
-            </div>
-            <div>
-              <h4>Targeted Relief</h4>
-              <span>Calms joint & muscle tension</span>
-            </div>
-          </div>
-
-          <div class="hb-spotlight-feature">
-            <div class="hb-spotlight-icon">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-            </div>
-            <div>
-              <h4>Clean Formula</h4>
-              <span>Zero mineral oils or parabens</span>
-            </div>
-          </div>
+          {% endif %}
         </div>
 
         <div class="hb-hero-actions">
-          <a href="{{ section.settings.primary_cta_link | default: '/collections/all' }}" class="hb-btn-primary">
-            {{ section.settings.primary_cta_text }}
-          </a>
-          <a href="{{ section.settings.secondary_cta_link | default: '#ingredients' }}" class="hb-btn-link">
-            {{ section.settings.secondary_cta_text }} &rarr;
-          </a>
+          {% if section.settings.primary_cta_text != blank %}
+            <a href="{{ section.settings.primary_cta_link | default: '/collections/all' }}" class="hb-btn-primary">
+              {{ section.settings.primary_cta_text }}
+            </a>
+          {% endif %}
+          {% if section.settings.secondary_cta_text != blank %}
+            <a href="{{ section.settings.secondary_cta_link | default: '#ingredients' }}" class="hb-btn-link">
+              {{ section.settings.secondary_cta_text }} &rarr;
+            </a>
+          {% endif %}
         </div>
       </div>
     </div>
@@ -75,6 +89,11 @@
 {
   "name": "Product Spotlight Trio",
   "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Showcase Image (Trio Bottles)"
+    },
     {
       "type": "text",
       "id": "eyebrow",
@@ -88,42 +107,139 @@
       "default": "Botanical Care for Everyday Movement"
     },
     {
-      "type": "textarea",
+      "type": "richtext",
       "id": "description",
-      "label": "Description",
-      "default": "Targeted botanical formulas designed to calm tension and restore flexibility naturally without greasy residue or harsh synthetic ingredients."
+      "label": "Description Copy",
+      "default": "<p>Targeted botanical formulas designed to calm tension and restore flexibility naturally without greasy residue or harsh synthetic ingredients.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Action Buttons"
     },
     {
       "type": "text",
       "id": "primary_cta_text",
-      "label": "Primary CTA Text",
+      "label": "Primary Button Label",
       "default": "Shop the Collection"
     },
     {
       "type": "url",
       "id": "primary_cta_link",
-      "label": "Primary CTA Link"
+      "label": "Primary Button URL"
     },
     {
       "type": "text",
       "id": "secondary_cta_text",
-      "label": "Secondary CTA Text",
+      "label": "Secondary Button Label",
       "default": "See Ingredients"
     },
     {
       "type": "url",
       "id": "secondary_cta_link",
-      "label": "Secondary CTA Link"
+      "label": "Secondary Button URL"
     },
     {
-      "type": "image_picker",
-      "id": "image",
-      "label": "Spotlight Image"
+      "type": "header",
+      "content": "Section Styling"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 20,
+      "max": 140,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 88
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 20,
+      "max": 140,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 88
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature Badge",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "shield", "label": "Shield / Clean" },
+            { "value": "bolt", "label": "Lightning / Fast Absorbing" },
+            { "value": "target", "label": "Target / Relief" },
+            { "value": "check", "label": "Checkmark / Tested" },
+            { "value": "droplet", "label": "Droplet / Pure" },
+            { "value": "star", "label": "Star / Premium" }
+          ],
+          "default": "shield"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Feature Title",
+          "default": "Non-Toxic"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Feature Subtitle",
+          "default": "100% clean botanical extracts"
+        }
+      ]
     }
   ],
   "presets": [
     {
-      "name": "Product Spotlight Trio"
+      "name": "Product Spotlight Trio",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "shield",
+            "title": "Non-Toxic",
+            "subtitle": "Pure natural extracts"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "bolt",
+            "title": "Fast Absorbing",
+            "subtitle": "Sub-minute transdermal delivery"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "target",
+            "title": "Targeted Relief",
+            "subtitle": "Calms joint & muscle tension"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "check",
+            "title": "Clean Formula",
+            "subtitle": "Zero mineral oils or parabens"
+          }
+        }
+      ]
     }
   ]
 }

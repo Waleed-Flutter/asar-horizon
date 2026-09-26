@@ -29,6 +29,34 @@
       {%- render 'theme-editor' -%}
     {% endif %}
 
+    
+    {{ 'horizon-botanical.css' | asset_url | stylesheet_tag }}
+    <style>
+      :root {
+        {% if settings.botanical_primary_color != blank %}
+          --hb-primary: {{ settings.botanical_primary_color }};
+          --hb-primary-hover: {{ settings.botanical_primary_color }}dd;
+          --hb-text-green: {{ settings.botanical_primary_color }};
+        {% endif %}
+        {% if settings.botanical_dark_green != blank %}
+          --hb-primary-dark: {{ settings.botanical_dark_green }};
+        {% endif %}
+        {% if settings.botanical_mint_color != blank %}
+          --hb-accent-mint: {{ settings.botanical_mint_color }};
+        {% endif %}
+        {% if settings.botanical_gold_color != blank %}
+          --hb-accent-gold: {{ settings.botanical_gold_color }};
+        {% endif %}
+        {% if settings.botanical_card_radius != blank %}
+          --hb-radius-md: {{ settings.botanical_card_radius }}px;
+          --hb-radius-lg: {{ settings.botanical_card_radius | plus: 6 }}px;
+        {% endif %}
+        {% if settings.botanical_button_radius != blank %}
+          --hb-radius-pill: {{ settings.botanical_button_radius }}px;
+        {% endif %}
+      }
+    </style>
+
     {{ content_for_header }}
   </head>
 
@@ -162,7 +190,7 @@
       </main>
 
       <footer>
-        {% sections 'footer-group' %}
+        {% section 'footer-horizon-botanical' %}
       </footer>
     </div>
 
