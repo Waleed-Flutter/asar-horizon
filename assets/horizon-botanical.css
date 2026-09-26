@@ -1,6 +1,6 @@
 /* ==========================================================================
    ASAR HORIZON — Modern Botanical Wellness Theme System
-   Matching 1-to-1 the High-Converting Botanical Dropper Landing Page
+   Matching 1-to-1 the Desktop & Mobile High-Converting Botanical Landing Page
    Built for Shopify Horizon Architecture
    ========================================================================== */
 
@@ -37,12 +37,14 @@
 }
 
 /* Base resets & typography */
-.hb-wrapper {
+.hb-wrapper, body {
   font-family: var(--hb-font-main);
   color: var(--hb-text-body);
   background-color: var(--hb-bg-white);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  margin: 0;
+  padding: 0;
 }
 
 .hb-container {
@@ -77,6 +79,17 @@
   justify-content: space-between;
   padding: 16px 0;
 }
+.hb-mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  color: var(--hb-text-title);
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+}
 .hb-nav-links {
   display: flex;
   align-items: center;
@@ -105,7 +118,7 @@
 .hb-header-actions {
   display: flex;
   align-items: center;
-  gap: 18px;
+  gap: 16px;
 }
 .hb-icon-btn {
   background: none;
@@ -118,6 +131,7 @@
   align-items: center;
   justify-content: center;
   border-radius: 50%;
+  text-decoration: none;
   transition: var(--hb-transition);
 }
 .hb-icon-btn:hover {
@@ -138,6 +152,104 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* Mobile Drawer */
+.hb-mobile-drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(4px);
+  z-index: 10001;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+.hb-mobile-drawer-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+.hb-mobile-drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 85%;
+  max-width: 320px;
+  background: #ffffff;
+  box-shadow: 10px 0 30px rgba(0, 0, 0, 0.12);
+  z-index: 10002;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(-100%);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.hb-mobile-drawer.active {
+  transform: translateX(0);
+}
+.hb-mobile-drawer-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid #eef2ee;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.hb-mobile-drawer-close {
+  background: #f4f6f4;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #374151;
+}
+.hb-mobile-drawer-body {
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+.hb-mobile-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.hb-mobile-links a {
+  text-decoration: none;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--hb-text-title);
+  display: block;
+}
+.hb-mobile-links a:hover,
+.hb-mobile-links a.active {
+  color: var(--hb-primary);
+}
+.hb-mobile-drawer-footer {
+  margin-top: 32px;
+  border-top: 1px solid #f0f3f0;
+  padding-top: 24px;
+}
+.hb-mobile-contact {
+  margin-top: 16px;
+  text-align: center;
+  font-size: 0.85rem;
+}
+.hb-mobile-contact p {
+  margin: 0 0 4px;
+  color: var(--hb-text-muted);
+}
+.hb-mobile-contact a {
+  color: var(--hb-primary);
+  font-weight: 700;
+  text-decoration: none;
 }
 
 /* Eyebrows & Badges */
@@ -815,66 +927,345 @@
   opacity: 0.85;
 }
 
-/* Responsive Media Queries */
-@media (max-width: 1024px) {
-  .hb-hero-grid,
-  .hb-story-grid,
-  .hb-spotlight-grid {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-  .hb-hero-content {
-    text-align: center;
-  }
-  .hb-hero-content h1 {
-    font-size: 2.6rem;
-  }
-  .hb-hero-desc {
-    margin: 0 auto 28px;
-  }
-  .hb-hero-features,
-  .hb-hero-actions {
-    justify-content: center;
-  }
-  .hb-pain-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .hb-ingredients-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  .hb-trust-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .hb-footer-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
+/* ==========================================================================
+   MOBILE RESPONSIVENESS (Matching exact mobile reference design)
+   ========================================================================== */
 
 @media (max-width: 768px) {
   .hb-container {
-    padding: 0 18px;
+    padding: 0 16px;
+  }
+
+  /* 1. Mobile Header */
+  .hb-desktop-nav,
+  .hb-desktop-only {
+    display: none !important;
+  }
+  .hb-mobile-menu-btn {
+    display: flex !important;
+  }
+  .hb-header-inner {
+    padding: 10px 0;
+  }
+  .hb-header-brand img {
+    height: 30px;
+  }
+  .hb-announcement {
+    font-size: 0.76rem;
+    padding: 7px 12px;
+  }
+
+  /* 2. Mobile Hero: Image First, Center Content */
+  .hb-hero-section {
+    padding: 24px 0 56px;
+  }
+  .hb-hero-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    text-align: center;
+  }
+  .hb-hero-image-wrap {
+    order: -1;
+    margin-bottom: 4px;
+  }
+  .hb-hero-image-wrap img {
+    max-width: 320px;
+    width: 90%;
+    border-radius: 16px;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.1);
   }
   .hb-hero-content h1 {
-    font-size: 2.15rem;
+    font-size: 2.1rem;
+    line-height: 1.2;
+    margin: 0 0 14px;
   }
-  .hb-pain-grid,
-  .hb-routine-grid,
-  .hb-trust-grid {
+  .hb-hero-desc {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0 auto 24px;
+    max-width: 100%;
+  }
+  .hb-hero-features {
+    justify-content: center;
+    gap: 12px 16px;
+    margin-bottom: 28px;
+  }
+  .hb-hero-feature-item {
+    font-size: 0.82rem;
+  }
+  .hb-hero-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+  .hb-hero-actions .hb-btn-primary {
+    width: 100%;
+    padding: 14px 20px;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+  .hb-hero-actions .hb-btn-link {
+    justify-content: center;
+    padding: 8px;
+  }
+
+  /* 3. Mobile Science of Nature: Image Top, Text Below */
+  .hb-story-section {
+    padding: 56px 0;
+  }
+  .hb-story-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    text-align: left;
+  }
+  .hb-story-visual {
+    width: 100%;
+    justify-content: center;
+  }
+  .hb-story-visual img {
+    max-width: 320px;
+    width: 90%;
+    border-radius: 16px;
+  }
+  .hb-story-badge {
+    width: 82px;
+    height: 82px;
+    top: -12px;
+    right: 12px;
+  }
+  .hb-story-content h2 {
+    font-size: 1.85rem;
+    line-height: 1.25;
+    margin: 0 0 14px;
+  }
+  .hb-story-content p {
+    font-size: 0.92rem;
+    line-height: 1.65;
+    margin-bottom: 14px;
+  }
+
+  /* 4. Mobile Pain Points Grid: 1 Column Stack */
+  .hb-pain-section {
+    padding: 60px 0;
+  }
+  .hb-section-header {
+    margin: 0 auto 36px;
+  }
+  .hb-section-header h2 {
+    font-size: 1.85rem;
+    line-height: 1.25;
+    margin: 0 0 12px;
+  }
+  .hb-section-header p {
+    font-size: 0.92rem;
+  }
+  .hb-pain-grid {
     grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .hb-pain-card {
+    border-radius: 14px;
+  }
+  .hb-pain-body {
+    padding: 18px 16px;
+  }
+  .hb-pain-body h3 {
+    font-size: 1rem;
+    margin-bottom: 8px;
+  }
+  .hb-pain-body p {
+    font-size: 0.86rem;
+    line-height: 1.5;
+  }
+
+  /* 5. Mobile Product Spotlight: Trio Bottles Top, Details Below */
+  .hb-spotlight-section {
+    padding: 56px 0;
+  }
+  .hb-spotlight-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    text-align: left;
+  }
+  .hb-spotlight-visual {
+    order: -1;
+    text-align: center;
+  }
+  .hb-spotlight-visual img {
+    max-width: 320px;
+    width: 90%;
+    border-radius: 16px;
+  }
+  .hb-spotlight-content h2 {
+    font-size: 1.85rem;
+    line-height: 1.25;
+    margin: 0 0 14px;
+  }
+  .hb-spotlight-content p {
+    font-size: 0.92rem;
+    line-height: 1.65;
+    margin-bottom: 24px;
+  }
+  .hb-spotlight-features {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px 12px;
+    margin-bottom: 28px;
+  }
+  .hb-spotlight-feature h4 {
+    font-size: 0.88rem;
+  }
+  .hb-spotlight-feature span {
+    font-size: 0.76rem;
+  }
+  .hb-spotlight-content .hb-hero-actions {
+    width: 100%;
+  }
+  .hb-spotlight-content .hb-btn-primary {
+    width: 100%;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+
+  /* 6. Mobile Ingredients Grid: 2 Columns */
+  .hb-ingredients-section {
+    padding: 60px 0;
   }
   .hb-ingredients-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 24px 14px;
+    margin-top: 32px;
+  }
+  .hb-ingredient-circle {
+    width: 86px;
+    height: 86px;
+    margin-bottom: 10px;
+  }
+  .hb-ingredient-title {
+    font-size: 0.86rem;
+  }
+  .hb-ingredient-desc {
+    font-size: 0.74rem;
+    max-width: 140px;
+  }
+
+  /* 7. Mobile Daily Routine: Split Card Layout (Text Left, Image Right) */
+  .hb-routine-section {
+    padding: 56px 0;
+  }
+  .hb-routine-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 32px;
+  }
+  .hb-routine-card {
+    display: grid;
+    grid-template-columns: 1.35fr 1fr;
+    align-items: center;
+    border-radius: 14px;
+  }
+  .hb-routine-img {
+    height: 100%;
+    aspect-ratio: auto;
+  }
+  .hb-routine-img img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+  .hb-routine-body {
+    padding: 18px 16px;
+  }
+  .hb-routine-step-num {
+    font-size: 0.78rem;
+  }
+  .hb-routine-title {
+    font-size: 1rem;
+    margin: 0 0 6px;
+  }
+  .hb-routine-desc {
+    font-size: 0.82rem;
+    line-height: 1.45;
   }
   .hb-routine-trust-bar {
     flex-direction: column;
     align-items: flex-start;
-    border-radius: var(--hb-radius-md);
+    gap: 12px;
+    padding: 16px 20px;
+    border-radius: 12px;
+    margin-top: 32px;
+  }
+  .hb-routine-trust-item {
+    font-size: 0.84rem;
+  }
+
+  /* 8. Mobile Why Choose Grid: Clean Row Cards */
+  .hb-trust-section {
+    padding: 56px 0;
+  }
+  .hb-trust-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 32px;
+  }
+  .hb-trust-card {
+    padding: 20px 18px;
+    border-radius: 12px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .hb-trust-icon-box {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 0;
+    flex-shrink: 0;
+  }
+  .hb-trust-card h3 {
+    font-size: 1rem;
+    margin: 0 0 6px;
+  }
+  .hb-trust-card p {
+    font-size: 0.84rem;
+    line-height: 1.5;
+  }
+
+  /* 9. Mobile FAQ Accordion */
+  .hb-faq-section {
+    padding: 56px 0;
+  }
+  .hb-faq-list {
+    margin-top: 32px;
+  }
+  .hb-faq-question {
+    padding: 16px 18px;
+    font-size: 0.95rem;
+  }
+  .hb-faq-answer {
+    padding: 0 18px;
+    font-size: 0.88rem;
+  }
+  .hb-faq-item.active .hb-faq-answer {
+    padding: 0 18px 18px;
+  }
+
+  /* 10. Mobile Footer */
+  .hb-footer {
+    padding: 48px 0 28px;
   }
   .hb-footer-grid {
     grid-template-columns: 1fr;
+    gap: 32px;
+    margin-bottom: 36px;
   }
   .hb-footer-bottom {
     flex-direction: column;
     text-align: center;
+    gap: 16px;
   }
 }

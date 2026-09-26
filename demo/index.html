@@ -159,11 +159,16 @@
   </div>
 
   <!-- 2. STICKY HEADER -->
-  <header class="hb-header-nav">
+  <header class="hb-header-nav" id="header-component">
     <div class="hb-container">
       <div class="hb-header-inner">
-        <!-- Navigation Links -->
-        <nav class="hb-nav" aria-label="Main Navigation">
+        <!-- Mobile Hamburger Button -->
+        <button class="hb-mobile-menu-btn" id="hbMobileMenuOpen" aria-label="Open Navigation Menu" type="button">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+
+        <!-- Navigation Links (Desktop) -->
+        <nav class="hb-nav hb-desktop-nav" aria-label="Main Navigation">
           <ul class="hb-nav-links">
             <li><a href="#" class="active">Home</a></li>
             <li><a href="#spotlight">All Products</a></li>
@@ -171,7 +176,7 @@
           </ul>
         </nav>
 
-        <!-- Brand Logo -->
+        <!-- Brand Logo (Centered on mobile) -->
         <div class="hb-header-brand">
           <a href="#">
             <img src="../assets/horizon-logo.svg" alt="TIERA BOTANICALS" width="160" height="38">
@@ -180,10 +185,10 @@
 
         <!-- Action Icons -->
         <div class="hb-header-actions">
-          <button class="hb-icon-btn" aria-label="Search">
+          <button class="hb-icon-btn hb-desktop-only" aria-label="Search">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
           </button>
-          <button class="hb-icon-btn" aria-label="Account">
+          <button class="hb-icon-btn hb-desktop-only" aria-label="Account">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
           </button>
           <button class="hb-icon-btn" id="openCartBtn" aria-label="Shopping Cart">
@@ -194,6 +199,37 @@
       </div>
     </div>
   </header>
+
+  <!-- Mobile Navigation Drawer -->
+  <div class="hb-mobile-drawer-overlay" id="hbMobileDrawerOverlay"></div>
+  <aside class="hb-mobile-drawer" id="hbMobileDrawer" aria-label="Mobile Navigation">
+    <div class="hb-mobile-drawer-header">
+      <div class="hb-mobile-brand">
+        <img src="../assets/horizon-logo.svg" alt="TIERA BOTANICALS" width="130" height="32">
+      </div>
+      <button class="hb-mobile-drawer-close" id="hbMobileMenuClose" aria-label="Close Navigation Menu" type="button">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+    <div class="hb-mobile-drawer-body">
+      <ul class="hb-mobile-links">
+        <li><a href="#" class="active">Home</a></li>
+        <li><a href="#spotlight">All Products</a></li>
+        <li><a href="#story">Our Story</a></li>
+        <li><a href="#ingredients">Ingredients</a></li>
+        <li><a href="#faq">Got Questions?</a></li>
+        <li><a href="#faq">Contact Us</a></li>
+      </ul>
+
+      <div class="hb-mobile-drawer-footer">
+        <a href="#spotlight" class="hb-btn-primary" style="width: 100%; justify-content: center; box-sizing: border-box;">Shop Best Sellers</a>
+        <div class="hb-mobile-contact">
+          <p>Questions? Reach out to us:</p>
+          <a href="mailto:hello@tierabotanicals.com">hello@tierabotanicals.com</a>
+        </div>
+      </div>
+    </div>
+  </aside>
 
   <!-- 3. HERO SECTION -->
   <section class="hb-hero-section">
@@ -270,7 +306,7 @@
     </div>
   </section>
 
-  <!-- 5. TARGET PAIN POINTS GRID (3x2) -->
+  <!-- 5. TARGET PAIN POINTS GRID (3x2 Desktop, 1 Col Mobile) -->
   <section class="hb-pain-section" id="pain-points">
     <div class="hb-container">
       <div class="hb-section-header">
@@ -554,37 +590,37 @@
       <div class="hb-routine-grid">
         <!-- 01 Apply -->
         <div class="hb-routine-card">
-          <div class="hb-routine-img">
-            <img src="../assets/routine-step-apply.jpg" alt="Step 01 Apply" width="400" height="400">
-          </div>
           <div class="hb-routine-body">
             <span class="hb-routine-step-num">STEP 01</span>
             <h3 class="hb-routine-title">Apply</h3>
             <p class="hb-routine-desc">Dispense 3 to 5 drops directly onto the targeted joint, shoulder, or muscle area.</p>
           </div>
+          <div class="hb-routine-img">
+            <img src="../assets/routine-step-apply.jpg" alt="Step 01 Apply" width="400" height="400">
+          </div>
         </div>
 
         <!-- 02 Massage -->
         <div class="hb-routine-card">
-          <div class="hb-routine-img">
-            <img src="../assets/routine-step-massage.jpg" alt="Step 02 Massage" width="400" height="400">
-          </div>
           <div class="hb-routine-body">
             <span class="hb-routine-step-num">STEP 02</span>
             <h3 class="hb-routine-title">Massage</h3>
             <p class="hb-routine-desc">Massage with gentle, firm circular motions for 30 to 60 seconds until absorbed.</p>
           </div>
+          <div class="hb-routine-img">
+            <img src="../assets/routine-step-massage.jpg" alt="Step 02 Massage" width="400" height="400">
+          </div>
         </div>
 
         <!-- 03 Feel Relief -->
         <div class="hb-routine-card">
-          <div class="hb-routine-img">
-            <img src="../assets/routine-step-relief.jpg" alt="Step 03 Feel Relief" width="400" height="400">
-          </div>
           <div class="hb-routine-body">
             <span class="hb-routine-step-num">STEP 03</span>
             <h3 class="hb-routine-title">Feel Relief</h3>
             <p class="hb-routine-desc">Notice gentle soothing warmth and calming relief spread through tight fibers in 10-15 minutes.</p>
+          </div>
+          <div class="hb-routine-img">
+            <img src="../assets/routine-step-relief.jpg" alt="Step 03 Feel Relief" width="400" height="400">
           </div>
         </div>
       </div>
@@ -620,48 +656,60 @@
           <div class="hb-trust-icon-box">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           </div>
-          <h3>Clean & Safe Formulas</h3>
-          <p>100% free of petroleum, mineral oil, synthetic fragrances, and artificial chemicals. Safe for sensitive skin.</p>
+          <div>
+            <h3>Clean & Safe Formulas</h3>
+            <p>100% free of petroleum, mineral oil, synthetic fragrances, and artificial chemicals. Safe for sensitive skin.</p>
+          </div>
         </div>
 
         <div class="hb-trust-card">
           <div class="hb-trust-icon-box">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
           </div>
-          <h3>Transparent Sourcing</h3>
-          <p>Every botanical harvest is traceable to ethical organic growers with batch certificates of analysis.</p>
+          <div>
+            <h3>Transparent Sourcing</h3>
+            <p>Every botanical harvest is traceable to ethical organic growers with batch certificates of analysis.</p>
+          </div>
         </div>
 
         <div class="hb-trust-card">
           <div class="hb-trust-icon-box">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
           </div>
-          <h3>Third-Party Tested</h3>
-          <p>Every single batch is independently analyzed for heavy metals, pesticides, and absolute microbial purity.</p>
+          <div>
+            <h3>Third-Party Tested</h3>
+            <p>Every single batch is independently analyzed for heavy metals, pesticides, and absolute microbial purity.</p>
+          </div>
         </div>
 
         <div class="hb-trust-card">
           <div class="hb-trust-icon-box">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
           </div>
-          <h3>Eco-Friendly Bottling</h3>
-          <p>Amber UV-blocking glass preserves volatile essential plant molecules, packaged in sustainable recyclable cartons.</p>
+          <div>
+            <h3>Eco-Friendly Bottling</h3>
+            <p>Amber UV-blocking glass preserves volatile essential plant molecules, packaged in sustainable recyclable cartons.</p>
+          </div>
         </div>
 
         <div class="hb-trust-card">
           <div class="hb-trust-icon-box">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
           </div>
-          <h3>Cruelty-Free Always</h3>
-          <p>Never tested on animals. Ethically formulated with kindness and deep respect for our natural world.</p>
+          <div>
+            <h3>Cruelty-Free Always</h3>
+            <p>Never tested on animals. Ethically formulated with kindness and deep respect for our natural world.</p>
+          </div>
         </div>
 
         <div class="hb-trust-card">
           <div class="hb-trust-icon-box">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
           </div>
-          <h3>Fast Reliable Shipping</h3>
-          <p>Dispatched within 24 hours with live tracking and our worry-free 30-day money back satisfaction guarantee.</p>
+          <div>
+            <h3>Fast Reliable Shipping</h3>
+            <p>Dispatched within 24 hours with live tracking and our worry-free 30-day money back satisfaction guarantee.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -841,7 +889,7 @@
         <span>Subtotal</span>
         <span>$38.00</span>
       </div>
-      <button class="hb-btn-primary" style="width: 100%; justify-content: center; padding: 15px;" onclick="alert('Proceeding to Official Shopify Secure Checkout...');">
+      <button class="hb-btn-primary" style="width: 100%; justify-content: center; padding: 15px; box-sizing: border-box;" onclick="alert('Proceeding to Official Shopify Secure Checkout...');">
         Secure Checkout &rarr;
       </button>
       <div style="text-align: center; margin-top: 12px; font-size: 0.78rem; color: #6b7280;">
@@ -852,6 +900,32 @@
 
   <!-- Interactive Scripts -->
   <script>
+    // Mobile Drawer Toggle
+    const hbMobileMenuOpen = document.getElementById('hbMobileMenuOpen');
+    const hbMobileMenuClose = document.getElementById('hbMobileMenuClose');
+    const hbMobileDrawer = document.getElementById('hbMobileDrawer');
+    const hbMobileDrawerOverlay = document.getElementById('hbMobileDrawerOverlay');
+
+    function openMobileDrawer() {
+      hbMobileDrawer.classList.add('active');
+      hbMobileDrawerOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMobileDrawer() {
+      hbMobileDrawer.classList.remove('active');
+      hbMobileDrawerOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    if (hbMobileMenuOpen) hbMobileMenuOpen.addEventListener('click', openMobileDrawer);
+    if (hbMobileMenuClose) hbMobileMenuClose.addEventListener('click', closeMobileDrawer);
+    if (hbMobileDrawerOverlay) hbMobileDrawerOverlay.addEventListener('click', closeMobileDrawer);
+
+    document.querySelectorAll('.hb-mobile-links a').forEach(link => {
+      link.addEventListener('click', closeMobileDrawer);
+    });
+
     // FAQ Accordion
     document.querySelectorAll('.hb-faq-question').forEach(button => {
       button.addEventListener('click', () => {
@@ -884,9 +958,9 @@
       document.body.style.overflow = '';
     }
 
-    openCartBtn.addEventListener('click', openCart);
-    closeCartBtn.addEventListener('click', closeCart);
-    cartOverlay.addEventListener('click', closeCart);
+    if (openCartBtn) openCartBtn.addEventListener('click', openCart);
+    if (closeCartBtn) closeCartBtn.addEventListener('click', closeCart);
+    if (cartOverlay) cartOverlay.addEventListener('click', closeCart);
 
     if (spotlightAddBtn) {
       spotlightAddBtn.addEventListener('click', (e) => {

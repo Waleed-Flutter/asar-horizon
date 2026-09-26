@@ -1,6 +1,6 @@
 {{ 'horizon-botanical.css' | asset_url | stylesheet_tag }}
 
-<section class="hb-routine-section">
+<section class="hb-routine-section" id="routine">
   <div class="hb-container">
     <div class="hb-section-header">
       <span class="hb-eyebrow">{{ section.settings.eyebrow }}</span>
@@ -11,37 +11,37 @@
     <div class="hb-routine-grid">
       <!-- Step 01: Apply -->
       <div class="hb-routine-card">
-        <div class="hb-routine-img">
-          <img src="{{ 'routine-step-apply.jpg' | asset_url }}" alt="Step 01 Apply" width="400" height="400" loading="lazy">
-        </div>
         <div class="hb-routine-body">
           <span class="hb-routine-step-num">STEP 01</span>
           <h3 class="hb-routine-title">{{ section.settings.step_1_title }}</h3>
           <p class="hb-routine-desc">{{ section.settings.step_1_desc }}</p>
         </div>
+        <div class="hb-routine-img">
+          <img src="{{ 'routine-step-apply.jpg' | asset_url }}" alt="Step 01 Apply" width="400" height="400" loading="lazy">
+        </div>
       </div>
 
       <!-- Step 02: Massage -->
       <div class="hb-routine-card">
-        <div class="hb-routine-img">
-          <img src="{{ 'routine-step-massage.jpg' | asset_url }}" alt="Step 02 Massage" width="400" height="400" loading="lazy">
-        </div>
         <div class="hb-routine-body">
           <span class="hb-routine-step-num">STEP 02</span>
           <h3 class="hb-routine-title">{{ section.settings.step_2_title }}</h3>
           <p class="hb-routine-desc">{{ section.settings.step_2_desc }}</p>
         </div>
+        <div class="hb-routine-img">
+          <img src="{{ 'routine-step-massage.jpg' | asset_url }}" alt="Step 02 Massage" width="400" height="400" loading="lazy">
+        </div>
       </div>
 
       <!-- Step 03: Feel Relief -->
       <div class="hb-routine-card">
-        <div class="hb-routine-img">
-          <img src="{{ 'routine-step-relief.jpg' | asset_url }}" alt="Step 03 Feel Relief" width="400" height="400" loading="lazy">
-        </div>
         <div class="hb-routine-body">
           <span class="hb-routine-step-num">STEP 03</span>
           <h3 class="hb-routine-title">{{ section.settings.step_3_title }}</h3>
           <p class="hb-routine-desc">{{ section.settings.step_3_desc }}</p>
+        </div>
+        <div class="hb-routine-img">
+          <img src="{{ 'routine-step-relief.jpg' | asset_url }}" alt="Step 03 Feel Relief" width="400" height="400" loading="lazy">
         </div>
       </div>
     </div>
