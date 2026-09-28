@@ -9,6 +9,9 @@
  */
 {
   "current": {
+    "botanical_primary_color": "#7A2A2B",
+    "botanical_dark_green": "#7A2A2B",
+    "botanical_mint_color": "{{ settings.color_palette.background }}",
     "logo": "shopify://shop_images/5.png",
     "logo_height": 36,
     "logo_height_mobile": 28,
@@ -43,7 +46,7 @@
     "type_font_h6": "subheading",
     "type_size_h6": "12",
     "type_line_height_h6": "display-loose",
-    "page_width": "narrow",
+    "page_width": "wide",
     "page_transition_enabled": false,
     "transition_to_main_product": false,
     "card_hover_effect": "none",
@@ -116,14 +119,45 @@
       },
       "footer-horizon-botanical": {
         "type": "footer-horizon-botanical",
+        "blocks": {
+          "brand_info_PcyUkX": {
+            "type": "brand_info",
+            "settings": {
+              "logo_width": 240,
+              "about_text": "Pure, plant-powered botanical drops formulated for natural everyday comfort, restorative joint care, and effortless daily movement."
+            }
+          },
+          "link_column_eKETee": {
+            "type": "link_column",
+            "settings": {
+              "heading": "Quick Links",
+              "menu": "footer"
+            }
+          },
+          "contact_column_aPjTGf": {
+            "type": "contact_column",
+            "settings": {
+              "heading": "Contact Us",
+              "email": "hello@tierabotanicals.com",
+              "hours": "Mon – Fri: 9:00 AM – 6:00 PM",
+              "delivery_badge": "Direct Tracked Express Delivery",
+              "eco_badge": "100% Eco-Sustainable Packaging"
+            }
+          }
+        },
+        "block_order": [
+          "brand_info_PcyUkX",
+          "link_column_eKETee",
+          "contact_column_aPjTGf"
+        ],
         "settings": {
           "background_color": "#7a2a2b",
-          "text_color": "#f2f7f3",
+          "text_color": "{{ settings.color_palette.background }}",
           "show_payment_icons": true,
           "show_cod_badge": true,
           "copyright_text": "All rights reserved. Powered by Shopify Horizon.",
           "padding_top": 64,
-          "padding_bottom": 40
+          "padding_bottom": 64
         }
       }
     },

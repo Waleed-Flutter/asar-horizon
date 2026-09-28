@@ -11,6 +11,9 @@
   "sections": {
     "hero_botanical": {
       "type": "hero-horizon-botanical",
+      "custom_css": [
+        "{background-color: #92a8d1;}"
+      ],
       "settings": {
         "badge_text": "ANCIENT-POWERED WELLNESS",
         "badge_bg": "#7A2A2B",
@@ -438,6 +441,7 @@
     "product_spotlight_trio": {
       "type": "product-spotlight-trio",
       "settings": {
+        "image": "shopify://shop_images/Ostrich_Oil_Product_2.jpg",
         "eyebrow": "DAILY RELIEF BLENDS",
         "heading": "Ostrich Oil for Everyday Movement",
         "description": "<p>Targeted &nbsp;formulas designed to calm tension and restore flexibility naturally without greasy residue or harsh synthetic ingredients.</p>",
