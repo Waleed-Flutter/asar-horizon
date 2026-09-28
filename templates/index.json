@@ -429,7 +429,7 @@
       "settings": {
         "product": "asar-ostrich-oil",
         "content_width": "content-center-aligned",
-        "desktop_media_position": "left",
+        "desktop_media_position": "right",
         "equal_columns": true,
         "limit_details_width": false,
         "gap": 48,
@@ -512,6 +512,71 @@
         "bg_color": "#fafbfa",
         "padding_top": 96,
         "padding_bottom": 96
+      }
+    },
+    "ingredients_botanical_showcase_M8gcWG": {
+      "type": "ingredients-botanical-showcase",
+      "blocks": {
+        "ingredient_bAVhAA": {
+          "type": "ingredient",
+          "settings": {
+            "image": "shopify://shop_images/361e337752f5fa4b5861d418fe31d0f0.jpg",
+            "fallback_image": "",
+            "title": "Peppermint Oil",
+            "description": ""
+          }
+        },
+        "ingredient_NfFJHg": {
+          "type": "ingredient",
+          "settings": {
+            "image": "shopify://shop_images/4006d4b31feb442c480ff6dc723b906a.jpg",
+            "fallback_image": "",
+            "title": "Capsicum Oleoresin",
+            "description": ""
+          }
+        },
+        "ingredient_KzYkbF": {
+          "type": "ingredient",
+          "settings": {
+            "fallback_image": "ingredient-wintergreen.jpg",
+            "title": "Wintergreen",
+            "description": ""
+          }
+        },
+        "ingredient_eNGicy": {
+          "type": "ingredient",
+          "settings": {
+            "image": "shopify://shop_images/7083d18ad9ffc1dd97f5124f5328da64.jpg",
+            "fallback_image": "ingredient-wintergreen.jpg",
+            "title": "Ostrich Oil",
+            "description": ""
+          }
+        },
+        "ingredient_CLd6iL": {
+          "type": "ingredient",
+          "settings": {
+            "fallback_image": "ingredient-eucalyptus.jpg",
+            "title": "Eucalyptus",
+            "description": ""
+          }
+        }
+      },
+      "block_order": [
+        "ingredient_bAVhAA",
+        "ingredient_NfFJHg",
+        "ingredient_KzYkbF",
+        "ingredient_eNGicy",
+        "ingredient_CLd6iL"
+      ],
+      "name": "Botanical Ingredients",
+      "settings": {
+        "eyebrow": "WHAT'S INSIDE",
+        "heading": "Nature powered solutions .Created with Ancient Wisdom.",
+        "subheading": "",
+        "columns_desktop": 5,
+        "background_color": "#ffffff",
+        "padding_top": 64,
+        "padding_bottom": 64
       }
     },
     "why_choose_grid": {
@@ -616,71 +681,6 @@
         "background_color": "{{ settings.color_palette.background }}",
         "padding_top": 88,
         "padding_bottom": 88
-      }
-    },
-    "ingredients_botanical_showcase_M8gcWG": {
-      "type": "ingredients-botanical-showcase",
-      "blocks": {
-        "ingredient_bAVhAA": {
-          "type": "ingredient",
-          "settings": {
-            "image": "shopify://shop_images/361e337752f5fa4b5861d418fe31d0f0.jpg",
-            "fallback_image": "",
-            "title": "Peppermint Oil",
-            "description": ""
-          }
-        },
-        "ingredient_NfFJHg": {
-          "type": "ingredient",
-          "settings": {
-            "image": "shopify://shop_images/4006d4b31feb442c480ff6dc723b906a.jpg",
-            "fallback_image": "",
-            "title": "Capsicum Oleoresin",
-            "description": ""
-          }
-        },
-        "ingredient_KzYkbF": {
-          "type": "ingredient",
-          "settings": {
-            "fallback_image": "ingredient-wintergreen.jpg",
-            "title": "Wintergreen",
-            "description": ""
-          }
-        },
-        "ingredient_eNGicy": {
-          "type": "ingredient",
-          "settings": {
-            "image": "shopify://shop_images/7083d18ad9ffc1dd97f5124f5328da64.jpg",
-            "fallback_image": "ingredient-wintergreen.jpg",
-            "title": "Ostrich Oil",
-            "description": ""
-          }
-        },
-        "ingredient_CLd6iL": {
-          "type": "ingredient",
-          "settings": {
-            "fallback_image": "ingredient-eucalyptus.jpg",
-            "title": "Eucalyptus",
-            "description": ""
-          }
-        }
-      },
-      "block_order": [
-        "ingredient_bAVhAA",
-        "ingredient_NfFJHg",
-        "ingredient_KzYkbF",
-        "ingredient_eNGicy",
-        "ingredient_CLd6iL"
-      ],
-      "name": "Botanical Ingredients",
-      "settings": {
-        "eyebrow": "WHAT'S INSIDE",
-        "heading": "Nature powered solutions .Created with Ancient Wisdom.",
-        "subheading": "",
-        "columns_desktop": 5,
-        "background_color": "#ffffff",
-        "padding_top": 64,
-        "padding_bottom": 64
       }
     }
   },
