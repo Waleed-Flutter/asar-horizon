@@ -164,8 +164,8 @@
           "show_payment_icons": true,
           "show_cod_badge": true,
           "copyright_text": "All rights reserved. Powered by Shopify Horizon.",
-          "padding_top": 64,
-          "padding_bottom": 64
+          "padding_top": 72,
+          "padding_bottom": 72
         }
       }
     },
