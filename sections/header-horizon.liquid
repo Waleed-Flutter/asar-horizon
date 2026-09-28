@@ -1,35 +1,55 @@
-{{ 'horizon-botanical.css' | asset_url | stylesheet_tag }}
-
-<header class="hb-header-nav {% if section.settings.enable_sticky %}hb-header-sticky{% endif %}" id="header-component" style="background-color: {{ section.settings.header_bg | default: '#ffffff' }};">
+{% assign header_logo = section.settings.logo | default: settings.logo %}
+<header class="hb-header{% if section.settings.enable_sticky %} hb-sticky{% endif %}" id="hbHeader" style="
+  {% liquid
+    assign hbg = section.settings.header_bg | default: '#ffffff'
+    if hbg contains 'settings.' or hbg contains '{{'
+      assign hbg = 'var(--color-background, #ffffff)'
+    endif
+    assign link_color = section.settings.nav_link_color | default: '#111827'
+    assign icon_color = section.settings.icons_color | default: '#111827'
+    assign border_color = section.settings.header_border_color | default: '#f0f3f0'
+  %}
+  --hb-header-bg: {{ hbg }};
+  --hb-nav-link: {{ link_color }};
+  --hb-nav-link-hover: {{ section.settings.nav_link_hover_color | default: '#257942' }};
+  --hb-icons-color: {{ icon_color }};
+  background-color: var(--hb-header-bg);
+  border-bottom: 1px solid {{ border_color }};
+  padding-top: {{ section.settings.padding_top | default: 16 }}px;
+  padding-bottom: {{ section.settings.padding_bottom | default: 16 }}px;
+">
   <div class="hb-container">
-    <div class="hb-header-inner" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;">
+    <div class="hb-header-inner">
       <!-- Mobile Hamburger Button -->
-      <button class="hb-mobile-menu-btn" id="hbMobileMenuOpen" aria-label="Open Navigation Menu" type="button">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      <button class="hb-mobile-menu-btn" id="hbMobileMenuOpen" aria-label="Open Navigation Menu" type="button" style="color: var(--hb-icons-color);">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
       </button>
 
-      <!-- Desktop Navigation -->
-      <nav class="hb-nav hb-desktop-nav" aria-label="Main Navigation">
-        <ul class="hb-nav-links">
-          {% if section.settings.menu != blank and linklists[section.settings.menu].links.size > 0 %}
-            {% for link in linklists[section.settings.menu].links %}
-              <li><a href="{{ link.url }}" class="{% if link.current %}active{% endif %}">{{ link.title }}</a></li>
-            {% endfor %}
+      <!-- Desktop Navigation Menu -->
+      <nav class="hb-nav-desktop" aria-label="Main Navigation">
+        {% assign main_menu = linklists[section.settings.menu] | default: linklists.main-menu %}
+        <ul class="hb-nav-list">
+          {% for link in main_menu.links %}
+            <li>
+              <a href="{{ link.url }}" class="hb-nav-link" style="color: var(--hb-nav-link); font-size: {{ section.settings.nav_font_size | default: 14 }}px;">{{ link.title }}</a>
+            </li>
           {% else %}
-            <li><a href="/" class="active">Home</a></li>
-            <li><a href="/collections/all">All Products</a></li>
-            <li><a href="/pages/contact">Contact</a></li>
-          {% endif %}
+            <li><a href="/" class="hb-nav-link" style="color: var(--hb-nav-link);">Home</a></li>
+            <li><a href="/collections/all" class="hb-nav-link" style="color: var(--hb-nav-link);">Products</a></li>
+            <li><a href="#routine" class="hb-nav-link" style="color: var(--hb-nav-link);">How to Use</a></li>
+            <li><a href="#ingredients" class="hb-nav-link" style="color: var(--hb-nav-link);">Ingredients</a></li>
+            <li><a href="#faq" class="hb-nav-link" style="color: var(--hb-nav-link);">FAQ</a></li>
+          {% endfor %}
         </ul>
       </nav>
 
       <!-- Brand Logo (Centered on mobile) -->
       <div class="hb-header-brand">
         <a href="{{ routes.root_url }}">
-          {% if section.settings.logo != blank %}
-            <img src="{{ section.settings.logo | image_url: width: 300 }}" alt="{{ shop.name }}" style="width: {{ section.settings.logo_width }}px; height: auto;" class="hb-logo-desktop" width="{{ section.settings.logo_width }}" height="38">
+          {% if header_logo != blank %}
+            <img src="{{ header_logo | image_url: width: 400 }}" alt="{{ shop.name }}" style="width: {{ section.settings.logo_width | default: 150 }}px; height: auto;" class="hb-logo-desktop" width="{{ section.settings.logo_width | default: 150 }}" height="38">
           {% else %}
-            <img src="{{ 'horizon-logo.svg' | asset_url }}" alt="{{ shop.name }}" style="width: {{ section.settings.logo_width }}px; height: auto;" width="{{ section.settings.logo_width }}" height="38">
+            <img src="{{ 'horizon-logo.svg' | asset_url }}" alt="{{ shop.name }}" style="width: {{ section.settings.logo_width | default: 150 }}px; height: auto;" width="{{ section.settings.logo_width | default: 150 }}" height="38">
           {% endif %}
         </a>
       </div>
@@ -37,19 +57,19 @@
       <!-- Action Icons -->
       <div class="hb-header-actions">
         {% if section.settings.show_search %}
-          <a href="{{ routes.search_url }}" class="hb-icon-btn hb-desktop-only" aria-label="Search">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <a href="{{ routes.search_url }}" class="hb-action-icon" aria-label="Search" style="color: var(--hb-icons-color);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
           </a>
         {% endif %}
-        {% if section.settings.show_account %}
-          <a href="{{ routes.account_url }}" class="hb-icon-btn hb-desktop-only" aria-label="Account">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+        {% if section.settings.show_account and shop.customer_accounts_enabled %}
+          <a href="{{ routes.account_url }}" class="hb-action-icon" aria-label="Account" style="color: var(--hb-icons-color);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
           </a>
         {% endif %}
         {% if section.settings.show_cart %}
-          <a href="{{ routes.cart_url }}" class="hb-icon-btn" aria-label="Cart" id="hbCartBtn">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
-            <span class="hb-cart-count">{{ cart.item_count | default: 0 }}</span>
+          <a href="{{ routes.cart_url }}" class="hb-action-icon hb-cart-icon" aria-label="Cart" style="color: var(--hb-icons-color);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+            <span class="hb-cart-count" id="hbCartBadge" style="background-color: var(--hb-nav-link-hover);">{{ cart.item_count }}</span>
           </a>
         {% endif %}
       </div>
@@ -62,10 +82,10 @@
 <aside class="hb-mobile-drawer" id="hbMobileDrawer" aria-label="Mobile Navigation">
   <div class="hb-mobile-drawer-header">
     <div class="hb-mobile-brand">
-      {% if section.settings.logo != blank %}
-        <img src="{{ section.settings.logo | image_url: width: 220 }}" alt="{{ shop.name }}" style="width: {{ section.settings.logo_width_mobile }}px; height: auto;" width="{{ section.settings.logo_width_mobile }}" height="32">
+      {% if header_logo != blank %}
+        <img src="{{ header_logo | image_url: width: 300 }}" alt="{{ shop.name }}" style="width: {{ section.settings.logo_width_mobile | default: 130 }}px; height: auto;" width="{{ section.settings.logo_width_mobile | default: 130 }}" height="32">
       {% else %}
-        <img src="{{ 'horizon-logo.svg' | asset_url }}" alt="{{ shop.name }}" style="width: {{ section.settings.logo_width_mobile }}px; height: auto;" width="{{ section.settings.logo_width_mobile }}" height="32">
+        <img src="{{ 'horizon-logo.svg' | asset_url }}" alt="{{ shop.name }}" style="width: {{ section.settings.logo_width_mobile | default: 130 }}px; height: auto;" width="{{ section.settings.logo_width_mobile | default: 130 }}" height="32">
       {% endif %}
     </div>
     <button class="hb-mobile-drawer-close" id="hbMobileMenuClose" aria-label="Close Navigation Menu" type="button">
@@ -73,61 +93,78 @@
     </button>
   </div>
   <div class="hb-mobile-drawer-body">
-    <ul class="hb-mobile-links">
-      {% if section.settings.menu != blank and linklists[section.settings.menu].links.size > 0 %}
-        {% for link in linklists[section.settings.menu].links %}
-          <li><a href="{{ link.url }}" class="{% if link.current %}active{% endif %}">{{ link.title }}</a></li>
-        {% endfor %}
+    <ul class="hb-mobile-nav-list">
+      {% for link in main_menu.links %}
+        <li><a href="{{ link.url }}">{{ link.title }}</a></li>
       {% else %}
-        <li><a href="/" class="active">Home</a></li>
+        <li><a href="/">Home</a></li>
         <li><a href="/collections/all">All Products</a></li>
-        <li><a href="#story">Our Story</a></li>
-        <li><a href="#ingredients">Ingredients</a></li>
-        <li><a href="#faq">Got Questions?</a></li>
-        <li><a href="/pages/contact">Contact Us</a></li>
-      {% endif %}
+        <li><a href="#routine">How to Use</a></li>
+        <li><a href="#ingredients">Our Ingredients</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      {% endfor %}
     </ul>
-
-    <div class="hb-mobile-drawer-footer">
-      {% if section.settings.drawer_button_text != blank %}
-        <a href="{{ section.settings.drawer_button_link | default: '/collections/all' }}" class="hb-btn-primary" style="width: 100%; justify-content: center; box-sizing: border-box;">{{ section.settings.drawer_button_text }}</a>
-      {% endif %}
-      <div class="hb-mobile-contact">
-        <p>{{ section.settings.drawer_contact_text | default: 'Questions? Reach out to us:' }}</p>
-        <a href="mailto:{{ section.settings.drawer_email | default: 'hello@tierabotanicals.com' }}">{{ section.settings.drawer_email | default: 'hello@tierabotanicals.com' }}</a>
+    {% if section.settings.drawer_button_text != blank %}
+      <div class="hb-mobile-drawer-cta">
+        <a href="{{ section.settings.drawer_button_link | default: '/collections/all' }}" class="hb-btn-primary" style="
+          width: 100%;
+          justify-content: center;
+          box-sizing: border-box;
+          background-color: {{ section.settings.drawer_btn_bg | default: '#257942' }};
+          color: {{ section.settings.drawer_btn_color | default: '#ffffff' }};
+          border-radius: {{ section.settings.drawer_btn_radius | default: 30 }}px;
+        ">{{ section.settings.drawer_button_text }}</a>
       </div>
-    </div>
+    {% endif %}
+    {% if section.settings.drawer_contact_text != blank or section.settings.drawer_email != blank %}
+      <div class="hb-mobile-drawer-contact">
+        {% if section.settings.drawer_contact_text != blank %}
+          <span>{{ section.settings.drawer_contact_text }}</span>
+        {% endif %}
+        {% if section.settings.drawer_email != blank %}
+          <a href="mailto:{{ section.settings.drawer_email }}">{{ section.settings.drawer_email }}</a>
+        {% endif %}
+      </div>
+    {% endif %}
   </div>
 </aside>
 
 <script>
   (function() {
-    const openBtn = document.getElementById('hbMobileMenuOpen');
-    const closeBtn = document.getElementById('hbMobileMenuClose');
-    const drawer = document.getElementById('hbMobileDrawer');
-    const overlay = document.getElementById('hbMobileDrawerOverlay');
+    function initHeaderDrawer() {
+      const openBtn = document.getElementById('hbMobileMenuOpen');
+      const closeBtn = document.getElementById('hbMobileMenuClose');
+      const drawer = document.getElementById('hbMobileDrawer');
+      const overlay = document.getElementById('hbMobileDrawerOverlay');
 
-    if (!openBtn || !drawer || !overlay) return;
+      if (!openBtn || !closeBtn || !drawer || !overlay) return;
 
-    function openDrawer() {
-      drawer.classList.add('active');
-      overlay.classList.add('active');
-      document.body.style.overflow = 'hidden';
+      function openDrawer() {
+        drawer.classList.add('active');
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeDrawer() {
+        drawer.classList.remove('active');
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      openBtn.addEventListener('click', openDrawer);
+      closeBtn.addEventListener('click', closeDrawer);
+      overlay.addEventListener('click', closeDrawer);
+
+      drawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', closeDrawer);
+      });
     }
 
-    function closeDrawer() {
-      drawer.classList.remove('active');
-      overlay.classList.remove('active');
-      document.body.style.overflow = '';
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initHeaderDrawer);
+    } else {
+      initHeaderDrawer();
     }
-
-    openBtn.addEventListener('click', openDrawer);
-    if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
-    overlay.addEventListener('click', closeDrawer);
-
-    drawer.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', closeDrawer);
-    });
+    document.addEventListener('shopify:section:load', initHeaderDrawer);
   })();
 </script>
 
@@ -137,18 +174,18 @@
   "settings": [
     {
       "type": "header",
-      "content": "Logo Settings"
+      "content": "Logo"
     },
     {
       "type": "image_picker",
       "id": "logo",
-      "label": "Custom Logo Image"
+      "label": "Custom Logo"
     },
     {
       "type": "range",
       "id": "logo_width",
       "min": 80,
-      "max": 280,
+      "max": 240,
       "step": 10,
       "unit": "px",
       "label": "Desktop Logo Width",
@@ -158,7 +195,7 @@
       "type": "range",
       "id": "logo_width_mobile",
       "min": 60,
-      "max": 200,
+      "max": 180,
       "step": 5,
       "unit": "px",
       "label": "Mobile Logo Width",
@@ -166,12 +203,12 @@
     },
     {
       "type": "header",
-      "content": "Navigation & Actions"
+      "content": "Navigation"
     },
     {
       "type": "link_list",
       "id": "menu",
-      "label": "Main Menu",
+      "label": "Menu",
       "default": "main-menu"
     },
     {
@@ -195,39 +232,12 @@
     {
       "type": "checkbox",
       "id": "show_cart",
-      "label": "Show Shopping Bag Icon",
+      "label": "Show Cart Icon",
       "default": true
     },
     {
       "type": "header",
-      "content": "Mobile Drawer Extras"
-    },
-    {
-      "type": "text",
-      "id": "drawer_button_text",
-      "label": "Drawer Button Text",
-      "default": "Shop Best Sellers"
-    },
-    {
-      "type": "url",
-      "id": "drawer_button_link",
-      "label": "Drawer Button Link"
-    },
-    {
-      "type": "text",
-      "id": "drawer_contact_text",
-      "label": "Contact Label",
-      "default": "Questions? Reach out to us:"
-    },
-    {
-      "type": "text",
-      "id": "drawer_email",
-      "label": "Contact Email",
-      "default": "hello@tierabotanicals.com"
-    },
-    {
-      "type": "header",
-      "content": "Section Spacing & Colors"
+      "content": "Colors & Styling"
     },
     {
       "type": "color",
@@ -236,10 +246,97 @@
       "default": "#ffffff"
     },
     {
+      "type": "color",
+      "id": "header_border_color",
+      "label": "Bottom Border Color",
+      "default": "#f0f3f0"
+    },
+    {
+      "type": "color",
+      "id": "nav_link_color",
+      "label": "Menu Link Color",
+      "default": "#111827"
+    },
+    {
+      "type": "color",
+      "id": "nav_link_hover_color",
+      "label": "Menu Link Hover / Active Color",
+      "default": "#257942"
+    },
+    {
+      "type": "range",
+      "id": "nav_font_size",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "label": "Menu Font Size",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "icons_color",
+      "label": "Header Icons Color",
+      "default": "#111827"
+    },
+    {
+      "type": "header",
+      "content": "Mobile Drawer Settings"
+    },
+    {
+      "type": "text",
+      "id": "drawer_button_text",
+      "label": "Drawer CTA Text",
+      "default": "Shop Best Sellers"
+    },
+    {
+      "type": "url",
+      "id": "drawer_button_link",
+      "label": "Drawer CTA URL"
+    },
+    {
+      "type": "color",
+      "id": "drawer_btn_bg",
+      "label": "Drawer CTA Button Background",
+      "default": "#257942"
+    },
+    {
+      "type": "color",
+      "id": "drawer_btn_color",
+      "label": "Drawer CTA Button Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "drawer_btn_radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Drawer CTA Button Radius",
+      "default": 30
+    },
+    {
+      "type": "text",
+      "id": "drawer_contact_text",
+      "label": "Drawer Contact Label",
+      "default": "Questions? Reach out to us:"
+    },
+    {
+      "type": "text",
+      "id": "drawer_email",
+      "label": "Drawer Contact Email",
+      "default": "hello@tierabotanicals.com"
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
       "type": "range",
       "id": "padding_top",
-      "min": 6,
-      "max": 30,
+      "min": 8,
+      "max": 36,
       "step": 2,
       "unit": "px",
       "label": "Top Padding",
@@ -248,8 +345,8 @@
     {
       "type": "range",
       "id": "padding_bottom",
-      "min": 6,
-      "max": 30,
+      "min": 8,
+      "max": 36,
       "step": 2,
       "unit": "px",
       "label": "Bottom Padding",

@@ -1,18 +1,38 @@
-{{ 'horizon-botanical.css' | asset_url | stylesheet_tag }}
-
-<section class="hb-hero-section" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; {% if section.settings.bg_color != blank %}background: {{ section.settings.bg_color }};{% endif %}">
+<section id="hb-hero-{{ section.id }}" class="hb-hero-section" style="
+  {% liquid
+    assign bg = section.settings.bg_color | default: '#ffffff'
+    if bg contains 'settings.' or bg contains '{{'
+      assign bg = 'var(--color-background, #ffffff)'
+    endif
+    assign h_color = section.settings.heading_color | default: '#111827'
+    assign t_color = section.settings.text_color | default: '#4b5563'
+    assign b_bg = section.settings.badge_bg | default: '#f2f7f3'
+    assign b_col = section.settings.badge_color | default: '#257942'
+    assign p_btn_bg = section.settings.btn_primary_bg | default: '#257942'
+    assign p_btn_col = section.settings.btn_primary_color | default: '#ffffff'
+    assign p_btn_rad = section.settings.btn_primary_radius | default: 30
+    assign s_btn_col = section.settings.btn_secondary_color | default: '#111827'
+  %}
+  background-color: {{ bg }};
+  padding-top: {{ section.settings.padding_top | default: 80 }}px;
+  padding-bottom: {{ section.settings.padding_bottom | default: 80 }}px;
+">
   <div class="hb-container">
     <div class="hb-hero-grid">
       <div class="hb-hero-content">
         {% if section.settings.badge_text != blank %}
-          <div class="hb-eyebrow-pill" style="{% if section.settings.badge_bg != blank %}background: {{ section.settings.badge_bg }};{% endif %} {% if section.settings.badge_color != blank %}color: {{ section.settings.badge_color }};{% endif %}">
+          <div class="hb-eyebrow-pill" style="
+            background: {{ b_bg }};
+            color: {{ b_col }};
+            border-radius: {{ section.settings.badge_radius | default: 20 }}px;
+          ">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
             {{ section.settings.badge_text }}
           </div>
         {% endif %}
 
-        <h1 style="{% if section.settings.heading_color != blank %}color: {{ section.settings.heading_color }};{% endif %}">{{ section.settings.heading }}</h1>
-        <div class="hb-hero-desc" style="{% if section.settings.text_color != blank %}color: {{ section.settings.text_color }};{% endif %}">
+        <h1 style="color: {{ h_color }};">{{ section.settings.heading }}</h1>
+        <div class="hb-hero-desc" style="color: {{ t_color }};">
           {{ section.settings.subtext }}
         </div>
 
@@ -20,8 +40,11 @@
         <div class="hb-hero-features">
           {% if section.blocks.size > 0 %}
             {% for block in section.blocks %}
-              <div class="hb-hero-feature-item" {{ block.shopify_attributes }}>
-                <span class="hb-hero-feature-icon">
+              <div class="hb-hero-feature-item" {{ block.shopify_attributes }} style="color: {{ section.settings.feature_text_color | default: '#111827' }};">
+                <span class="hb-hero-feature-icon" style="
+                  color: {{ section.settings.feature_icon_color | default: '#257942' }};
+                  background-color: {{ section.settings.feature_icon_bg | default: '#f2f7f3' }};
+                ">
                   {% case block.settings.icon %}
                     {% when 'droplet' %}
                       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
@@ -40,16 +63,16 @@
             {% endfor %}
           {% else %}
             <!-- Fallbacks -->
-            <div class="hb-hero-feature-item">
-              <span class="hb-hero-feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg></span>
+            <div class="hb-hero-feature-item" style="color: {{ section.settings.feature_text_color | default: '#111827' }};">
+              <span class="hb-hero-feature-icon" style="color: {{ section.settings.feature_icon_color | default: '#257942' }}; background-color: {{ section.settings.feature_icon_bg | default: '#f2f7f3' }};"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg></span>
               <span>Pure Ingredients</span>
             </div>
-            <div class="hb-hero-feature-item">
-              <span class="hb-hero-feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+            <div class="hb-hero-feature-item" style="color: {{ section.settings.feature_text_color | default: '#111827' }};">
+              <span class="hb-hero-feature-icon" style="color: {{ section.settings.feature_icon_color | default: '#257942' }}; background-color: {{ section.settings.feature_icon_bg | default: '#f2f7f3' }};"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
               <span>Gentle Formula</span>
             </div>
-            <div class="hb-hero-feature-item">
-              <span class="hb-hero-feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+            <div class="hb-hero-feature-item" style="color: {{ section.settings.feature_text_color | default: '#111827' }};">
+              <span class="hb-hero-feature-icon" style="color: {{ section.settings.feature_icon_color | default: '#257942' }}; background-color: {{ section.settings.feature_icon_bg | default: '#f2f7f3' }};"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
               <span>Made in Small Batches</span>
             </div>
           {% endif %}
@@ -57,12 +80,16 @@
 
         <div class="hb-hero-actions">
           {% if section.settings.btn_primary_text != blank %}
-            <a href="{{ section.settings.btn_primary_link | default: '/collections/all' }}" class="hb-btn-primary" style="{% if section.settings.btn_primary_bg != blank %}background: {{ section.settings.btn_primary_bg }};{% endif %}">
+            <a href="{{ section.settings.btn_primary_link | default: '/collections/all' }}" class="hb-btn-primary" style="
+              background-color: {{ p_btn_bg }} !important;
+              color: {{ p_btn_col }} !important;
+              border-radius: {{ p_btn_rad }}px !important;
+            ">
               {{ section.settings.btn_primary_text }}
             </a>
           {% endif %}
           {% if section.settings.btn_secondary_text != blank %}
-            <a href="{{ section.settings.btn_secondary_link | default: '#story' }}" class="hb-btn-link">
+            <a href="{{ section.settings.btn_secondary_link | default: '#story' }}" class="hb-btn-link" style="color: {{ s_btn_col }} !important;">
               {{ section.settings.btn_secondary_text }} &rarr;
             </a>
           {% endif %}
@@ -73,7 +100,7 @@
         {% if section.settings.hero_image != blank %}
           <img src="{{ section.settings.hero_image | image_url: width: 900 }}" alt="{{ section.settings.heading | escape }}" width="480" height="480" loading="eager">
         {% else %}
-          <img src="{{ 'horizon-hero-bottle.jpg' | asset_url }}" alt="Everyday Comfort Botanical Dropper" width="480" height="480" loading="eager">
+          <img src="{{ 'hero-bottle-stone.jpg' | asset_url }}" alt="Herbal Relief Oil Bottle" width="480" height="480" loading="eager">
         {% endif %}
       </div>
     </div>
@@ -86,7 +113,7 @@
   "settings": [
     {
       "type": "header",
-      "content": "Pill Badge"
+      "content": "Badge / Eyebrow"
     },
     {
       "type": "text",
@@ -98,17 +125,27 @@
       "type": "color",
       "id": "badge_bg",
       "label": "Badge Background Color",
-      "default": "#e8f5e9"
+      "default": "#f2f7f3"
     },
     {
       "type": "color",
       "id": "badge_color",
       "label": "Badge Text Color",
-      "default": "#1b5e20"
+      "default": "#257942"
+    },
+    {
+      "type": "range",
+      "id": "badge_radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Badge Border Radius",
+      "default": 20
     },
     {
       "type": "header",
-      "content": "Headings & Typography"
+      "content": "Headings & Content"
     },
     {
       "type": "text",
@@ -117,31 +154,40 @@
       "default": "Everyday Comfort, Thoughtfully Made."
     },
     {
-      "type": "richtext",
-      "id": "subtext",
-      "label": "Description Text",
-      "default": "<p>Experience natural balance with our handcrafted herbal drops made with pure, organic botanical extracts for deep, restorative muscle and joint comfort.</p>"
-    },
-    {
       "type": "color",
       "id": "heading_color",
       "label": "Heading Color",
       "default": "#111827"
     },
     {
+      "type": "richtext",
+      "id": "subtext",
+      "label": "Subtext / Description",
+      "default": "<p>Experience natural balance with our handcrafted herbal drops made with pure, organic botanical extracts for deep, restorative muscle and joint comfort.</p>"
+    },
+    {
       "type": "color",
       "id": "text_color",
-      "label": "Body Text Color",
+      "label": "Subtext Color",
       "default": "#4b5563"
     },
     {
       "type": "header",
-      "content": "Action Buttons"
+      "content": "Hero Bottle Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero Image"
+    },
+    {
+      "type": "header",
+      "content": "Primary Button"
     },
     {
       "type": "text",
       "id": "btn_primary_text",
-      "label": "Primary Button Label",
+      "label": "Primary Button Text",
       "default": "Shop Best Sellers"
     },
     {
@@ -152,13 +198,33 @@
     {
       "type": "color",
       "id": "btn_primary_bg",
-      "label": "Primary Button Color",
+      "label": "Primary Button Background",
       "default": "#257942"
+    },
+    {
+      "type": "color",
+      "id": "btn_primary_color",
+      "label": "Primary Button Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "btn_primary_radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Primary Button Border Radius",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Secondary Button"
     },
     {
       "type": "text",
       "id": "btn_secondary_text",
-      "label": "Secondary Button Label",
+      "label": "Secondary Button Text",
       "default": "Explore Our Blends"
     },
     {
@@ -167,39 +233,58 @@
       "label": "Secondary Button URL"
     },
     {
-      "type": "header",
-      "content": "Hero Imagery"
-    },
-    {
-      "type": "image_picker",
-      "id": "hero_image",
-      "label": "Hero Product Image"
+      "type": "color",
+      "id": "btn_secondary_color",
+      "label": "Secondary Button Text Color",
+      "default": "#111827"
     },
     {
       "type": "header",
-      "content": "Layout & Padding"
+      "content": "Feature Bullets Styling"
+    },
+    {
+      "type": "color",
+      "id": "feature_text_color",
+      "label": "Feature Bullet Text Color",
+      "default": "#111827"
+    },
+    {
+      "type": "color",
+      "id": "feature_icon_color",
+      "label": "Feature Bullet Icon Color",
+      "default": "#257942"
+    },
+    {
+      "type": "color",
+      "id": "feature_icon_bg",
+      "label": "Feature Bullet Icon Background",
+      "default": "#f2f7f3"
+    },
+    {
+      "type": "header",
+      "content": "Section Layout & Background"
     },
     {
       "type": "color",
       "id": "bg_color",
-      "label": "Section Background",
+      "label": "Section Background Color",
       "default": "#ffffff"
     },
     {
       "type": "range",
       "id": "padding_top",
       "min": 20,
-      "max": 120,
+      "max": 140,
       "step": 4,
       "unit": "px",
       "label": "Top Padding",
-      "default": 64
+      "default": 80
     },
     {
       "type": "range",
       "id": "padding_bottom",
       "min": 20,
-      "max": 120,
+      "max": 140,
       "step": 4,
       "unit": "px",
       "label": "Bottom Padding",
@@ -209,25 +294,25 @@
   "blocks": [
     {
       "type": "feature_highlight",
-      "name": "Feature Bullet",
+      "name": "Feature Highlight",
       "settings": [
         {
           "type": "select",
           "id": "icon",
           "label": "Icon",
           "options": [
-            { "value": "droplet", "label": "Droplet / Pure" },
-            { "value": "shield", "label": "Shield / Safe" },
-            { "value": "clock", "label": "Clock / Batch" },
-            { "value": "leaf", "label": "Leaf / Organic" },
+            { "value": "droplet", "label": "Droplet (Purity)" },
+            { "value": "shield", "label": "Shield (Safety)" },
+            { "value": "clock", "label": "Clock (Fast Acting)" },
+            { "value": "leaf", "label": "Leaf (Botanical)" },
             { "value": "check", "label": "Checkmark" }
           ],
-          "default": "droplet"
+          "default": "leaf"
         },
         {
           "type": "text",
           "id": "text",
-          "label": "Feature Title",
+          "label": "Text",
           "default": "Pure Ingredients"
         }
       ]
@@ -240,21 +325,21 @@
         {
           "type": "feature_highlight",
           "settings": {
-            "icon": "droplet",
+            "icon": "leaf",
             "text": "Pure Ingredients"
           }
         },
         {
           "type": "feature_highlight",
           "settings": {
-            "icon": "shield",
+            "icon": "droplet",
             "text": "Gentle Formula"
           }
         },
         {
           "type": "feature_highlight",
           "settings": {
-            "icon": "clock",
+            "icon": "check",
             "text": "Made in Small Batches"
           }
         }

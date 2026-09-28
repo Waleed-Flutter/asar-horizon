@@ -1,17 +1,36 @@
-{{ 'horizon-botanical.css' | asset_url | stylesheet_tag }}
-
-<section class="hb-routine-section" id="routine" style="background-color: {{ section.settings.background_color | default: '#ffffff' }}; padding-top: {{ section.settings.padding_top | default: 88 }}px; padding-bottom: {{ section.settings.padding_bottom | default: 88 }}px;">
+<section id="hb-routine-{{ section.id }}" class="hb-routine-section" style="
+  {% liquid
+    assign bg = section.settings.background_color | default: '#ffffff'
+    if bg contains 'settings.' or bg contains '{{'
+      assign bg = 'var(--color-background, #ffffff)'
+    endif
+    assign h_col = section.settings.heading_color | default: '#111827'
+    assign s_col = section.settings.subheading_color | default: '#4b5563'
+    assign eye_col = section.settings.eyebrow_color | default: '#257942'
+    assign c_bg = section.settings.card_bg | default: '#f7f9f7'
+    assign c_rad = section.settings.card_border_radius | default: 16
+    assign s_num = section.settings.step_num_color | default: '#257942'
+    assign s_title = section.settings.step_title_color | default: '#111827'
+    assign s_desc = section.settings.step_desc_color | default: '#4b5563'
+    assign t_bg = section.settings.trust_bar_bg | default: '#f2f7f3'
+    assign t_col = section.settings.trust_text_color | default: '#111827'
+    assign t_icon = section.settings.trust_icon_color | default: '#257942'
+  %}
+  background-color: {{ bg }};
+  padding-top: {{ section.settings.padding_top | default: 88 }}px;
+  padding-bottom: {{ section.settings.padding_bottom | default: 88 }}px;
+">
   <div class="hb-container">
     {% if section.settings.heading != blank or section.settings.eyebrow != blank %}
       <div class="hb-section-header">
         {% if section.settings.eyebrow != blank %}
-          <span class="hb-eyebrow">{{ section.settings.eyebrow }}</span>
+          <span class="hb-eyebrow" style="color: {{ eye_col }};">{{ section.settings.eyebrow }}</span>
         {% endif %}
         {% if section.settings.heading != blank %}
-          <h2>{{ section.settings.heading }}</h2>
+          <h2 style="color: {{ h_col }};">{{ section.settings.heading }}</h2>
         {% endif %}
         {% if section.settings.subheading != blank %}
-          <p>{{ section.settings.subheading }}</p>
+          <p style="color: {{ s_col }};">{{ section.settings.subheading }}</p>
         {% endif %}
       </div>
     {% endif %}
@@ -19,16 +38,16 @@
     <div class="hb-routine-grid">
       {% for block in section.blocks %}
         {% if block.type == 'step' %}
-          <div class="hb-routine-card" {{ block.shopify_attributes }}>
+          <div class="hb-routine-card" {{ block.shopify_attributes }} style="background-color: {{ c_bg }}; border-radius: {{ c_rad }}px;">
             <div class="hb-routine-body">
               {% if block.settings.step_number != blank %}
-                <span class="hb-routine-step-num">{{ block.settings.step_number }}</span>
+                <span class="hb-routine-step-num" style="color: {{ s_num }};">{{ block.settings.step_number }}</span>
               {% endif %}
               {% if block.settings.title != blank %}
-                <h3 class="hb-routine-title">{{ block.settings.title }}</h3>
+                <h3 class="hb-routine-title" style="color: {{ s_title }};">{{ block.settings.title }}</h3>
               {% endif %}
               {% if block.settings.description != blank %}
-                <p class="hb-routine-desc">{{ block.settings.description }}</p>
+                <p class="hb-routine-desc" style="color: {{ s_desc }};">{{ block.settings.description }}</p>
               {% endif %}
             </div>
             <div class="hb-routine-img">
@@ -45,10 +64,10 @@
 
     {% assign trust_points = section.blocks | where: "type", "trust_point" %}
     {% if trust_points.size > 0 %}
-      <div class="hb-routine-trust-bar">
+      <div class="hb-routine-trust-bar" style="background-color: {{ t_bg }};">
         {% for block in trust_points %}
-          <div class="hb-routine-trust-item" {{ block.shopify_attributes }}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          <div class="hb-routine-trust-item" {{ block.shopify_attributes }} style="color: {{ t_col }};">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{ t_icon }}" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
             <span>{{ block.settings.text }}</span>
           </div>
         {% endfor %}
@@ -62,16 +81,32 @@
   "name": "Daily Routine Steps",
   "settings": [
     {
+      "type": "header",
+      "content": "Section Header"
+    },
+    {
       "type": "text",
       "id": "eyebrow",
       "label": "Eyebrow Text",
       "default": "EASY 3 STEPS"
     },
     {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow Color",
+      "default": "#257942"
+    },
+    {
       "type": "text",
       "id": "heading",
       "label": "Heading",
       "default": "Simple Enough for Every Day."
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#111827"
     },
     {
       "type": "textarea",
@@ -81,28 +116,98 @@
     },
     {
       "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading Color",
+      "default": "#4b5563"
+    },
+    {
+      "type": "header",
+      "content": "Step Cards Styling"
+    },
+    {
+      "type": "color",
+      "id": "card_bg",
+      "label": "Card Background Color",
+      "default": "#f7f9f7"
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "min": 0,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "label": "Card Border Radius",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "step_num_color",
+      "label": "Step Number Tag Color",
+      "default": "#257942"
+    },
+    {
+      "type": "color",
+      "id": "step_title_color",
+      "label": "Step Title Color",
+      "default": "#111827"
+    },
+    {
+      "type": "color",
+      "id": "step_desc_color",
+      "label": "Step Description Color",
+      "default": "#4b5563"
+    },
+    {
+      "type": "header",
+      "content": "Trust Bar Styling"
+    },
+    {
+      "type": "color",
+      "id": "trust_bar_bg",
+      "label": "Trust Bar Background Color",
+      "default": "#f2f7f3"
+    },
+    {
+      "type": "color",
+      "id": "trust_text_color",
+      "label": "Trust Bar Text Color",
+      "default": "#111827"
+    },
+    {
+      "type": "color",
+      "id": "trust_icon_color",
+      "label": "Trust Bar Checkmark Color",
+      "default": "#257942"
+    },
+    {
+      "type": "header",
+      "content": "Section Layout & Padding"
+    },
+    {
+      "type": "color",
       "id": "background_color",
-      "label": "Background Color",
+      "label": "Section Background Color",
       "default": "#ffffff"
     },
     {
       "type": "range",
       "id": "padding_top",
       "min": 20,
-      "max": 120,
+      "max": 140,
       "step": 4,
       "unit": "px",
-      "label": "Padding Top",
+      "label": "Top Padding",
       "default": 88
     },
     {
       "type": "range",
       "id": "padding_bottom",
       "min": 20,
-      "max": 120,
+      "max": 140,
       "step": 4,
       "unit": "px",
-      "label": "Padding Bottom",
+      "label": "Bottom Padding",
       "default": 88
     }
   ],
