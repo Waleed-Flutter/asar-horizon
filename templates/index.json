@@ -621,6 +621,15 @@
     "ingredients_botanical_showcase_M8gcWG": {
       "type": "ingredients-botanical-showcase",
       "blocks": {
+        "ingredient_bAVhAA": {
+          "type": "ingredient",
+          "settings": {
+            "image": "shopify://shop_images/361e337752f5fa4b5861d418fe31d0f0.jpg",
+            "fallback_image": "",
+            "title": "Peppermint Oil",
+            "description": ""
+          }
+        },
         "ingredient_NfFJHg": {
           "type": "ingredient",
           "settings": {
@@ -657,6 +666,7 @@
         }
       },
       "block_order": [
+        "ingredient_bAVhAA",
         "ingredient_NfFJHg",
         "ingredient_KzYkbF",
         "ingredient_eNGicy",
@@ -665,9 +675,9 @@
       "name": "Botanical Ingredients",
       "settings": {
         "eyebrow": "WHAT'S INSIDE",
-        "heading": "Powered by Botanicals. Created with Purpose.",
-        "subheading": "Every botanical extract is carefully selected for therapeutic efficacy, sustainability, and absolute purity.",
-        "columns_desktop": 2,
+        "heading": "Nature powered solutions .Created with Ancient Wisdom.",
+        "subheading": "",
+        "columns_desktop": 5,
         "background_color": "#ffffff",
         "padding_top": 64,
         "padding_bottom": 64
@@ -682,8 +692,8 @@
     "product_spotlight_trio",
     "daily_routine_steps",
     "pain_points_grid",
+    "ingredients_botanical_showcase_M8gcWG",
     "why_choose_grid",
-    "faq_accordion",
-    "ingredients_botanical_showcase_M8gcWG"
+    "faq_accordion"
   ]
 }
