@@ -17,26 +17,26 @@
       {
         "type": "color",
         "id": "botanical_primary_color",
-        "label": "Primary Brand Color",
-        "info": "Overrides the primary button & green brand color throughout the store"
+        "label": "Primary Botanical Green",
+        "default": "#257942"
       },
       {
         "type": "color",
         "id": "botanical_dark_green",
-        "label": "Dark Accent / Forest Color",
-        "info": "Deep tone used for footer backgrounds and dark elements"
+        "label": "Dark Forest Green",
+        "default": "#15331e"
       },
       {
         "type": "color",
         "id": "botanical_mint_color",
-        "label": "Light Accent / Surface Background",
-        "info": "Soft background tint used for badges and subtle cards"
+        "label": "Mint Accent Background",
+        "default": "#f2f7f3"
       },
       {
         "type": "color",
         "id": "botanical_gold_color",
-        "label": "Highlight / Star Accent",
-        "info": "Accent color for trust ratings, badges, and highlights"
+        "label": "Gold Star / Badge Accent",
+        "default": "#c8963e"
       },
       {
         "type": "header",

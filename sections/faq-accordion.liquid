@@ -1,3 +1,5 @@
+{{ 'horizon-botanical.css' | asset_url | stylesheet_tag }}
+
 <section class="hb-faq-section" id="faq" style="background-color: {{ section.settings.background_color | default: '#ffffff' }}; padding-top: {{ section.settings.padding_top | default: 88 }}px; padding-bottom: {{ section.settings.padding_bottom | default: 88 }}px;">
   <div class="hb-container">
     {% if section.settings.heading != blank or section.settings.eyebrow != blank %}
