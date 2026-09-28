@@ -114,15 +114,7 @@
           "type": "faq_item",
           "settings": {
             "question": "Where can I buy Ostruce products?",
-            "answer": "You can shop directly atasarwellnes.com with delivery options nationwide.",
-            "open_by_default": false
-          }
-        },
-        "faq_item_GmfLEh": {
-          "type": "faq_item",
-          "settings": {
-            "question": "Is Enhanced Ostrich Oil safe for daily use?",
-            "answer": "Yes. It is 100% natural, steroid-free, and suitable for all ages. It can be applied multiple times a day.",
+            "answer": "You can shop directly asarwellness.com with delivery options nationwide.",
             "open_by_default": false
           }
         },
@@ -133,12 +125,38 @@
             "answer": "It is a 100% natural formula enriched with Omega 3-6-9 and infused with Capsicum Oleoresin, Wintergreen, and Eucalyptus oils to ease pain, stiffness, and inflammation.",
             "open_by_default": false
           }
+        },
+        "faq_item_m6JdDH": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How quickly can I expect to feel relief?",
+            "answer": "Most customers notice an immediate cooling and soothing sensation within 2 to 3 minutes of application, followed by deeper therapeutic warmth and muscle ease around 15 minutes.",
+            "open_by_default": false
+          }
+        },
+        "faq_item_xaG4qV": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can Enhanced Ostrich Oil help with joint pain and arthritis?",
+            "answer": "Yes, it helps soothe sore muscles, stiff joints, and aches associated with conditions such as arthritis and muscle strains. Consulting a healthcare professional is recommended for individual needs.",
+            "open_by_default": false
+          }
+        },
+        "faq_item_GmfLEh": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is Enhanced Ostrich Oil safe for daily use?",
+            "answer": "Yes. It is 100% natural, steroid-free, and suitable for all ages. It can be applied multiple times a day.",
+            "open_by_default": false
+          }
         }
       },
       "block_order": [
         "faq_item_jjyRG7",
-        "faq_item_GmfLEh",
-        "faq_item_BThi7x"
+        "faq_item_BThi7x",
+        "faq_item_m6JdDH",
+        "faq_item_xaG4qV",
+        "faq_item_GmfLEh"
       ],
       "settings": {
         "eyebrow": "FREQUENTLY ASKED QUESTIONS",
