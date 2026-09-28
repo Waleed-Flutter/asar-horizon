@@ -319,6 +319,32 @@
             "padding-inline-end": 0
           },
           "blocks": {
+            "text_fHJ8Pn": {
+              "type": "text",
+              "name": "t:names.heading",
+              "settings": {
+                "text": "<h2>Ostrich Oil</h2>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "#000000",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
             "group_qhAeHa": {
               "type": "group",
               "name": "t:names.header",
@@ -338,7 +364,7 @@
                 "height": "fit",
                 "custom_height": 100,
                 "background_media": "none",
-                "background_color": "#7A2A2B",
+                "background_color": "#FEE6D4",
                 "video_position": "cover",
                 "background_image_position": "cover",
                 "toggle_overlay": false,
@@ -406,11 +432,38 @@
                     "padding-inline-end": 0
                   },
                   "blocks": {}
+                },
+                "product_description_nPUTyt": {
+                  "type": "product-description",
+                  "name": "t:names.product_description",
+                  "settings": {
+                    "text": "<p>{{ closest.product.description }}</p>",
+                    "width": "100%",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "rte",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "text_color": "#000000",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
                 }
               },
               "block_order": [
                 "product_title_8TGNWh",
-                "price_TUqHQk"
+                "price_TUqHQk",
+                "product_description_nPUTyt"
               ]
             },
             "review_QcMFAf": {
@@ -512,6 +565,7 @@
             }
           },
           "block_order": [
+            "text_fHJ8Pn",
             "group_qhAeHa",
             "review_QcMFAf",
             "variant_picker_xMfWMT",
@@ -527,7 +581,7 @@
         "equal_columns": true,
         "limit_details_width": false,
         "gap": 48,
-        "background_color": "",
+        "background_color": "#FEE6D4",
         "padding-block-start": 40,
         "padding-block-end": 40
       }
@@ -537,11 +591,11 @@
     "hero_botanical",
     "marquee_TVKhCt",
     "feature_organic_story",
+    "featured_product_information_iNXkXV",
     "product_spotlight_trio",
     "daily_routine_steps",
     "pain_points_grid",
     "why_choose_grid",
-    "faq_accordion",
-    "featured_product_information_iNXkXV"
+    "faq_accordion"
   ]
 }
