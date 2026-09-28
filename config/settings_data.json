@@ -127,11 +127,18 @@
               "about_text": "Pure, plant-powered botanical drops formulated for natural everyday comfort, restorative joint care, and effortless daily movement."
             }
           },
+          "link_column_RaDTwH": {
+            "type": "link_column",
+            "settings": {
+              "heading": "Policies",
+              "menu": "policies"
+            }
+          },
           "link_column_eKETee": {
             "type": "link_column",
             "settings": {
               "heading": "Quick Links",
-              "menu": "footer"
+              "menu": "main-menu"
             }
           },
           "contact_column_aPjTGf": {
@@ -147,6 +154,7 @@
         },
         "block_order": [
           "brand_info_PcyUkX",
+          "link_column_RaDTwH",
           "link_column_eKETee",
           "contact_column_aPjTGf"
         ],
