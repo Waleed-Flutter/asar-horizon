@@ -110,6 +110,22 @@
     "faq_accordion": {
       "type": "faq-accordion",
       "blocks": {
+        "faq_item_jjyRG7": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Where can I buy Ostruce products?",
+            "answer": "You can shop directly atasarwellnes.com with delivery options nationwide.",
+            "open_by_default": false
+          }
+        },
+        "faq_item_GmfLEh": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is Enhanced Ostrich Oil safe for daily use?",
+            "answer": "Yes. It is 100% natural, steroid-free, and suitable for all ages. It can be applied multiple times a day.",
+            "open_by_default": false
+          }
+        },
         "faq_item_BThi7x": {
           "type": "faq_item",
           "settings": {
@@ -120,6 +136,8 @@
         }
       },
       "block_order": [
+        "faq_item_jjyRG7",
+        "faq_item_GmfLEh",
         "faq_item_BThi7x"
       ],
       "settings": {
