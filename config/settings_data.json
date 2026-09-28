@@ -123,8 +123,9 @@
           "brand_info_PcyUkX": {
             "type": "brand_info",
             "settings": {
-              "logo_width": 240,
-              "about_text": "Pure, plant-powered botanical drops formulated for natural everyday comfort, restorative joint care, and effortless daily movement."
+              "logo": "shopify://shop_images/Asar_Wellness_Logo.png",
+              "logo_width": 80,
+              "about_text": ""
             }
           },
           "link_column_RaDTwH": {
