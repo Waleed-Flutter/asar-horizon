@@ -97,11 +97,51 @@
     },
     "why_choose_grid": {
       "type": "why-choose-grid",
+      "blocks": {
+        "benefit_3E7LrK": {
+          "type": "benefit",
+          "settings": {
+            "icon": "shield",
+            "title": "Clean & Safe Formulas",
+            "description": "100% free of petroleum, mineral oil, synthetic fragrances, and artificial chemicals. Gentle enough for sensitive skin."
+          }
+        },
+        "benefit_MVnP9g": {
+          "type": "benefit",
+          "settings": {
+            "icon": "shield",
+            "title": "Made for Real Life",
+            "description": "Simple products designed for everyday wellness."
+          }
+        },
+        "benefit_DweE84": {
+          "type": "benefit",
+          "settings": {
+            "icon": "shield",
+            "title": "Quality Focused",
+            "description": "Careful formulation and manufacturing standards."
+          }
+        },
+        "benefit_6TghAH": {
+          "type": "benefit",
+          "settings": {
+            "icon": "leaf",
+            "title": "Quality Standards",
+            "description": "Thoughtful manufacturing and quality controls."
+          }
+        }
+      },
+      "block_order": [
+        "benefit_3E7LrK",
+        "benefit_MVnP9g",
+        "benefit_DweE84",
+        "benefit_6TghAH"
+      ],
       "settings": {
         "eyebrow": "WHY US",
         "heading": "Natural Wellness, Without the Guesswork.",
         "subheading": "We bring clinical transparency and organic purity to every step of our formulation process.",
-        "columns_desktop": 3,
+        "columns_desktop": 4,
         "background_color": "#ffffff",
         "padding_top": 88,
         "padding_bottom": 88
