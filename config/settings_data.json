@@ -47,6 +47,7 @@
     "card_hover_effect": "none",
     "badge_position": "top-right",
     "badge_corner_radius": 100,
+    "badge_sold_out_background_color": "{{ settings.color_palette.color2 }}",
     "badge_text_transform": "none",
     "primary_button_border_width": 0,
     "button_border_radius_primary": 14,
@@ -57,6 +58,7 @@
     "show_cart_note": false,
     "show_add_discount_code": true,
     "icon_stroke": "default",
+    "palette_input_border": "{{ settings.color_palette.color3 }}",
     "input_border_width": 1,
     "inputs_border_radius": 4,
     "popover_border_radius": 14,
@@ -69,13 +71,57 @@
     "variant_swatch_width": 34,
     "variant_swatch_height": 34,
     "variant_swatch_radius": 32,
+    "palette_variant_border": "{{ settings.color_palette.color3 }}",
     "variant_button_border_width": 1,
     "variant_button_radius": 14,
     "variant_button_width": "equal-width-buttons",
+    "sections": {
+      "announcement-bar-horizon": {
+        "type": "announcement-bar-horizon",
+        "settings": {
+          "show_announcement": true,
+          "text": "Free shipping on orders over $50 | 100% Satisfaction Guarantee",
+          "link": "",
+          "bg_color": "#7A2A2B",
+          "text_color": "#ffffff",
+          "font_size": 13,
+          "padding_vertical": 9
+        }
+      },
+      "header-horizon": {
+        "type": "header-horizon",
+        "settings": {
+          "logo": "shopify://shop_images/5.png",
+          "logo_width": 150,
+          "logo_width_mobile": 130,
+          "menu": "main-menu",
+          "enable_sticky": true,
+          "show_search": true,
+          "show_account": true,
+          "show_cart": true,
+          "drawer_button_text": "Shop Best Sellers",
+          "drawer_button_link": "",
+          "drawer_contact_text": "Questions? Reach out to us:",
+          "drawer_email": "hello@tierabotanicals.com",
+          "header_bg": "#ffffff",
+          "padding_top": 16,
+          "padding_bottom": 16
+        }
+      },
+      "footer-horizon-botanical": {
+        "type": "footer-horizon-botanical",
+        "settings": {
+          "background_color": "#7A2A2B",
+          "text_color": "#f2f7f3",
+          "show_payment_icons": true,
+          "show_cod_badge": true,
+          "copyright_text": "All rights reserved. Powered by Shopify Horizon.",
+          "padding_top": 64,
+          "padding_bottom": 40
+        }
+      }
+    },
     "content_for_index": [],
-    "badge_sold_out_background_color": "{{ settings.color_palette.color2 }}",
-    "palette_input_border": "{{ settings.color_palette.color3 }}",
-    "palette_variant_border": "{{ settings.color_palette.color3 }}",
     "color_palette": {
       "background": "#ffffff",
       "foreground": "#000000",
