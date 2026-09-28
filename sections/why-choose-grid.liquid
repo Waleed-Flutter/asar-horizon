@@ -1,48 +1,25 @@
-<section id="hb-why-{{ section.id }}" class="hb-trust-section" style="
-  {% liquid
-    assign bg = section.settings.background_color | default: '#ffffff'
-    if bg contains 'settings.' or bg contains '{{'
-      assign bg = 'var(--color-background, #ffffff)'
-    endif
-    assign h_col = section.settings.heading_color | default: '#111827'
-    assign s_col = section.settings.subheading_color | default: '#4b5563'
-    assign eye_col = section.settings.eyebrow_color | default: '#257942'
-    assign c_bg = section.settings.card_bg | default: '#fafbf9'
-    assign c_rad = section.settings.card_border_radius | default: 14
-    assign c_border = section.settings.card_border_color | default: '#e5ece6'
-    assign c_title = section.settings.card_title_color | default: '#111827'
-    assign c_desc = section.settings.card_desc_color | default: '#4b5563'
-    assign i_col = section.settings.icon_color | default: '#257942'
-    assign i_bg = section.settings.icon_box_bg | default: '#f2f7f3'
-    assign i_rad = section.settings.icon_box_radius | default: 12
-  %}
-  background-color: {{ bg }};
-  padding-top: {{ section.settings.padding_top | default: 88 }}px;
-  padding-bottom: {{ section.settings.padding_bottom | default: 88 }}px;
-">
+{{ 'horizon-botanical.css' | asset_url | stylesheet_tag }}
+
+<section class="hb-trust-section" style="background-color: {{ section.settings.background_color | default: '#ffffff' }}; padding-top: {{ section.settings.padding_top | default: 88 }}px; padding-bottom: {{ section.settings.padding_bottom | default: 88 }}px;">
   <div class="hb-container">
     {% if section.settings.heading != blank or section.settings.eyebrow != blank %}
       <div class="hb-section-header">
         {% if section.settings.eyebrow != blank %}
-          <span class="hb-eyebrow" style="color: {{ eye_col }};">{{ section.settings.eyebrow }}</span>
+          <span class="hb-eyebrow">{{ section.settings.eyebrow }}</span>
         {% endif %}
         {% if section.settings.heading != blank %}
-          <h2 style="color: {{ h_col }};">{{ section.settings.heading }}</h2>
+          <h2>{{ section.settings.heading }}</h2>
         {% endif %}
         {% if section.settings.subheading != blank %}
-          <p style="color: {{ s_col }};">{{ section.settings.subheading }}</p>
+          <p>{{ section.settings.subheading }}</p>
         {% endif %}
       </div>
     {% endif %}
 
     <div class="hb-trust-grid" style="--trust-cols: {{ section.settings.columns_desktop | default: 3 }};">
       {% for block in section.blocks %}
-        <div class="hb-trust-card" {{ block.shopify_attributes }} style="
-          background-color: {{ c_bg }};
-          border-radius: {{ c_rad }}px;
-          border-color: {{ c_border }};
-        ">
-          <div class="hb-trust-icon-box" style="background-color: {{ i_bg }}; color: {{ i_col }}; border-radius: {{ i_rad }}px;">
+        <div class="hb-trust-card" {{ block.shopify_attributes }}>
+          <div class="hb-trust-icon-box">
             {% case block.settings.icon %}
               {% when 'shield' %}
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
@@ -64,10 +41,10 @@
           </div>
           <div>
             {% if block.settings.title != blank %}
-              <h3 style="color: {{ c_title }};">{{ block.settings.title }}</h3>
+              <h3>{{ block.settings.title }}</h3>
             {% endif %}
             {% if block.settings.description != blank %}
-              <p style="color: {{ c_desc }};">{{ block.settings.description }}</p>
+              <p>{{ block.settings.description }}</p>
             {% endif %}
           </div>
         </div>
@@ -81,20 +58,10 @@
   "name": "Why Choose Grid",
   "settings": [
     {
-      "type": "header",
-      "content": "Section Header"
-    },
-    {
       "type": "text",
       "id": "eyebrow",
       "label": "Eyebrow Text",
       "default": "WHY US"
-    },
-    {
-      "type": "color",
-      "id": "eyebrow_color",
-      "label": "Eyebrow Color",
-      "default": "#257942"
     },
     {
       "type": "text",
@@ -103,22 +70,10 @@
       "default": "Natural Wellness, Without the Guesswork."
     },
     {
-      "type": "color",
-      "id": "heading_color",
-      "label": "Heading Color",
-      "default": "#111827"
-    },
-    {
       "type": "textarea",
       "id": "subheading",
       "label": "Subheading",
       "default": "We bring clinical transparency and organic purity to every step of our formulation process."
-    },
-    {
-      "type": "color",
-      "id": "subheading_color",
-      "label": "Subheading Color",
-      "default": "#4b5563"
     },
     {
       "type": "range",
@@ -130,74 +85,6 @@
       "default": 3
     },
     {
-      "type": "header",
-      "content": "Card Styling"
-    },
-    {
-      "type": "color",
-      "id": "card_bg",
-      "label": "Card Background Color",
-      "default": "#fafbf9"
-    },
-    {
-      "type": "range",
-      "id": "card_border_radius",
-      "min": 0,
-      "max": 32,
-      "step": 2,
-      "unit": "px",
-      "label": "Card Border Radius",
-      "default": 14
-    },
-    {
-      "type": "color",
-      "id": "card_border_color",
-      "label": "Card Border Color",
-      "default": "#e5ece6"
-    },
-    {
-      "type": "color",
-      "id": "card_title_color",
-      "label": "Card Title Color",
-      "default": "#111827"
-    },
-    {
-      "type": "color",
-      "id": "card_desc_color",
-      "label": "Card Description Color",
-      "default": "#4b5563"
-    },
-    {
-      "type": "header",
-      "content": "Icon Box Styling"
-    },
-    {
-      "type": "color",
-      "id": "icon_color",
-      "label": "Icon Color",
-      "default": "#257942"
-    },
-    {
-      "type": "color",
-      "id": "icon_box_bg",
-      "label": "Icon Box Background",
-      "default": "#f2f7f3"
-    },
-    {
-      "type": "range",
-      "id": "icon_box_radius",
-      "min": 0,
-      "max": 24,
-      "step": 2,
-      "unit": "px",
-      "label": "Icon Box Border Radius",
-      "default": 12
-    },
-    {
-      "type": "header",
-      "content": "Section Layout & Padding"
-    },
-    {
       "type": "color",
       "id": "background_color",
       "label": "Background Color",
@@ -207,7 +94,7 @@
       "type": "range",
       "id": "padding_top",
       "min": 20,
-      "max": 140,
+      "max": 120,
       "step": 4,
       "unit": "px",
       "label": "Padding Top",
@@ -217,7 +104,7 @@
       "type": "range",
       "id": "padding_bottom",
       "min": 20,
-      "max": 140,
+      "max": 120,
       "step": 4,
       "unit": "px",
       "label": "Padding Bottom",
@@ -261,7 +148,57 @@
   ],
   "presets": [
     {
-      "name": "Why Choose Grid"
+      "name": "Why Choose Grid",
+      "blocks": [
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "shield",
+            "title": "Clean & Safe Formulas",
+            "description": "100% free of petroleum, mineral oil, synthetic fragrances, and artificial chemicals. Gentle enough for sensitive skin."
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "globe",
+            "title": "Transparent Sourcing",
+            "description": "Every botanical drop is traceable to ethical organic growers with batch certificates of analysis available on request."
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "clipboard",
+            "title": "Third-Party Tested",
+            "description": "Every single harvest is rigorously verified for purity, potency, and zero contaminants by accredited independent laboratories."
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "box",
+            "title": "Eco-Friendly Bottling",
+            "description": "Amber UV-blocking glass preserves volatile essential plant molecules, packaged in 100% recyclable, sustainable boxes."
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "heart",
+            "title": "Cruelty-Free Always",
+            "description": "Never tested on animals. Ethically crafted with care, kindness, and deep reverence for nature and living beings."
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "truck",
+            "title": "Fast Reliable Shipping",
+            "description": "Orders dispatched within 24 hours in secure, discreet packaging with real-time tracking and 30-day money-back satisfaction."
+          }
+        }
+      ]
     }
   ]
 }

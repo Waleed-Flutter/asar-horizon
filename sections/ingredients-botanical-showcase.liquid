@@ -1,41 +1,25 @@
-<section id="hb-ingredients-{{ section.id }}" class="hb-ingredients-section" style="
-  {% liquid
-    assign bg = section.settings.background_color | default: '#ffffff'
-    if bg contains 'settings.' or bg contains '{{'
-      assign bg = 'var(--color-background, #ffffff)'
-    endif
-    assign h_col = section.settings.heading_color | default: '#111827'
-    assign s_col = section.settings.subheading_color | default: '#4b5563'
-    assign eye_col = section.settings.eyebrow_color | default: '#257942'
-    assign c_bg = section.settings.card_bg | default: '#ffffff'
-    assign c_rad = section.settings.card_border_radius | default: 14
-    assign t_col = section.settings.title_color | default: '#111827'
-    assign d_col = section.settings.desc_color | default: '#6b7280'
-    assign circle_border = section.settings.circle_border_color | default: '#e5ece6'
-  %}
-  background-color: {{ bg }};
-  padding-top: {{ section.settings.padding_top | default: 64 }}px;
-  padding-bottom: {{ section.settings.padding_bottom | default: 64 }}px;
-">
+{{ 'horizon-botanical.css' | asset_url | stylesheet_tag }}
+
+<section class="hb-ingredients-section" id="ingredients" style="background-color: {{ section.settings.background_color | default: '#ffffff' }}; padding-top: {{ section.settings.padding_top | default: 64 }}px; padding-bottom: {{ section.settings.padding_bottom | default: 64 }}px;">
   <div class="hb-container">
     {% if section.settings.heading != blank or section.settings.eyebrow != blank %}
       <div class="hb-section-header">
         {% if section.settings.eyebrow != blank %}
-          <span class="hb-eyebrow" style="color: {{ eye_col }};">{{ section.settings.eyebrow }}</span>
+          <span class="hb-eyebrow">{{ section.settings.eyebrow }}</span>
         {% endif %}
         {% if section.settings.heading != blank %}
-          <h2 style="color: {{ h_col }};">{{ section.settings.heading }}</h2>
+          <h2>{{ section.settings.heading }}</h2>
         {% endif %}
         {% if section.settings.subheading != blank %}
-          <p style="color: {{ s_col }};">{{ section.settings.subheading }}</p>
+          <p>{{ section.settings.subheading }}</p>
         {% endif %}
       </div>
     {% endif %}
 
     <div class="hb-ingredients-grid" style="--ingredients-cols: {{ section.settings.columns_desktop | default: 5 }};">
       {% for block in section.blocks %}
-        <div class="hb-ingredient-card" {{ block.shopify_attributes }} style="background-color: {{ c_bg }}; border-radius: {{ c_rad }}px;">
-          <div class="hb-ingredient-circle" style="border-color: {{ circle_border }};">
+        <div class="hb-ingredient-card" {{ block.shopify_attributes }}>
+          <div class="hb-ingredient-circle">
             {% if block.settings.image != blank %}
               {{ block.settings.image | image_url: width: 240 | image_tag: loading: 'lazy', alt: block.settings.title, width: 104, height: 104 }}
             {% elsif block.settings.fallback_image != blank %}
@@ -45,10 +29,10 @@
             {% endif %}
           </div>
           {% if block.settings.title != blank %}
-            <div class="hb-ingredient-title" style="color: {{ t_col }};">{{ block.settings.title }}</div>
+            <div class="hb-ingredient-title">{{ block.settings.title }}</div>
           {% endif %}
           {% if block.settings.description != blank %}
-            <div class="hb-ingredient-desc" style="color: {{ d_col }};">{{ block.settings.description }}</div>
+            <div class="hb-ingredient-desc">{{ block.settings.description }}</div>
           {% endif %}
         </div>
       {% endfor %}
@@ -61,20 +45,10 @@
   "name": "Botanical Ingredients",
   "settings": [
     {
-      "type": "header",
-      "content": "Section Header"
-    },
-    {
       "type": "text",
       "id": "eyebrow",
       "label": "Eyebrow Text",
       "default": "WHAT'S INSIDE"
-    },
-    {
-      "type": "color",
-      "id": "eyebrow_color",
-      "label": "Eyebrow Color",
-      "default": "#257942"
     },
     {
       "type": "text",
@@ -83,22 +57,10 @@
       "default": "Powered by Botanicals. Created with Purpose."
     },
     {
-      "type": "color",
-      "id": "heading_color",
-      "label": "Heading Color",
-      "default": "#111827"
-    },
-    {
       "type": "textarea",
       "id": "subheading",
       "label": "Subheading",
       "default": "Every botanical extract is carefully selected for therapeutic efficacy, sustainability, and absolute purity."
-    },
-    {
-      "type": "color",
-      "id": "subheading_color",
-      "label": "Subheading Color",
-      "default": "#4b5563"
     },
     {
       "type": "range",
@@ -110,48 +72,6 @@
       "default": 5
     },
     {
-      "type": "header",
-      "content": "Ingredient Cards Styling"
-    },
-    {
-      "type": "color",
-      "id": "card_bg",
-      "label": "Card Background Color",
-      "default": "#ffffff"
-    },
-    {
-      "type": "range",
-      "id": "card_border_radius",
-      "min": 0,
-      "max": 32,
-      "step": 2,
-      "unit": "px",
-      "label": "Card Border Radius",
-      "default": 14
-    },
-    {
-      "type": "color",
-      "id": "title_color",
-      "label": "Ingredient Name Color",
-      "default": "#111827"
-    },
-    {
-      "type": "color",
-      "id": "desc_color",
-      "label": "Ingredient Description Color",
-      "default": "#6b7280"
-    },
-    {
-      "type": "color",
-      "id": "circle_border_color",
-      "label": "Circle Image Border Color",
-      "default": "#e5ece6"
-    },
-    {
-      "type": "header",
-      "content": "Section Layout & Padding"
-    },
-    {
       "type": "color",
       "id": "background_color",
       "label": "Background color",
@@ -161,7 +81,7 @@
       "type": "range",
       "id": "padding_top",
       "min": 20,
-      "max": 140,
+      "max": 120,
       "step": 4,
       "unit": "px",
       "label": "Padding Top",
@@ -171,7 +91,7 @@
       "type": "range",
       "id": "padding_bottom",
       "min": 20,
-      "max": 140,
+      "max": 120,
       "step": 4,
       "unit": "px",
       "label": "Padding Bottom",
@@ -211,7 +131,89 @@
   ],
   "presets": [
     {
-      "name": "Botanical Ingredients"
+      "name": "Botanical Ingredients",
+      "blocks": [
+        {
+          "type": "ingredient",
+          "settings": {
+            "title": "Wintergreen",
+            "description": "Natural methyl salicylate for cooling comfort",
+            "fallback_image": "ingredient-wintergreen.jpg"
+          }
+        },
+        {
+          "type": "ingredient",
+          "settings": {
+            "title": "Pure Lipids",
+            "description": "Deep bio-identical carrier for rapid cellular delivery",
+            "fallback_image": "ingredient-lipids.jpg"
+          }
+        },
+        {
+          "type": "ingredient",
+          "settings": {
+            "title": "Peppermint",
+            "description": "Cooling menthol that calms acute muscle strain",
+            "fallback_image": "ingredient-peppermint.jpg"
+          }
+        },
+        {
+          "type": "ingredient",
+          "settings": {
+            "title": "Arnica Montana",
+            "description": "Traditional restorative for joint and soft-tissue care",
+            "fallback_image": "ingredient-arnica.jpg"
+          }
+        },
+        {
+          "type": "ingredient",
+          "settings": {
+            "title": "Camphor",
+            "description": "Stimulates micro-circulation for soothing warmth",
+            "fallback_image": "ingredient-camphor.jpg"
+          }
+        },
+        {
+          "type": "ingredient",
+          "settings": {
+            "title": "Eucalyptus",
+            "description": "Purifying cineole compounds to ease stiffness",
+            "fallback_image": "ingredient-eucalyptus.jpg"
+          }
+        },
+        {
+          "type": "ingredient",
+          "settings": {
+            "title": "Ginger Root",
+            "description": "Natural gingerols that warm tight muscle knots",
+            "fallback_image": "ingredient-ginger.jpg"
+          }
+        },
+        {
+          "type": "ingredient",
+          "settings": {
+            "title": "Frankincense",
+            "description": "Ancient Boswellia resin that soothes joint inflammation",
+            "fallback_image": "ingredient-frankincense.jpg"
+          }
+        },
+        {
+          "type": "ingredient",
+          "settings": {
+            "title": "Clove Bud",
+            "description": "Eugenol-rich flower buds for sustained relief",
+            "fallback_image": "ingredient-cloves.jpg"
+          }
+        },
+        {
+          "type": "ingredient",
+          "settings": {
+            "title": "Rosemary",
+            "description": "Rosmarinic acid antioxidant supporting tissue vigor",
+            "fallback_image": "ingredient-rosemary.jpg"
+          }
+        }
+      ]
     }
   ]
 }

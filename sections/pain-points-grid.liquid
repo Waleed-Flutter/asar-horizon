@@ -1,72 +1,74 @@
-<section id="hb-pain-{{ section.id }}" class="hb-pain-section" style="
-  {% liquid
-    assign bg = section.settings.bg_color | default: '#fafbfa'
-    if bg contains 'settings.' or bg contains '{{'
-      assign bg = 'var(--color-background, #fafbfa)'
-    endif
-    assign h_col = section.settings.heading_color | default: '#111827'
-    assign s_col = section.settings.subheading_color | default: '#4b5563'
-    assign eye_col = section.settings.eyebrow_color | default: '#257942'
-    assign c_bg = section.settings.card_bg | default: '#ffffff'
-    assign c_rad = section.settings.card_border_radius | default: 16
-    assign c_border = section.settings.card_border_color | default: '#e5ece6'
-    assign c_title = section.settings.card_title_color | default: '#111827'
-    assign c_desc = section.settings.card_desc_color | default: '#6b7280'
-    assign t_col = section.settings.card_tag_color | default: '#257942'
-    assign t_bg = section.settings.card_tag_bg | default: '#f2f7f3'
-  %}
-  background-color: {{ bg }};
-  padding-top: {{ section.settings.padding_top | default: 96 }}px;
-  padding-bottom: {{ section.settings.padding_bottom | default: 96 }}px;
-">
-  <div class="hb-container">
-    {% if section.settings.heading != blank or section.settings.eyebrow != blank %}
-      <div class="hb-section-header">
-        {% if section.settings.eyebrow != blank %}
-          <span class="hb-eyebrow" style="color: {{ eye_col }};">{{ section.settings.eyebrow }}</span>
-        {% endif %}
-        {% if section.settings.heading != blank %}
-          <h2 style="color: {{ h_col }};">{{ section.settings.heading }}</h2>
-        {% endif %}
-        {% if section.settings.subheading != blank %}
-          <p style="color: {{ s_col }};">{{ section.settings.subheading }}</p>
-        {% endif %}
-      </div>
-    {% endif %}
+{{ 'horizon-botanical.css' | asset_url | stylesheet_tag }}
 
-    <div class="hb-pain-grid" style="--pain-cols: {{ section.settings.columns_desktop | default: 3 }};">
-      {% for block in section.blocks %}
-        <div class="hb-pain-card" {{ block.shopify_attributes }} style="
-          background-color: {{ c_bg }};
-          border-radius: {{ c_rad }}px;
-          border-color: {{ c_border }};
-        ">
-          <div class="hb-pain-img-box">
-            {% if block.settings.image != blank %}
-              <img src="{{ block.settings.image | image_url: width: 600 }}" alt="{{ block.settings.title | escape }}" width="380" height="260" loading="lazy">
-            {% elsif block.settings.fallback_image != blank %}
-              <img src="{{ block.settings.fallback_image | asset_url }}" alt="{{ block.settings.title | escape }}" width="380" height="260" loading="lazy">
-            {% endif %}
-            
-            {% if block.settings.category != blank %}
-              <span class="hb-pain-badge" style="background-color: {{ t_bg }}; color: {{ t_col }};">{{ block.settings.category }}</span>
-            {% endif %}
+<section class="hb-pain-section" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; background-color: {{ section.settings.bg_color }};">
+  <div class="hb-container">
+    <div class="hb-section-header">
+      {% if section.settings.eyebrow != blank %}
+        <span class="hb-eyebrow">{{ section.settings.eyebrow }}</span>
+      {% endif %}
+      <h2>{{ section.settings.heading }}</h2>
+      {% if section.settings.subheading != blank %}
+        <p>{{ section.settings.subheading }}</p>
+      {% endif %}
+    </div>
+
+    <div class="hb-pain-grid hb-grid-cols-{{ section.settings.columns_desktop }}">
+      {% if section.blocks.size > 0 %}
+        {% for block in section.blocks %}
+          <div class="hb-pain-card" {{ block.shopify_attributes }}>
+            <div class="hb-pain-media">
+              {% if block.settings.image != blank %}
+                <img src="{{ block.settings.image | image_url: width: 600 }}" alt="{{ block.settings.title | escape }}" width="400" height="300" loading="lazy">
+              {% else %}
+                {% assign default_idx = forloop.index | modulo: 6 %}
+                {% case default_idx %}
+                  {% when 1 %}
+                    <img src="{{ 'pain-desk-worker.jpg' | asset_url }}" alt="{{ block.settings.title | escape }}" width="400" height="300" loading="lazy">
+                  {% when 2 %}
+                    <img src="{{ 'pain-knee-runner.jpg' | asset_url }}" alt="{{ block.settings.title | escape }}" width="400" height="300" loading="lazy">
+                  {% when 3 %}
+                    <img src="{{ 'pain-lower-back.jpg' | asset_url }}" alt="{{ block.settings.title | escape }}" width="400" height="300" loading="lazy">
+                  {% when 4 %}
+                    <img src="{{ 'pain-family-posture.jpg' | asset_url }}" alt="{{ block.settings.title | escape }}" width="400" height="300" loading="lazy">
+                  {% when 5 %}
+                    <img src="{{ 'pain-chores-ironing.jpg' | asset_url }}" alt="{{ block.settings.title | escape }}" width="400" height="300" loading="lazy">
+                  {% else %}
+                    <img src="{{ 'pain-driving-seat.jpg' | asset_url }}" alt="{{ block.settings.title | escape }}" width="400" height="300" loading="lazy">
+                {% endcase %}
+              {% endif %}
+
+              {% if block.settings.tag != blank %}
+                <div class="hb-pain-tag-pill">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                  {{ block.settings.tag }}
+                </div>
+              {% endif %}
+            </div>
+
+            <div class="hb-pain-body">
+              <h3>{{ block.settings.title }}</h3>
+              <p>{{ block.settings.description }}</p>
+            </div>
           </div>
-          <div class="hb-pain-card-body">
-            {% if block.settings.title != blank %}
-              <h3 class="hb-pain-card-title" style="color: {{ c_title }};">{{ block.settings.title }}</h3>
-            {% endif %}
-            {% if block.settings.description != blank %}
-              <p class="hb-pain-card-desc" style="color: {{ c_desc }};">{{ block.settings.description }}</p>
-            {% endif %}
+        {% endfor %}
+      {% else %}
+        <!-- Default Fallback Cards -->
+        <div class="hb-pain-card">
+          <div class="hb-pain-media">
+            <img src="{{ 'pain-desk-worker.jpg' | asset_url }}" alt="Desk Worker Shoulder Pain" width="400" height="300" loading="lazy">
+            <div class="hb-pain-tag-pill">Upper Body</div>
+          </div>
+          <div class="hb-pain-body">
+            <h3>LOWER BACK & SHOULDER TENSION</h3>
+            <p>Calms tight trapezius muscles and neck stiffness caused by screen time and desk work.</p>
           </div>
         </div>
-      {% endfor %}
+      {% endif %}
     </div>
 
     {% if section.settings.bottom_note != blank %}
-      <div class="hb-pain-bottom-note" style="color: {{ section.settings.bottom_note_color | default: '#6b7280' }};">
-        <p>{{ section.settings.bottom_note }}</p>
+      <div style="text-align: center; margin-top: 36px; font-size: 0.85rem; color: #6b7280;">
+        {{ section.settings.bottom_note }}
       </div>
     {% endif %}
   </div>
@@ -77,20 +79,10 @@
   "name": "Pain Points Grid",
   "settings": [
     {
-      "type": "header",
-      "content": "Section Header"
-    },
-    {
       "type": "text",
       "id": "eyebrow",
       "label": "Eyebrow Text",
       "default": "REAL RELIEF FOR REAL LIFE"
-    },
-    {
-      "type": "color",
-      "id": "eyebrow_color",
-      "label": "Eyebrow Color",
-      "default": "#257942"
     },
     {
       "type": "text",
@@ -99,101 +91,31 @@
       "default": "Your Day Doesn't Stop When Your Body Feels Tired."
     },
     {
-      "type": "color",
-      "id": "heading_color",
-      "label": "Heading Color",
-      "default": "#111827"
-    },
-    {
       "type": "textarea",
       "id": "subheading",
       "label": "Subheading",
       "default": "Formulated for targeted comfort where tension, fatigue, and soreness build up most during busy routines."
     },
     {
-      "type": "color",
-      "id": "subheading_color",
-      "label": "Subheading Color",
-      "default": "#4b5563"
-    },
-    {
-      "type": "range",
-      "id": "columns_desktop",
-      "min": 2,
-      "max": 4,
-      "step": 1,
-      "label": "Columns on Desktop",
-      "default": 3
-    },
-    {
-      "type": "header",
-      "content": "Card Styling"
-    },
-    {
-      "type": "color",
-      "id": "card_bg",
-      "label": "Card Background Color",
-      "default": "#ffffff"
-    },
-    {
-      "type": "range",
-      "id": "card_border_radius",
-      "min": 0,
-      "max": 32,
-      "step": 2,
-      "unit": "px",
-      "label": "Card Border Radius",
-      "default": 16
-    },
-    {
-      "type": "color",
-      "id": "card_border_color",
-      "label": "Card Border Color",
-      "default": "#e5ece6"
-    },
-    {
-      "type": "color",
-      "id": "card_title_color",
-      "label": "Card Title Color",
-      "default": "#111827"
-    },
-    {
-      "type": "color",
-      "id": "card_desc_color",
-      "label": "Card Description Color",
-      "default": "#6b7280"
-    },
-    {
-      "type": "color",
-      "id": "card_tag_color",
-      "label": "Category Tag Text Color",
-      "default": "#257942"
-    },
-    {
-      "type": "color",
-      "id": "card_tag_bg",
-      "label": "Category Tag Background",
-      "default": "#f2f7f3"
-    },
-    {
-      "type": "header",
-      "content": "Bottom Note"
-    },
-    {
       "type": "text",
       "id": "bottom_note",
-      "label": "Bottom Disclaimer / Note",
+      "label": "Bottom Footer Note",
       "default": "Clinically informed botanicals designed for rapid cutaneous absorption."
     },
     {
-      "type": "color",
-      "id": "bottom_note_color",
-      "label": "Bottom Note Color",
-      "default": "#6b7280"
+      "type": "select",
+      "id": "columns_desktop",
+      "label": "Columns on Desktop",
+      "options": [
+        { "value": "2", "label": "2 Columns" },
+        { "value": "3", "label": "3 Columns" },
+        { "value": "4", "label": "4 Columns" }
+      ],
+      "default": "3"
     },
     {
       "type": "header",
-      "content": "Section Layout & Padding"
+      "content": "Section Styling"
     },
     {
       "type": "color",
@@ -225,43 +147,92 @@
   "blocks": [
     {
       "type": "pain_card",
-      "name": "Pain / Lifestyle Card",
+      "name": "Pain Card",
       "settings": [
         {
           "type": "image_picker",
           "id": "image",
-          "label": "Custom Card Image"
+          "label": "Card Photo with Heat Indicator"
         },
         {
           "type": "text",
-          "id": "fallback_image",
-          "label": "Theme Asset Filename",
-          "default": "pain-desk-worker.jpg"
-        },
-        {
-          "type": "text",
-          "id": "category",
-          "label": "Category / Tag",
-          "default": "WORK FROM HOME"
+          "id": "tag",
+          "label": "Category Pill Tag",
+          "default": "Upper Body"
         },
         {
           "type": "text",
           "id": "title",
-          "label": "Area / Concern Title",
+          "label": "Card Title",
           "default": "LOWER BACK & SHOULDER TENSION"
         },
         {
           "type": "textarea",
           "id": "description",
-          "label": "Description",
-          "default": "Calms tight trapezius muscles and neck stiffness caused by prolonged screen time, bad ergonomic chairs, and desk work."
+          "label": "Card Description",
+          "default": "Calms tight trapezius muscles and neck stiffness after hours seated at the desk."
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Optional Card Link"
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Pain Points Grid"
+      "name": "Pain Points Grid",
+      "blocks": [
+        {
+          "type": "pain_card",
+          "settings": {
+            "tag": "Upper Body",
+            "title": "LOWER BACK & SHOULDER TENSION",
+            "description": "Calms tight trapezius muscles and neck stiffness caused by prolonged screen time, bad ergonomic chairs, and desk work."
+          }
+        },
+        {
+          "type": "pain_card",
+          "settings": {
+            "tag": "Active Recovery",
+            "title": "RUNNING & JOINT DISCOMFORT",
+            "description": "Eases stressed knees and tight calf muscles after athletic workouts, running pavement, or high-intensity training sessions."
+          }
+        },
+        {
+          "type": "pain_card",
+          "settings": {
+            "tag": "Lumbar Relief",
+            "title": "LUMBAR & SPINE STIFFNESS",
+            "description": "Soothes deep muscular tightness along lumbar vertebrae and sacral joints so you can stand and walk with effortless posture."
+          }
+        },
+        {
+          "type": "pain_card",
+          "settings": {
+            "tag": "Everyday Life",
+            "title": "POSTURE & EVERYDAY STRAIN",
+            "description": "Relieves aches from picking up children, prolonged carpet floor sitting, or awkward twisting throughout the busy day."
+          }
+        },
+        {
+          "type": "pain_card",
+          "settings": {
+            "tag": "Domestic Chores",
+            "title": "DAILY CHORES & BENDING FATIGUE",
+            "description": "Provides soothing comfort from hours on your feet, repetitive bending, grocery carrying, and laundry chores."
+          }
+        },
+        {
+          "type": "pain_card",
+          "settings": {
+            "tag": "Travel & Commute",
+            "title": "LONG DRIVES & TRAVEL FATIGUE",
+            "description": "Counteracts lower back compression and hip tightness resulting from daily commutes, bumper-to-bumper traffic, and flight travel."
+          }
+        }
+      ]
     }
   ]
 }

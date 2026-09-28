@@ -1,50 +1,31 @@
-<section id="hb-spotlight-{{ section.id }}" class="hb-spotlight-section" style="
-  {% liquid
-    assign bg = section.settings.bg_color | default: '#ffffff'
-    if bg contains 'settings.' or bg contains '{{'
-      assign bg = 'var(--color-background, #ffffff)'
-    endif
-    assign h_col = section.settings.heading_color | default: '#111827'
-    assign t_col = section.settings.text_color | default: '#4b5563'
-    assign eye_col = section.settings.eyebrow_color | default: '#257942'
-    assign p_btn_bg = section.settings.primary_btn_bg | default: '#257942'
-    assign p_btn_col = section.settings.primary_btn_color | default: '#ffffff'
-    assign p_btn_rad = section.settings.primary_btn_radius | default: 30
-    assign s_btn_col = section.settings.secondary_btn_color | default: '#111827'
-    assign b_card_bg = section.settings.badge_card_bg | default: '#ffffff'
-    assign b_title_col = section.settings.badge_title_color | default: '#111827'
-    assign b_desc_col = section.settings.badge_desc_color | default: '#6b7280'
-    assign b_icon_col = section.settings.badge_icon_color | default: '#257942'
-  %}
-  background-color: {{ bg }};
-  padding-top: {{ section.settings.padding_top | default: 88 }}px;
-  padding-bottom: {{ section.settings.padding_bottom | default: 88 }}px;
-">
+{{ 'horizon-botanical.css' | asset_url | stylesheet_tag }}
+
+<section class="hb-spotlight-section" id="spotlight" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; background-color: {{ section.settings.bg_color }};">
   <div class="hb-container">
     <div class="hb-spotlight-grid">
       <div class="hb-spotlight-visual">
         {% if section.settings.image != blank %}
-          <img src="{{ section.settings.image | image_url: width: 800 }}" alt="{{ section.settings.heading | escape }}" width="440" height="440" loading="lazy">
+          <img src="{{ section.settings.image | image_url: width: 900 }}" alt="{{ section.settings.heading | escape }}" width="480" height="480" loading="lazy">
         {% else %}
-          <img src="{{ 'bottles-trio-showcase.jpg' | asset_url }}" alt="Triple Bottle Product Lineup" width="440" height="440" loading="lazy">
+          <img src="{{ 'horizon-bottles-trio.jpg' | asset_url }}" alt="Botanical Care Dropper Trio" width="480" height="480" loading="lazy">
         {% endif %}
       </div>
 
       <div class="hb-spotlight-content">
         {% if section.settings.eyebrow != blank %}
-          <span class="hb-eyebrow" style="color: {{ eye_col }};">{{ section.settings.eyebrow }}</span>
+          <span class="hb-eyebrow">{{ section.settings.eyebrow }}</span>
         {% endif %}
-        <h2 style="color: {{ h_col }};">{{ section.settings.heading }}</h2>
-        <div class="hb-hero-desc" style="color: {{ t_col }};">
+        <h2>{{ section.settings.heading }}</h2>
+        <div class="hb-spotlight-desc">
           {{ section.settings.description }}
         </div>
 
-        <!-- 4 Key Feature Grid -->
+        <!-- Dynamic Feature Highlights -->
         <div class="hb-spotlight-features">
           {% if section.blocks.size > 0 %}
             {% for block in section.blocks %}
-              <div class="hb-spotlight-feature" {{ block.shopify_attributes }} style="background-color: {{ b_card_bg }}; border-radius: {{ section.settings.badge_card_radius | default: 12 }}px;">
-                <div class="hb-spotlight-icon" style="color: {{ b_icon_col }};">
+              <div class="hb-spotlight-feature" {{ block.shopify_attributes }}>
+                <div class="hb-spotlight-icon">
                   {% case block.settings.icon %}
                     {% when 'shield' %}
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
@@ -61,44 +42,40 @@
                   {% endcase %}
                 </div>
                 <div>
-                  <h4 style="color: {{ b_title_col }};">{{ block.settings.title }}</h4>
-                  <span style="color: {{ b_desc_col }};">{{ block.settings.subtitle }}</span>
+                  <h4>{{ block.settings.title }}</h4>
+                  <span>{{ block.settings.subtitle }}</span>
                 </div>
               </div>
             {% endfor %}
           {% else %}
             <!-- Defaults -->
-            <div class="hb-spotlight-feature" style="background-color: {{ b_card_bg }}; border-radius: {{ section.settings.badge_card_radius | default: 12 }}px;">
-              <div class="hb-spotlight-icon" style="color: {{ b_icon_col }};"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-              <div><h4 style="color: {{ b_title_col }};">Non-Toxic</h4><span style="color: {{ b_desc_col }};">Pure natural extracts</span></div>
+            <div class="hb-spotlight-feature">
+              <div class="hb-spotlight-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+              <div><h4>Non-Toxic</h4><span>Pure natural extracts</span></div>
             </div>
-            <div class="hb-spotlight-feature" style="background-color: {{ b_card_bg }}; border-radius: {{ section.settings.badge_card_radius | default: 12 }}px;">
-              <div class="hb-spotlight-icon" style="color: {{ b_icon_col }};"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
-              <div><h4 style="color: {{ b_title_col }};">Fast Absorbing</h4><span style="color: {{ b_desc_col }};">Sub-minute transdermal delivery</span></div>
+            <div class="hb-spotlight-feature">
+              <div class="hb-spotlight-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+              <div><h4>Fast Absorbing</h4><span>Sub-minute transdermal delivery</span></div>
             </div>
-            <div class="hb-spotlight-feature" style="background-color: {{ b_card_bg }}; border-radius: {{ section.settings.badge_card_radius | default: 12 }}px;">
-              <div class="hb-spotlight-icon" style="color: {{ b_icon_col }};"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
-              <div><h4 style="color: {{ b_title_col }};">Targeted Relief</h4><span style="color: {{ b_desc_col }};">Calms joint & muscle tension</span></div>
+            <div class="hb-spotlight-feature">
+              <div class="hb-spotlight-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
+              <div><h4>Targeted Relief</h4><span>Calms joint & muscle tension</span></div>
             </div>
-            <div class="hb-spotlight-feature" style="background-color: {{ b_card_bg }}; border-radius: {{ section.settings.badge_card_radius | default: 12 }}px;">
-              <div class="hb-spotlight-icon" style="color: {{ b_icon_col }};"><circle cx="12" cy="7" r="4"/></svg></div>
-              <div><h4 style="color: {{ b_title_col }};">Clean Formula</h4><span style="color: {{ b_desc_col }};">Zero mineral oils or parabens</span></div>
+            <div class="hb-spotlight-feature">
+              <div class="hb-spotlight-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div>
+              <div><h4>Clean Formula</h4><span>Zero mineral oils or parabens</span></div>
             </div>
           {% endif %}
         </div>
 
         <div class="hb-hero-actions">
           {% if section.settings.primary_cta_text != blank %}
-            <a href="{{ section.settings.primary_cta_link | default: '/collections/all' }}" class="hb-btn-primary" style="
-              background-color: {{ p_btn_bg }} !important;
-              color: {{ p_btn_col }} !important;
-              border-radius: {{ p_btn_rad }}px !important;
-            ">
+            <a href="{{ section.settings.primary_cta_link | default: '/collections/all' }}" class="hb-btn-primary">
               {{ section.settings.primary_cta_text }}
             </a>
           {% endif %}
           {% if section.settings.secondary_cta_text != blank %}
-            <a href="{{ section.settings.secondary_cta_link | default: '#ingredients' }}" class="hb-btn-link" style="color: {{ s_btn_col }} !important;">
+            <a href="{{ section.settings.secondary_cta_link | default: '#ingredients' }}" class="hb-btn-link">
               {{ section.settings.secondary_cta_text }} &rarr;
             </a>
           {% endif %}
@@ -118,20 +95,10 @@
       "label": "Showcase Image (Trio Bottles)"
     },
     {
-      "type": "header",
-      "content": "Headings & Content"
-    },
-    {
       "type": "text",
       "id": "eyebrow",
       "label": "Eyebrow Text",
       "default": "DAILY RELIEF BLENDS"
-    },
-    {
-      "type": "color",
-      "id": "eyebrow_color",
-      "label": "Eyebrow Color",
-      "default": "#257942"
     },
     {
       "type": "text",
@@ -140,22 +107,10 @@
       "default": "Botanical Care for Everyday Movement"
     },
     {
-      "type": "color",
-      "id": "heading_color",
-      "label": "Heading Color",
-      "default": "#111827"
-    },
-    {
       "type": "richtext",
       "id": "description",
       "label": "Description Copy",
       "default": "<p>Targeted botanical formulas designed to calm tension and restore flexibility naturally without greasy residue or harsh synthetic ingredients.</p>"
-    },
-    {
-      "type": "color",
-      "id": "text_color",
-      "label": "Description Text Color",
-      "default": "#4b5563"
     },
     {
       "type": "header",
@@ -173,28 +128,6 @@
       "label": "Primary Button URL"
     },
     {
-      "type": "color",
-      "id": "primary_btn_bg",
-      "label": "Primary Button Background",
-      "default": "#257942"
-    },
-    {
-      "type": "color",
-      "id": "primary_btn_color",
-      "label": "Primary Button Text Color",
-      "default": "#ffffff"
-    },
-    {
-      "type": "range",
-      "id": "primary_btn_radius",
-      "min": 0,
-      "max": 50,
-      "step": 2,
-      "unit": "px",
-      "label": "Primary Button Border Radius",
-      "default": 30
-    },
-    {
       "type": "text",
       "id": "secondary_cta_text",
       "label": "Secondary Button Label",
@@ -206,52 +139,8 @@
       "label": "Secondary Button URL"
     },
     {
-      "type": "color",
-      "id": "secondary_btn_color",
-      "label": "Secondary Button Text Color",
-      "default": "#111827"
-    },
-    {
       "type": "header",
-      "content": "Feature Badges Styling"
-    },
-    {
-      "type": "color",
-      "id": "badge_card_bg",
-      "label": "Badge Background Color",
-      "default": "#ffffff"
-    },
-    {
-      "type": "range",
-      "id": "badge_card_radius",
-      "min": 0,
-      "max": 24,
-      "step": 2,
-      "unit": "px",
-      "label": "Badge Border Radius",
-      "default": 12
-    },
-    {
-      "type": "color",
-      "id": "badge_icon_color",
-      "label": "Badge Icon Color",
-      "default": "#257942"
-    },
-    {
-      "type": "color",
-      "id": "badge_title_color",
-      "label": "Badge Title Color",
-      "default": "#111827"
-    },
-    {
-      "type": "color",
-      "id": "badge_desc_color",
-      "label": "Badge Description Color",
-      "default": "#6b7280"
-    },
-    {
-      "type": "header",
-      "content": "Section Layout & Padding"
+      "content": "Section Styling"
     },
     {
       "type": "color",

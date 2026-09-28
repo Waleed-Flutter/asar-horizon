@@ -1,25 +1,6 @@
-<footer id="hb-footer-{{ section.id }}" class="hb-footer" style="
-  {% liquid
-    assign f_bg = section.settings.background_color | default: '#15331e'
-    if f_bg contains 'settings.' or f_bg contains '{{'
-      assign f_bg = 'var(--color-background, #15331e)'
-    endif
-    assign f_tc = section.settings.text_color | default: '#f2f7f3'
-    if f_tc contains 'settings.' or f_tc contains '{{'
-      assign f_tc = 'var(--color-foreground, #f2f7f3)'
-    endif
-    assign h_col = section.settings.headings_color | default: '#ffffff'
-    assign l_col = section.settings.links_color | default: '#d1d5db'
-    assign l_hov = section.settings.links_hover_color | default: '#ffffff'
-    assign div_col = section.settings.bottom_border_color | default: 'rgba(255,255,255,0.12)'
-  %}
-  --hb-footer-link: {{ l_col }};
-  --hb-footer-link-hover: {{ l_hov }};
-  background-color: {{ f_bg }};
-  color: {{ f_tc }};
-  padding-top: {{ section.settings.padding_top | default: 64 }}px;
-  padding-bottom: {{ section.settings.padding_bottom | default: 40 }}px;
-">
+{{ 'horizon-botanical.css' | asset_url | stylesheet_tag }}
+
+<footer class="hb-footer" style="background-color: {{ section.settings.background_color | default: '#15331e' }}; color: {{ section.settings.text_color | default: '#f2f7f3' }}; padding-top: {{ section.settings.padding_top | default: 64 }}px; padding-bottom: {{ section.settings.padding_bottom | default: 40 }}px;">
   <div class="hb-container">
     <div class="hb-footer-grid">
       {% for block in section.blocks %}
@@ -27,41 +8,40 @@
           {% when 'brand_info' %}
             <div class="hb-footer-col" {{ block.shopify_attributes }}>
               <div class="hb-footer-brand">
-                {% assign footer_logo = block.settings.logo | default: settings.logo %}
-                {% if footer_logo != blank %}
-                  {{ footer_logo | image_url: width: 300 | image_tag: loading: 'lazy', alt: shop.name, style: 'max-width: 100%; height: auto;' }}
+                {% if block.settings.logo != blank %}
+                  {{ block.settings.logo | image_url: width: 300 | image_tag: loading: 'lazy', alt: shop.name, style: 'max-width: 100%; height: auto;' }}
                 {% else %}
                   <img src="{{ 'horizon-logo.svg' | asset_url }}" alt="{{ shop.name }}" width="{{ block.settings.logo_width | default: 150 }}" height="38">
                 {% endif %}
               </div>
               {% if block.settings.about_text != blank %}
-                <p class="hb-footer-about" style="color: {{ f_tc }};">{{ block.settings.about_text }}</p>
+                <p class="hb-footer-about">{{ block.settings.about_text }}</p>
               {% endif %}
             </div>
 
           {% when 'link_column' %}
             <div class="hb-footer-col" {{ block.shopify_attributes }}>
               {% if block.settings.heading != blank %}
-                <h4 style="color: {{ h_col }};">{{ block.settings.heading }}</h4>
+                <h4>{{ block.settings.heading }}</h4>
               {% endif %}
               <ul class="hb-footer-links">
                 {% if block.settings.menu != blank and linklists[block.settings.menu].links.size > 0 %}
                   {% for link in linklists[block.settings.menu].links %}
-                    <li><a href="{{ link.url }}" style="color: var(--hb-footer-link);">{{ link.title }}</a></li>
+                    <li><a href="{{ link.url }}">{{ link.title }}</a></li>
                   {% endfor %}
                 {% else %}
-                  {% if block.settings.heading contains 'Customer' or block.settings.heading contains 'Care' or block.settings.heading contains 'Policies' %}
-                    <li><a href="/pages/shipping" style="color: var(--hb-footer-link);">Shipping Policy</a></li>
-                    <li><a href="/pages/refunds" style="color: var(--hb-footer-link);">Refund & Return Policy</a></li>
-                    <li><a href="/pages/privacy" style="color: var(--hb-footer-link);">Privacy Policy</a></li>
-                    <li><a href="/pages/terms" style="color: var(--hb-footer-link);">Terms of Service</a></li>
-                    <li><a href="#faq" style="color: var(--hb-footer-link);">Support Center</a></li>
+                  {% if block.settings.heading contains 'Customer' or block.settings.heading contains 'Care' %}
+                    <li><a href="/pages/shipping">Shipping Policy</a></li>
+                    <li><a href="/pages/refunds">Refund & Return Policy</a></li>
+                    <li><a href="/pages/privacy">Privacy Policy</a></li>
+                    <li><a href="/pages/terms">Terms of Service</a></li>
+                    <li><a href="#faq">Support Center</a></li>
                   {% else %}
-                    <li><a href="/" style="color: var(--hb-footer-link);">Home</a></li>
-                    <li><a href="/collections/all" style="color: var(--hb-footer-link);">All Products</a></li>
-                    <li><a href="#ingredients" style="color: var(--hb-footer-link);">Our Ingredients</a></li>
-                    <li><a href="#faq" style="color: var(--hb-footer-link);">Frequently Asked</a></li>
-                    <li><a href="/pages/track-order" style="color: var(--hb-footer-link);">Track My Order</a></li>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/collections/all">All Products</a></li>
+                    <li><a href="#ingredients">Our Ingredients</a></li>
+                    <li><a href="#faq">Frequently Asked</a></li>
+                    <li><a href="/pages/track-order">Track My Order</a></li>
                   {% endif %}
                 {% endif %}
               </ul>
@@ -70,20 +50,20 @@
           {% when 'contact_column' %}
             <div class="hb-footer-col" {{ block.shopify_attributes }}>
               {% if block.settings.heading != blank %}
-                <h4 style="color: {{ h_col }};">{{ block.settings.heading }}</h4>
+                <h4>{{ block.settings.heading }}</h4>
               {% endif %}
               <ul class="hb-footer-links">
                 {% if block.settings.email != blank %}
-                  <li><a href="mailto:{{ block.settings.email }}" style="color: var(--hb-footer-link);">{{ block.settings.email }}</a></li>
+                  <li><a href="mailto:{{ block.settings.email }}">{{ block.settings.email }}</a></li>
                 {% endif %}
                 {% if block.settings.hours != blank %}
-                  <li style="color: {{ f_tc }};">{{ block.settings.hours }}</li>
+                  <li>{{ block.settings.hours }}</li>
                 {% endif %}
                 {% if block.settings.delivery_badge != blank %}
-                  <li style="color: {{ f_tc }};">{{ block.settings.delivery_badge }}</li>
+                  <li>{{ block.settings.delivery_badge }}</li>
                 {% endif %}
                 {% if block.settings.eco_badge != blank %}
-                  <li style="color: {{ f_tc }};">{{ block.settings.eco_badge }}</li>
+                  <li>{{ block.settings.eco_badge }}</li>
                 {% endif %}
               </ul>
             </div>
@@ -91,8 +71,8 @@
       {% endfor %}
     </div>
 
-    <div class="hb-footer-bottom" style="border-top: 1px solid {{ div_col }};">
-      <div style="color: {{ f_tc }};">&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. {{ section.settings.copyright_text }}</div>
+    <div class="hb-footer-bottom">
+      <div>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. {{ section.settings.copyright_text }}</div>
       {% if section.settings.show_payment_icons %}
         <div class="hb-payment-badges">
           <svg width="38" height="24" viewBox="0 0 38 24" fill="none"><rect width="38" height="24" rx="3" fill="#ffffff" stroke="#e0e0e0"/><path d="M15 17L17 7H20L18 17H15Z" fill="#1434CB"/><path d="M25 7.2C24.3 7 23.3 6.8 22.1 6.8C19.3 6.8 17.3 8.3 17.3 10.4C17.3 12 18.7 12.8 19.8 13.3C20.9 13.8 21.3 14.2 21.3 14.7C21.3 15.5 20.3 15.9 19.4 15.9C18.1 15.9 17.3 15.6 16.5 15.2L16.1 15L15.7 17.2C16.4 17.5 17.7 17.8 19.1 17.8C22.1 17.8 24 16.3 24 14.1C24 12.8 23.2 11.8 21.5 11C20.5 10.5 19.9 10.2 19.9 9.6C19.9 9.1 20.5 8.6 21.7 8.6C22.6 8.6 23.4 8.8 23.9 9.1L24.2 9.2L25 7.2Z" fill="#1434CB"/></svg>
@@ -111,10 +91,6 @@
   "name": "Botanical Footer",
   "settings": [
     {
-      "type": "header",
-      "content": "Footer Colors"
-    },
-    {
       "type": "color",
       "id": "background_color",
       "label": "Background Color",
@@ -123,36 +99,8 @@
     {
       "type": "color",
       "id": "text_color",
-      "label": "Body / Description Text Color",
+      "label": "Text Color",
       "default": "#f2f7f3"
-    },
-    {
-      "type": "color",
-      "id": "headings_color",
-      "label": "Column Headings Color",
-      "default": "#ffffff"
-    },
-    {
-      "type": "color",
-      "id": "links_color",
-      "label": "Links Color",
-      "default": "#d1d5db"
-    },
-    {
-      "type": "color",
-      "id": "links_hover_color",
-      "label": "Links Hover Color",
-      "default": "#ffffff"
-    },
-    {
-      "type": "color",
-      "id": "bottom_border_color",
-      "label": "Divider Border Color",
-      "default": "rgba(255,255,255,0.12)"
-    },
-    {
-      "type": "header",
-      "content": "Payment Badges & Copyright"
     },
     {
       "type": "checkbox",
@@ -173,14 +121,10 @@
       "default": "All rights reserved. Powered by Shopify Horizon."
     },
     {
-      "type": "header",
-      "content": "Section Padding"
-    },
-    {
       "type": "range",
       "id": "padding_top",
       "min": 20,
-      "max": 140,
+      "max": 120,
       "step": 4,
       "unit": "px",
       "label": "Padding Top",
@@ -190,7 +134,7 @@
       "type": "range",
       "id": "padding_bottom",
       "min": 20,
-      "max": 140,
+      "max": 120,
       "step": 4,
       "unit": "px",
       "label": "Padding Bottom",
@@ -283,7 +227,37 @@
   ],
   "presets": [
     {
-      "name": "Botanical Footer"
+      "name": "Botanical Footer",
+      "blocks": [
+        {
+          "type": "brand_info",
+          "settings": {
+            "about_text": "Pure, plant-powered botanical drops formulated for natural everyday comfort, restorative joint care, and effortless daily movement."
+          }
+        },
+        {
+          "type": "link_column",
+          "settings": {
+            "heading": "Quick Links"
+          }
+        },
+        {
+          "type": "link_column",
+          "settings": {
+            "heading": "Customer Care"
+          }
+        },
+        {
+          "type": "contact_column",
+          "settings": {
+            "heading": "Contact Us",
+            "email": "hello@tierabotanicals.com",
+            "hours": "Mon – Fri: 9:00 AM – 6:00 PM",
+            "delivery_badge": "Direct Tracked Express Delivery",
+            "eco_badge": "100% Eco-Sustainable Packaging"
+          }
+        }
+      ]
     }
   ]
 }
