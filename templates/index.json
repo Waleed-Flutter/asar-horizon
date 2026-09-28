@@ -23,7 +23,8 @@
         "btn_primary_link": "/collections/all",
         "btn_primary_bg": "#7a2a2b",
         "btn_secondary_text": "Explore Our Blends",
-        "btn_secondary_link": "#story",
+        "btn_secondary_link": "shopify://products/asar-ostrich-oil",
+        "hero_image": "shopify://shop_images/OstrichOilProduct.jpg",
         "bg_color": "#ffffff",
         "padding_top": 64,
         "padding_bottom": 80
@@ -74,199 +75,44 @@
       "type": "feature-organic-story",
       "settings": {
         "layout": "image_first",
-        "show_badge": true,
-        "eyebrow": "THE SCIENCE OF NATURE",
-        "heading": "Wellness Should Be Part of Everyday Life",
-        "body_text": "<p>We believe physical relief should be pure, natural, and accessible. Our bio-active extraction process preserves vital botanical terpenes and fatty acids for deep transdermal absorption.</p><p>From morning stiffness to post-activity recovery, our clean plant formula works with your body's natural physiology to calm tension at the source without synthetic blockers or greasy residue.</p>",
-        "cta_text": "Discover Our Story",
-        "cta_link": "#ingredients",
+        "image": "shopify://shop_images/OstrichOilProduct.jpg",
+        "show_badge": false,
+        "custom_badge": "shopify://shop_images/5.png",
+        "eyebrow": "",
+        "heading": "About Us",
+        "body_text": "<p>At <strong>ASAR Holistic Wellness</strong>, we believe that true well-being begins where the outside world fades and you reconnect with yourself. In a fast-paced world that constantly asks you to move quicker, we serve as your daily anchor for holistic alignment..</p><p>We are dedicated to redefining health and personal care through intelligent formulation. By uniting ancient traditions with modern momentum, we create a sacred space where your mind, body, and spirit can thrive in every season<br/><br/></p>",
+        "cta_text": "About Us",
+        "cta_link": "shopify://pages/about-us",
         "bg_color": "#ffffff",
-        "padding_top": 80,
-        "padding_bottom": 80
-      }
-    },
-    "product_spotlight_trio": {
-      "type": "product-spotlight-trio",
-      "settings": {
-        "eyebrow": "DAILY RELIEF BLENDS",
-        "heading": "Ostrich Oil for Everyday Movement",
-        "description": "<p>Targeted &nbsp;formulas designed to calm tension and restore flexibility naturally without greasy residue or harsh synthetic ingredients.</p>",
-        "primary_cta_text": "Shop Pain Relief",
-        "primary_cta_link": "shopify://products/asar-ostrich-oil",
-        "secondary_cta_text": "See Ingredients",
-        "secondary_cta_link": "#ingredients",
-        "bg_color": "#ffffff",
-        "padding_top": 88,
-        "padding_bottom": 88
-      }
-    },
-    "daily_routine_steps": {
-      "type": "daily-routine-steps",
-      "blocks": {
-        "step_kEc96N": {
-          "type": "step",
-          "settings": {
-            "step_number": "STEP 01",
-            "title": "Apply",
-            "description": "Dispense 3 to 5 drops directly onto the targeted joint, shoulder, lower back, or muscle area.",
-            "image": "shopify://shop_images/OstrichOilProduct.jpg",
-            "fallback_image": "routine-step-apply.jpg"
-          }
-        },
-        "step_RYhiNy": {
-          "type": "step",
-          "settings": {
-            "step_number": "STEP 02",
-            "title": "Apply",
-            "description": "Dispense 3 to 5 drops directly onto the targeted joint, shoulder, lower back, or muscle area.",
-            "fallback_image": "routine-step-apply.jpg"
-          }
-        },
-        "step_BRdQbW": {
-          "type": "step",
-          "settings": {
-            "step_number": "STEP 03",
-            "title": "Apply",
-            "description": "Dispense 3 to 5 drops directly onto the targeted joint, shoulder, lower back, or muscle area.",
-            "image": "shopify://shop_images/Ostrich_oil_bottle_on_savanna_2K_20260924171940.jpg",
-            "fallback_image": "routine-step-apply.jpg"
-          }
-        }
-      },
-      "block_order": [
-        "step_kEc96N",
-        "step_RYhiNy",
-        "step_BRdQbW"
-      ],
-      "settings": {
-        "eyebrow": "How to use",
-        "heading": "Simple Enough for Every Day.",
-        "subheading": "",
-        "background_color": "#ffffff",
-        "padding_top": 88,
-        "padding_bottom": 88
-      }
-    },
-    "pain_points_grid": {
-      "type": "pain-points-grid",
-      "settings": {
-        "eyebrow": "REAL RELIEF FOR REAL LIFE",
-        "heading": "Your Day Doesn't Stop When Your Body Feels Tired.",
-        "subheading": "Formulated for targeted comfort where tension, fatigue, and soreness build up most during busy routines.",
-        "bottom_note": "Clinically informed botanicals designed for rapid cutaneous absorption.",
-        "columns_desktop": "3",
-        "bg_color": "#fafbfa",
-        "padding_top": 96,
-        "padding_bottom": 96
-      }
-    },
-    "why_choose_grid": {
-      "type": "why-choose-grid",
-      "blocks": {
-        "benefit_3E7LrK": {
-          "type": "benefit",
-          "settings": {
-            "icon": "shield",
-            "title": "Clean & Safe Formulas",
-            "description": "Clear communication about what goes into our products."
-          }
-        },
-        "benefit_MVnP9g": {
-          "type": "benefit",
-          "settings": {
-            "icon": "leaf",
-            "title": "Made for Real Life",
-            "description": "Simple products designed for everyday wellness."
-          }
-        },
-        "benefit_DweE84": {
-          "type": "benefit",
-          "settings": {
-            "icon": "truck",
-            "title": "Fast Shipping",
-            "description": "Carefully delivered  nationwide shipping"
-          }
-        }
-      },
-      "block_order": [
-        "benefit_3E7LrK",
-        "benefit_MVnP9g",
-        "benefit_DweE84"
-      ],
-      "settings": {
-        "eyebrow": "WHY ASAR",
-        "heading": "Ancient Wellness, Without the Guesswork.",
-        "subheading": "",
-        "columns_desktop": 4,
-        "background_color": "#ffffff",
-        "padding_top": 88,
-        "padding_bottom": 88
-      }
-    },
-    "faq_accordion": {
-      "type": "faq-accordion",
-      "blocks": {
-        "faq_item_jjyRG7": {
-          "type": "faq_item",
-          "settings": {
-            "question": "Where can I buy Ostruce products?",
-            "answer": "You can shop directly asarwellness.com with delivery options nationwide.",
-            "open_by_default": false
-          }
-        },
-        "faq_item_BThi7x": {
-          "type": "faq_item",
-          "settings": {
-            "question": "What makes Asar Wellness  Ostrich Oil unique?",
-            "answer": "It is a 100% natural formula enriched with Omega 3-6-9 and infused with Capsicum Oleoresin, Wintergreen, and Eucalyptus oils to ease pain, stiffness, and inflammation.",
-            "open_by_default": false
-          }
-        },
-        "faq_item_m6JdDH": {
-          "type": "faq_item",
-          "settings": {
-            "question": "How quickly can I expect to feel relief?",
-            "answer": "Most customers notice an immediate cooling and soothing sensation within 2 to 3 minutes of application, followed by deeper therapeutic warmth and muscle ease around 15 minutes.",
-            "open_by_default": false
-          }
-        },
-        "faq_item_xaG4qV": {
-          "type": "faq_item",
-          "settings": {
-            "question": "Can Enhanced Ostrich Oil help with joint pain and arthritis?",
-            "answer": "Yes, it helps soothe sore muscles, stiff joints, and aches associated with conditions such as arthritis and muscle strains. Consulting a healthcare professional is recommended for individual needs.",
-            "open_by_default": false
-          }
-        },
-        "faq_item_GmfLEh": {
-          "type": "faq_item",
-          "settings": {
-            "question": "Is Enhanced Ostrich Oil safe for daily use?",
-            "answer": "Yes. It is 100% natural, steroid-free, and suitable for all ages. It can be applied multiple times a day.",
-            "open_by_default": false
-          }
-        }
-      },
-      "block_order": [
-        "faq_item_jjyRG7",
-        "faq_item_BThi7x",
-        "faq_item_m6JdDH",
-        "faq_item_xaG4qV",
-        "faq_item_GmfLEh"
-      ],
-      "settings": {
-        "eyebrow": "FREQUENTLY ASKED QUESTIONS",
-        "heading": "Got Questions? We've Got Answers.",
-        "subheading": "",
-        "allow_multiple_open": false,
-        "background_color": "{{ settings.color_palette.background }}",
-        "padding_top": 88,
-        "padding_bottom": 88
+        "padding_top": 52,
+        "padding_bottom": 52
       }
     },
     "featured_product_information_iNXkXV": {
       "type": "featured-product-information",
       "blocks": {
+        "accordion_aQJtCF": {
+          "type": "accordion",
+          "name": "t:names.accordion",
+          "settings": {
+            "icon": "caret",
+            "dividers": true,
+            "divider_color": "",
+            "type_preset": "h6",
+            "background_color": "",
+            "text_color": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
         "media-gallery": {
           "type": "_featured-product-information-carousel",
           "static": true,
@@ -573,6 +419,9 @@
           ]
         }
       },
+      "block_order": [
+        "accordion_aQJtCF"
+      ],
       "name": "t:names.featured_product_information",
       "settings": {
         "product": "asar-ostrich-oil",
@@ -584,6 +433,185 @@
         "background_color": "#FEE6D4",
         "padding-block-start": 40,
         "padding-block-end": 40
+      }
+    },
+    "product_spotlight_trio": {
+      "type": "product-spotlight-trio",
+      "settings": {
+        "eyebrow": "DAILY RELIEF BLENDS",
+        "heading": "Ostrich Oil for Everyday Movement",
+        "description": "<p>Targeted &nbsp;formulas designed to calm tension and restore flexibility naturally without greasy residue or harsh synthetic ingredients.</p>",
+        "primary_cta_text": "Shop Pain Relief",
+        "primary_cta_link": "shopify://products/asar-ostrich-oil",
+        "secondary_cta_text": "See Ingredients",
+        "secondary_cta_link": "#ingredients",
+        "bg_color": "#ffffff",
+        "padding_top": 88,
+        "padding_bottom": 88
+      }
+    },
+    "daily_routine_steps": {
+      "type": "daily-routine-steps",
+      "blocks": {
+        "step_kEc96N": {
+          "type": "step",
+          "settings": {
+            "step_number": "STEP 01",
+            "title": "Apply",
+            "description": "Dispense 3 to 5 drops directly onto the targeted joint, shoulder, lower back, or muscle area.",
+            "image": "shopify://shop_images/OstrichOilProduct.jpg",
+            "fallback_image": "routine-step-apply.jpg"
+          }
+        },
+        "step_RYhiNy": {
+          "type": "step",
+          "settings": {
+            "step_number": "STEP 02",
+            "title": "Apply",
+            "description": "Dispense 3 to 5 drops directly onto the targeted joint, shoulder, lower back, or muscle area.",
+            "fallback_image": "routine-step-apply.jpg"
+          }
+        },
+        "step_BRdQbW": {
+          "type": "step",
+          "settings": {
+            "step_number": "STEP 03",
+            "title": "Apply",
+            "description": "Dispense 3 to 5 drops directly onto the targeted joint, shoulder, lower back, or muscle area.",
+            "image": "shopify://shop_images/Ostrich_oil_bottle_on_savanna_2K_20260924171940.jpg",
+            "fallback_image": "routine-step-apply.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "step_kEc96N",
+        "step_RYhiNy",
+        "step_BRdQbW"
+      ],
+      "settings": {
+        "eyebrow": "How to use",
+        "heading": "Simple Enough for Every Day.",
+        "subheading": "",
+        "background_color": "#ffffff",
+        "padding_top": 88,
+        "padding_bottom": 88
+      }
+    },
+    "pain_points_grid": {
+      "type": "pain-points-grid",
+      "settings": {
+        "eyebrow": "REAL RELIEF FOR REAL LIFE",
+        "heading": "Your Day Doesn't Stop When Your Body Feels Tired.",
+        "subheading": "Formulated for targeted comfort where tension, fatigue, and soreness build up most during busy routines.",
+        "bottom_note": "Clinically informed botanicals designed for rapid cutaneous absorption.",
+        "columns_desktop": "3",
+        "bg_color": "#fafbfa",
+        "padding_top": 96,
+        "padding_bottom": 96
+      }
+    },
+    "why_choose_grid": {
+      "type": "why-choose-grid",
+      "blocks": {
+        "benefit_3E7LrK": {
+          "type": "benefit",
+          "settings": {
+            "icon": "shield",
+            "title": "Clean & Safe Formulas",
+            "description": "Clear communication about what goes into our products."
+          }
+        },
+        "benefit_MVnP9g": {
+          "type": "benefit",
+          "settings": {
+            "icon": "leaf",
+            "title": "Made for Real Life",
+            "description": "Simple products designed for everyday wellness."
+          }
+        },
+        "benefit_DweE84": {
+          "type": "benefit",
+          "settings": {
+            "icon": "truck",
+            "title": "Fast Shipping",
+            "description": "Carefully delivered  nationwide shipping"
+          }
+        }
+      },
+      "block_order": [
+        "benefit_3E7LrK",
+        "benefit_MVnP9g",
+        "benefit_DweE84"
+      ],
+      "settings": {
+        "eyebrow": "WHY ASAR",
+        "heading": "Ancient Wellness, Without the Guesswork.",
+        "subheading": "",
+        "columns_desktop": 4,
+        "background_color": "#ffffff",
+        "padding_top": 88,
+        "padding_bottom": 88
+      }
+    },
+    "faq_accordion": {
+      "type": "faq-accordion",
+      "blocks": {
+        "faq_item_jjyRG7": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Where can I buy Ostruce products?",
+            "answer": "You can shop directly asarwellness.com with delivery options nationwide.",
+            "open_by_default": false
+          }
+        },
+        "faq_item_BThi7x": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What makes Asar Wellness  Ostrich Oil unique?",
+            "answer": "It is a 100% natural formula enriched with Omega 3-6-9 and infused with Capsicum Oleoresin, Wintergreen, and Eucalyptus oils to ease pain, stiffness, and inflammation.",
+            "open_by_default": false
+          }
+        },
+        "faq_item_m6JdDH": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How quickly can I expect to feel relief?",
+            "answer": "Most customers notice an immediate cooling and soothing sensation within 2 to 3 minutes of application, followed by deeper therapeutic warmth and muscle ease around 15 minutes.",
+            "open_by_default": false
+          }
+        },
+        "faq_item_xaG4qV": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can Enhanced Ostrich Oil help with joint pain and arthritis?",
+            "answer": "Yes, it helps soothe sore muscles, stiff joints, and aches associated with conditions such as arthritis and muscle strains. Consulting a healthcare professional is recommended for individual needs.",
+            "open_by_default": false
+          }
+        },
+        "faq_item_GmfLEh": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is Enhanced Ostrich Oil safe for daily use?",
+            "answer": "Yes. It is 100% natural, steroid-free, and suitable for all ages. It can be applied multiple times a day.",
+            "open_by_default": false
+          }
+        }
+      },
+      "block_order": [
+        "faq_item_jjyRG7",
+        "faq_item_BThi7x",
+        "faq_item_m6JdDH",
+        "faq_item_xaG4qV",
+        "faq_item_GmfLEh"
+      ],
+      "settings": {
+        "eyebrow": "FREQUENTLY ASKED QUESTIONS",
+        "heading": "Got Questions? We've Got Answers.",
+        "subheading": "",
+        "allow_multiple_open": false,
+        "background_color": "{{ settings.color_palette.background }}",
+        "padding_top": 88,
+        "padding_bottom": 88
       }
     }
   },
