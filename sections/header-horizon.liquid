@@ -1,5 +1,4 @@
-{{ 'horizon-botanical.css' | asset_url | stylesheet_tag }}
-
+{% assign header_logo = section.settings.logo | default: settings.logo %}
 <header class="hb-header-nav {% if section.settings.enable_sticky %}hb-header-sticky{% endif %}" id="header-component" style="background-color: {{ section.settings.header_bg | default: '#ffffff' }};">
   <div class="hb-container">
     <div class="hb-header-inner" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;">
@@ -26,8 +25,8 @@
       <!-- Brand Logo (Centered on mobile) -->
       <div class="hb-header-brand">
         <a href="{{ routes.root_url }}">
-          {% if section.settings.logo != blank %}
-            <img src="{{ section.settings.logo | image_url: width: 300 }}" alt="{{ shop.name }}" style="width: {{ section.settings.logo_width }}px; height: auto;" class="hb-logo-desktop" width="{{ section.settings.logo_width }}" height="38">
+          {% if header_logo != blank %}
+            <img src="{{ header_logo | image_url: width: 400 }}" alt="{{ shop.name }}" style="width: {{ section.settings.logo_width }}px; height: auto;" class="hb-logo-desktop" width="{{ section.settings.logo_width }}" height="38">
           {% else %}
             <img src="{{ 'horizon-logo.svg' | asset_url }}" alt="{{ shop.name }}" style="width: {{ section.settings.logo_width }}px; height: auto;" width="{{ section.settings.logo_width }}" height="38">
           {% endif %}
@@ -62,8 +61,8 @@
 <aside class="hb-mobile-drawer" id="hbMobileDrawer" aria-label="Mobile Navigation">
   <div class="hb-mobile-drawer-header">
     <div class="hb-mobile-brand">
-      {% if section.settings.logo != blank %}
-        <img src="{{ section.settings.logo | image_url: width: 220 }}" alt="{{ shop.name }}" style="width: {{ section.settings.logo_width_mobile }}px; height: auto;" width="{{ section.settings.logo_width_mobile }}" height="32">
+      {% if header_logo != blank %}
+        <img src="{{ header_logo | image_url: width: 300 }}" alt="{{ shop.name }}" style="width: {{ section.settings.logo_width_mobile }}px; height: auto;" width="{{ section.settings.logo_width_mobile }}" height="32">
       {% else %}
         <img src="{{ 'horizon-logo.svg' | asset_url }}" alt="{{ shop.name }}" style="width: {{ section.settings.logo_width_mobile }}px; height: auto;" width="{{ section.settings.logo_width_mobile }}" height="32">
       {% endif %}

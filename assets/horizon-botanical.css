@@ -5,33 +5,38 @@
    ========================================================================== */
 
 :root {
-  --hb-primary: #257942;
-  --hb-primary-dark: #1b5e20;
-  --hb-primary-hover: #1e6b37;
-  --hb-primary-light: #e8f5e9;
+  /* Dynamic integration with Shopify Horizon Theme Settings */
+  --hb-primary: var(--color-primary-button-background, #257942);
+  --hb-primary-hover: var(--color-primary-button-hover-background, #1e6b37);
+  --hb-primary-dark: var(--palette-darkest, #15331e);
+  --hb-primary-light: #f2f7f3;
+  --hb-btn-text: var(--color-primary-button-text, #ffffff);
+  
   --hb-accent-mint: #f2f7f3;
   --hb-accent-gold: #c8963e;
   
-  --hb-bg-white: #ffffff;
-  --hb-bg-cream: #fafbf9;
+  --hb-bg-white: var(--color-background, #ffffff);
+  --hb-bg-cream: var(--color-background, #fafbf9);
   --hb-bg-card: #f7f9f7;
   --hb-card-border: #e5ece6;
   
-  --hb-text-title: #111827;
-  --hb-text-body: #4b5563;
-  --hb-text-muted: #6b7280;
-  --hb-text-green: #257942;
+  --hb-text-title: var(--color-foreground, #111827);
+  --hb-text-body: var(--color-foreground, #4b5563);
+  --hb-text-muted: var(--color-foreground-muted, #6b7280);
+  --hb-text-green: var(--hb-primary);
 
-  --hb-font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --hb-font-main: var(--font-body--family, 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif);
+  --hb-font-heading: var(--font-heading--family, var(--font-body--family, 'Plus Jakarta Sans', sans-serif));
+  
   --hb-radius-sm: 8px;
-  --hb-radius-md: 14px;
+  --hb-radius-md: var(--card-corner-radius, 14px);
   --hb-radius-lg: 20px;
-  --hb-radius-pill: 9999px;
+  --hb-radius-pill: var(--style-border-radius-buttons-primary, var(--style-border-radius-pills, 9999px));
   
   --hb-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
-  --hb-shadow-md: 0 8px 24px rgba(27, 94, 32, 0.08);
+  --hb-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
   --hb-shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.08);
-  --hb-shadow-hover: 0 20px 45px rgba(37, 121, 66, 0.14);
+  --hb-shadow-hover: 0 20px 45px rgba(0, 0, 0, 0.14);
   
   --hb-transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }

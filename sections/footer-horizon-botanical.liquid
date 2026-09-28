@@ -1,6 +1,22 @@
-{{ 'horizon-botanical.css' | asset_url | stylesheet_tag }}
+{% liquid
+  assign footer_logo = block.settings.logo | default: settings.logo
+  assign footer_bg = section.settings.background_color
+  if footer_bg == blank or footer_bg == 'rgba(0,0,0,0)'
+    assign footer_bg = 'var(--hb-primary-dark, #15331e)'
+  endif
 
-<footer class="hb-footer" style="background-color: {{ section.settings.background_color | default: '#15331e' }}; color: {{ section.settings.text_color | default: '#f2f7f3' }}; padding-top: {{ section.settings.padding_top | default: 64 }}px; padding-bottom: {{ section.settings.padding_bottom | default: 40 }}px;">
+  assign footer_tc = section.settings.text_color
+  if footer_tc.rgba != blank
+    assign footer_tc_val = 'rgb(' | append: footer_tc.rgba | append: ')'
+  elsif footer_tc != blank and footer_tc contains 'settings.'
+    assign footer_tc_val = 'var(--color-background, #ffffff)'
+  elsif footer_tc != blank
+    assign footer_tc_val = footer_tc
+  else
+    assign footer_tc_val = '#f2f7f3'
+  endif
+%}
+<footer class="hb-footer" style="background-color: {{ footer_bg }}; color: {{ footer_tc_val }}; padding-top: {{ section.settings.padding_top | default: 64 }}px; padding-bottom: {{ section.settings.padding_bottom | default: 40 }}px;">
   <div class="hb-container">
     <div class="hb-footer-grid">
       {% for block in section.blocks %}
@@ -8,8 +24,9 @@
           {% when 'brand_info' %}
             <div class="hb-footer-col" {{ block.shopify_attributes }}>
               <div class="hb-footer-brand">
-                {% if block.settings.logo != blank %}
-                  {{ block.settings.logo | image_url: width: 300 | image_tag: loading: 'lazy', alt: shop.name, style: 'max-width: 100%; height: auto;' }}
+                {% assign f_logo = block.settings.logo | default: settings.logo %}
+                {% if f_logo != blank %}
+                  {{ f_logo | image_url: width: 300 | image_tag: loading: 'lazy', alt: shop.name, style: 'max-width: 100%; height: auto;' }}
                 {% else %}
                   <img src="{{ 'horizon-logo.svg' | asset_url }}" alt="{{ shop.name }}" width="{{ block.settings.logo_width | default: 150 }}" height="38">
                 {% endif %}

@@ -33,27 +33,72 @@
     {{ 'horizon-botanical.css' | asset_url | stylesheet_tag }}
     <style>
       :root {
-        {% if settings.botanical_primary_color != blank %}
+        /* Primary Brand / Button Color */
+        {% if settings.botanical_primary_color != blank and settings.botanical_primary_color != 'rgba(0,0,0,0)' %}
           --hb-primary: {{ settings.botanical_primary_color }};
-          --hb-primary-hover: {{ settings.botanical_primary_color }}dd;
           --hb-text-green: {{ settings.botanical_primary_color }};
+        {% elsif settings.palette_primary_button_background != blank %}
+          --hb-primary: rgb({{ settings.palette_primary_button_background.rgba }});
+          --hb-text-green: rgb({{ settings.palette_primary_button_background.rgba }});
         {% endif %}
-        {% if settings.botanical_dark_green != blank %}
+
+        {% if settings.palette_primary_button_text != blank %}
+          --hb-btn-text: rgb({{ settings.palette_primary_button_text.rgba }});
+        {% endif %}
+
+        /* Dark Forest / Secondary Color */
+        {% if settings.botanical_dark_green != blank and settings.botanical_dark_green != 'rgba(0,0,0,0)' %}
           --hb-primary-dark: {{ settings.botanical_dark_green }};
+        {% elsif settings.palette_secondary_button_background != blank %}
+          --hb-primary-dark: rgb({{ settings.palette_secondary_button_background.rgba }});
         {% endif %}
-        {% if settings.botanical_mint_color != blank %}
-          --hb-accent-mint: {{ settings.botanical_mint_color }};
+
+        /* Mint / Surface Accent Color */
+        {% if settings.botanical_mint_color != blank and settings.botanical_mint_color != 'rgba(0,0,0,0)' %}
+          {% unless settings.botanical_mint_color contains 'settings.' %}
+            --hb-accent-mint: {{ settings.botanical_mint_color }};
+          {% else %}
+            --hb-accent-mint: var(--color-background, #f2f7f3);
+          {% endunless %}
         {% endif %}
-        {% if settings.botanical_gold_color != blank %}
-          --hb-accent-gold: {{ settings.botanical_gold_color }};
+
+        /* Gold Badge Accent */
+        {% if settings.botanical_gold_color != blank and settings.botanical_gold_color != 'rgba(0,0,0,0)' %}
+          {% unless settings.botanical_gold_color contains 'settings.' %}
+            --hb-accent-gold: {{ settings.botanical_gold_color }};
+          {% endunless %}
         {% endif %}
+
+        /* Card & Shape Radius */
         {% if settings.botanical_card_radius != blank %}
           --hb-radius-md: {{ settings.botanical_card_radius }}px;
           --hb-radius-lg: {{ settings.botanical_card_radius | plus: 6 }}px;
+        {% elsif settings.card_corner_radius != blank %}
+          --hb-radius-md: {{ settings.card_corner_radius }}px;
+          --hb-radius-lg: {{ settings.card_corner_radius | plus: 6 }}px;
         {% endif %}
+
+        /* Button & Pill Radius */
         {% if settings.botanical_button_radius != blank %}
           --hb-radius-pill: {{ settings.botanical_button_radius }}px;
+        {% elsif settings.button_border_radius_primary != blank %}
+          --hb-radius-pill: {{ settings.button_border_radius_primary }}px;
+        {% elsif settings.pills_border_radius != blank %}
+          --hb-radius-pill: {{ settings.pills_border_radius }}px;
         {% endif %}
+      }
+
+      /* Link Theme Typography to all Botanical Elements */
+      .hb-wrapper, .hb-container, .hb-hero-section, .hb-story-section, .hb-pain-section, 
+      .hb-spotlight-section, .hb-ingredients-section, .hb-routine-section, 
+      .hb-trust-section, .hb-faq-section, .hb-footer, .hb-header, .hb-announcement,
+      .hb-btn-primary, .hb-btn-link, .hb-hero-desc, .hb-pain-card, .hb-ingredient-card {
+        font-family: var(--font-body--family, 'Plus Jakarta Sans', sans-serif);
+      }
+      .hb-hero-content h1, .hb-section-header h2, .hb-story-content h2, 
+      .hb-spotlight-content h2, .hb-routine-title, .hb-trust-card h3, 
+      .hb-faq-question, .hb-footer-col h4, .hb-eyebrow, .hb-routine-step-num {
+        font-family: var(--font-heading--family, var(--font-body--family, 'Plus Jakarta Sans', sans-serif));
       }
     </style>
 
