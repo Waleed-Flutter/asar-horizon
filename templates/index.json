@@ -12,7 +12,7 @@
     "hero_botanical": {
       "type": "hero-horizon-botanical",
       "settings": {
-        "badge_text": "PLANT-POWERED WELLNESS",
+        "badge_text": "ANCIENT-POWERED WELLNESS",
         "badge_bg": "#e8f5e9",
         "badge_color": "#7A2A2B",
         "heading": "Everyday Comfort, Thoughtfully Made.",
@@ -44,27 +44,14 @@
         "padding_bottom": 80
       }
     },
-    "pain_points_grid": {
-      "type": "pain-points-grid",
-      "settings": {
-        "eyebrow": "REAL RELIEF FOR REAL LIFE",
-        "heading": "Your Day Doesn't Stop When Your Body Feels Tired.",
-        "subheading": "Formulated for targeted comfort where tension, fatigue, and soreness build up most during busy routines.",
-        "bottom_note": "Clinically informed botanicals designed for rapid cutaneous absorption.",
-        "columns_desktop": "3",
-        "bg_color": "#fafbfa",
-        "padding_top": 96,
-        "padding_bottom": 96
-      }
-    },
     "product_spotlight_trio": {
       "type": "product-spotlight-trio",
       "settings": {
         "eyebrow": "DAILY RELIEF BLENDS",
         "heading": "Botanical Care for Everyday Movement",
         "description": "<p>Targeted botanical formulas designed to calm tension and restore flexibility naturally without greasy residue or harsh synthetic ingredients.</p>",
-        "primary_cta_text": "Shop the Collection",
-        "primary_cta_link": "/collections/all",
+        "primary_cta_text": "Shop Pain Relief",
+        "primary_cta_link": "shopify://products/asar-ostrich-oil",
         "secondary_cta_text": "See Ingredients",
         "secondary_cta_link": "#ingredients",
         "bg_color": "#ffffff",
@@ -95,6 +82,19 @@
         "padding_bottom": 88
       }
     },
+    "pain_points_grid": {
+      "type": "pain-points-grid",
+      "settings": {
+        "eyebrow": "REAL RELIEF FOR REAL LIFE",
+        "heading": "Your Day Doesn't Stop When Your Body Feels Tired.",
+        "subheading": "Formulated for targeted comfort where tension, fatigue, and soreness build up most during busy routines.",
+        "bottom_note": "Clinically informed botanicals designed for rapid cutaneous absorption.",
+        "columns_desktop": "3",
+        "bg_color": "#fafbfa",
+        "padding_top": 96,
+        "padding_bottom": 96
+      }
+    },
     "why_choose_grid": {
       "type": "why-choose-grid",
       "settings": {
@@ -109,6 +109,19 @@
     },
     "faq_accordion": {
       "type": "faq-accordion",
+      "blocks": {
+        "faq_item_BThi7x": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What makes Asar Wellness  Ostrich Oil unique?",
+            "answer": "It is a 100% natural formula enriched with Omega 3-6-9 and infused with Capsicum Oleoresin, Wintergreen, and Eucalyptus oils to ease pain, stiffness, and inflammation.",
+            "open_by_default": false
+          }
+        }
+      },
+      "block_order": [
+        "faq_item_BThi7x"
+      ],
       "settings": {
         "eyebrow": "FREQUENTLY ASKED QUESTIONS",
         "heading": "Got Questions? We've Got Answers.",
@@ -123,10 +136,10 @@
   "order": [
     "hero_botanical",
     "feature_organic_story",
-    "pain_points_grid",
     "product_spotlight_trio",
     "ingredients_showcase",
     "daily_routine_steps",
+    "pain_points_grid",
     "why_choose_grid",
     "faq_accordion"
   ]
