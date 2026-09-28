@@ -13,15 +13,15 @@
       "type": "hero-horizon-botanical",
       "settings": {
         "badge_text": "ANCIENT-POWERED WELLNESS",
-        "badge_bg": "#e8f5e9",
-        "badge_color": "#7A2A2B",
+        "badge_bg": "#7A2A2B",
+        "badge_color": "#FEE6D4",
         "heading": "Everyday Comfort, Thoughtfully Made.",
         "subtext": "<p>Experience natural balance with our handcrafted herbal drops made with pure, organic botanical extracts for deep, restorative muscle and joint comfort.</p>",
-        "heading_color": "#111827",
-        "text_color": "#4b5563",
+        "heading_color": "#000000",
+        "text_color": "#000000",
         "btn_primary_text": "Shop Best Sellers",
         "btn_primary_link": "/collections/all",
-        "btn_primary_bg": "#7A2A2B",
+        "btn_primary_bg": "#7a2a2b",
         "btn_secondary_text": "Explore Our Blends",
         "btn_secondary_link": "#story",
         "bg_color": "#ffffff",
@@ -161,9 +161,9 @@
       "settings": {
         "eyebrow": "FREQUENTLY ASKED QUESTIONS",
         "heading": "Got Questions? We've Got Answers.",
-        "subheading": "Everything you need to know about our organic botanical drops, application techniques, and delivery guarantees.",
+        "subheading": "",
         "allow_multiple_open": false,
-        "background_color": "#ffffff",
+        "background_color": "{{ settings.color_palette.background }}",
         "padding_top": 88,
         "padding_bottom": 88
       }
