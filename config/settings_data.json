@@ -138,14 +138,14 @@
             "type": "link_column",
             "settings": {
               "heading": "Quick Links",
-              "menu": "main-menu"
+              "menu": "footer"
             }
           },
           "contact_column_aPjTGf": {
             "type": "contact_column",
             "settings": {
               "heading": "Contact Us",
-              "email": "hello@tierabotanicals.com",
+              "email": "asarwellness@gmail.com",
               "hours": "Mon – Fri: 9:00 AM – 6:00 PM",
               "delivery_badge": "Direct Tracked Express Delivery",
               "eco_badge": "100% Eco-Sustainable Packaging"
