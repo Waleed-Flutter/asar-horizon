@@ -23,6 +23,185 @@
 {% render 'deferred-media-product-model-styles' %}
 {% render 'deferred-media-video-styles' %}
 
+{% liquid
+  assign atc_bg = section.settings.atc_button_bg | default: '#7a2a2b'
+  assign atc_color = section.settings.atc_button_color | default: '#ffffff'
+  assign atc_border = section.settings.atc_button_border_color | default: atc_bg
+  assign atc_hover_bg = section.settings.atc_button_hover_bg | default: '#5c1f20'
+  assign atc_hover_color = section.settings.atc_button_hover_color | default: '#ffffff'
+  assign atc_radius = section.settings.atc_button_radius | default: 30
+
+  assign qty_bg = section.settings.qty_bg_color | default: '#f4f6f4'
+  assign qty_color = section.settings.qty_text_color | default: '#111827'
+  assign qty_border = section.settings.qty_border_color | default: 'rgba(0, 0, 0, 0.08)'
+  assign qty_radius = section.settings.qty_radius | default: 30
+
+  assign variant_bg = section.settings.variant_pill_bg | default: '#ffffff'
+  assign variant_color = section.settings.variant_pill_color | default: '#111827'
+  assign variant_border = section.settings.variant_pill_border | default: 'rgba(0, 0, 0, 0.15)'
+  assign variant_active_bg = section.settings.variant_pill_active_bg | default: atc_bg
+  assign variant_active_color = section.settings.variant_pill_active_color | default: '#ffffff'
+  assign variant_active_border = section.settings.variant_pill_active_border | default: atc_bg
+  assign variant_radius = section.settings.variant_pill_radius | default: 30
+
+  assign title_col = section.settings.product_title_color | default: '#111827'
+  assign price_col = section.settings.product_price_color | default: atc_bg
+  assign sale_price_col = section.settings.product_sale_price_color | default: '#991b1b'
+  assign desc_col = section.settings.product_desc_color | default: '#4b5563'
+  assign star_col = section.settings.star_rating_color | default: '#eab308'
+  assign eyebrow_col = section.settings.eyebrow_color | default: atc_bg
+  assign media_radius = section.settings.media_border_radius | default: 16
+%}
+
+<style>
+  /* Section background */
+  #shopify-section-{{ section.id }} .product-information {
+    {% if section.settings.background_color != blank %}
+      background-color: {{ section.settings.background_color }} !important;
+    {% endif %}
+  }
+
+  /* Add to Cart Button */
+  #shopify-section-{{ section.id }} .add-to-cart-button,
+  #shopify-section-{{ section.id }} button[name="add"],
+  #shopify-section-{{ section.id }} .product-form-buttons button.button-secondary,
+  #shopify-section-{{ section.id }} .product-form-buttons button.button-primary {
+    background-color: {{ atc_bg }} !important;
+    color: {{ atc_color }} !important;
+    border-color: {{ atc_border }} !important;
+    border-radius: {{ atc_radius }}px !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12) !important;
+    transition: all 0.25s ease !important;
+  }
+  #shopify-section-{{ section.id }} .add-to-cart-button:hover,
+  #shopify-section-{{ section.id }} button[name="add"]:hover,
+  #shopify-section-{{ section.id }} .product-form-buttons button.button-secondary:hover,
+  #shopify-section-{{ section.id }} .product-form-buttons button.button-primary:hover {
+    background-color: {{ atc_hover_bg }} !important;
+    color: {{ atc_hover_color }} !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18) !important;
+  }
+  #shopify-section-{{ section.id }} .add-to-cart-text,
+  #shopify-section-{{ section.id }} .add-to-cart-button span {
+    color: {{ atc_color }} !important;
+  }
+  #shopify-section-{{ section.id }} .add-to-cart-button:hover .add-to-cart-text,
+  #shopify-section-{{ section.id }} .add-to-cart-button:hover span {
+    color: {{ atc_hover_color }} !important;
+  }
+
+  /* Accelerated Checkout Buttons */
+  #shopify-section-{{ section.id }} shopify-accelerated-checkout {
+    --shopify-accelerated-checkout-button-border-radius: {{ atc_radius }}px !important;
+  }
+
+  /* Quantity Selector */
+  #shopify-section-{{ section.id }} .quantity-selector,
+  #shopify-section-{{ section.id }} quantity-selector-component {
+    background-color: {{ qty_bg }} !important;
+    border-color: {{ qty_border }} !important;
+    border-radius: {{ qty_radius }}px !important;
+  }
+  #shopify-section-{{ section.id }} .quantity-selector__input,
+  #shopify-section-{{ section.id }} .quantity-selector__button,
+  #shopify-section-{{ section.id }} .quantity-selector svg {
+    color: {{ qty_color }} !important;
+    stroke: {{ qty_color }} !important;
+  }
+
+  /* Variant Picker */
+  #shopify-section-{{ section.id }} .variant-picker__option-label,
+  #shopify-section-{{ section.id }} label.variant-picker__option-label,
+  #shopify-section-{{ section.id }} .variant-picker legend {
+    color: {{ section.settings.variant_label_color | default: title_col }} !important;
+  }
+  #shopify-section-{{ section.id }} .variant-picker input[type="radio"] + label,
+  #shopify-section-{{ section.id }} .variant-button,
+  #shopify-section-{{ section.id }} .variant-picker .variant-pill {
+    background-color: {{ variant_bg }} !important;
+    color: {{ variant_color }} !important;
+    border-color: {{ variant_border }} !important;
+    border-radius: {{ variant_radius }}px !important;
+    transition: all 0.2s ease !important;
+  }
+  #shopify-section-{{ section.id }} .variant-picker input[type="radio"]:checked + label,
+  #shopify-section-{{ section.id }} .variant-button.is-selected,
+  #shopify-section-{{ section.id }} .variant-picker input[type="radio"]:checked + .variant-pill {
+    background-color: {{ variant_active_bg }} !important;
+    color: {{ variant_active_color }} !important;
+    border-color: {{ variant_active_border }} !important;
+  }
+
+  /* Product Title */
+  #shopify-section-{{ section.id }} .product-title,
+  #shopify-section-{{ section.id }} [data-testid="product-title"],
+  #shopify-section-{{ section.id }} .product-details h1,
+  #shopify-section-{{ section.id }} .product-details h2 {
+    color: {{ title_col }} !important;
+    {% if section.settings.product_title_size != blank %}
+      font-size: {{ section.settings.product_title_size }}px !important;
+    {% endif %}
+  }
+
+  /* Product Price */
+  #shopify-section-{{ section.id }} .price,
+  #shopify-section-{{ section.id }} .price-item--regular,
+  #shopify-section-{{ section.id }} product-price,
+  #shopify-section-{{ section.id }} [data-testid="product-price"] {
+    color: {{ price_col }} !important;
+    {% if section.settings.price_size != blank %}
+      font-size: {{ section.settings.price_size }}px !important;
+      font-weight: 700;
+    {% endif %}
+  }
+  #shopify-section-{{ section.id }} .price-item--sale {
+    color: {{ sale_price_col }} !important;
+  }
+
+  /* Product Description */
+  #shopify-section-{{ section.id }} .product-description,
+  #shopify-section-{{ section.id }} .product-details .rte,
+  #shopify-section-{{ section.id }} .product-details p:not(.price) {
+    color: {{ desc_col }} !important;
+    {% if section.settings.desc_font_size != blank %}
+      font-size: {{ section.settings.desc_font_size }}px !important;
+    {% endif %}
+  }
+
+  /* Star Reviews */
+  #shopify-section-{{ section.id }} .review-stars,
+  #shopify-section-{{ section.id }} [data-testid="product-review-stars"] svg,
+  #shopify-section-{{ section.id }} .stars svg,
+  #shopify-section-{{ section.id }} .rating-star {
+    color: {{ star_col }} !important;
+    fill: {{ star_col }} !important;
+  }
+
+  /* Eyebrow / Vendor */
+  #shopify-section-{{ section.id }} .product-details .eyebrow,
+  #shopify-section-{{ section.id }} .product-details .text-block--subdued {
+    color: {{ eyebrow_col }} !important;
+  }
+
+  /* Media Gallery Radius */
+  #shopify-section-{{ section.id }} .product-information__media img,
+  #shopify-section-{{ section.id }} .product-media-gallery img,
+  #shopify-section-{{ section.id }} .media-gallery-carousel img {
+    border-radius: {{ media_radius }}px !important;
+  }
+
+  @media (max-width: 768px) {
+    #shopify-section-{{ section.id }} .product-title,
+    #shopify-section-{{ section.id }} [data-testid="product-title"],
+    #shopify-section-{{ section.id }} .product-details h1 {
+      {% if section.settings.product_title_size_mobile != blank %}
+        font-size: {{ section.settings.product_title_size_mobile }}px !important;
+      {% endif %}
+    }
+  }
+</style>
+
 <featured-product-information id="{{ section.id }}">
   <h2 class="visually-hidden">{{ 'accessibility.featured_product' | t }}</h2>
   {% render 'product-information-content',
@@ -47,7 +226,10 @@
     }
   ],
   "disabled_on": {
-    "groups": ["header", "footer"]
+    "groups": [
+      "header",
+      "footer"
+    ]
   },
   "settings": [
     {
@@ -143,6 +325,232 @@
       "step": 1,
       "unit": "px",
       "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Add To Cart & Checkout Buttons"
+    },
+    {
+      "type": "color",
+      "id": "atc_button_bg",
+      "label": "Add to Cart Button Background",
+      "default": "#7a2a2b"
+    },
+    {
+      "type": "color",
+      "id": "atc_button_color",
+      "label": "Add to Cart Button Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "atc_button_border_color",
+      "label": "Add to Cart Button Border Color",
+      "default": "#7a2a2b"
+    },
+    {
+      "type": "color",
+      "id": "atc_button_hover_bg",
+      "label": "Add to Cart Hover Background",
+      "default": "#5c1f20"
+    },
+    {
+      "type": "color",
+      "id": "atc_button_hover_color",
+      "label": "Add to Cart Hover Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "atc_button_radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Button Border Radius",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Quantity Selector"
+    },
+    {
+      "type": "color",
+      "id": "qty_bg_color",
+      "label": "Quantity Background Color",
+      "default": "#f4f6f4"
+    },
+    {
+      "type": "color",
+      "id": "qty_text_color",
+      "label": "Quantity Text & Icon Color",
+      "default": "#111827"
+    },
+    {
+      "type": "color",
+      "id": "qty_border_color",
+      "label": "Quantity Border Color",
+      "default": "rgba(0, 0, 0, 0.08)"
+    },
+    {
+      "type": "range",
+      "id": "qty_radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Quantity Border Radius",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Variant Picker"
+    },
+    {
+      "type": "color",
+      "id": "variant_label_color",
+      "label": "Variant Option Label Color",
+      "default": "#111827"
+    },
+    {
+      "type": "color",
+      "id": "variant_pill_bg",
+      "label": "Unselected Pill Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "variant_pill_color",
+      "label": "Unselected Pill Text Color",
+      "default": "#111827"
+    },
+    {
+      "type": "color",
+      "id": "variant_pill_border",
+      "label": "Unselected Pill Border Color",
+      "default": "rgba(0, 0, 0, 0.15)"
+    },
+    {
+      "type": "color",
+      "id": "variant_pill_active_bg",
+      "label": "Selected Pill Background",
+      "default": "#7a2a2b"
+    },
+    {
+      "type": "color",
+      "id": "variant_pill_active_color",
+      "label": "Selected Pill Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "variant_pill_active_border",
+      "label": "Selected Pill Border Color",
+      "default": "#7a2a2b"
+    },
+    {
+      "type": "range",
+      "id": "variant_pill_radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Variant Pill Border Radius",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Headings, Price & Typography"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow / Subheading Color",
+      "default": "#7a2a2b"
+    },
+    {
+      "type": "color",
+      "id": "product_title_color",
+      "label": "Product Title Color",
+      "default": "#111827"
+    },
+    {
+      "type": "range",
+      "id": "product_title_size",
+      "min": 20,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Product Title Size (Desktop)",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "product_title_size_mobile",
+      "min": 18,
+      "max": 36,
+      "step": 2,
+      "unit": "px",
+      "label": "Product Title Size (Mobile)",
+      "default": 26
+    },
+    {
+      "type": "color",
+      "id": "product_price_color",
+      "label": "Regular Price Color",
+      "default": "#7a2a2b"
+    },
+    {
+      "type": "color",
+      "id": "product_sale_price_color",
+      "label": "Sale Price Color",
+      "default": "#991b1b"
+    },
+    {
+      "type": "range",
+      "id": "price_size",
+      "min": 16,
+      "max": 36,
+      "step": 1,
+      "unit": "px",
+      "label": "Price Font Size",
+      "default": 22
+    },
+    {
+      "type": "color",
+      "id": "product_desc_color",
+      "label": "Description Text Color",
+      "default": "#4b5563"
+    },
+    {
+      "type": "range",
+      "id": "desc_font_size",
+      "min": 13,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "label": "Description Font Size",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "star_rating_color",
+      "label": "Review Stars Color",
+      "default": "#eab308"
+    },
+    {
+      "type": "header",
+      "content": "Product Media Gallery"
+    },
+    {
+      "type": "range",
+      "id": "media_border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Media Image Border Radius",
+      "default": 16
     }
   ],
   "presets": [
@@ -204,7 +612,10 @@
                   }
                 }
               },
-              "block_order": ["title", "price"]
+              "block_order": [
+                "title",
+                "price"
+              ]
             },
             "review_stars": {
               "type": "review",
@@ -233,7 +644,12 @@
               }
             }
           },
-          "block_order": ["header", "review_stars", "variant_picker", "buy_buttons"]
+          "block_order": [
+            "header",
+            "review_stars",
+            "variant_picker",
+            "buy_buttons"
+          ]
         }
       }
     }
