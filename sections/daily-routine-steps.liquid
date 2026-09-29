@@ -1,11 +1,112 @@
 {{ 'horizon-botanical.css' | asset_url | stylesheet_tag }}
 
-<section class="hb-routine-section" id="routine" style="background-color: {{ section.settings.background_color | default: '#ffffff' }}; padding-top: {{ section.settings.padding_top | default: 88 }}px; padding-bottom: {{ section.settings.padding_bottom | default: 88 }}px;">
-  <div class="hb-container">
+{%- style -%}
+  #shopify-section-{{ section.id }} {
+    background-color: {{ section.settings.background_color | default: '#ffffff' }};
+    padding-top: {{ section.settings.padding_top | default: 88 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | default: 88 }}px;
+  }
+
+  #shopify-section-{{ section.id }} .hb-section-header .hb-eyebrow {
+    color: {{ section.settings.eyebrow_color | default: '#257942' }};
+    font-size: {{ section.settings.eyebrow_size | default: 13 }}px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  #shopify-section-{{ section.id }} .hb-section-header h2 {
+    color: {{ section.settings.heading_color | default: '#111827' }};
+    font-size: {{ section.settings.heading_size | default: 40 }}px;
+    line-height: 1.2;
+    margin: 0 0 12px;
+  }
+
+  @media (max-width: 768px) {
+    #shopify-section-{{ section.id }} .hb-section-header h2 {
+      font-size: {{ section.settings.heading_size_mobile | default: 28 }}px;
+    }
+  }
+
+  #shopify-section-{{ section.id }} .hb-section-header p {
+    color: {{ section.settings.subheading_color | default: '#4b5563' }};
+    font-size: {{ section.settings.subheading_size | default: 16 }}px;
+    line-height: 1.6;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  /* Routine Cards */
+  #shopify-section-{{ section.id }} .hb-routine-card {
+    background-color: {{ section.settings.card_bg | default: '#ffffff' }};
+    border-radius: {{ section.settings.card_radius | default: 16 }}px;
+    border: 1px solid {{ section.settings.card_border_color | default: '#e5e7eb' }};
+    {% if section.settings.card_shadow %}
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+    {% else %}
+      box-shadow: none;
+    {% endif %}
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  #shopify-section-{{ section.id }} .hb-routine-card:hover {
+    transform: translateY(-4px);
+    border-color: {{ section.settings.card_hover_border_color | default: '#257942' }};
+    {% if section.settings.card_shadow %}
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    {% endif %}
+  }
+
+  {% unless section.settings.img_hover_zoom %}
+    #shopify-section-{{ section.id }} .hb-routine-card:hover .hb-routine-img img {
+      transform: none !important;
+    }
+  {% endunless %}
+
+  #shopify-section-{{ section.id }} .hb-routine-step-num {
+    color: {{ section.settings.step_num_color | default: '#257942' }};
+    font-size: {{ section.settings.step_num_size | default: 14 }}px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+  }
+
+  #shopify-section-{{ section.id }} .hb-routine-title {
+    color: {{ section.settings.step_title_color | default: '#111827' }};
+    font-size: {{ section.settings.step_title_size | default: 18 }}px;
+    font-weight: 700;
+  }
+
+  #shopify-section-{{ section.id }} .hb-routine-desc {
+    color: {{ section.settings.step_desc_color | default: '#4b5563' }};
+    font-size: {{ section.settings.step_desc_size | default: 14 }}px;
+    line-height: 1.55;
+  }
+
+  /* Trust Bar */
+  #shopify-section-{{ section.id }} .hb-routine-trust-bar {
+    background-color: {{ section.settings.trust_bar_bg | default: '#e8f5e9' }};
+    border-radius: {{ section.settings.trust_bar_radius | default: 50 }}px;
+  }
+
+  #shopify-section-{{ section.id }} .hb-routine-trust-item {
+    color: {{ section.settings.trust_bar_color | default: '#1b5e20' }};
+    font-size: {{ section.settings.trust_bar_size | default: 14 }}px;
+    font-weight: 700;
+  }
+
+  #shopify-section-{{ section.id }} .hb-routine-trust-item svg {
+    color: {{ section.settings.trust_bar_icon_color | default: '#257942' }};
+    stroke: currentColor;
+  }
+{%- endstyle -%}
+
+<section class=hb-routine-section id=routine>
+  <div class=hb-container>
     {% if section.settings.heading != blank or section.settings.eyebrow != blank %}
-      <div class="hb-section-header">
+      <div class=hb-section-header>
         {% if section.settings.eyebrow != blank %}
-          <span class="hb-eyebrow">{{ section.settings.eyebrow }}</span>
+          <span class=hb-eyebrow>{{ section.settings.eyebrow }}</span>
         {% endif %}
         {% if section.settings.heading != blank %}
           <h2>{{ section.settings.heading }}</h2>
@@ -16,22 +117,24 @@
       </div>
     {% endif %}
 
-    <div class="hb-routine-grid">
+    <div class=hb-routine-grid>
       {% for block in section.blocks %}
         {% if block.type == 'step' %}
-          <div class="hb-routine-card" {{ block.shopify_attributes }}>
-            <div class="hb-routine-body">
+          {%- assign blk_num_color = block.settings.custom_step_color | default: section.settings.step_num_color | default: '#257942' -%}
+          {%- assign blk_title_color = block.settings.custom_title_color | default: section.settings.step_title_color | default: '#111827' -%}
+          <div class=hb-routine-card {{ block.shopify_attributes }}>
+            <div class=hb-routine-body>
               {% if block.settings.step_number != blank %}
-                <span class="hb-routine-step-num">{{ block.settings.step_number }}</span>
+                <span class=hb-routine-step-num style="color: {{ blk_num_color }};">{{ block.settings.step_number }}</span>
               {% endif %}
               {% if block.settings.title != blank %}
-                <h3 class="hb-routine-title">{{ block.settings.title }}</h3>
+                <h3 class=hb-routine-title style="color: {{ blk_title_color }};">{{ block.settings.title }}</h3>
               {% endif %}
               {% if block.settings.description != blank %}
-                <p class="hb-routine-desc">{{ block.settings.description }}</p>
+                <p class=hb-routine-desc>{{ block.settings.description }}</p>
               {% endif %}
             </div>
-            <div class="hb-routine-img">
+            <div class=hb-routine-img>
               {% if block.settings.image != blank %}
                 {{ block.settings.image | image_url: width: 600 | image_tag: loading: 'lazy', alt: block.settings.title, width: 400, height: 400 }}
               {% elsif block.settings.fallback_image != blank %}
@@ -43,16 +146,20 @@
       {% endfor %}
     </div>
 
-    {% assign trust_points = section.blocks | where: "type", "trust_point" %}
-    {% if trust_points.size > 0 %}
-      <div class="hb-routine-trust-bar">
-        {% for block in trust_points %}
-          <div class="hb-routine-trust-item" {{ block.shopify_attributes }}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-            <span>{{ block.settings.text }}</span>
-          </div>
-        {% endfor %}
-      </div>
+    {% if section.settings.show_trust_bar %}
+      {% assign trust_points = section.blocks | where: "type", "trust_point" %}
+      {% if trust_points.size > 0 %}
+        <div class=hb-routine-trust-bar>
+          {% for block in trust_points %}
+            {%- assign item_text_color = block.settings.custom_color | default: section.settings.trust_bar_color | default: '#1b5e20' -%}
+            {%- assign item_icon_color = block.settings.custom_icon_color | default: section.settings.trust_bar_icon_color | default: '#257942' -%}
+            <div class=hb-routine-trust-item style="color: {{ item_text_color }};" {{ block.shopify_attributes }}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="color: {{ item_icon_color }};"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>{{ block.settings.text }}</span>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
     {% endif %}
   </div>
 </section>
@@ -62,16 +169,62 @@
   "name": "Daily Routine Steps",
   "settings": [
     {
+      "type": "header",
+      "content": "Section Header & Typography"
+    },
+    {
       "type": "text",
       "id": "eyebrow",
       "label": "Eyebrow Text",
       "default": "EASY 3 STEPS"
     },
     {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow Color",
+      "default": "#257942"
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_size",
+      "min": 10,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "label": "Eyebrow Font Size",
+      "default": 13
+    },
+    {
       "type": "text",
       "id": "heading",
       "label": "Heading",
       "default": "Simple Enough for Every Day."
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#111827"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 24,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Font Size (Desktop)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "min": 20,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Font Size (Mobile)",
+      "default": 28
     },
     {
       "type": "textarea",
@@ -81,28 +234,192 @@
     },
     {
       "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading Color",
+      "default": "#4b5563"
+    },
+    {
+      "type": "range",
+      "id": "subheading_size",
+      "min": 13,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "label": "Subheading Font Size",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Routine Step Cards"
+    },
+    {
+      "type": "color",
+      "id": "card_bg",
+      "label": "Card Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_border_color",
+      "label": "Card Border Color",
+      "default": "#e5e7eb"
+    },
+    {
+      "type": "color",
+      "id": "card_hover_border_color",
+      "label": "Card Hover Border Color",
+      "default": "#257942"
+    },
+    {
+      "type": "range",
+      "id": "card_radius",
+      "min": 0,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "label": "Card Border Radius",
+      "default": 16
+    },
+    {
+      "type": "checkbox",
+      "id": "card_shadow",
+      "label": "Enable Card Shadow",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "img_hover_zoom",
+      "label": "Enable Image Hover Zoom",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Step Typography & Colors"
+    },
+    {
+      "type": "color",
+      "id": "step_num_color",
+      "label": "Step Number Color (e.g. STEP 01)",
+      "default": "#257942"
+    },
+    {
+      "type": "range",
+      "id": "step_num_size",
+      "min": 11,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Step Number Font Size",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "step_title_color",
+      "label": "Step Title Color",
+      "default": "#111827"
+    },
+    {
+      "type": "range",
+      "id": "step_title_size",
+      "min": 14,
+      "max": 26,
+      "step": 1,
+      "unit": "px",
+      "label": "Step Title Font Size",
+      "default": 18
+    },
+    {
+      "type": "color",
+      "id": "step_desc_color",
+      "label": "Step Description Color",
+      "default": "#4b5563"
+    },
+    {
+      "type": "range",
+      "id": "step_desc_size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Step Description Font Size",
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "Trust Points / Features Bar"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_trust_bar",
+      "label": "Show Trust Points Bar",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "trust_bar_bg",
+      "label": "Trust Bar Background Color",
+      "default": "#e8f5e9"
+    },
+    {
+      "type": "color",
+      "id": "trust_bar_color",
+      "label": "Trust Bar Text Color",
+      "default": "#1b5e20"
+    },
+    {
+      "type": "color",
+      "id": "trust_bar_icon_color",
+      "label": "Trust Bar Checkmark Icon Color",
+      "default": "#257942"
+    },
+    {
+      "type": "range",
+      "id": "trust_bar_radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Trust Bar Border Radius",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "trust_bar_size",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "label": "Trust Bar Font Size",
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "Section Layout & Background"
+    },
+    {
+      "type": "color",
       "id": "background_color",
-      "label": "Background Color",
+      "label": "Section Background Color",
       "default": "#ffffff"
     },
     {
       "type": "range",
       "id": "padding_top",
       "min": 20,
-      "max": 120,
+      "max": 140,
       "step": 4,
       "unit": "px",
-      "label": "Padding Top",
+      "label": "Top Padding",
       "default": 88
     },
     {
       "type": "range",
       "id": "padding_bottom",
       "min": 20,
-      "max": 120,
+      "max": 140,
       "step": 4,
       "unit": "px",
-      "label": "Padding Bottom",
+      "label": "Bottom Padding",
       "default": 88
     }
   ],
@@ -139,6 +456,16 @@
           "id": "fallback_image",
           "label": "Theme Asset Filename",
           "default": "routine-step-apply.jpg"
+        },
+        {
+          "type": "color",
+          "id": "custom_step_color",
+          "label": "Custom Step Number Color (Optional)"
+        },
+        {
+          "type": "color",
+          "id": "custom_title_color",
+          "label": "Custom Step Title Color (Optional)"
         }
       ]
     },
@@ -151,6 +478,16 @@
           "id": "text",
           "label": "Feature Note",
           "default": "Fast absorption in under 90 seconds"
+        },
+        {
+          "type": "color",
+          "id": "custom_color",
+          "label": "Custom Text Color (Optional)"
+        },
+        {
+          "type": "color",
+          "id": "custom_icon_color",
+          "label": "Custom Icon Color (Optional)"
         }
       ]
     }
