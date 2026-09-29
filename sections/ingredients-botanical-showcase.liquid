@@ -2,9 +2,21 @@
 
 {%- style -%}
   #shopify-section-{{ section.id }} {
-    background-color: {{ section.settings.background_color | default: '#ffffff' }};
-    padding-top: {{ section.settings.padding_top | default: 64 }}px;
-    padding-bottom: {{ section.settings.padding_bottom | default: 64 }}px;
+    padding: 0 !important;
+    background-color: {{ section.settings.background_color | default: '#ffffff' }} !important;
+  }
+
+  #shopify-section-{{ section.id }} .hb-ingredients-section {
+    background-color: {{ section.settings.background_color | default: '#ffffff' }} !important;
+    padding-top: {{ section.settings.padding_top | default: 64 }}px !important;
+    padding-bottom: {{ section.settings.padding_bottom | default: 64 }}px !important;
+  }
+
+  @media (max-width: 768px) {
+    #shopify-section-{{ section.id }} .hb-ingredients-section {
+      padding-top: {{ section.settings.padding_top | default: 64 | times: 0.65 | round }}px !important;
+      padding-bottom: {{ section.settings.padding_bottom | default: 64 | times: 0.65 | round }}px !important;
+    }
   }
 
   #shopify-section-{{ section.id }} .hb-section-header .hb-eyebrow {
@@ -93,7 +105,7 @@
   }
 {%- endstyle -%}
 
-<section class="hb-ingredients-section" id="ingredients">
+<section class="hb-ingredients-section" id="ingredients" style="background-color: {{ section.settings.background_color | default: '#ffffff' }}; padding-top: {{ section.settings.padding_top | default: 64 }}px; padding-bottom: {{ section.settings.padding_bottom | default: 64 }}px;">
   <div class="hb-container">
     {% if section.settings.heading != blank or section.settings.eyebrow != blank %}
       <div class="hb-section-header">
