@@ -36,7 +36,7 @@
         "btn_primary_border_color": "",
         "btn_primary_hover_bg": "#1e6336",
         "btn_primary_hover_color": "#ffffff",
-        "btn_primary_radius": 30,
+        "btn_primary_radius": 10,
         "btn_secondary_text": "Explore Our Blends",
         "btn_secondary_link": "shopify://products/asar-ostrich-oil",
         "btn_secondary_color": "#7A2A2B",
