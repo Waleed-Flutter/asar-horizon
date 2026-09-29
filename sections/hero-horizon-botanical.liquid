@@ -1,18 +1,123 @@
 {{ 'horizon-botanical.css' | asset_url | stylesheet_tag }}
 
-<section class="hb-hero-section" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; {% if section.settings.bg_color != blank %}background: {{ section.settings.bg_color }};{% endif %}">
+{% liquid
+  assign primary_btn_bg = section.settings.btn_primary_bg | default: '#257942'
+  assign primary_btn_color = section.settings.btn_primary_color | default: '#ffffff'
+  assign primary_btn_radius = section.settings.btn_primary_radius | default: 30
+  assign primary_btn_hover_bg = section.settings.btn_primary_hover_bg | default: primary_btn_bg
+  assign primary_btn_hover_color = section.settings.btn_primary_hover_color | default: primary_btn_color
+
+  assign secondary_btn_color = section.settings.btn_secondary_color | default: primary_btn_bg
+  assign secondary_btn_bg = section.settings.btn_secondary_bg | default: 'transparent'
+  assign secondary_btn_border = section.settings.btn_secondary_border_color | default: 'transparent'
+  assign secondary_btn_radius = section.settings.btn_secondary_radius | default: 30
+  assign secondary_btn_hover_color = section.settings.btn_secondary_hover_color | default: secondary_btn_color
+  assign secondary_btn_hover_bg = section.settings.btn_secondary_hover_bg | default: 'transparent'
+
+  assign icon_global_color = section.settings.feature_icon_color | default: primary_btn_bg
+  assign feature_text_col = section.settings.feature_text_color | default: section.settings.heading_color | default: '#111827'
+%}
+
+<style>
+  #shopify-section-{{ section.id }} .hb-hero-section {
+    padding-top: {{ section.settings.padding_top | default: 64 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | default: 80 }}px;
+    background: {{ section.settings.bg_color | default: '#ffffff' }};
+  }
+  #shopify-section-{{ section.id }} .hb-eyebrow-pill {
+    background: {{ section.settings.badge_bg | default: '#e8f5e9' }} !important;
+    color: {{ section.settings.badge_color | default: '#1b5e20' }} !important;
+    border-radius: {{ section.settings.badge_radius | default: 30 }}px !important;
+  }
+  #shopify-section-{{ section.id }} .hb-hero-content h1 {
+    color: {{ section.settings.heading_color | default: '#111827' }} !important;
+    {% if section.settings.heading_size != blank %}
+      font-size: {{ section.settings.heading_size }}px !important;
+    {% endif %}
+  }
+  #shopify-section-{{ section.id }} .hb-hero-desc,
+  #shopify-section-{{ section.id }} .hb-hero-desc p {
+    color: {{ section.settings.text_color | default: '#4b5563' }} !important;
+  }
+  #shopify-section-{{ section.id }} .hb-hero-feature-item {
+    color: {{ feature_text_col }} !important;
+    {% if section.settings.feature_font_size != blank %}
+      font-size: {{ section.settings.feature_font_size }}px !important;
+    {% endif %}
+  }
+  #shopify-section-{{ section.id }} .hb-hero-feature-icon {
+    color: {{ icon_global_color }} !important;
+    {% if section.settings.feature_icon_bg != blank and section.settings.feature_icon_bg != 'rgba(0,0,0,0)' and section.settings.feature_icon_bg != 'transparent' %}
+      background-color: {{ section.settings.feature_icon_bg }} !important;
+      border-radius: 50%;
+      padding: 4px;
+    {% endif %}
+  }
+  #shopify-section-{{ section.id }} .hb-hero-btn-primary {
+    background-color: {{ primary_btn_bg }} !important;
+    color: {{ primary_btn_color }} !important;
+    border-radius: {{ primary_btn_radius }}px !important;
+    border: 1px solid {{ section.settings.btn_primary_border_color | default: primary_btn_bg }} !important;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s ease;
+  }
+  #shopify-section-{{ section.id }} .hb-hero-btn-primary:hover {
+    background-color: {{ primary_btn_hover_bg }} !important;
+    color: {{ primary_btn_hover_color }} !important;
+    transform: translateY(-2px);
+  }
+  #shopify-section-{{ section.id }} .hb-hero-btn-secondary {
+    color: {{ secondary_btn_color }} !important;
+    background-color: {{ secondary_btn_bg }} !important;
+    border-radius: {{ secondary_btn_radius }}px !important;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.25s ease;
+    {% if secondary_btn_border != 'transparent' and secondary_btn_border != blank %}
+      border: 1px solid {{ secondary_btn_border }} !important;
+      padding: 12px 24px !important;
+    {% else %}
+      border: none !important;
+      padding: 12px 16px !important;
+    {% endif %}
+  }
+  #shopify-section-{{ section.id }} .hb-hero-btn-secondary:hover {
+    color: {{ secondary_btn_hover_color }} !important;
+    background-color: {{ secondary_btn_hover_bg }} !important;
+    transform: translateX(3px);
+  }
+  {% if section.settings.image_radius != blank %}
+    #shopify-section-{{ section.id }} .hb-hero-image-wrap img {
+      border-radius: {{ section.settings.image_radius }}px !important;
+    }
+  {% endif %}
+  @media (max-width: 768px) {
+    #shopify-section-{{ section.id }} .hb-hero-content h1 {
+      {% if section.settings.heading_size_mobile != blank %}
+        font-size: {{ section.settings.heading_size_mobile }}px !important;
+      {% endif %}
+    }
+  }
+</style>
+
+<section class="hb-hero-section">
   <div class="hb-container">
     <div class="hb-hero-grid">
       <div class="hb-hero-content">
         {% if section.settings.badge_text != blank %}
-          <div class="hb-eyebrow-pill" style="{% if section.settings.badge_bg != blank %}background: {{ section.settings.badge_bg }};{% endif %} {% if section.settings.badge_color != blank %}color: {{ section.settings.badge_color }};{% endif %}">
+          <div class="hb-eyebrow-pill">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
             {{ section.settings.badge_text }}
           </div>
         {% endif %}
 
-        <h1 style="{% if section.settings.heading_color != blank %}color: {{ section.settings.heading_color }};{% endif %}">{{ section.settings.heading }}</h1>
-        <div class="hb-hero-desc" style="{% if section.settings.text_color != blank %}color: {{ section.settings.text_color }};{% endif %}">
+        <h1>{{ section.settings.heading }}</h1>
+        <div class="hb-hero-desc">
           {{ section.settings.subtext }}
         </div>
 
@@ -20,8 +125,9 @@
         <div class="hb-hero-features">
           {% if section.blocks.size > 0 %}
             {% for block in section.blocks %}
+              {% assign block_icon_color = block.settings.icon_color | default: icon_global_color %}
               <div class="hb-hero-feature-item" {{ block.shopify_attributes }}>
-                <span class="hb-hero-feature-icon">
+                <span class="hb-hero-feature-icon" style="color: {{ block_icon_color }} !important;">
                   {% case block.settings.icon %}
                     {% when 'droplet' %}
                       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
@@ -41,15 +147,15 @@
           {% else %}
             <!-- Fallbacks -->
             <div class="hb-hero-feature-item">
-              <span class="hb-hero-feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg></span>
+              <span class="hb-hero-feature-icon" style="color: {{ icon_global_color }} !important;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg></span>
               <span>Pure Ingredients</span>
             </div>
             <div class="hb-hero-feature-item">
-              <span class="hb-hero-feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+              <span class="hb-hero-feature-icon" style="color: {{ icon_global_color }} !important;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
               <span>Gentle Formula</span>
             </div>
             <div class="hb-hero-feature-item">
-              <span class="hb-hero-feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+              <span class="hb-hero-feature-icon" style="color: {{ icon_global_color }} !important;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
               <span>Made in Small Batches</span>
             </div>
           {% endif %}
@@ -57,12 +163,12 @@
 
         <div class="hb-hero-actions">
           {% if section.settings.btn_primary_text != blank %}
-            <a href="{{ section.settings.btn_primary_link | default: '/collections/all' }}" class="hb-btn-primary" style="{% if section.settings.btn_primary_bg != blank %}background: {{ section.settings.btn_primary_bg }};{% endif %}">
+            <a href="{{ section.settings.btn_primary_link | default: '/collections/all' }}" class="hb-btn-primary hb-hero-btn-primary">
               {{ section.settings.btn_primary_text }}
             </a>
           {% endif %}
           {% if section.settings.btn_secondary_text != blank %}
-            <a href="{{ section.settings.btn_secondary_link | default: '#story' }}" class="hb-btn-link">
+            <a href="{{ section.settings.btn_secondary_link | default: '#story' }}" class="hb-btn-link hb-hero-btn-secondary">
               {{ section.settings.btn_secondary_text }} &rarr;
             </a>
           {% endif %}
@@ -107,6 +213,16 @@
       "default": "#1b5e20"
     },
     {
+      "type": "range",
+      "id": "badge_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Badge Border Radius",
+      "default": 30
+    },
+    {
       "type": "header",
       "content": "Headings & Typography"
     },
@@ -117,16 +233,36 @@
       "default": "Everyday Comfort, Thoughtfully Made."
     },
     {
-      "type": "richtext",
-      "id": "subtext",
-      "label": "Description Text",
-      "default": "<p>Experience natural balance with our handcrafted herbal drops made with pure, organic botanical extracts for deep, restorative muscle and joint comfort.</p>"
-    },
-    {
       "type": "color",
       "id": "heading_color",
       "label": "Heading Color",
       "default": "#111827"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 28,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Size (Desktop)",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "min": 22,
+      "max": 44,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Size (Mobile)",
+      "default": 32
+    },
+    {
+      "type": "richtext",
+      "id": "subtext",
+      "label": "Description Text",
+      "default": "<p>Experience natural balance with our handcrafted herbal drops made with pure, organic botanical extracts for deep, restorative muscle and joint comfort.</p>"
     },
     {
       "type": "color",
@@ -136,7 +272,38 @@
     },
     {
       "type": "header",
-      "content": "Action Buttons"
+      "content": "Feature Bullets & Icons"
+    },
+    {
+      "type": "color",
+      "id": "feature_icon_color",
+      "label": "Icons Color",
+      "default": "#257942"
+    },
+    {
+      "type": "color",
+      "id": "feature_icon_bg",
+      "label": "Icon Background Circle (Optional)"
+    },
+    {
+      "type": "color",
+      "id": "feature_text_color",
+      "label": "Feature Text Color",
+      "default": "#111827"
+    },
+    {
+      "type": "range",
+      "id": "feature_font_size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Feature Font Size",
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "Primary Action Button"
     },
     {
       "type": "text",
@@ -152,8 +319,45 @@
     {
       "type": "color",
       "id": "btn_primary_bg",
-      "label": "Primary Button Color",
+      "label": "Primary Button Background",
       "default": "#257942"
+    },
+    {
+      "type": "color",
+      "id": "btn_primary_color",
+      "label": "Primary Button Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "btn_primary_border_color",
+      "label": "Primary Button Border Color"
+    },
+    {
+      "type": "color",
+      "id": "btn_primary_hover_bg",
+      "label": "Primary Button Hover Background",
+      "default": "#1e6336"
+    },
+    {
+      "type": "color",
+      "id": "btn_primary_hover_color",
+      "label": "Primary Button Hover Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "btn_primary_radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Primary Button Border Radius",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Secondary Action Button"
     },
     {
       "type": "text",
@@ -167,6 +371,43 @@
       "label": "Secondary Button URL"
     },
     {
+      "type": "color",
+      "id": "btn_secondary_color",
+      "label": "Secondary Button Text Color",
+      "default": "#257942"
+    },
+    {
+      "type": "color",
+      "id": "btn_secondary_bg",
+      "label": "Secondary Button Background Color"
+    },
+    {
+      "type": "color",
+      "id": "btn_secondary_border_color",
+      "label": "Secondary Button Border Color"
+    },
+    {
+      "type": "color",
+      "id": "btn_secondary_hover_color",
+      "label": "Secondary Button Hover Text Color",
+      "default": "#1e6336"
+    },
+    {
+      "type": "color",
+      "id": "btn_secondary_hover_bg",
+      "label": "Secondary Button Hover Background Color"
+    },
+    {
+      "type": "range",
+      "id": "btn_secondary_radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Secondary Button Border Radius",
+      "default": 30
+    },
+    {
       "type": "header",
       "content": "Hero Imagery"
     },
@@ -174,6 +415,16 @@
       "type": "image_picker",
       "id": "hero_image",
       "label": "Hero Product Image"
+    },
+    {
+      "type": "range",
+      "id": "image_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Image Border Radius",
+      "default": 16
     },
     {
       "type": "header",
@@ -229,6 +480,11 @@
           "id": "text",
           "label": "Feature Title",
           "default": "Pure Ingredients"
+        },
+        {
+          "type": "color",
+          "id": "icon_color",
+          "label": "Custom Bullet Icon Color (Optional)"
         }
       ]
     }

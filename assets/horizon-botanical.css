@@ -306,7 +306,7 @@
   justify-content: center;
   gap: 10px;
   background-color: var(--hb-primary);
-  color: #ffffff !important;
+  color: #ffffff;
   font-weight: 700;
   font-size: 0.96rem;
   padding: 13px 28px;
