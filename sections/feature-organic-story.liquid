@@ -1,6 +1,127 @@
 {{ 'horizon-botanical.css' | asset_url | stylesheet_tag }}
 
-<section class="hb-story-section" id="story" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; background-color: {{ section.settings.bg_color }};">
+{% liquid
+  assign cta_mode = section.settings.cta_style | default: 'button'
+  assign cta_bg_color = section.settings.cta_bg | default: '#7a2a2b'
+  assign cta_txt_color = section.settings.cta_color | default: '#ffffff'
+  assign cta_border_col = section.settings.cta_border_color | default: cta_bg_color
+  assign cta_hvr_bg = section.settings.cta_hover_bg | default: '#5c1f20'
+  assign cta_hvr_color = section.settings.cta_hover_color | default: '#ffffff'
+  assign cta_rad = section.settings.cta_radius | default: 30
+
+  assign heading_col = section.settings.heading_color | default: '#111827'
+  assign body_col = section.settings.body_color | default: '#4b5563'
+  assign eyebrow_col = section.settings.eyebrow_color | default: '#7a2a2b'
+  assign border_top_col = section.settings.border_top_color | default: 'rgba(0, 0, 0, 0.06)'
+%}
+
+<style>
+  #shopify-section-{{ section.id }} .hb-story-section {
+    padding-top: {{ section.settings.padding_top | default: 80 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | default: 80 }}px;
+    background-color: {{ section.settings.bg_color | default: '#ffffff' }};
+    border-top: 1px solid {{ border_top_col }};
+  }
+  #shopify-section-{{ section.id }} .hb-story-content .hb-eyebrow {
+    color: {{ eyebrow_col }} !important;
+    {% if section.settings.eyebrow_size != blank %}
+      font-size: {{ section.settings.eyebrow_size }}px !important;
+    {% endif %}
+  }
+  #shopify-section-{{ section.id }} .hb-story-content h2 {
+    color: {{ heading_col }} !important;
+    {% if section.settings.heading_size != blank %}
+      font-size: {{ section.settings.heading_size }}px !important;
+    {% endif %}
+  }
+  #shopify-section-{{ section.id }} .hb-story-body,
+  #shopify-section-{{ section.id }} .hb-story-body p {
+    color: {{ body_col }} !important;
+    {% if section.settings.body_font_size != blank %}
+      font-size: {{ section.settings.body_font_size }}px !important;
+    {% endif %}
+  }
+  #shopify-section-{{ section.id }} .hb-story-visual img {
+    border-radius: {{ section.settings.image_radius | default: 16 }}px !important;
+    {% unless section.settings.image_shadow %}
+      box-shadow: none !important;
+    {% endunless %}
+  }
+  #shopify-section-{{ section.id }} .hb-story-badge {
+    width: {{ section.settings.badge_size | default: 110 }}px !important;
+    height: {{ section.settings.badge_size | default: 110 }}px !important;
+    {% unless section.settings.enable_badge_rotation %}
+      animation: none !important;
+    {% endunless %}
+  }
+  #shopify-section-{{ section.id }} .hb-story-badge img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain;
+  }
+
+  /* CTA Button Styles */
+  #shopify-section-{{ section.id }} .hb-story-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    cursor: pointer;
+  }
+
+  {% if cta_mode == 'button' %}
+    #shopify-section-{{ section.id }} .hb-story-cta {
+      background-color: {{ cta_bg_color }} !important;
+      color: {{ cta_txt_color }} !important;
+      border-radius: {{ cta_rad }}px !important;
+      padding: 13px 28px !important;
+      border: 1px solid {{ cta_border_col }} !important;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+    }
+    #shopify-section-{{ section.id }} .hb-story-cta:hover {
+      background-color: {{ cta_hvr_bg }} !important;
+      color: {{ cta_hvr_color }} !important;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.16);
+    }
+  {% elsif cta_mode == 'outline' %}
+    #shopify-section-{{ section.id }} .hb-story-cta {
+      background-color: {{ cta_bg_color | default: 'transparent' }} !important;
+      color: {{ cta_txt_color }} !important;
+      border-radius: {{ cta_rad }}px !important;
+      padding: 12px 26px !important;
+      border: 2px solid {{ cta_border_col }} !important;
+    }
+    #shopify-section-{{ section.id }} .hb-story-cta:hover {
+      background-color: {{ cta_hvr_bg }} !important;
+      color: {{ cta_hvr_color }} !important;
+      transform: translateY(-2px);
+    }
+  {% else %}
+    /* Link style */
+    #shopify-section-{{ section.id }} .hb-story-cta {
+      color: {{ cta_txt_color }} !important;
+      padding: 8px 0 !important;
+      font-size: 1.05rem;
+    }
+    #shopify-section-{{ section.id }} .hb-story-cta:hover {
+      color: {{ cta_hvr_color }} !important;
+      transform: translateX(4px);
+    }
+  {% endif %}
+
+  @media (max-width: 768px) {
+    #shopify-section-{{ section.id }} .hb-story-content h2 {
+      {% if section.settings.heading_size_mobile != blank %}
+        font-size: {{ section.settings.heading_size_mobile }}px !important;
+      {% endif %}
+    }
+  }
+</style>
+
+<section class="hb-story-section" id="story">
   <div class="hb-container">
     <div class="hb-story-grid {% if section.settings.layout == 'image_second' %}hb-grid-reversed{% endif %}">
       <div class="hb-story-visual">
@@ -31,8 +152,11 @@
         </div>
 
         {% if section.settings.cta_text != blank %}
-          <a href="{{ section.settings.cta_link | default: '/pages/about' }}" class="hb-btn-link" style="padding-left: 0;">
-            {{ section.settings.cta_text }} &rarr;
+          <a href="{{ section.settings.cta_link | default: '/pages/about' }}" class="hb-story-cta">
+            <span>{{ section.settings.cta_text }}</span>
+            {% if section.settings.show_arrow %}
+              <span class="hb-story-cta-arrow">&rarr;</span>
+            {% endif %}
           </a>
         {% endif %}
       </div>
@@ -44,6 +168,10 @@
 {
   "name": "Feature Organic Story",
   "settings": [
+    {
+      "type": "header",
+      "content": "Layout & Media"
+    },
     {
       "type": "select",
       "id": "layout",
@@ -60,9 +188,29 @@
       "label": "Featured Botanical Image"
     },
     {
+      "type": "range",
+      "id": "image_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Image Border Radius",
+      "default": 16
+    },
+    {
+      "type": "checkbox",
+      "id": "image_shadow",
+      "label": "Enable Image Shadow",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Rotating Organic Badge"
+    },
+    {
       "type": "checkbox",
       "id": "show_badge",
-      "label": "Show Rotating Organic Badge",
+      "label": "Show Organic Badge",
       "default": true
     },
     {
@@ -71,10 +219,46 @@
       "label": "Custom Badge Graphic (Optional)"
     },
     {
+      "type": "range",
+      "id": "badge_size",
+      "min": 60,
+      "max": 160,
+      "step": 5,
+      "unit": "px",
+      "label": "Badge Size",
+      "default": 110
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_badge_rotation",
+      "label": "Enable Rotating Animation",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Headings & Typography"
+    },
+    {
       "type": "text",
       "id": "eyebrow",
       "label": "Eyebrow Text",
       "default": "THE SCIENCE OF NATURE"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow Text Color",
+      "default": "#7a2a2b"
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Eyebrow Font Size",
+      "default": 13
     },
     {
       "type": "text",
@@ -83,21 +267,124 @@
       "default": "Wellness Should Be Part of Everyday Life"
     },
     {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#111827"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 24,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Font Size (Desktop)",
+      "default": 38
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "min": 20,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Font Size (Mobile)",
+      "default": 28
+    },
+    {
       "type": "richtext",
       "id": "body_text",
       "label": "Story Body Copy",
       "default": "<p>We believe physical relief should be pure, natural, and accessible. Our bio-active extraction process preserves vital botanical terpenes and fatty acids for deep transdermal absorption.</p><p>From morning stiffness to post-activity recovery, our clean plant formula works with your body's natural physiology to calm tension at the source without synthetic blockers or greasy residue.</p>"
     },
     {
+      "type": "color",
+      "id": "body_color",
+      "label": "Body Text Color",
+      "default": "#4b5563"
+    },
+    {
+      "type": "range",
+      "id": "body_font_size",
+      "min": 13,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "label": "Body Font Size",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Call To Action Button / Link"
+    },
+    {
       "type": "text",
       "id": "cta_text",
-      "label": "Link Text",
+      "label": "Button / Link Text",
       "default": "Discover Our Story"
     },
     {
       "type": "url",
       "id": "cta_link",
-      "label": "Link URL"
+      "label": "Button / Link URL"
+    },
+    {
+      "type": "select",
+      "id": "cta_style",
+      "label": "Button Style",
+      "options": [
+        { "value": "button", "label": "Solid Button" },
+        { "value": "outline", "label": "Outlined Button" },
+        { "value": "link", "label": "Text Link" }
+      ],
+      "default": "button"
+    },
+    {
+      "type": "color",
+      "id": "cta_bg",
+      "label": "Button Background Color",
+      "default": "#7a2a2b"
+    },
+    {
+      "type": "color",
+      "id": "cta_color",
+      "label": "Button / Link Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "cta_border_color",
+      "label": "Button Border Color",
+      "default": "#7a2a2b"
+    },
+    {
+      "type": "color",
+      "id": "cta_hover_bg",
+      "label": "Button Hover Background",
+      "default": "#5c1f20"
+    },
+    {
+      "type": "color",
+      "id": "cta_hover_color",
+      "label": "Button Hover Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "cta_radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Button Border Radius",
+      "default": 30
+    },
+    {
+      "type": "checkbox",
+      "id": "show_arrow",
+      "label": "Show Arrow After Label",
+      "default": true
     },
     {
       "type": "header",
@@ -108,6 +395,12 @@
       "id": "bg_color",
       "label": "Background Color",
       "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "border_top_color",
+      "label": "Top Divider Border Color",
+      "default": "rgba(0, 0, 0, 0.06)"
     },
     {
       "type": "range",
