@@ -111,18 +111,21 @@
           "header_bg": "#ffffff",
           "header_border_color": "#0000000f",
           "nav_link_color": "#111827",
-          "nav_link_hover_color": "#7A2A2B",
+          "nav_link_hover_color": "#7a2a2b",
           "nav_font_size": 14,
           "nav_font_weight": "600",
           "icons_color": "#111827",
-          "cart_badge_bg": "#7A2A2B",
+          "cart_badge_bg": "#7a2a2b",
           "cart_badge_color": "#ffffff",
-          "drawer_bg": "#7A2A2B",
-          "drawer_links_color": "#FEE6D4",
+          "drawer_bg": "#7a2a2b",
+          "drawer_links_color": "#fee6d4",
+          "drawer_close_icon_color": "#111827",
+          "drawer_close_bg_color": "#e5e7eb",
+          "drawer_border_color": "#e5e7eb",
           "drawer_button_text": "Shop Best Sellers",
           "drawer_button_link": "",
-          "drawer_button_bg": "#FEE6D4",
-          "drawer_button_color": "#7A2A2B",
+          "drawer_button_bg": "#fee6d4",
+          "drawer_button_color": "#7a2a2b",
           "drawer_button_radius": 30,
           "drawer_contact_text": "Questions? Reach out to us:",
           "drawer_email": "hello@tierabotanicals.com",
@@ -138,21 +141,26 @@
             "settings": {
               "logo": "shopify://shop_images/Asar_Wellness_Logo.png",
               "logo_width": 80,
-              "about_text": ""
+              "about_text": "",
+              "custom_text_color": ""
             }
           },
           "link_column_RaDTwH": {
             "type": "link_column",
             "settings": {
               "heading": "Policies",
-              "menu": "policies"
+              "menu": "policies",
+              "custom_heading_color": "",
+              "custom_link_color": ""
             }
           },
           "link_column_eKETee": {
             "type": "link_column",
             "settings": {
               "heading": "Quick Links",
-              "menu": "footer"
+              "menu": "footer",
+              "custom_heading_color": "",
+              "custom_link_color": ""
             }
           },
           "contact_column_aPjTGf": {
@@ -160,9 +168,11 @@
             "settings": {
               "heading": "Contact Us",
               "email": "asarwellness@gmail.com",
+              "phone": "+1 (800) 555-0199",
               "hours": "Mon – Fri: 9:00 AM – 6:00 PM",
               "delivery_badge": "Direct Tracked Express Delivery",
-              "eco_badge": "100% Eco-Sustainable Packaging"
+              "eco_badge": "100% Eco-Sustainable Packaging",
+              "custom_heading_color": ""
             }
           }
         },
@@ -174,10 +184,21 @@
         ],
         "settings": {
           "background_color": "#7a2a2b",
-          "text_color": "{{ settings.color_palette.background }}",
+          "border_top_width": 2,
+          "border_top_color": "#FEE6D4",
+          "heading_color": "#ffffff",
+          "heading_size": 16,
+          "text_color": "#FEE6D4",
+          "text_size": 14,
+          "link_color": "#FEE6D4",
+          "link_hover_color": "#FEE6D4",
+          "link_size": 14,
+          "bottom_bar_border_color": "#FEE6D4",
+          "copyright_color": "#FEE6D4",
+          "copyright_size": 13,
+          "copyright_text": "All rights reserved. Powered by Shopify Horizon.",
           "show_payment_icons": true,
           "show_cod_badge": true,
-          "copyright_text": "All rights reserved. Powered by Shopify Horizon.",
           "padding_top": 72,
           "padding_bottom": 72
         }
