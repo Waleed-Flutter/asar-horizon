@@ -698,7 +698,7 @@
         "subheading_size": 16,
         "card_bg": "#ffffff",
         "card_border_color": "#e5e7eb",
-        "card_hover_border_color": "#257942",
+        "card_hover_border_color": "#7A2A2B",
         "card_radius": 16,
         "card_shadow": true,
         "img_hover_zoom": true,
