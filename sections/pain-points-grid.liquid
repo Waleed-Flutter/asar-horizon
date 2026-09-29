@@ -1,21 +1,139 @@
 {{ 'horizon-botanical.css' | asset_url | stylesheet_tag }}
 
-<section class="hb-pain-section" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; background-color: {{ section.settings.bg_color }};">
-  <div class="hb-container">
-    <div class="hb-section-header">
-      {% if section.settings.eyebrow != blank %}
-        <span class="hb-eyebrow">{{ section.settings.eyebrow }}</span>
-      {% endif %}
-      <h2>{{ section.settings.heading }}</h2>
-      {% if section.settings.subheading != blank %}
-        <p>{{ section.settings.subheading }}</p>
-      {% endif %}
-    </div>
+{%- style -%}
+  #shopify-section-{{ section.id }} {
+    background-color: {{ section.settings.bg_color | default: '#fafbfa' }};
+    padding-top: {{ section.settings.padding_top | default: 96 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | default: 96 }}px;
+  }
 
-    <div class="hb-pain-grid hb-grid-cols-{{ section.settings.columns_desktop }}">
+  #shopify-section-{{ section.id }} .hb-section-header .hb-eyebrow {
+    color: {{ section.settings.eyebrow_color | default: '#257942' }};
+    font-size: {{ section.settings.eyebrow_size | default: 13 }}px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  #shopify-section-{{ section.id }} .hb-section-header h2 {
+    color: {{ section.settings.heading_color | default: '#111827' }};
+    font-size: {{ section.settings.heading_size | default: 38 }}px;
+    line-height: 1.25;
+    margin: 0 0 16px;
+  }
+
+  @media (max-width: 768px) {
+    #shopify-section-{{ section.id }} .hb-section-header h2 {
+      font-size: {{ section.settings.heading_size_mobile | default: 28 }}px;
+    }
+  }
+
+  #shopify-section-{{ section.id }} .hb-section-header p {
+    color: {{ section.settings.subheading_color | default: '#4b5563' }};
+    font-size: {{ section.settings.subheading_size | default: 16 }}px;
+    line-height: 1.6;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  /* Cards */
+  #shopify-section-{{ section.id }} .hb-pain-card {
+    background-color: {{ section.settings.card_bg | default: '#ffffff' }};
+    border-radius: {{ section.settings.card_radius | default: 16 }}px;
+    border: 1px solid {{ section.settings.card_border_color | default: '#e5e7eb' }};
+    {% if section.settings.card_shadow %}
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+    {% else %}
+      box-shadow: none;
+    {% endif %}
+    overflow: hidden;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+  }
+
+  {% if section.settings.card_hover_lift %}
+    #shopify-section-{{ section.id }} .hb-pain-card:hover {
+      transform: translateY(-6px);
+      border-color: {{ section.settings.card_hover_border_color | default: '#257942' }};
+      {% if section.settings.card_shadow %}
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.09);
+      {% endif %}
+    }
+    #shopify-section-{{ section.id }} .hb-pain-card:hover .hb-pain-media img {
+      transform: scale(1.04);
+    }
+  {% else %}
+    #shopify-section-{{ section.id }} .hb-pain-card:hover {
+      border-color: {{ section.settings.card_hover_border_color | default: '#257942' }};
+    }
+    #shopify-section-{{ section.id }} .hb-pain-card:hover .hb-pain-media img {
+      transform: none !important;
+    }
+  {% endif %}
+
+  #shopify-section-{{ section.id }} .hb-pain-body h3 {
+    color: {{ section.settings.card_title_color | default: '#111827' }};
+    font-size: {{ section.settings.card_title_size | default: 16 }}px;
+    font-weight: 800;
+    margin: 0 0 10px;
+    line-height: 1.35;
+  }
+
+  #shopify-section-{{ section.id }} .hb-pain-body p {
+    color: {{ section.settings.card_desc_color | default: '#4b5563' }};
+    font-size: {{ section.settings.card_desc_size | default: 14 }}px;
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  /* Tag Pill */
+  #shopify-section-{{ section.id }} .hb-pain-tag-pill {
+    background-color: {{ section.settings.tag_bg | default: '#ffffff' }};
+    color: {{ section.settings.tag_color | default: '#1b5e20' }};
+    border-radius: {{ section.settings.tag_radius | default: 20 }}px;
+    font-size: {{ section.settings.tag_font_size | default: 12 }}px;
+    {% if section.settings.tag_border_color != blank %}
+      border: 1px solid {{ section.settings.tag_border_color }};
+    {% endif %}
+  }
+
+  #shopify-section-{{ section.id }} .hb-pain-bottom-note {
+    color: {{ section.settings.bottom_note_color | default: '#6b7280' }};
+    font-size: {{ section.settings.bottom_note_size | default: 14 }}px;
+  }
+{%- endstyle -%}
+
+<section class="hb-pain-section" id="pain-points">
+  <div class="hb-container">
+    {% if section.settings.heading != blank or section.settings.eyebrow != blank %}
+      <div class="hb-section-header">
+        {% if section.settings.eyebrow != blank %}
+          <span class="hb-eyebrow">{{ section.settings.eyebrow }}</span>
+        {% endif %}
+        {% if section.settings.heading != blank %}
+          <h2>{{ section.settings.heading }}</h2>
+        {% endif %}
+        {% if section.settings.subheading != blank %}
+          <p>{{ section.settings.subheading }}</p>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="hb-pain-grid hb-grid-cols-{{ section.settings.columns_desktop | default: '3' }}">
       {% if section.blocks.size > 0 %}
         {% for block in section.blocks %}
-          <div class="hb-pain-card" {{ block.shopify_attributes }}>
+          {%- assign card_tag_bg = block.settings.custom_tag_bg | default: section.settings.tag_bg | default: '#ffffff' -%}
+          {%- assign card_tag_color = block.settings.custom_tag_color | default: section.settings.tag_color | default: '#1b5e20' -%}
+          {%- assign card_title_col = block.settings.custom_title_color | default: section.settings.card_title_color | default: '#111827' -%}
+
+          {% if block.settings.link != blank %}
+            <a href="{{ block.settings.link }}" class="hb-pain-card" {{ block.shopify_attributes }}>
+          {% else %}
+            <div class="hb-pain-card" {{ block.shopify_attributes }}>
+          {% endif %}
+
             <div class="hb-pain-media">
               {% if block.settings.image != blank %}
                 <img src="{{ block.settings.image | image_url: width: 600 }}" alt="{{ block.settings.title | escape }}" width="400" height="300" loading="lazy">
@@ -38,7 +156,7 @@
               {% endif %}
 
               {% if block.settings.tag != blank %}
-                <div class="hb-pain-tag-pill">
+                <div class="hb-pain-tag-pill" style="background-color: {{ card_tag_bg }}; color: {{ card_tag_color }};">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
                   {{ block.settings.tag }}
                 </div>
@@ -46,10 +164,15 @@
             </div>
 
             <div class="hb-pain-body">
-              <h3>{{ block.settings.title }}</h3>
+              <h3 style="color: {{ card_title_col }};">{{ block.settings.title }}</h3>
               <p>{{ block.settings.description }}</p>
             </div>
-          </div>
+
+          {% if block.settings.link != blank %}
+            </a>
+          {% else %}
+            </div>
+          {% endif %}
         {% endfor %}
       {% else %}
         <!-- Default Fallback Cards -->
@@ -67,7 +190,7 @@
     </div>
 
     {% if section.settings.bottom_note != blank %}
-      <div style="text-align: center; margin-top: 36px; font-size: 0.85rem; color: #6b7280;">
+      <div class="hb-pain-bottom-note" style="text-align: center; margin-top: 40px; font-weight: 500;">
         {{ section.settings.bottom_note }}
       </div>
     {% endif %}
@@ -79,10 +202,30 @@
   "name": "Pain Points Grid",
   "settings": [
     {
+      "type": "header",
+      "content": "Section Header & Typography"
+    },
+    {
       "type": "text",
       "id": "eyebrow",
       "label": "Eyebrow Text",
       "default": "REAL RELIEF FOR REAL LIFE"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow Color",
+      "default": "#257942"
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_size",
+      "min": 10,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "label": "Eyebrow Font Size",
+      "default": 13
     },
     {
       "type": "text",
@@ -91,16 +234,56 @@
       "default": "Your Day Doesn't Stop When Your Body Feels Tired."
     },
     {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#111827"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 24,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Font Size (Desktop)",
+      "default": 38
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "min": 20,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Font Size (Mobile)",
+      "default": 28
+    },
+    {
       "type": "textarea",
       "id": "subheading",
       "label": "Subheading",
       "default": "Formulated for targeted comfort where tension, fatigue, and soreness build up most during busy routines."
     },
     {
-      "type": "text",
-      "id": "bottom_note",
-      "label": "Bottom Footer Note",
-      "default": "Clinically informed botanicals designed for rapid cutaneous absorption."
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading Color",
+      "default": "#4b5563"
+    },
+    {
+      "type": "range",
+      "id": "subheading_size",
+      "min": 13,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "label": "Subheading Font Size",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Grid Layout"
     },
     {
       "type": "select",
@@ -115,7 +298,154 @@
     },
     {
       "type": "header",
-      "content": "Section Styling"
+      "content": "Card Styling"
+    },
+    {
+      "type": "color",
+      "id": "card_bg",
+      "label": "Card Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_border_color",
+      "label": "Card Border Color",
+      "default": "#e5e7eb"
+    },
+    {
+      "type": "color",
+      "id": "card_hover_border_color",
+      "label": "Card Hover Border Color",
+      "default": "#257942"
+    },
+    {
+      "type": "range",
+      "id": "card_radius",
+      "min": 0,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "label": "Card Border Radius",
+      "default": 16
+    },
+    {
+      "type": "checkbox",
+      "id": "card_shadow",
+      "label": "Enable Card Shadow",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "card_hover_lift",
+      "label": "Enable Card Hover Lift & Zoom",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Card Typography"
+    },
+    {
+      "type": "color",
+      "id": "card_title_color",
+      "label": "Card Title Color",
+      "default": "#111827"
+    },
+    {
+      "type": "range",
+      "id": "card_title_size",
+      "min": 13,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Card Title Font Size",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "card_desc_color",
+      "label": "Card Description Color",
+      "default": "#4b5563"
+    },
+    {
+      "type": "range",
+      "id": "card_desc_size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Card Description Font Size",
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "Category Pill Tag"
+    },
+    {
+      "type": "color",
+      "id": "tag_bg",
+      "label": "Tag Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "tag_color",
+      "label": "Tag Text Color",
+      "default": "#1b5e20"
+    },
+    {
+      "type": "color",
+      "id": "tag_border_color",
+      "label": "Tag Border Color (Optional)"
+    },
+    {
+      "type": "range",
+      "id": "tag_radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Tag Border Radius",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "tag_font_size",
+      "min": 10,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "label": "Tag Font Size",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Bottom Note"
+    },
+    {
+      "type": "text",
+      "id": "bottom_note",
+      "label": "Bottom Footer Note Text",
+      "default": "Clinically informed botanicals designed for rapid cutaneous absorption."
+    },
+    {
+      "type": "color",
+      "id": "bottom_note_color",
+      "label": "Bottom Note Color",
+      "default": "#6b7280"
+    },
+    {
+      "type": "range",
+      "id": "bottom_note_size",
+      "min": 11,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "label": "Bottom Note Font Size",
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "Section Styling & Padding"
     },
     {
       "type": "color",
@@ -176,6 +506,21 @@
           "type": "url",
           "id": "link",
           "label": "Optional Card Link"
+        },
+        {
+          "type": "color",
+          "id": "custom_tag_bg",
+          "label": "Custom Tag Background (Optional)"
+        },
+        {
+          "type": "color",
+          "id": "custom_tag_color",
+          "label": "Custom Tag Color (Optional)"
+        },
+        {
+          "type": "color",
+          "id": "custom_title_color",
+          "label": "Custom Title Color (Optional)"
         }
       ]
     }
