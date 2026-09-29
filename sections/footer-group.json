@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "type": "footer",
   "name": "Footer",
@@ -29,7 +38,7 @@
           "settings": {
             "heading": "Contact Us",
             "email": "hello@tierabotanicals.com",
-            "hours": "Mon \u2013 Fri: 9:00 AM \u2013 6:00 PM",
+            "hours": "Mon – Fri: 9:00 AM – 6:00 PM",
             "delivery_badge": "Direct Tracked Express Delivery",
             "eco_badge": "100% Eco-Sustainable Packaging"
           }
@@ -44,16 +53,11 @@
       "settings": {
         "background_color": "#15331e",
         "text_color": "#f2f7f3",
+        "copyright_text": "All rights reserved. Powered by Shopify Horizon.",
         "show_payment_icons": true,
         "show_cod_badge": true,
-        "copyright_text": "All rights reserved. Powered by Shopify Horizon.",
         "padding_top": 64,
-        "padding_bottom": 40,
-        "show_social_in_brand": true,
-        "social_instagram": "https://instagram.com",
-        "social_facebook": "https://facebook.com",
-        "social_whatsapp": "https://wa.me/",
-        "social_tiktok": "https://tiktok.com"
+        "padding_bottom": 40
       }
     }
   },
