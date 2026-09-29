@@ -1,6 +1,99 @@
 {{ 'horizon-botanical.css' | asset_url | stylesheet_tag }}
 
-<section class="hb-ingredients-section" id="ingredients" style="background-color: {{ section.settings.background_color | default: '#ffffff' }}; padding-top: {{ section.settings.padding_top | default: 64 }}px; padding-bottom: {{ section.settings.padding_bottom | default: 64 }}px;">
+{%- style -%}
+  #shopify-section-{{ section.id }} {
+    background-color: {{ section.settings.background_color | default: '#ffffff' }};
+    padding-top: {{ section.settings.padding_top | default: 64 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | default: 64 }}px;
+  }
+
+  #shopify-section-{{ section.id }} .hb-section-header .hb-eyebrow {
+    color: {{ section.settings.eyebrow_color | default: '#257942' }};
+    font-size: {{ section.settings.eyebrow_size | default: 13 }}px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  #shopify-section-{{ section.id }} .hb-section-header h2 {
+    color: {{ section.settings.heading_color | default: '#111827' }};
+    font-size: {{ section.settings.heading_size | default: 38 }}px;
+    line-height: 1.25;
+    margin: 0 0 16px;
+  }
+
+  @media (max-width: 768px) {
+    #shopify-section-{{ section.id }} .hb-section-header h2 {
+      font-size: {{ section.settings.heading_size_mobile | default: 28 }}px;
+    }
+  }
+
+  #shopify-section-{{ section.id }} .hb-section-header p {
+    color: {{ section.settings.subheading_color | default: '#4b5563' }};
+    font-size: {{ section.settings.subheading_size | default: 16 }}px;
+    line-height: 1.6;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  #shopify-section-{{ section.id }} .hb-ingredients-grid {
+    grid-template-columns: repeat({{ section.settings.columns_desktop | default: 5 }}, 1fr);
+  }
+
+  @media (max-width: 768px) {
+    #shopify-section-{{ section.id }} .hb-ingredients-grid {
+      grid-template-columns: repeat({{ section.settings.columns_mobile | default: 2 }}, 1fr);
+    }
+  }
+
+  /* Circle & Image Styling */
+  #shopify-section-{{ section.id }} .hb-ingredient-circle {
+    width: {{ section.settings.circle_size | default: 104 }}px;
+    height: {{ section.settings.circle_size | default: 104 }}px;
+    background-color: {{ section.settings.circle_bg | default: '#ffffff' }};
+    border: {{ section.settings.circle_border_width | default: 3 }}px solid {{ section.settings.circle_border_color | default: '#ffffff' }};
+    border-radius: {{ section.settings.circle_radius | default: 50 }}%;
+    {% if section.settings.circle_shadow %}
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    {% else %}
+      box-shadow: none;
+    {% endif %}
+  }
+
+  {% if section.settings.circle_hover_zoom %}
+    #shopify-section-{{ section.id }} .hb-ingredient-card:hover .hb-ingredient-circle {
+      transform: translateY(-4px) scale(1.05);
+      border-color: {{ section.settings.circle_hover_border_color | default: '#257942' }};
+      {% if section.settings.circle_shadow %}
+        box-shadow: 0 8px 24px rgba(37, 121, 66, 0.2);
+      {% endif %}
+    }
+    #shopify-section-{{ section.id }} .hb-ingredient-card:hover .hb-ingredient-circle img {
+      transform: scale(1.1);
+    }
+  {% else %}
+    #shopify-section-{{ section.id }} .hb-ingredient-card:hover .hb-ingredient-circle {
+      border-color: {{ section.settings.circle_hover_border_color | default: '#257942' }};
+    }
+    #shopify-section-{{ section.id }} .hb-ingredient-card:hover .hb-ingredient-circle img {
+      transform: none !important;
+    }
+  {% endif %}
+
+  #shopify-section-{{ section.id }} .hb-ingredient-title {
+    color: {{ section.settings.title_color | default: '#111827' }};
+    font-size: {{ section.settings.title_size | default: 15 }}px;
+    font-weight: 700;
+  }
+
+  #shopify-section-{{ section.id }} .hb-ingredient-desc {
+    color: {{ section.settings.desc_color | default: '#6b7280' }};
+    font-size: {{ section.settings.desc_size | default: 13 }}px;
+    line-height: 1.45;
+  }
+{%- endstyle -%}
+
+<section class="hb-ingredients-section" id="ingredients">
   <div class="hb-container">
     {% if section.settings.heading != blank or section.settings.eyebrow != blank %}
       <div class="hb-section-header">
@@ -16,10 +109,13 @@
       </div>
     {% endif %}
 
-    <div class="hb-ingredients-grid" style="--ingredients-cols: {{ section.settings.columns_desktop | default: 5 }};">
+    <div class="hb-ingredients-grid">
       {% for block in section.blocks %}
+        {%- assign blk_title_col = block.settings.custom_title_color | default: section.settings.title_color | default: '#111827' -%}
+        {%- assign blk_border_col = block.settings.custom_circle_border | default: section.settings.circle_border_color | default: '#ffffff' -%}
+
         <div class="hb-ingredient-card" {{ block.shopify_attributes }}>
-          <div class="hb-ingredient-circle">
+          <div class="hb-ingredient-circle" style="{% if block.settings.custom_circle_border != blank %}border-color: {{ blk_border_col }};{% endif %}">
             {% if block.settings.image != blank %}
               {{ block.settings.image | image_url: width: 240 | image_tag: loading: 'lazy', alt: block.settings.title, width: 104, height: 104 }}
             {% elsif block.settings.fallback_image != blank %}
@@ -29,7 +125,7 @@
             {% endif %}
           </div>
           {% if block.settings.title != blank %}
-            <div class="hb-ingredient-title">{{ block.settings.title }}</div>
+            <div class="hb-ingredient-title" style="color: {{ blk_title_col }};">{{ block.settings.title }}</div>
           {% endif %}
           {% if block.settings.description != blank %}
             <div class="hb-ingredient-desc">{{ block.settings.description }}</div>
@@ -45,10 +141,30 @@
   "name": "Botanical Ingredients",
   "settings": [
     {
+      "type": "header",
+      "content": "Section Header & Typography"
+    },
+    {
       "type": "text",
       "id": "eyebrow",
       "label": "Eyebrow Text",
       "default": "WHAT'S INSIDE"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow Color",
+      "default": "#257942"
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_size",
+      "min": 10,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "label": "Eyebrow Font Size",
+      "default": 13
     },
     {
       "type": "text",
@@ -57,10 +173,56 @@
       "default": "Powered by Botanicals. Created with Purpose."
     },
     {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#111827"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 24,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Font Size (Desktop)",
+      "default": 38
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "min": 20,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Font Size (Mobile)",
+      "default": 28
+    },
+    {
       "type": "textarea",
       "id": "subheading",
       "label": "Subheading",
       "default": "Every botanical extract is carefully selected for therapeutic efficacy, sustainability, and absolute purity."
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading Color",
+      "default": "#4b5563"
+    },
+    {
+      "type": "range",
+      "id": "subheading_size",
+      "min": 13,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "label": "Subheading Font Size",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Grid Layout"
     },
     {
       "type": "range",
@@ -68,33 +230,148 @@
       "min": 2,
       "max": 6,
       "step": 1,
-      "label": "Columns on desktop",
+      "label": "Columns on Desktop",
       "default": 5
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Columns on Mobile",
+      "options": [
+        { "value": "1", "label": "1 Column" },
+        { "value": "2", "label": "2 Columns" },
+        { "value": "3", "label": "3 Columns" }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "header",
+      "content": "Ingredient Image & Circle Styling"
+    },
+    {
+      "type": "range",
+      "id": "circle_size",
+      "min": 70,
+      "max": 140,
+      "step": 2,
+      "unit": "px",
+      "label": "Circle Image Size",
+      "default": 104
+    },
+    {
+      "type": "color",
+      "id": "circle_bg",
+      "label": "Circle Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "circle_border_color",
+      "label": "Circle Border Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "circle_hover_border_color",
+      "label": "Circle Hover Border Color",
+      "default": "#257942"
+    },
+    {
+      "type": "range",
+      "id": "circle_border_width",
+      "min": 0,
+      "max": 6,
+      "step": 1,
+      "unit": "px",
+      "label": "Circle Border Width",
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "circle_radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "%",
+      "label": "Circle Border Radius (50% = Circle)",
+      "default": 50
+    },
+    {
+      "type": "checkbox",
+      "id": "circle_shadow",
+      "label": "Enable Circle Drop Shadow",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "circle_hover_zoom",
+      "label": "Enable Hover Lift & Zoom",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Ingredient Typography"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Ingredient Title Color",
+      "default": "#111827"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "min": 12,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "label": "Ingredient Title Font Size",
+      "default": 15
+    },
+    {
+      "type": "color",
+      "id": "desc_color",
+      "label": "Description Text Color",
+      "default": "#6b7280"
+    },
+    {
+      "type": "range",
+      "id": "desc_size",
+      "min": 11,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "label": "Description Font Size",
+      "default": 13
+    },
+    {
+      "type": "header",
+      "content": "Section Styling & Padding"
     },
     {
       "type": "color",
       "id": "background_color",
-      "label": "Background color",
+      "label": "Section Background Color",
       "default": "#ffffff"
     },
     {
       "type": "range",
       "id": "padding_top",
       "min": 20,
-      "max": 120,
+      "max": 140,
       "step": 4,
       "unit": "px",
-      "label": "Padding Top",
+      "label": "Top Padding",
       "default": 64
     },
     {
       "type": "range",
       "id": "padding_bottom",
       "min": 20,
-      "max": 120,
+      "max": 140,
       "step": 4,
       "unit": "px",
-      "label": "Padding Bottom",
+      "label": "Bottom Padding",
       "default": 64
     }
   ],
@@ -125,6 +402,16 @@
           "id": "description",
           "label": "Benefits / Description",
           "default": "Natural methyl salicylate for cooling comfort"
+        },
+        {
+          "type": "color",
+          "id": "custom_title_color",
+          "label": "Custom Title Color (Optional)"
+        },
+        {
+          "type": "color",
+          "id": "custom_circle_border",
+          "label": "Custom Circle Border (Optional)"
         }
       ]
     }
@@ -171,46 +458,6 @@
             "title": "Camphor",
             "description": "Stimulates micro-circulation for soothing warmth",
             "fallback_image": "ingredient-camphor.jpg"
-          }
-        },
-        {
-          "type": "ingredient",
-          "settings": {
-            "title": "Eucalyptus",
-            "description": "Purifying cineole compounds to ease stiffness",
-            "fallback_image": "ingredient-eucalyptus.jpg"
-          }
-        },
-        {
-          "type": "ingredient",
-          "settings": {
-            "title": "Ginger Root",
-            "description": "Natural gingerols that warm tight muscle knots",
-            "fallback_image": "ingredient-ginger.jpg"
-          }
-        },
-        {
-          "type": "ingredient",
-          "settings": {
-            "title": "Frankincense",
-            "description": "Ancient Boswellia resin that soothes joint inflammation",
-            "fallback_image": "ingredient-frankincense.jpg"
-          }
-        },
-        {
-          "type": "ingredient",
-          "settings": {
-            "title": "Clove Bud",
-            "description": "Eugenol-rich flower buds for sustained relief",
-            "fallback_image": "ingredient-cloves.jpg"
-          }
-        },
-        {
-          "type": "ingredient",
-          "settings": {
-            "title": "Rosemary",
-            "description": "Rosmarinic acid antioxidant supporting tissue vigor",
-            "fallback_image": "ingredient-rosemary.jpg"
           }
         }
       ]
