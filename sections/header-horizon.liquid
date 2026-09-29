@@ -14,6 +14,9 @@
   assign border_color = section.settings.header_border_color | default: 'rgba(0, 0, 0, 0.06)'
   assign drawer_bg = section.settings.drawer_bg | default: '#ffffff'
   assign drawer_link_color = section.settings.drawer_links_color | default: '#111827'
+  assign drawer_close_icon_color = section.settings.drawer_close_icon_color | default: drawer_link_color
+  assign drawer_close_bg = section.settings.drawer_close_bg_color | default: 'rgba(0, 0, 0, 0.06)'
+  assign drawer_border_color = section.settings.drawer_border_color | default: 'rgba(0, 0, 0, 0.08)'
   assign drawer_btn_bg = section.settings.drawer_button_bg | default: hover_color
   assign drawer_btn_color = section.settings.drawer_button_color | default: '#ffffff'
   assign drawer_btn_rad = section.settings.drawer_button_radius | default: 30
@@ -108,7 +111,7 @@
 <!-- Mobile Navigation Drawer -->
 <div class="hb-mobile-drawer-overlay" id="hbMobileDrawerOverlay"></div>
 <aside class="hb-mobile-drawer" id="hbMobileDrawer" aria-label="Mobile Navigation" style="background-color: {{ drawer_bg }};">
-  <div class="hb-mobile-drawer-header">
+  <div class="hb-mobile-drawer-header" style="border-bottom: 1px solid {{ drawer_border_color }};">
     <div class="hb-mobile-brand">
       {% if header_logo != blank %}
         <img src="{{ header_logo | image_url: width: 300 }}" alt="{{ shop.name }}" style="width: {{ section.settings.logo_width_mobile | default: 130 }}px; height: auto;" width="{{ section.settings.logo_width_mobile | default: 130 }}" height="32">
@@ -116,7 +119,7 @@
         <img src="{{ 'horizon-logo.svg' | asset_url }}" alt="{{ shop.name }}" style="width: {{ section.settings.logo_width_mobile | default: 130 }}px; height: auto;" width="{{ section.settings.logo_width_mobile | default: 130 }}" height="32">
       {% endif %}
     </div>
-    <button class="hb-mobile-drawer-close" id="hbMobileMenuClose" aria-label="Close Navigation Menu" type="button" style="color: {{ drawer_link_color }};">
+    <button class="hb-mobile-drawer-close" id="hbMobileMenuClose" aria-label="Close Navigation Menu" type="button" style="color: {{ drawer_close_icon_color }} !important; background-color: {{ drawer_close_bg }} !important;">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
     </button>
   </div>
@@ -527,6 +530,24 @@
       "id": "drawer_links_color",
       "label": "Drawer Links Text Color",
       "default": "#111827"
+    },
+    {
+      "type": "color",
+      "id": "drawer_close_icon_color",
+      "label": "Close Button Icon Color",
+      "default": "#111827"
+    },
+    {
+      "type": "color",
+      "id": "drawer_close_bg_color",
+      "label": "Close Button Background Color",
+      "default": "rgba(0, 0, 0, 0.06)"
+    },
+    {
+      "type": "color",
+      "id": "drawer_border_color",
+      "label": "Drawer Header Divider Line Color",
+      "default": "rgba(0, 0, 0, 0.08)"
     },
     {
       "type": "text",

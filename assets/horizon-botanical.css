@@ -212,7 +212,7 @@
   justify-content: space-between;
 }
 .hb-mobile-drawer-close {
-  background: #f4f6f4;
+  background: rgba(0, 0, 0, 0.06);
   border: none;
   width: 36px;
   height: 36px;
@@ -221,7 +221,12 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: #374151;
+  color: inherit;
+  transition: transform 0.2s ease, opacity 0.2s ease, background-color 0.2s ease;
+}
+.hb-mobile-drawer-close:hover {
+  transform: scale(1.08);
+  opacity: 0.9;
 }
 .hb-mobile-drawer-body {
   padding: 24px 20px;
