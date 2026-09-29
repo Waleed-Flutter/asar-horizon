@@ -601,7 +601,7 @@
         "subheading": "Formulated for targeted comfort where tension, fatigue, and soreness build up most during busy routines.",
         "bottom_note": "Clinically informed botanicals designed for rapid cutaneous absorption.",
         "columns_desktop": "3",
-        "bg_color": "#fafbfa",
+        "bg_color": "{{ settings.color_palette.background }}",
         "padding_top": 96,
         "padding_bottom": 96
       }
