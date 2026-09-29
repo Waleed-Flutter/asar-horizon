@@ -168,10 +168,10 @@
             "settings": {
               "heading": "Contact Us",
               "email": "asarwellness@gmail.com",
-              "phone": "+1 (800) 555-0199",
+              "phone": "03040014222",
               "hours": "Mon – Fri: 9:00 AM – 6:00 PM",
-              "delivery_badge": "Direct Tracked Express Delivery",
-              "eco_badge": "100% Eco-Sustainable Packaging",
+              "delivery_badge": "",
+              "eco_badge": "",
               "show_social_here": false,
               "custom_heading_color": ""
             }
@@ -187,8 +187,8 @@
           "background_color": "#7a2a2b",
           "border_top_width": 2,
           "border_top_color": "#fee6d4",
-          "show_social_in_brand": true,
-          "show_social_in_bottom": false,
+          "show_social_in_brand": false,
+          "show_social_in_bottom": true,
           "social_instagram": "https://www.instagram.com/asarwellness/",
           "social_facebook": "https://www.facebook.com/asarwellness",
           "social_tiktok": "https://www.tiktok.com/@asarwellness",
@@ -202,7 +202,7 @@
           "social_icon_hover_color": "#FEE6D4",
           "social_icon_hover_bg": "#7A2A2B",
           "social_icon_size": 36,
-          "social_icon_radius": 50,
+          "social_icon_radius": 14,
           "heading_color": "#ffffff",
           "heading_size": 16,
           "text_color": "#fee6d4",
