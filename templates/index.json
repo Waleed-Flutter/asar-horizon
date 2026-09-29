@@ -895,7 +895,7 @@
       ],
       "settings": {
         "eyebrow": "WHY ASAR",
-        "eyebrow_color": "#7A2A2B",
+        "eyebrow_color": "#7a2a2b",
         "eyebrow_size": 13,
         "heading": "Ancient Wellness, Without the Guesswork.",
         "heading_color": "#111827",
@@ -904,15 +904,15 @@
         "subheading": "",
         "subheading_color": "#4b5563",
         "subheading_size": 16,
-        "columns_desktop": 4,
+        "columns_desktop": 3,
         "card_bg": "#ffffff",
         "card_border_color": "#e5e7eb",
-        "card_hover_border_color": "#7A2A2B",
+        "card_hover_border_color": "#7a2a2b",
         "card_radius": 16,
         "card_shadow": true,
         "card_hover_lift": true,
-        "icon_box_bg": "#7A2A2B",
-        "icon_box_color": "#FEE6D4",
+        "icon_box_bg": "#7a2a2b",
+        "icon_box_color": "#fee6d4",
         "icon_box_size": 48,
         "icon_box_radius": 12,
         "card_title_color": "#111827",
@@ -932,7 +932,8 @@
           "settings": {
             "question": "Where can I buy Ostruce products?",
             "answer": "You can shop directly asarwellness.com with delivery options nationwide.",
-            "open_by_default": false
+            "open_by_default": false,
+            "custom_question_color": ""
           }
         },
         "faq_item_BThi7x": {
@@ -940,7 +941,8 @@
           "settings": {
             "question": "What makes Asar Wellness  Ostrich Oil unique?",
             "answer": "It is a 100% natural formula enriched with Omega 3-6-9 and infused with Capsicum Oleoresin, Wintergreen, and Eucalyptus oils to ease pain, stiffness, and inflammation.",
-            "open_by_default": false
+            "open_by_default": false,
+            "custom_question_color": ""
           }
         },
         "faq_item_m6JdDH": {
@@ -948,7 +950,8 @@
           "settings": {
             "question": "How quickly can I expect to feel relief?",
             "answer": "Most customers notice an immediate cooling and soothing sensation within 2 to 3 minutes of application, followed by deeper therapeutic warmth and muscle ease around 15 minutes.",
-            "open_by_default": false
+            "open_by_default": false,
+            "custom_question_color": ""
           }
         },
         "faq_item_xaG4qV": {
@@ -956,7 +959,8 @@
           "settings": {
             "question": "Can Enhanced Ostrich Oil help with joint pain and arthritis?",
             "answer": "Yes, it helps soothe sore muscles, stiff joints, and aches associated with conditions such as arthritis and muscle strains. Consulting a healthcare professional is recommended for individual needs.",
-            "open_by_default": false
+            "open_by_default": false,
+            "custom_question_color": ""
           }
         },
         "faq_item_GmfLEh": {
@@ -964,7 +968,8 @@
           "settings": {
             "question": "Is Enhanced Ostrich Oil safe for daily use?",
             "answer": "Yes. It is 100% natural, steroid-free, and suitable for all ages. It can be applied multiple times a day.",
-            "open_by_default": false
+            "open_by_default": false,
+            "custom_question_color": ""
           }
         }
       },
@@ -977,9 +982,32 @@
       ],
       "settings": {
         "eyebrow": "FREQUENTLY ASKED QUESTIONS",
+        "eyebrow_color": "#257942",
+        "eyebrow_size": 13,
         "heading": "Got Questions? We've Got Answers.",
+        "heading_color": "#111827",
+        "heading_size": 38,
+        "heading_size_mobile": 28,
         "subheading": "",
+        "subheading_color": "#4b5563",
+        "subheading_size": 16,
+        "item_bg": "#ffffff",
+        "item_border_color": "#e5e7eb",
+        "item_active_border_color": "#257942",
+        "item_active_bg": "#ffffff",
+        "item_radius": 14,
+        "item_spacing": 14,
+        "item_shadow": true,
+        "question_color": "#111827",
+        "question_active_color": "#257942",
+        "question_size": 17,
+        "icon_color": "#257942",
+        "icon_active_color": "#1b5e20",
+        "icon_bg": "",
+        "answer_color": "#4b5563",
+        "answer_size": 15,
         "allow_multiple_open": false,
+        "max_width": 820,
         "background_color": "{{ settings.color_palette.background }}",
         "padding_top": 88,
         "padding_bottom": 88
