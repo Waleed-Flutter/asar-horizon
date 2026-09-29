@@ -698,7 +698,7 @@
         "subheading_size": 16,
         "card_bg": "#ffffff",
         "card_border_color": "#e5e7eb",
-        "card_hover_border_color": "#7A2A2B",
+        "card_hover_border_color": "#7a2a2b",
         "card_radius": 16,
         "card_shadow": true,
         "img_hover_zoom": true,
@@ -723,7 +723,7 @@
       "type": "pain-points-grid",
       "settings": {
         "eyebrow": "REAL RELIEF FOR REAL LIFE",
-        "eyebrow_color": "#7A2A2B",
+        "eyebrow_color": "#7a2a2b",
         "eyebrow_size": 13,
         "heading": "Your Day Doesn't Stop When Your Body Feels Tired.",
         "heading_color": "#111827",
@@ -735,7 +735,7 @@
         "columns_desktop": "3",
         "card_bg": "#ffffff",
         "card_border_color": "#e5e7eb",
-        "card_hover_border_color": "#7A2A2B",
+        "card_hover_border_color": "#7a2a2b",
         "card_radius": 16,
         "card_shadow": true,
         "card_hover_lift": true,
@@ -765,7 +765,9 @@
             "image": "shopify://shop_images/361e337752f5fa4b5861d418fe31d0f0.jpg",
             "fallback_image": "",
             "title": "Peppermint Oil",
-            "description": ""
+            "description": "",
+            "custom_title_color": "",
+            "custom_circle_border": ""
           }
         },
         "ingredient_NfFJHg": {
@@ -774,7 +776,9 @@
             "image": "shopify://shop_images/4006d4b31feb442c480ff6dc723b906a.jpg",
             "fallback_image": "",
             "title": "Capsicum Oleoresin",
-            "description": ""
+            "description": "",
+            "custom_title_color": "",
+            "custom_circle_border": ""
           }
         },
         "ingredient_KzYkbF": {
@@ -782,7 +786,9 @@
           "settings": {
             "fallback_image": "ingredient-wintergreen.jpg",
             "title": "Wintergreen",
-            "description": ""
+            "description": "",
+            "custom_title_color": "",
+            "custom_circle_border": ""
           }
         },
         "ingredient_eNGicy": {
@@ -791,7 +797,9 @@
             "image": "shopify://shop_images/7083d18ad9ffc1dd97f5124f5328da64.jpg",
             "fallback_image": "ingredient-wintergreen.jpg",
             "title": "Ostrich Oil",
-            "description": ""
+            "description": "",
+            "custom_title_color": "",
+            "custom_circle_border": ""
           }
         },
         "ingredient_CLd6iL": {
@@ -799,7 +807,9 @@
           "settings": {
             "fallback_image": "ingredient-eucalyptus.jpg",
             "title": "Eucalyptus",
-            "description": ""
+            "description": "",
+            "custom_title_color": "",
+            "custom_circle_border": ""
           }
         }
       },
@@ -813,9 +823,29 @@
       "name": "Botanical Ingredients",
       "settings": {
         "eyebrow": "WHAT'S INSIDE",
+        "eyebrow_color": "#7A2A2B",
+        "eyebrow_size": 13,
         "heading": "Nature powered solutions .Created with Ancient Wisdom.",
+        "heading_color": "#111827",
+        "heading_size": 38,
+        "heading_size_mobile": 28,
         "subheading": "",
+        "subheading_color": "#4b5563",
+        "subheading_size": 16,
         "columns_desktop": 5,
+        "columns_mobile": "2",
+        "circle_size": 104,
+        "circle_bg": "#ffffff",
+        "circle_border_color": "#ffffff",
+        "circle_hover_border_color": "#7A2A2B",
+        "circle_border_width": 3,
+        "circle_radius": 50,
+        "circle_shadow": true,
+        "circle_hover_zoom": true,
+        "title_color": "#111827",
+        "title_size": 15,
+        "desc_color": "#6b7280",
+        "desc_size": 13,
         "background_color": "#ffffff",
         "padding_top": 64,
         "padding_bottom": 64
