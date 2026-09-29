@@ -83,9 +83,21 @@
           </a>
         {% endif %}
         {% if section.settings.show_cart %}
-          <a href="{{ routes.cart_url }}" class="hb-icon-btn" aria-label="Cart" id="hbCartBtn" style="color: var(--hb-header-icon-color);">
+          <a
+            href="{{ routes.cart_url }}"
+            class="hb-icon-btn"
+            aria-label="Cart"
+            id="hbCartBtn"
+            {% if settings.cart_type == 'drawer' and template.name != 'cart' %}
+              on:click="#cart-drawer/toggle"
+              aria-haspopup="dialog"
+              aria-expanded="false"
+              aria-controls="cart-drawer"
+            {% endif %}
+            style="color: var(--hb-header-icon-color);"
+          >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
-            <span class="hb-cart-count" style="background-color: var(--hb-cart-badge-bg); color: var(--hb-cart-badge-text);">{{ cart.item_count | default: 0 }}</span>
+            <span class="hb-cart-count" id="hbCartCount" style="background-color: var(--hb-cart-badge-bg); color: var(--hb-cart-badge-text);">{{ cart.item_count | default: 0 }}</span>
           </a>
         {% endif %}
       </div>
@@ -143,6 +155,18 @@
   </div>
 </aside>
 
+<style>
+  .hb-cart-count {
+    transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .hb-cart-count.hb-cart-bump {
+    transform: scale(1.35);
+  }
+</style>
+
 <script>
   (function() {
     function initHeaderDrawer() {
@@ -174,12 +198,182 @@
       });
     }
 
+    function initRealtimeCart() {
+      const cartBtn = document.getElementById('hbCartBtn');
+
+      function updateBadges(count, animate) {
+        if (typeof animate === 'undefined') animate = true;
+        const num = typeof count === 'number' ? count : parseInt(count, 10);
+        const validCount = isNaN(num) || num < 0 ? 0 : num;
+        const textVal = validCount > 99 ? '99+' : String(validCount);
+
+        const badges = document.querySelectorAll('.hb-cart-count');
+        badges.forEach(badge => {
+          badge.textContent = textVal;
+          if (animate) {
+            badge.classList.remove('hb-cart-bump');
+            void badge.offsetWidth;
+            badge.classList.add('hb-cart-bump');
+            setTimeout(() => badge.classList.remove('hb-cart-bump'), 350);
+          }
+        });
+
+        // Sync with Horizon live region accessibility
+        const liveRegion = document.querySelector('[data-testid="cart-count-live-region"]');
+        if (liveRegion && window.Theme && window.Theme.translations && window.Theme.translations.cart_count) {
+          liveRegion.textContent = window.Theme.translations.cart_count + ': ' + validCount;
+        }
+
+        try {
+          sessionStorage.setItem('cart-count', JSON.stringify({
+            value: textVal,
+            timestamp: Date.now()
+          }));
+        } catch (_) {}
+      }
+
+      function fetchCartData() {
+        const root = (window.Shopify && window.Shopify.routes && window.Shopify.routes.root) || '/';
+        fetch(root + 'cart.js', { credentials: 'same-origin', headers: { 'Accept': 'application/json' } })
+          .then(res => res.json())
+          .then(cart => {
+            if (cart && typeof cart.item_count === 'number') {
+              updateBadges(cart.item_count, true);
+            }
+          })
+          .catch(() => {});
+      }
+
+      // 1. Shopify standard custom event (Horizon StandardEvents.cartLinesUpdate)
+      document.addEventListener('shopify:cart:lines-update', function(event) {
+        if (event && event.promise && typeof event.promise.then === 'function') {
+          event.promise
+            .then(data => {
+              const count = data && data.cart ? data.cart.totalQuantity : (data && data.detail ? data.detail.itemCount : null);
+              if (typeof count === 'number') {
+                updateBadges(count, true);
+              } else {
+                fetchCartData();
+              }
+            })
+            .catch(() => {
+              fetchCartData();
+            });
+        } else {
+          fetchCartData();
+        }
+      });
+
+      // 2. Custom events from cart apps & themes
+      ['cart:updated', 'cart:refresh', 'cart:change', 'cart:add', 'ajaxCart.afterCartLoad'].forEach(evtName => {
+        document.addEventListener(evtName, function(event) {
+          const detail = event && event.detail;
+          const count = detail && detail.cart ? detail.cart.item_count : (detail ? (detail.item_count || detail.totalQuantity) : null);
+          if (typeof count === 'number') {
+            updateBadges(count, true);
+          } else {
+            fetchCartData();
+          }
+        });
+      });
+
+      // 3. Intercept fetch calls targeting cart endpoints
+      if (!window.__hbCartFetchIntercepted) {
+        window.__hbCartFetchIntercepted = true;
+        const origFetch = window.fetch;
+        window.fetch = function() {
+          const args = arguments;
+          const url = typeof args[0] === 'string' ? args[0] : (args[0] && args[0].url ? args[0].url : '');
+          const result = origFetch.apply(this, args);
+          if (typeof url === 'string' && (
+            url.indexOf('/cart/add') !== -1 ||
+            url.indexOf('/cart/change') !== -1 ||
+            url.indexOf('/cart/clear') !== -1 ||
+            url.indexOf('/cart/update') !== -1
+          )) {
+            result.then(response => {
+              if (response && response.ok) {
+                setTimeout(fetchCartData, 120);
+              }
+            }).catch(() => {});
+          }
+          return result;
+        };
+      }
+
+      // 4. Intercept XMLHttpRequest for legacy/app scripts
+      if (!window.__hbCartXHRIntercepted && window.XMLHttpRequest) {
+        window.__hbCartXHRIntercepted = true;
+        const origOpen = XMLHttpRequest.prototype.open;
+        const origSend = XMLHttpRequest.prototype.send;
+        XMLHttpRequest.prototype.open = function(method, url) {
+          this.__hbUrl = url;
+          return origOpen.apply(this, arguments);
+        };
+        XMLHttpRequest.prototype.send = function() {
+          if (typeof this.__hbUrl === 'string' && (
+            this.__hbUrl.indexOf('/cart/add') !== -1 ||
+            this.__hbUrl.indexOf('/cart/change') !== -1 ||
+            this.__hbUrl.indexOf('/cart/clear') !== -1 ||
+            this.__hbUrl.indexOf('/cart/update') !== -1
+          )) {
+            this.addEventListener('load', function() {
+              if (this.status >= 200 && this.status < 300) {
+                setTimeout(fetchCartData, 120);
+              }
+            });
+          }
+          return origSend.apply(this, arguments);
+        };
+      }
+
+      // 5. Sync from session storage or fetch on pageshow (back/forward cache navigation)
+      window.addEventListener('pageshow', function() {
+        try {
+          const stored = sessionStorage.getItem('cart-count');
+          if (stored) {
+            const parsed = JSON.parse(stored);
+            if (parsed && parsed.value) {
+              updateBadges(parseInt(parsed.value, 10), false);
+            }
+          }
+        } catch (_) {}
+        fetchCartData();
+      });
+
+      // 6. Handle cart icon button click to toggle drawer if drawer enabled
+      if (cartBtn) {
+        cartBtn.addEventListener('click', function(e) {
+          {% if settings.cart_type == 'drawer' and template.name != 'cart' %}
+            const drawer = document.getElementById('cart-drawer') || document.querySelector('theme-drawer#cart-drawer');
+            if (drawer && typeof drawer.open === 'function') {
+              e.preventDefault();
+              drawer.open();
+              return;
+            }
+            if (window.Shopify && window.Shopify.actions && typeof window.Shopify.actions.openCart === 'function') {
+              e.preventDefault();
+              window.Shopify.actions.openCart();
+              return;
+            }
+          {% endif %}
+        });
+      }
+    }
+
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initHeaderDrawer);
+      document.addEventListener('DOMContentLoaded', function() {
+        initHeaderDrawer();
+        initRealtimeCart();
+      });
     } else {
       initHeaderDrawer();
+      initRealtimeCart();
     }
-    document.addEventListener('shopify:section:load', initHeaderDrawer);
+    document.addEventListener('shopify:section:load', function() {
+      initHeaderDrawer();
+      initRealtimeCart();
+    });
   })();
 </script>
 
