@@ -1,6 +1,58 @@
 {{ 'horizon-botanical.css' | asset_url | stylesheet_tag }}
 
-<footer class="hb-footer" style="background-color: {{ section.settings.background_color | default: '#15331e' }}; color: {{ section.settings.text_color | default: '#f2f7f3' }}; padding-top: {{ section.settings.padding_top | default: 64 }}px; padding-bottom: {{ section.settings.padding_bottom | default: 40 }}px;">
+{%- style -%}
+  #shopify-section-{{ section.id }} footer.hb-footer {
+    background-color: {{ section.settings.background_color | default: '#15331e' }};
+    color: {{ section.settings.text_color | default: '#d1e2d4' }};
+    padding-top: {{ section.settings.padding_top | default: 64 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | default: 40 }}px;
+    {% if section.settings.border_top_width > 0 %}
+      border-top: {{ section.settings.border_top_width }}px solid {{ section.settings.border_top_color | default: '#204b2e' }};
+    {% else %}
+      border-top: none;
+    {% endif %}
+  }
+
+  #shopify-section-{{ section.id }} .hb-footer-col h4 {
+    color: {{ section.settings.heading_color | default: '#ffffff' }};
+    font-size: {{ section.settings.heading_size | default: 16 }}px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin: 0 0 20px;
+  }
+
+  #shopify-section-{{ section.id }} .hb-footer-about {
+    color: {{ section.settings.text_color | default: '#d1e2d4' }};
+    font-size: {{ section.settings.text_size | default: 14 }}px;
+    line-height: 1.65;
+  }
+
+  #shopify-section-{{ section.id }} .hb-footer-links li {
+    color: {{ section.settings.text_color | default: '#d1e2d4' }};
+    font-size: {{ section.settings.link_size | default: 14 }}px;
+    line-height: 1.5;
+  }
+
+  #shopify-section-{{ section.id }} .hb-footer-links a {
+    color: {{ section.settings.link_color | default: '#d1e2d4' }};
+    font-size: {{ section.settings.link_size | default: 14 }}px;
+    text-decoration: none;
+    transition: color 0.25s ease, transform 0.25s ease;
+  }
+
+  #shopify-section-{{ section.id }} .hb-footer-links a:hover {
+    color: {{ section.settings.link_hover_color | default: '#68d391' }};
+    transform: translateX(3px);
+  }
+
+  #shopify-section-{{ section.id }} .hb-footer-bottom {
+    border-top: 1px solid {{ section.settings.bottom_bar_border_color | default: '#204b2e' }};
+    color: {{ section.settings.copyright_color | default: '#a3bfa8' }};
+    font-size: {{ section.settings.copyright_size | default: 13 }}px;
+  }
+{%- endstyle -%}
+
+<footer class="hb-footer">
   <div class="hb-container">
     <div class="hb-footer-grid">
       {% for block in section.blocks %}
@@ -15,46 +67,53 @@
                 {% endif %}
               </div>
               {% if block.settings.about_text != blank %}
-                <p class="hb-footer-about">{{ block.settings.about_text }}</p>
+                <p class="hb-footer-about" style="{% if block.settings.custom_text_color != blank %}color: {{ block.settings.custom_text_color }};{% endif %}">{{ block.settings.about_text }}</p>
               {% endif %}
             </div>
 
           {% when 'link_column' %}
+            {%- assign blk_heading_col = block.settings.custom_heading_color | default: section.settings.heading_color | default: '#ffffff' -%}
+            {%- assign blk_link_col = block.settings.custom_link_color | default: section.settings.link_color | default: '#d1e2d4' -%}
+
             <div class="hb-footer-col" {{ block.shopify_attributes }}>
               {% if block.settings.heading != blank %}
-                <h4>{{ block.settings.heading }}</h4>
+                <h4 style="color: {{ blk_heading_col }};">{{ block.settings.heading }}</h4>
               {% endif %}
               <ul class="hb-footer-links">
                 {% if block.settings.menu != blank and linklists[block.settings.menu].links.size > 0 %}
                   {% for link in linklists[block.settings.menu].links %}
-                    <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                    <li><a href="{{ link.url }}" style="color: {{ blk_link_col }};">{{ link.title }}</a></li>
                   {% endfor %}
                 {% else %}
                   {% if block.settings.heading contains 'Customer' or block.settings.heading contains 'Care' %}
-                    <li><a href="/pages/shipping">Shipping Policy</a></li>
-                    <li><a href="/pages/refunds">Refund & Return Policy</a></li>
-                    <li><a href="/pages/privacy">Privacy Policy</a></li>
-                    <li><a href="/pages/terms">Terms of Service</a></li>
-                    <li><a href="#faq">Support Center</a></li>
+                    <li><a href="/pages/shipping" style="color: {{ blk_link_col }};">Shipping Policy</a></li>
+                    <li><a href="/pages/refunds" style="color: {{ blk_link_col }};">Refund & Return Policy</a></li>
+                    <li><a href="/pages/privacy" style="color: {{ blk_link_col }};">Privacy Policy</a></li>
+                    <li><a href="/pages/terms" style="color: {{ blk_link_col }};">Terms of Service</a></li>
+                    <li><a href="#faq" style="color: {{ blk_link_col }};">Support Center</a></li>
                   {% else %}
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/collections/all">All Products</a></li>
-                    <li><a href="#ingredients">Our Ingredients</a></li>
-                    <li><a href="#faq">Frequently Asked</a></li>
-                    <li><a href="/pages/track-order">Track My Order</a></li>
+                    <li><a href="/" style="color: {{ blk_link_col }};">Home</a></li>
+                    <li><a href="/collections/all" style="color: {{ blk_link_col }};">All Products</a></li>
+                    <li><a href="#ingredients" style="color: {{ blk_link_col }};">Our Ingredients</a></li>
+                    <li><a href="#faq" style="color: {{ blk_link_col }};">Frequently Asked</a></li>
+                    <li><a href="/pages/track-order" style="color: {{ blk_link_col }};">Track My Order</a></li>
                   {% endif %}
                 {% endif %}
               </ul>
             </div>
 
           {% when 'contact_column' %}
+            {%- assign blk_cnt_heading = block.settings.custom_heading_color | default: section.settings.heading_color | default: '#ffffff' -%}
             <div class="hb-footer-col" {{ block.shopify_attributes }}>
               {% if block.settings.heading != blank %}
-                <h4>{{ block.settings.heading }}</h4>
+                <h4 style="color: {{ blk_cnt_heading }};">{{ block.settings.heading }}</h4>
               {% endif %}
               <ul class="hb-footer-links">
                 {% if block.settings.email != blank %}
                   <li><a href="mailto:{{ block.settings.email }}">{{ block.settings.email }}</a></li>
+                {% endif %}
+                {% if block.settings.phone != blank %}
+                  <li><a href="tel:{{ block.settings.phone }}">{{ block.settings.phone }}</a></li>
                 {% endif %}
                 {% if block.settings.hours != blank %}
                   <li>{{ block.settings.hours }}</li>
@@ -91,16 +150,124 @@
   "name": "Botanical Footer",
   "settings": [
     {
+      "type": "header",
+      "content": "Footer Background & Borders"
+    },
+    {
       "type": "color",
       "id": "background_color",
       "label": "Background Color",
       "default": "#15331e"
     },
     {
+      "type": "range",
+      "id": "border_top_width",
+      "min": 0,
+      "max": 6,
+      "step": 1,
+      "unit": "px",
+      "label": "Top Divider Border Width",
+      "default": 1
+    },
+    {
+      "type": "color",
+      "id": "border_top_color",
+      "label": "Top Divider Border Color",
+      "default": "#204b2e"
+    },
+    {
+      "type": "header",
+      "content": "Headings & Typography"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Column Headings Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 13,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Column Headings Font Size",
+      "default": 16
+    },
+    {
       "type": "color",
       "id": "text_color",
-      "label": "Text Color",
-      "default": "#f2f7f3"
+      "label": "Body / Brand Text Color",
+      "default": "#d1e2d4"
+    },
+    {
+      "type": "range",
+      "id": "text_size",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "label": "Body / Brand Font Size",
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "Navigation Links"
+    },
+    {
+      "type": "color",
+      "id": "link_color",
+      "label": "Links Color",
+      "default": "#d1e2d4"
+    },
+    {
+      "type": "color",
+      "id": "link_hover_color",
+      "label": "Links Hover Color",
+      "default": "#68d391"
+    },
+    {
+      "type": "range",
+      "id": "link_size",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "label": "Links Font Size",
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "Bottom Bar & Copyright"
+    },
+    {
+      "type": "color",
+      "id": "bottom_bar_border_color",
+      "label": "Bottom Divider Border Color",
+      "default": "#204b2e"
+    },
+    {
+      "type": "color",
+      "id": "copyright_color",
+      "label": "Copyright Text Color",
+      "default": "#a3bfa8"
+    },
+    {
+      "type": "range",
+      "id": "copyright_size",
+      "min": 11,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "label": "Copyright Font Size",
+      "default": 13
+    },
+    {
+      "type": "text",
+      "id": "copyright_text",
+      "label": "Copyright Text",
+      "default": "All rights reserved. Powered by Shopify Horizon."
     },
     {
       "type": "checkbox",
@@ -115,16 +282,14 @@
       "default": true
     },
     {
-      "type": "text",
-      "id": "copyright_text",
-      "label": "Copyright Text",
-      "default": "All rights reserved. Powered by Shopify Horizon."
+      "type": "header",
+      "content": "Section Padding"
     },
     {
       "type": "range",
       "id": "padding_top",
       "min": 20,
-      "max": 120,
+      "max": 140,
       "step": 4,
       "unit": "px",
       "label": "Padding Top",
@@ -134,7 +299,7 @@
       "type": "range",
       "id": "padding_bottom",
       "min": 20,
-      "max": 120,
+      "max": 140,
       "step": 4,
       "unit": "px",
       "label": "Padding Bottom",
@@ -167,6 +332,11 @@
           "id": "about_text",
           "label": "About Text",
           "default": "Pure, plant-powered botanical drops formulated for natural everyday comfort, restorative joint care, and effortless daily movement."
+        },
+        {
+          "type": "color",
+          "id": "custom_text_color",
+          "label": "Custom Text Color (Optional)"
         }
       ]
     },
@@ -184,6 +354,16 @@
           "type": "link_list",
           "id": "menu",
           "label": "Navigation Menu"
+        },
+        {
+          "type": "color",
+          "id": "custom_heading_color",
+          "label": "Custom Heading Color (Optional)"
+        },
+        {
+          "type": "color",
+          "id": "custom_link_color",
+          "label": "Custom Link Color (Optional)"
         }
       ]
     },
@@ -206,6 +386,12 @@
         },
         {
           "type": "text",
+          "id": "phone",
+          "label": "Phone / WhatsApp",
+          "default": "+1 (800) 555-0199"
+        },
+        {
+          "type": "text",
           "id": "hours",
           "label": "Business Hours",
           "default": "Mon – Fri: 9:00 AM – 6:00 PM"
@@ -221,6 +407,11 @@
           "id": "eco_badge",
           "label": "Sustainability Badge Note",
           "default": "100% Eco-Sustainable Packaging"
+        },
+        {
+          "type": "color",
+          "id": "custom_heading_color",
+          "label": "Custom Heading Color (Optional)"
         }
       ]
     }
