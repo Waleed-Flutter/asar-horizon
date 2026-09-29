@@ -214,7 +214,7 @@
           "copyright_color": "#fee6d4",
           "copyright_size": 13,
           "copyright_text": "All rights reserved.",
-          "show_payment_icons": true,
+          "show_payment_icons": false,
           "show_cod_badge": true,
           "padding_top": 72,
           "padding_bottom": 72
