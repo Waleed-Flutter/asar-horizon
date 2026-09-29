@@ -48,7 +48,12 @@
         "show_cod_badge": true,
         "copyright_text": "All rights reserved. Powered by Shopify Horizon.",
         "padding_top": 64,
-        "padding_bottom": 40
+        "padding_bottom": 40,
+        "show_social_in_brand": true,
+        "social_instagram": "https://instagram.com",
+        "social_facebook": "https://facebook.com",
+        "social_whatsapp": "https://wa.me/",
+        "social_tiktok": "https://tiktok.com"
       }
     }
   },
