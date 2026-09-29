@@ -222,6 +222,13 @@
       }
     },
     "content_for_index": [],
+    "blocks": {
+      "11643523502022917574": {
+        "type": "shopify://apps/scroll-to-top-pro/blocks/app-embed/48ed35da-915e-406b-b5ab-7b699e6e1635",
+        "disabled": false,
+        "settings": {}
+      }
+    },
     "color_palette": {
       "background": "#ffffff",
       "foreground": "#000000",
