@@ -301,7 +301,7 @@
                 "divider_color": "#FEE6D4",
                 "type_preset": "h5",
                 "background_color": "#7A2A2B",
-                "text_color": "",
+                "text_color": "{{ settings.color_palette.background }}",
                 "border": "none",
                 "border_width": 1,
                 "border_opacity": 100,
@@ -336,7 +336,7 @@
                         "letter_spacing": "normal",
                         "case": "none",
                         "wrap": "pretty",
-                        "text_color": "#000000",
+                        "text_color": "{{ settings.color_palette.background }}",
                         "background": false,
                         "background_color": "#00000026",
                         "corner_radius": 0,
@@ -355,7 +355,7 @@
                 "accordion_row_Xh7WFi": {
                   "type": "_accordion-row",
                   "settings": {
-                    "heading": "Shipping",
+                    "heading": "How to Use",
                     "open_by_default": false,
                     "icon": "none",
                     "width": 20
@@ -364,7 +364,7 @@
                     "text_JiLizB": {
                       "type": "text",
                       "settings": {
-                        "text": "<p>We will work quickly to ship your order as soon as possible. Once your order has shipped, you will receive an email with further information. Delivery times vary depending on your location.</p>",
+                        "text": "<p><strong>01 Warm</strong></p><p>Warm the bottle for 15-20 seconds (remove the cap first).<br/><strong><br/>02 APPLY</strong></p><p>Apply 5-7 drops directly to Affected<br/>Area.</p><p><strong>03 MASSAGE</strong></p><p>Massage gently for 2-3 mints using your fingertips until it's absorbed.</p><p><strong>04 REPEAT&nbsp;<br/><br/></strong>For the better results repeats three times daily.</p>",
                         "width": "100%",
                         "max_width": "normal",
                         "alignment": "left",
