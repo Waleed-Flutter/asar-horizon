@@ -16,10 +16,10 @@
           "type": "text",
           "name": "t:names.title",
           "settings": {
-            "text": "<h1>{{ closest.page.title }}</h1>",
+            "text": "<h1>FAQ's</h1>",
             "width": "100%",
             "max_width": "normal",
-            "alignment": "left",
+            "alignment": "center",
             "type_preset": "h2",
             "font": "var(--font-body--family)",
             "font_size": "",
@@ -27,6 +27,7 @@
             "letter_spacing": "normal",
             "case": "none",
             "wrap": "pretty",
+            "text_color": "",
             "background": false,
             "background_color": "#00000026",
             "corner_radius": 0,
@@ -39,7 +40,9 @@
         },
         "page-content": {
           "type": "page-content",
-          "settings": {},
+          "settings": {
+            "text_color": ""
+          },
           "blocks": {}
         }
       },
@@ -50,12 +53,104 @@
       "settings": {
         "content_direction": "column",
         "gap": 32,
+        "background_color": "",
         "padding-block-start": 40,
-        "padding-block-end": 80
+        "padding-block-end": 40
+      }
+    },
+    "faq_accordion_aJjRnw": {
+      "type": "faq-accordion",
+      "blocks": {
+        "faq_item_TFz6QN": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How quickly can I expect to feel relief?",
+            "answer": "Most customers notice an immediate cooling and soothing sensation within 2 to 3 minutes of application, followed by deeper therapeutic warmth and muscle ease around 15 minutes.",
+            "open_by_default": true,
+            "custom_question_color": ""
+          }
+        },
+        "faq_item_4pEaph": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How many times a day should I apply the drops?",
+            "answer": "For optimal results, apply 3 to 5 drops 2 to 3 times daily. We recommend once in the morning to start your day loose and free, and once in the evening before bed to help muscles unwind.",
+            "open_by_default": false,
+            "custom_question_color": ""
+          }
+        },
+        "faq_item_P3dyrn": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Will this leave an oily or sticky feeling on my skin or clothing?",
+            "answer": "No! Our proprietary micro-filtered formulation is bio-identical to human dermal lipids, allowing it to penetrate completely within 60 to 90 seconds. Once gently massaged in, it leaves skin silky-smooth with zero sticky film or residue.",
+            "open_by_default": false,
+            "custom_question_color": ""
+          }
+        },
+        "faq_item_9NbecX": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can this be used on both joints and tight muscles?",
+            "answer": "Yes. The formula combines joint-supporting boswellia and arnica with muscle-relaxing wintergreen and peppermint, making it equally effective for knee, hip, shoulder, lower back, and neck tension.",
+            "open_by_default": false,
+            "custom_question_color": ""
+          }
+        },
+        "faq_item_nhdrFx": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Are the ingredients 100% natural and safe for daily use?",
+            "answer": "Absolutely. Every bottle contains 100% pure botanical oils and lipid extracts, free of NSAIDs, steroids, mineral oil, artificial scents, or parabens. It is non-habit forming and designed for continuous daily therapy.",
+            "open_by_default": false,
+            "custom_question_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "faq_item_TFz6QN",
+        "faq_item_4pEaph",
+        "faq_item_P3dyrn",
+        "faq_item_9NbecX",
+        "faq_item_nhdrFx"
+      ],
+      "name": "FAQ Accordion",
+      "settings": {
+        "eyebrow": "FREQUENTLY ASKED QUESTIONS",
+        "eyebrow_color": "#7A2A2B",
+        "eyebrow_size": 13,
+        "heading": "Got Questions? We've Got Answers.",
+        "heading_color": "#111827",
+        "heading_size": 38,
+        "heading_size_mobile": 28,
+        "subheading": "",
+        "subheading_color": "#4b5563",
+        "subheading_size": 16,
+        "item_bg": "#ffffff",
+        "item_border_color": "#e5e7eb",
+        "item_active_border_color": "#7A2A2B",
+        "item_active_bg": "#ffffff",
+        "item_radius": 14,
+        "item_spacing": 14,
+        "item_shadow": true,
+        "question_color": "#111827",
+        "question_active_color": "#7A2A2B",
+        "question_size": 17,
+        "icon_color": "#7A2A2B",
+        "icon_active_color": "#7A2A2B",
+        "icon_bg": "",
+        "answer_color": "#000000",
+        "answer_size": 15,
+        "allow_multiple_open": false,
+        "max_width": 820,
+        "background_color": "#ffffff",
+        "padding_top": 88,
+        "padding_bottom": 88
       }
     }
   },
   "order": [
-    "main"
+    "main",
+    "faq_accordion_aJjRnw"
   ]
 }
