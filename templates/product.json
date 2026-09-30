@@ -364,7 +364,7 @@
                     "text_JiLizB": {
                       "type": "text",
                       "settings": {
-                        "text": "<p><strong>01 Warm</strong></p><p>Warm the bottle for 15-20 seconds (remove the cap first).<br/><strong><br/>02 APPLY</strong></p><p>Apply 5-7 drops directly to Affected<br/>Area.</p><p><strong>03 MASSAGE</strong></p><p>Massage gently for 2-3 mints using your fingertips until it's absorbed.</p><p><strong>04 REPEAT&nbsp;<br/><br/></strong>For the better results repeats three times daily.</p>",
+                        "text": "<p><strong>01 Warm</strong></p><p><em>Warm the bottle for 15-20 seconds (remove the cap first).</em><br/><strong><br/>02 APPLY</strong></p><p><em>Apply 5-7 drops directly to Affected<br/>Area.</em></p><p><strong>03 MASSAGE</strong></p><p><em>Massage gently for 2-3 mints using your fingertips until it's absorbed.</em></p><p><strong>04 REPEAT&nbsp;<br/><br/></strong><em>For the better results repeats three times daily.</em></p>",
                         "width": "100%",
                         "max_width": "normal",
                         "alignment": "left",
