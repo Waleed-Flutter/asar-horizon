@@ -208,7 +208,7 @@
           "text_color": "{{ settings.color_palette.background }}",
           "text_size": 14,
           "link_color": "{{ settings.color_palette.background }}",
-          "link_hover_color": "#fee6d4",
+          "link_hover_color": "{{ settings.color_palette.background }}",
           "link_size": 14,
           "bottom_bar_border_color": "#fee6d4",
           "copyright_color": "{{ settings.color_palette.background }}",
