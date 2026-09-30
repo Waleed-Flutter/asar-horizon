@@ -715,8 +715,8 @@
         "trust_bar_radius": 50,
         "trust_bar_size": 14,
         "background_color": "#ffffff",
-        "padding_top": 20,
-        "padding_bottom": 20
+        "padding_top": 80,
+        "padding_bottom": 84
       }
     },
     "pain_points_grid": {
