@@ -201,7 +201,7 @@
             "link": "",
             "image_ratio": "square",
             "width": "custom",
-            "custom_width": 60,
+            "custom_width": 70,
             "width_mobile": "fill",
             "custom_width_mobile": 100,
             "height": "fit",
@@ -260,7 +260,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<p><strong>Vision</strong></p>",
+                "text": "<p><strong>Our Vision</strong></p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -271,7 +271,7 @@
                 "letter_spacing": "normal",
                 "case": "none",
                 "wrap": "pretty",
-                "text_color": "",
+                "text_color": "#000000",
                 "background": false,
                 "background_color": "#00000026",
                 "corner_radius": 0,
@@ -285,7 +285,7 @@
             "text_QhjgxY": {
               "type": "text",
               "settings": {
-                "text": "<p>At Ostruce, we envision a world where people live together in peace and unity, linked by a sustainable ecosystem nurtured by mindfulness, gratitude, and empathy. We aim to enjoy nature's many gifts, especially the organic, halal wonders like the Ostrich, and get the most out of them, ensuring a cruelty-free process. With the motto \"Farq Tou Parta Hai\" (Every Step Counts), we hope that our work will serve as a means of sowing the seeds of positive change in the world.</p>",
+                "text": "<p>At Asar Wellness, we believe true wellness flows from harmony between mind, body, and nature. Our vision is to create a community where holistic health is accessible to all, rooted in the wisdom of natural remedies and mindful living. We are committed to sourcing the finest organic, ethically-harvested ingredients and crafting products that nourish without compromise. Through every choice we make, we honour both the earth that sustains us and the wellbeing of those we serve. Our mission is simple: to inspire transformative wellness that ripples outward, touching lives and communities with genuine care.</p>",
                 "width": "fit-content",
                 "max_width": "none",
                 "alignment": "left",
@@ -394,7 +394,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<p><strong>Mission</strong></p>",
+                "text": "<p><strong>Our Mission</strong></p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -405,7 +405,7 @@
                 "letter_spacing": "normal",
                 "case": "none",
                 "wrap": "pretty",
-                "text_color": "",
+                "text_color": "#000000",
                 "background": false,
                 "background_color": "#00000026",
                 "corner_radius": 0,
@@ -419,7 +419,7 @@
             "text_CmXY3Y": {
               "type": "text",
               "settings": {
-                "text": "<p>We promote sustainable lifestyles through Ostruce's diverse array of premium nature-based products. Our commitment to environmental harmony compels us to create one-of-a-kind products from nature. From innovative pain relief to personal care, our eco-friendly and responsible sourcing is evident in every product using our signature Ostrich Oil. This precious elixir, extracted with great care, has numerous benefits that enrich lives. Hence, we envision a world in which luxury and ecological sustainability coexist.</p>",
+                "text": "<p>At Asar Wellness, we believe true wellness comes from nature. We craft premium, sustainable products that honor both your body and our planet. Rooted in traditional wisdom and modern science, each product reflects our commitment to purity, responsibility, and environmental care. We envision a world where wellness and sustainability thrive together—where every choice supports healthier lives and a healthier earth.</p>",
                 "width": "fit-content",
                 "max_width": "none",
                 "alignment": "left",
@@ -454,7 +454,7 @@
             "link": "",
             "image_ratio": "square",
             "width": "custom",
-            "custom_width": 60,
+            "custom_width": 70,
             "width_mobile": "fill",
             "custom_width_mobile": 100,
             "height": "fit",
