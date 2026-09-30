@@ -98,11 +98,47 @@
             "custom_question_color": ""
           }
         },
-        "faq_item_nhdrFx": {
+        "faq_item_KbbVHD": {
           "type": "faq_item",
           "settings": {
-            "question": "Are the ingredients 100% natural and safe for daily use?",
-            "answer": "Absolutely. Every bottle contains 100% pure botanical oils and lipid extracts, free of NSAIDs, steroids, mineral oil, artificial scents, or parabens. It is non-habit forming and designed for continuous daily therapy.",
+            "question": "Is Enhanced Ostrich Oil safe for daily use?",
+            "answer": "Yes. It is 100% natural, steroid-free, and suitable for all ages. It can be applied multiple times a day.",
+            "open_by_default": false,
+            "custom_question_color": ""
+          }
+        },
+        "faq_item_cKFFP4": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can Enhanced Ostrich Oil help with joint pain and arthritis?",
+            "answer": "Yes, it helps soothe sore muscles, stiff joints, and aches associated with conditions such as arthritis and muscle strains. Consulting a healthcare professional is recommended for individual needs.",
+            "open_by_default": false,
+            "custom_question_color": ""
+          }
+        },
+        "faq_item_khWAfK": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How quickly can I expect to feel relief?",
+            "answer": "Most customers notice an immediate cooling and soothing sensation within 2 to 3 minutes of application, followed by deeper therapeutic warmth and muscle ease around 15 minutes.",
+            "open_by_default": false,
+            "custom_question_color": ""
+          }
+        },
+        "faq_item_iCc8b8": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What makes Asar Wellness  Ostrich Oil unique?",
+            "answer": "It is a 100% natural formula enriched with Omega 3-6-9 and infused with Capsicum Oleoresin, Wintergreen, and Eucalyptus oils to ease pain, stiffness, and inflammation.",
+            "open_by_default": false,
+            "custom_question_color": ""
+          }
+        },
+        "faq_item_a4pEVg": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Where can I buy Asar products?",
+            "answer": "You can shop directly asarwellness.com with delivery options nationwide.",
             "open_by_default": false,
             "custom_question_color": ""
           }
@@ -113,7 +149,11 @@
         "faq_item_4pEaph",
         "faq_item_P3dyrn",
         "faq_item_9NbecX",
-        "faq_item_nhdrFx"
+        "faq_item_KbbVHD",
+        "faq_item_cKFFP4",
+        "faq_item_khWAfK",
+        "faq_item_iCc8b8",
+        "faq_item_a4pEVg"
       ],
       "name": "FAQ Accordion",
       "settings": {
