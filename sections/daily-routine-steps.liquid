@@ -48,77 +48,255 @@
     margin: 0 auto;
   }
 
-  /* Routine Cards */
+  /* Routine Cards Grid */
+  #shopify-section-{{ section.id }} .hb-routine-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 24px !important;
+    margin-top: 48px !important;
+  }
+
+  /* Horizontal Routine Card */
   #shopify-section-{{ section.id }} .hb-routine-card {
-    background-color: {{ section.settings.card_bg | default: '#ffffff' }};
-    border-radius: {{ section.settings.card_radius | default: 16 }}px;
-    border: 1px solid {{ section.settings.card_border_color | default: '#e5e7eb' }};
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: stretch !important;
+    justify-content: space-between !important;
+    min-height: 165px !important;
+    background-color: {{ section.settings.card_bg | default: '#fafbfa' }} !important;
+    border-radius: {{ section.settings.card_radius | default: 16 }}px !important;
+    border: 1px solid {{ section.settings.card_border_color | default: '#eef0ee' }} !important;
+    overflow: hidden !important;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
     {% if section.settings.card_shadow %}
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.03) !important;
     {% else %}
-      box-shadow: none;
+      box-shadow: none !important;
     {% endif %}
-    overflow: hidden;
-    transition: all 0.3s ease;
   }
 
   #shopify-section-{{ section.id }} .hb-routine-card:hover {
-    transform: translateY(-4px);
-    border-color: {{ section.settings.card_hover_border_color | default: '#257942' }};
+    transform: translateY(-3px) !important;
+    border-color: {{ section.settings.card_hover_border_color | default: '#257942' }} !important;
     {% if section.settings.card_shadow %}
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08) !important;
     {% endif %}
   }
 
-  {% unless section.settings.img_hover_zoom %}
-    #shopify-section-{{ section.id }} .hb-routine-card:hover .hb-routine-img img {
-      transform: none !important;
-    }
-  {% endunless %}
+  /* Left Side: Body & Typography */
+  #shopify-section-{{ section.id }} .hb-routine-body {
+    flex: 1 1 58% !important;
+    padding: 22px 18px 22px 24px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    text-align: left !important;
+  }
+
+  #shopify-section-{{ section.id }} .hb-routine-card-header {
+    display: flex !important;
+    align-items: baseline !important;
+    gap: 8px !important;
+    margin-bottom: 8px !important;
+  }
 
   #shopify-section-{{ section.id }} .hb-routine-step-num {
-    color: {{ section.settings.step_num_color | default: '#257942' }};
-    font-size: {{ section.settings.step_num_size | default: 14 }}px;
-    font-weight: 800;
-    letter-spacing: 0.06em;
+    color: {{ section.settings.step_num_color | default: '#257942' }} !important;
+    font-size: {{ section.settings.step_num_size | default: 14 }}px !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.06em !important;
+    text-transform: uppercase !important;
+    line-height: 1.2 !important;
+    flex-shrink: 0 !important;
   }
 
   #shopify-section-{{ section.id }} .hb-routine-title {
-    color: {{ section.settings.step_title_color | default: '#111827' }};
-    font-size: {{ section.settings.step_title_size | default: 18 }}px;
-    font-weight: 700;
+    color: {{ section.settings.step_title_color | default: '#111827' }} !important;
+    font-size: {{ section.settings.step_title_size | default: 15 }}px !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.06em !important;
+    text-transform: uppercase !important;
+    margin: 0 !important;
+    line-height: 1.2 !important;
   }
 
   #shopify-section-{{ section.id }} .hb-routine-desc {
-    color: {{ section.settings.step_desc_color | default: '#4b5563' }};
-    font-size: {{ section.settings.step_desc_size | default: 14 }}px;
-    line-height: 1.55;
+    color: {{ section.settings.step_desc_color | default: '#6b7280' }} !important;
+    font-size: {{ section.settings.step_desc_size | default: 13.5 }}px !important;
+    line-height: 1.5 !important;
+    margin: 0 !important;
   }
 
-  /* Trust Bar */
-  #shopify-section-{{ section.id }} .hb-routine-trust-bar {
-    background-color: {{ section.settings.trust_bar_bg | default: '#e8f5e9' }};
-    border-radius: {{ section.settings.trust_bar_radius | default: 50 }}px;
+  /* Right Side: Visual Image & Media */
+  #shopify-section-{{ section.id }} .hb-routine-visual {
+    flex: 0 0 42% !important;
+    max-width: 44% !important;
+    height: 100% !important;
+    min-height: 100% !important;
+    position: relative !important;
+    overflow: hidden !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
   }
 
-  #shopify-section-{{ section.id }} .hb-routine-trust-item {
-    color: {{ section.settings.trust_bar_color | default: '#1b5e20' }};
-    font-size: {{ section.settings.trust_bar_size | default: 14 }}px;
-    font-weight: 700;
+  #shopify-section-{{ section.id }} .hb-routine-visual.hb-routine-visual--img {
+    aspect-ratio: auto !important;
+    background-color: #f7f9f7 !important;
   }
 
-  #shopify-section-{{ section.id }} .hb-routine-trust-item svg {
-    color: {{ section.settings.trust_bar_icon_color | default: '#257942' }};
-    stroke: currentColor;
+  #shopify-section-{{ section.id }} .hb-routine-visual img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    border-top-right-radius: inherit !important;
+    border-bottom-right-radius: inherit !important;
+    transition: transform 0.4s ease !important;
+  }
+
+  {% if section.settings.img_hover_zoom %}
+    #shopify-section-{{ section.id }} .hb-routine-card:hover .hb-routine-visual img {
+      transform: scale(1.06) !important;
+    }
+  {% endif %}
+
+  /* Morning & Evening Badge Visual */
+  #shopify-section-{{ section.id }} .hb-routine-badges-col {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 12px !important;
+    width: 100% !important;
+    height: 100% !important;
+    padding: 12px !important;
+    background-color: rgba(37, 121, 66, 0.03) !important;
+    border-top-right-radius: inherit !important;
+    border-bottom-right-radius: inherit !important;
+  }
+
+  #shopify-section-{{ section.id }} .hb-routine-badge-item {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 4px !important;
+  }
+
+  #shopify-section-{{ section.id }} .hb-routine-badge-label {
+    font-size: 10px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase !important;
+    color: {{ section.settings.step_num_color | default: '#257942' }} !important;
+  }
+
+  #shopify-section-{{ section.id }} .hb-routine-badge-circle {
+    width: 42px !important;
+    height: 42px !important;
+    border-radius: 50% !important;
+    border: 2px solid {{ section.settings.step_num_color | default: '#257942' }} !important;
+    background-color: #ffffff !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    color: {{ section.settings.step_num_color | default: '#257942' }} !important;
+    box-shadow: 0 2px 8px rgba(37, 121, 66, 0.12) !important;
+    transition: all 0.25s ease !important;
+  }
+
+  #shopify-section-{{ section.id }} .hb-routine-card:hover .hb-routine-badge-circle {
+    transform: scale(1.08) !important;
+    border-color: {{ section.settings.card_hover_border_color | default: '#257942' }} !important;
+  }
+
+  #shopify-section-{{ section.id }} .hb-routine-badge-circle svg {
+    width: 20px !important;
+    height: 20px !important;
+    stroke: currentColor !important;
+  }
+
+  /* Bottom Precautions / Safety Notes Row */
+  #shopify-section-{{ section.id }} .hb-routine-precautions {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 40px !important;
+    margin-top: 44px !important;
+    flex-wrap: wrap !important;
+    padding: 0 16px !important;
+  }
+
+  #shopify-section-{{ section.id }} .hb-routine-precaution-item {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    font-size: {{ section.settings.trust_bar_size | default: 14 }}px !important;
+    font-weight: 500 !important;
+    color: {{ section.settings.trust_bar_color | default: '#4b5563' }} !important;
+    line-height: 1.4 !important;
+  }
+
+  #shopify-section-{{ section.id }} .hb-routine-precaution-icon {
+    width: 22px !important;
+    height: 22px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    color: {{ section.settings.trust_bar_icon_color | default: '#257942' }} !important;
+    flex-shrink: 0 !important;
+  }
+
+  #shopify-section-{{ section.id }} .hb-routine-precaution-icon svg {
+    width: 20px !important;
+    height: 20px !important;
+    stroke: currentColor !important;
+  }
+
+  @media (max-width: 990px) {
+    #shopify-section-{{ section.id }} .hb-routine-grid {
+      grid-template-columns: 1fr !important;
+      gap: 18px !important;
+      max-width: 580px !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+    }
+    #shopify-section-{{ section.id }} .hb-routine-card {
+      min-height: 140px !important;
+    }
+    #shopify-section-{{ section.id }} .hb-routine-precautions {
+      gap: 24px !important;
+      margin-top: 32px !important;
+    }
+  }
+
+  @media (max-width: 540px) {
+    #shopify-section-{{ section.id }} .hb-routine-body {
+      padding: 16px 14px 16px 16px !important;
+    }
+    #shopify-section-{{ section.id }} .hb-routine-card-header {
+      gap: 6px !important;
+      margin-bottom: 6px !important;
+    }
+    #shopify-section-{{ section.id }} .hb-routine-desc {
+      font-size: 13px !important;
+    }
+    #shopify-section-{{ section.id }} .hb-routine-precautions {
+      flex-direction: column !important;
+      align-items: flex-start !important;
+      gap: 12px !important;
+      width: fit-content !important;
+      margin: 28px auto 0 !important;
+    }
   }
 {%- endstyle -%}
 
 <section class="hb-routine-section" id="routine" style="background-color: {{ section.settings.background_color | default: '#ffffff' }}; padding-top: {{ section.settings.padding_top | default: 88 }}px; padding-bottom: {{ section.settings.padding_bottom | default: 88 }}px;">
-  <div class=hb-container>
+  <div class="hb-container">
     {% if section.settings.heading != blank or section.settings.eyebrow != blank %}
-      <div class=hb-section-header>
+      <div class="hb-section-header">
         {% if section.settings.eyebrow != blank %}
-          <span class=hb-eyebrow>{{ section.settings.eyebrow }}</span>
+          <span class="hb-eyebrow">{{ section.settings.eyebrow }}</span>
         {% endif %}
         {% if section.settings.heading != blank %}
           <h2>{{ section.settings.heading }}</h2>
@@ -129,30 +307,67 @@
       </div>
     {% endif %}
 
-    <div class=hb-routine-grid>
+    <div class="hb-routine-grid">
       {% for block in section.blocks %}
         {% if block.type == 'step' %}
           {%- assign blk_num_color = block.settings.custom_step_color | default: section.settings.step_num_color | default: '#257942' -%}
           {%- assign blk_title_color = block.settings.custom_title_color | default: section.settings.step_title_color | default: '#111827' -%}
-          <div class=hb-routine-card {{ block.shopify_attributes }}>
-            <div class=hb-routine-body>
-              {% if block.settings.step_number != blank %}
-                <span class=hb-routine-step-num style="color: {{ blk_num_color }};">{{ block.settings.step_number }}</span>
-              {% endif %}
-              {% if block.settings.title != blank %}
-                <h3 class=hb-routine-title style="color: {{ blk_title_color }};">{{ block.settings.title }}</h3>
-              {% endif %}
+          {%- assign step_display = block.settings.step_number | remove: 'STEP ' | remove: 'Step ' | remove: 'step ' -%}
+          <div class="hb-routine-card" {{ block.shopify_attributes }}>
+            <div class="hb-routine-body">
+              <div class="hb-routine-card-header">
+                {% if block.settings.step_number != blank %}
+                  <span class="hb-routine-step-num" style="color: {{ blk_num_color }};">{{ step_display }}</span>
+                {% endif %}
+                {% if block.settings.title != blank %}
+                  <h3 class="hb-routine-title" style="color: {{ blk_title_color }};">{{ block.settings.title }}</h3>
+                {% endif %}
+              </div>
               {% if block.settings.description != blank %}
-                <p class=hb-routine-desc>{{ block.settings.description }}</p>
+                <p class="hb-routine-desc">{{ block.settings.description }}</p>
               {% endif %}
             </div>
-            <div class=hb-routine-img>
-              {% if block.settings.image != blank %}
-                {{ block.settings.image | image_url: width: 600 | image_tag: loading: 'lazy', alt: block.settings.title, width: 400, height: 400 }}
-              {% elsif block.settings.fallback_image != blank %}
-                <img src="{{ block.settings.fallback_image | asset_url }}" alt="{{ block.settings.title | escape }}" width="400" height="400" loading="lazy">
-              {% endif %}
-            </div>
+
+            {% if block.settings.visual_type == 'morning_evening' %}
+              <div class="hb-routine-visual hb-routine-visual--badges">
+                <div class="hb-routine-badges-col">
+                  <div class="hb-routine-badge-item">
+                    <span class="hb-routine-badge-label">{{ block.settings.morning_label | default: 'MORNING' }}</span>
+                    <div class="hb-routine-badge-circle">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                      </svg>
+                    </div>
+                  </div>
+                  <div class="hb-routine-badge-item">
+                    <span class="hb-routine-badge-label">{{ block.settings.evening_label | default: 'EVENING' }}</span>
+                    <div class="hb-routine-badge-circle">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                        <path d="M19 3v4"></path>
+                        <path d="M21 5h-4"></path>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% else %}
+              <div class="hb-routine-visual hb-routine-visual--img">
+                {% if block.settings.image != blank %}
+                  {{ block.settings.image | image_url: width: 500 | image_tag: loading: 'lazy', alt: block.settings.title, width: 260, height: 260 }}
+                {% elsif block.settings.fallback_image != blank %}
+                  <img src="{{ block.settings.fallback_image | asset_url }}" alt="{{ block.settings.title | escape }}" width="260" height="260" loading="lazy">
+                {% endif %}
+              </div>
+            {% endif %}
           </div>
         {% endif %}
       {% endfor %}
@@ -160,18 +375,50 @@
 
     {% if section.settings.show_trust_bar %}
       {% assign trust_points = section.blocks | where: "type", "trust_point" %}
-      {% if trust_points.size > 0 %}
-        <div class=hb-routine-trust-bar>
+      <div class="hb-routine-precautions">
+        {% if trust_points.size > 0 %}
           {% for block in trust_points %}
-            {%- assign item_text_color = block.settings.custom_color | default: section.settings.trust_bar_color | default: '#1b5e20' -%}
+            {%- assign item_text_color = block.settings.custom_color | default: section.settings.trust_bar_color | default: '#4b5563' -%}
             {%- assign item_icon_color = block.settings.custom_icon_color | default: section.settings.trust_bar_icon_color | default: '#257942' -%}
-            <div class=hb-routine-trust-item style="color: {{ item_text_color }};" {{ block.shopify_attributes }}>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="color: {{ item_icon_color }};"><polyline points="20 6 9 17 4 12"/></svg>
+            <div class="hb-routine-precaution-item" style="color: {{ item_text_color }};" {{ block.shopify_attributes }}>
+              <span class="hb-routine-precaution-icon" style="color: {{ item_icon_color }};">
+                {% case block.settings.icon %}
+                  {% when 'target' %}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1"/></svg>
+                  {% when 'prohibited' %}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+                  {% when 'check' %}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  {% when 'leaf' %}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+                  {% else %}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                {% endcase %}
+              </span>
               <span>{{ block.settings.text }}</span>
             </div>
           {% endfor %}
-        </div>
-      {% endif %}
+        {% else %}
+          <div class="hb-routine-precaution-item">
+            <span class="hb-routine-precaution-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </span>
+            <span>For external use only.</span>
+          </div>
+          <div class="hb-routine-precaution-item">
+            <span class="hb-routine-precaution-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1"/></svg>
+            </span>
+            <span>Patch test before first use.</span>
+          </div>
+          <div class="hb-routine-precaution-item">
+            <span class="hb-routine-precaution-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+            </span>
+            <span>Avoid eyes and broken skin.</span>
+          </div>
+        {% endif %}
+      </div>
     {% endif %}
   </div>
 </section>
@@ -188,7 +435,7 @@
       "type": "text",
       "id": "eyebrow",
       "label": "Eyebrow Text",
-      "default": "EASY 3 STEPS"
+      "default": "HOW TO USE"
     },
     {
       "type": "color",
@@ -241,8 +488,8 @@
     {
       "type": "textarea",
       "id": "subheading",
-      "label": "Subheading",
-      "default": "Incorporate soothing botanical nourishment into your morning routine or post-work relaxation in three effortless steps."
+      "label": "Subheading (Optional)",
+      "default": ""
     },
     {
       "type": "color",
@@ -268,13 +515,13 @@
       "type": "color",
       "id": "card_bg",
       "label": "Card Background Color",
-      "default": "#ffffff"
+      "default": "#fafbfa"
     },
     {
       "type": "color",
       "id": "card_border_color",
       "label": "Card Border Color",
-      "default": "#e5e7eb"
+      "default": "#eef0ee"
     },
     {
       "type": "color",
@@ -311,14 +558,14 @@
     {
       "type": "color",
       "id": "step_num_color",
-      "label": "Step Number Color (e.g. STEP 01)",
+      "label": "Step Number Color (e.g. 01)",
       "default": "#257942"
     },
     {
       "type": "range",
       "id": "step_num_size",
       "min": 11,
-      "max": 20,
+      "max": 22,
       "step": 1,
       "unit": "px",
       "label": "Step Number Font Size",
@@ -327,24 +574,24 @@
     {
       "type": "color",
       "id": "step_title_color",
-      "label": "Step Title Color",
+      "label": "Step Title Color (e.g. APPLY)",
       "default": "#111827"
     },
     {
       "type": "range",
       "id": "step_title_size",
-      "min": 14,
-      "max": 26,
+      "min": 13,
+      "max": 24,
       "step": 1,
       "unit": "px",
       "label": "Step Title Font Size",
-      "default": 18
+      "default": 15
     },
     {
       "type": "color",
       "id": "step_desc_color",
       "label": "Step Description Color",
-      "default": "#4b5563"
+      "default": "#6b7280"
     },
     {
       "type": "range",
@@ -358,41 +605,25 @@
     },
     {
       "type": "header",
-      "content": "Trust Points / Features Bar"
+      "content": "Precautions / Safety Notes Bar"
     },
     {
       "type": "checkbox",
       "id": "show_trust_bar",
-      "label": "Show Trust Points Bar",
+      "label": "Show Precautions / Safety Notes",
       "default": true
     },
     {
       "type": "color",
-      "id": "trust_bar_bg",
-      "label": "Trust Bar Background Color",
-      "default": "#e8f5e9"
-    },
-    {
-      "type": "color",
       "id": "trust_bar_color",
-      "label": "Trust Bar Text Color",
-      "default": "#1b5e20"
+      "label": "Notes Text Color",
+      "default": "#4b5563"
     },
     {
       "type": "color",
       "id": "trust_bar_icon_color",
-      "label": "Trust Bar Checkmark Icon Color",
+      "label": "Notes Icon Color",
       "default": "#257942"
-    },
-    {
-      "type": "range",
-      "id": "trust_bar_radius",
-      "min": 0,
-      "max": 50,
-      "step": 2,
-      "unit": "px",
-      "label": "Trust Bar Border Radius",
-      "default": 50
     },
     {
       "type": "range",
@@ -401,7 +632,7 @@
       "max": 18,
       "step": 1,
       "unit": "px",
-      "label": "Trust Bar Font Size",
+      "label": "Notes Font Size",
       "default": 14
     },
     {
@@ -444,19 +675,35 @@
           "type": "text",
           "id": "step_number",
           "label": "Step Number",
-          "default": "STEP 01"
+          "default": "01"
         },
         {
           "type": "text",
           "id": "title",
           "label": "Step Title",
-          "default": "Apply"
+          "default": "APPLY"
         },
         {
           "type": "textarea",
           "id": "description",
           "label": "Instructions / Description",
-          "default": "Dispense 3 to 5 drops directly onto the targeted joint, shoulder, lower back, or muscle area."
+          "default": "Apply a small amount to the area that needs attention."
+        },
+        {
+          "type": "select",
+          "id": "visual_type",
+          "label": "Visual Type",
+          "options": [
+            {
+              "value": "image",
+              "label": "Small Image / Photo"
+            },
+            {
+              "value": "morning_evening",
+              "label": "Morning & Evening Badges"
+            }
+          ],
+          "default": "image"
         },
         {
           "type": "image_picker",
@@ -468,6 +715,18 @@
           "id": "fallback_image",
           "label": "Theme Asset Filename",
           "default": "routine-step-apply.jpg"
+        },
+        {
+          "type": "text",
+          "id": "morning_label",
+          "label": "Morning Label (For Badges visual)",
+          "default": "MORNING"
+        },
+        {
+          "type": "text",
+          "id": "evening_label",
+          "label": "Evening Label (For Badges visual)",
+          "default": "EVENING"
         },
         {
           "type": "color",
@@ -483,13 +742,41 @@
     },
     {
       "type": "trust_point",
-      "name": "Trust Feature",
+      "name": "Precaution / Safety Note",
       "settings": [
         {
           "type": "text",
           "id": "text",
-          "label": "Feature Note",
-          "default": "Fast absorption in under 90 seconds"
+          "label": "Note Text",
+          "default": "For external use only."
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            {
+              "value": "shield",
+              "label": "Shield (External use)"
+            },
+            {
+              "value": "target",
+              "label": "Target (Patch test)"
+            },
+            {
+              "value": "prohibited",
+              "label": "Prohibited (Avoid eyes/broken skin)"
+            },
+            {
+              "value": "check",
+              "label": "Checkmark"
+            },
+            {
+              "value": "leaf",
+              "label": "Botanical Leaf"
+            }
+          ],
+          "default": "shield"
         },
         {
           "type": "color",
@@ -511,46 +798,51 @@
         {
           "type": "step",
           "settings": {
-            "step_number": "STEP 01",
-            "title": "Apply",
-            "description": "Dispense 3 to 5 drops directly onto the targeted joint, shoulder, lower back, or muscle area.",
+            "step_number": "01",
+            "title": "APPLY",
+            "description": "Apply a small amount to the area that needs attention.",
+            "visual_type": "image",
             "fallback_image": "routine-step-apply.jpg"
           }
         },
         {
           "type": "step",
           "settings": {
-            "step_number": "STEP 02",
-            "title": "Massage",
-            "description": "Massage with gentle, firm circular motions for 30 to 60 seconds until absorbed completely into the skin.",
+            "step_number": "02",
+            "title": "MASSAGE",
+            "description": "Gently massage until absorbed.",
+            "visual_type": "image",
             "fallback_image": "routine-step-massage.jpg"
           }
         },
         {
           "type": "step",
           "settings": {
-            "step_number": "STEP 03",
-            "title": "Feel Relief",
-            "description": "Notice gentle therapeutic warmth and calming relief spread through tight fibers within 10 to 15 minutes.",
-            "fallback_image": "routine-step-relief.jpg"
+            "step_number": "03",
+            "title": "REPEAT",
+            "description": "Use 1-2 times daily or as needed.",
+            "visual_type": "morning_evening"
           }
         },
         {
           "type": "trust_point",
           "settings": {
-            "text": "Fast absorption in under 90 seconds"
+            "text": "For external use only.",
+            "icon": "shield"
           }
         },
         {
           "type": "trust_point",
           "settings": {
-            "text": "Non-greasy, silky finish"
+            "text": "Patch test before first use.",
+            "icon": "target"
           }
         },
         {
           "type": "trust_point",
           "settings": {
-            "text": "100% Plant-powered therapeutic aroma"
+            "text": "Avoid eyes and broken skin.",
+            "icon": "prohibited"
           }
         }
       ]

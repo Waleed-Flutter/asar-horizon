@@ -667,47 +667,76 @@
         "step_kEc96N": {
           "type": "step",
           "settings": {
-            "step_number": "STEP 01",
-            "title": "Apply",
-            "description": "Apply 5-7 drops directly to Affected Area.",
+            "step_number": "01",
+            "title": "APPLY",
+            "description": "Apply a small amount to the area that needs attention.",
             "image": "shopify://shop_images/OstrichOilProduct.jpg",
             "fallback_image": "routine-step-apply.jpg",
             "custom_step_color": "",
-            "custom_title_color": ""
+            "custom_title_color": "",
+            "visual_type": "image"
           }
         },
         "step_RYhiNy": {
           "type": "step",
           "settings": {
-            "step_number": "STEP 02",
-            "title": "Apply",
-            "description": "Massage gently for 2-3 mints using your fingertips until it's absorbed.",
-            "fallback_image": "routine-step-apply.jpg",
+            "step_number": "02",
+            "title": "MASSAGE",
+            "description": "Gently massage until absorbed.",
+            "fallback_image": "routine-step-massage.jpg",
             "custom_step_color": "",
-            "custom_title_color": ""
+            "custom_title_color": "",
+            "visual_type": "image"
           }
         },
         "step_BRdQbW": {
           "type": "step",
           "settings": {
-            "step_number": "STEP 03",
-            "title": "Apply",
-            "description": "For the better results repeats three times daily.",
+            "step_number": "03",
+            "title": "REPEAT",
+            "description": "Use 1-2 times daily or as needed.",
             "image": "shopify://shop_images/Ostrich_oil_bottle_on_savanna_2K_20260924171940.jpg",
             "fallback_image": "routine-step-apply.jpg",
             "custom_step_color": "",
-            "custom_title_color": ""
+            "custom_title_color": "",
+            "visual_type": "morning_evening",
+            "morning_label": "MORNING",
+            "evening_label": "EVENING"
+          }
+        },
+        "trust_point_1": {
+          "type": "trust_point",
+          "settings": {
+            "text": "For external use only.",
+            "icon": "shield"
+          }
+        },
+        "trust_point_2": {
+          "type": "trust_point",
+          "settings": {
+            "text": "Patch test before first use.",
+            "icon": "target"
+          }
+        },
+        "trust_point_3": {
+          "type": "trust_point",
+          "settings": {
+            "text": "Avoid eyes and broken skin.",
+            "icon": "prohibited"
           }
         }
       },
       "block_order": [
         "step_kEc96N",
         "step_RYhiNy",
-        "step_BRdQbW"
+        "step_BRdQbW",
+        "trust_point_1",
+        "trust_point_2",
+        "trust_point_3"
       ],
       "settings": {
-        "eyebrow": "How to use",
-        "eyebrow_color": "#7a2a2b",
+        "eyebrow": "HOW TO USE",
+        "eyebrow_color": "#257942",
         "eyebrow_size": 13,
         "heading": "Simple Enough for Every Day.",
         "heading_color": "#111827",
@@ -716,13 +745,13 @@
         "subheading": "",
         "subheading_color": "#4b5563",
         "subheading_size": 16,
-        "card_bg": "#ffffff",
-        "card_border_color": "#e5e7eb",
-        "card_hover_border_color": "#7a2a2b",
+        "card_bg": "#fafbfa",
+        "card_border_color": "#eef0ee",
+        "card_hover_border_color": "#257942",
         "card_radius": 16,
         "card_shadow": true,
         "img_hover_zoom": true,
-        "step_num_color": "#7a2a2b",
+        "step_num_color": "#257942",
         "step_num_size": 14,
         "step_title_color": "#111827",
         "step_title_size": 18,
@@ -730,7 +759,7 @@
         "step_desc_size": 14,
         "show_trust_bar": true,
         "trust_bar_bg": "#e8f5e9",
-        "trust_bar_color": "#1b5e20",
+        "trust_bar_color": "#4b5563",
         "trust_bar_icon_color": "#257942",
         "trust_bar_radius": 50,
         "trust_bar_size": 14,
