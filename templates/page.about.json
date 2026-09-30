@@ -19,10 +19,36 @@
             "text": "<h1>{{ closest.page.title }}</h1>",
             "width": "100%",
             "max_width": "normal",
-            "alignment": "left",
+            "alignment": "center",
             "type_preset": "h2",
             "font": "var(--font-body--family)",
             "font_size": "",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "text_color": "#000000",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "text_Rb9XGb": {
+          "type": "text",
+          "name": "t:names.text",
+          "settings": {
+            "text": "",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "rte",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
             "line_height": "normal",
             "letter_spacing": "normal",
             "case": "none",
@@ -48,6 +74,7 @@
       },
       "block_order": [
         "heading",
+        "text_Rb9XGb",
         "page-content"
       ],
       "settings": {
@@ -55,35 +82,12 @@
         "gap": 32,
         "background_color": "",
         "padding-block-start": 40,
-        "padding-block-end": 80
+        "padding-block-end": 0
       }
     },
     "section_Adp9EG": {
       "type": "section",
       "blocks": {
-        "image_FjXLnf": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/OstrichOilProduct.jpg",
-            "link": "",
-            "image_ratio": "square",
-            "width": "custom",
-            "custom_width": 100,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fit",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_color": "",
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        },
         "group_3CDQgE": {
           "type": "group",
           "settings": {
@@ -123,7 +127,136 @@
             "padding-inline-end": 0
           },
           "blocks": {
-            "text_Yxx6Re": {
+            "text_Ckxyn7": {
+              "type": "text",
+              "settings": {
+                "text": "<p>At <strong>ASAR Holistic Wellness</strong>, we believe that true well-being begins where the outside world fades and you reconnect with yourself. In a fast-paced world that constantly asks you to move quicker, we serve as your daily anchor for holistic alignment..</p><p>We are dedicated to redefining health and personal care through intelligent formulation. By uniting ancient traditions with modern momentum, we create a sacred space where your mind, body, and spirit can thrive in every season</p>",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "center",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "#000000",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "text_Ckxyn7"
+          ]
+        }
+      },
+      "block_order": [
+        "group_3CDQgE"
+      ],
+      "name": "t:names.image_with_text",
+      "settings": {
+        "content_direction": "row",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 32,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "background_media": "none",
+        "background_color": "",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_color": "",
+        "border_radius": 0,
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "section_hkirFW": {
+      "type": "section",
+      "blocks": {
+        "image_kKJtzz": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/OstrichOilProduct.jpg",
+            "link": "",
+            "image_ratio": "square",
+            "width": "custom",
+            "custom_width": 60,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 14,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "group_q4XXqj": {
+          "type": "group",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 12,
+            "width": "custom",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "background_media": "none",
+            "background_color": "",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 0,
+            "link": "",
+            "open_in_new_tab": false,
+            "placeholder": "",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "text_f8mYcC": {
               "type": "text",
               "name": "t:names.heading",
               "settings": {
@@ -149,7 +282,7 @@
               },
               "blocks": {}
             },
-            "text_Ckxyn7": {
+            "text_QhjgxY": {
               "type": "text",
               "settings": {
                 "text": "<p>At Ostruce, we envision a world where people live together in peace and unity, linked by a sustainable ecosystem nurtured by mindfulness, gratitude, and empathy. We aim to enjoy nature's many gifts, especially the organic, halal wonders like the Ostrich, and get the most out of them, ensuring a cruelty-free process. With the motto \"Farq Tou Parta Hai\" (Every Step Counts), we hope that our work will serve as a means of sowing the seeds of positive change in the world.</p>",
@@ -176,14 +309,171 @@
             }
           },
           "block_order": [
-            "text_Yxx6Re",
-            "text_Ckxyn7"
+            "text_f8mYcC",
+            "text_QhjgxY"
           ]
         }
       },
       "block_order": [
-        "image_FjXLnf",
-        "group_3CDQgE"
+        "image_kKJtzz",
+        "group_q4XXqj"
+      ],
+      "name": "t:names.image_with_text",
+      "settings": {
+        "content_direction": "row",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 32,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "background_media": "none",
+        "background_color": "",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_color": "",
+        "border_radius": 0,
+        "padding-block-start": 40,
+        "padding-block-end": 40
+      }
+    },
+    "section_Ed8dKU": {
+      "type": "section",
+      "blocks": {
+        "group_xhE6h9": {
+          "type": "group",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 12,
+            "width": "custom",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "background_media": "none",
+            "background_color": "",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 0,
+            "link": "",
+            "open_in_new_tab": false,
+            "placeholder": "",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "text_mmPnkG": {
+              "type": "text",
+              "name": "t:names.heading",
+              "settings": {
+                "text": "<p><strong>Mission</strong></p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "h3",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "text_CmXY3Y": {
+              "type": "text",
+              "settings": {
+                "text": "<p>We promote sustainable lifestyles through Ostruce's diverse array of premium nature-based products. Our commitment to environmental harmony compels us to create one-of-a-kind products from nature. From innovative pain relief to personal care, our eco-friendly and responsible sourcing is evident in every product using our signature Ostrich Oil. This precious elixir, extracted with great care, has numerous benefits that enrich lives. Hence, we envision a world in which luxury and ecological sustainability coexist.</p>",
+                "width": "fit-content",
+                "max_width": "none",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "#000000",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "text_mmPnkG",
+            "text_CmXY3Y"
+          ]
+        },
+        "image_MW89k9": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/OstrichOilProduct.jpg",
+            "link": "",
+            "image_ratio": "square",
+            "width": "custom",
+            "custom_width": 60,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 14,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "group_xhE6h9",
+        "image_MW89k9"
       ],
       "name": "t:names.image_with_text",
       "settings": {
@@ -215,93 +505,122 @@
         "padding-block-end": 40
       }
     },
-    "section_7EExVA": {
-      "type": "section",
+    "why_choose_grid_zrmEM8": {
+      "type": "why-choose-grid",
       "blocks": {
-        "text_7m9WCJ": {
-          "type": "text",
-          "name": "t:names.text",
+        "benefit_PatMG3": {
+          "type": "benefit",
           "settings": {
-            "text": "<p></p><p><strong>Mission</strong></p><p>We promote sustainable lifestyles through Ostruce's diverse array of premium nature-based products. Our commitment to environmental harmony compels us to create one-of-a-kind products from nature. From innovative pain relief to personal care, our eco-friendly and responsible sourcing is evident in every product using our signature Ostrich Oil. This precious elixir, extracted with great care, has numerous benefits that enrich lives. Hence, we envision a world in which luxury and ecological sustainability coexist.</p><p>Our determination and hard work have earned us the trust of over 100,000 customers.</p><p><em><strong>Our Story \"Farq Tou Parta Hai\" Starts Here</strong></em></p><p>In Pakistan, a visionary named Mr. Shahid Jamal Kazi discovered a forgotten secret of nature. It's a tale about an extraordinary bird, the Ostrich, that could change an entire community's land and lives.</p><p>Mr. Kazi's fascination with the Ostrich began as he stumbled upon ancient manuscripts explaining Ostrich's grace, resilience, and mystical aura. He saw an opportunity to rewrite history, to weave a new narrative that intertwined humans and Ostriches in harmonious coexistence. He viewed Ostriches as partners in sustainability and prosperity, not just wildlife. He worked tirelessly to change the perception of these majestic birds, from exotic creatures to community members. Hence, he successfully legalized Ostrich Farming in 2012. This landmark decision reclassified Ostriches as livestock, opening new possibilities. Since then, we have been the leading market player and have played a vital role in manufacturing and marketing ostrich products nationwide, including ostrich meat, feathers, ostrich leather products, and ostrich oil, which was a byproduct initially.&nbsp;</p><p>He passed his leadership to his visionary son, Mr. Ahmad Shahid Kazi, who innovates and excels at building on his predecessor's work. With an extraordinary team, he founded Ostruce, symbolizing the unity of nature and human endeavor.</p><p>Even after 12 years of hard work, our goal of creating a market for organic products and empowering farmers and the entire supply chain remains unchanged. As a result, we can help them adopt sustainable farming methods and transition to a cooperative structure while providing them with humane guidance on caring for their livestock. Yet, we are proud to share that the Ostrich Oil used in Ostruce products is Halal Certified and prepared with strictly cruelty-free methodologies.</p><p><strong>Why do Ostruce Products work so well?</strong></p><p>When it comes to efficacy, purity matters! We produce the purest Ostrich Oil because:</p><ul><li>Ostriches are raised in a free-range environment & fed with wholesome grains</li><li>No hormones or steroids are used in them</li><li>Our R&D department tests all ingredients carefully</li><li>Our consultation team ensures you get the product only if needed.</li></ul>",
-            "width": "fit-content",
-            "max_width": "none",
-            "alignment": "left",
-            "type_preset": "rte",
-            "font": "var(--font-body--family)",
-            "font_size": "",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "text_color": "#000000",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
+            "icon": "shield",
+            "title": "Clean & Safe Formulas",
+            "description": "100% free of petroleum, mineral oil, synthetic fragrances, and artificial chemicals. Gentle enough for sensitive skin.",
+            "custom_icon_bg": "#7A2A2B",
+            "custom_icon_color": "#FEE6D4",
+            "custom_title_color": ""
+          }
         },
-        "button_BrpjbG": {
-          "type": "button",
-          "name": "t:names.button",
+        "benefit_3DeG98": {
+          "type": "benefit",
           "settings": {
-            "label": "Shop now",
-            "link": "shopify://collections/all",
-            "open_in_new_tab": false,
-            "style_class": "button",
-            "custom_button_background": "{{ settings.color_palette.foreground }}",
-            "custom_button_text": "{{ settings.color_palette.background }}",
-            "custom_button_border": "{{ settings.color_palette.background }}",
-            "link_text_color": "",
-            "width": "fit-content",
-            "custom_width": 100,
-            "width_mobile": "fit-content",
-            "custom_width_mobile": 100
-          },
-          "blocks": {}
+            "icon": "globe",
+            "title": "Transparent Sourcing",
+            "description": "Every botanical drop is traceable to ethical organic growers with batch certificates of analysis available on request.",
+            "custom_icon_bg": "#7A2A2B",
+            "custom_icon_color": "#FEE6D4",
+            "custom_title_color": ""
+          }
+        },
+        "benefit_fC4nXJ": {
+          "type": "benefit",
+          "settings": {
+            "icon": "clipboard",
+            "title": "Third-Party Tested",
+            "description": "Every single harvest is rigorously verified for purity, potency, and zero contaminants by accredited independent laboratories.",
+            "custom_icon_bg": "#7A2A2B",
+            "custom_icon_color": "#FEE6D4",
+            "custom_title_color": ""
+          }
+        },
+        "benefit_ir8JTR": {
+          "type": "benefit",
+          "settings": {
+            "icon": "box",
+            "title": "Eco-Friendly Bottling",
+            "description": "Amber UV-blocking glass preserves volatile essential plant molecules, packaged in 100% recyclable, sustainable boxes.",
+            "custom_icon_bg": "#7A2A2B",
+            "custom_icon_color": "#FEE6D4",
+            "custom_title_color": ""
+          }
+        },
+        "benefit_qjJywh": {
+          "type": "benefit",
+          "settings": {
+            "icon": "heart",
+            "title": "Cruelty-Free Always",
+            "description": "Never tested on animals. Ethically crafted with care, kindness, and deep reverence for nature and living beings.",
+            "custom_icon_bg": "#7A2A2B",
+            "custom_icon_color": "#FEE6D4",
+            "custom_title_color": ""
+          }
+        },
+        "benefit_8Kjw8G": {
+          "type": "benefit",
+          "settings": {
+            "icon": "truck",
+            "title": "Fast Reliable Shipping",
+            "description": "Orders dispatched within 24 hours in secure, discreet packaging with real-time tracking and 30-day money-back satisfaction.",
+            "custom_icon_bg": "#7A2A2B",
+            "custom_icon_color": "#FEE6D4",
+            "custom_title_color": ""
+          }
         }
       },
       "block_order": [
-        "text_7m9WCJ",
-        "button_BrpjbG"
+        "benefit_PatMG3",
+        "benefit_3DeG98",
+        "benefit_fC4nXJ",
+        "benefit_ir8JTR",
+        "benefit_qjJywh",
+        "benefit_8Kjw8G"
       ],
-      "name": "t:names.rich_text_section",
+      "name": "Why Choose Grid",
       "settings": {
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-start",
-        "vertical_alignment": "center",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "center",
-        "vertical_alignment_flex_direction_column": "center",
-        "gap": 25,
-        "section_width": "page-width",
-        "section_height": "small",
-        "section_height_custom": 50,
-        "background_media": "none",
-        "background_color": "",
-        "video_position": "cover",
-        "background_image_position": "cover",
-        "toggle_overlay": false,
-        "overlay_color": "#00000026",
-        "overlay_style": "solid",
-        "gradient_direction": "to top",
-        "border": "none",
-        "border_width": 1,
-        "border_opacity": 100,
-        "border_color": "",
-        "border_radius": 0,
-        "padding-block-start": 48,
-        "padding-block-end": 48
+        "eyebrow": "WHY ASAR",
+        "eyebrow_color": "#7A2A2B",
+        "eyebrow_size": 13,
+        "heading": "Ancient Wellness, Without the Guesswork.",
+        "heading_color": "#111827",
+        "heading_size": 38,
+        "heading_size_mobile": 28,
+        "subheading": "",
+        "subheading_color": "#4b5563",
+        "subheading_size": 16,
+        "columns_desktop": 3,
+        "card_bg": "#ffffff",
+        "card_border_color": "#e5e7eb",
+        "card_hover_border_color": "#7A2A2B",
+        "card_radius": 16,
+        "card_shadow": true,
+        "card_hover_lift": true,
+        "icon_box_bg": "#e8f5e9",
+        "icon_box_color": "#7A2A2B",
+        "icon_box_size": 48,
+        "icon_box_radius": 12,
+        "card_title_color": "#111827",
+        "card_title_size": 18,
+        "card_desc_color": "#4b5563",
+        "card_desc_size": 14,
+        "background_color": "#ffffff",
+        "padding_top": 88,
+        "padding_bottom": 88
       }
     }
   },
   "order": [
     "main",
     "section_Adp9EG",
-    "section_7EExVA"
+    "section_hkirFW",
+    "section_Ed8dKU",
+    "why_choose_grid_zrmEM8"
   ]
 }
