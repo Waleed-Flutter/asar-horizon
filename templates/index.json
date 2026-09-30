@@ -649,7 +649,7 @@
           "settings": {
             "step_number": "STEP 01",
             "title": "Apply",
-            "description": "Dispense 3 to 5 drops directly onto the targeted joint, shoulder, lower back, or muscle area.",
+            "description": "Apply 5-7 drops directly to Affected Area.",
             "image": "shopify://shop_images/OstrichOilProduct.jpg",
             "fallback_image": "routine-step-apply.jpg",
             "custom_step_color": "",
@@ -661,7 +661,7 @@
           "settings": {
             "step_number": "STEP 02",
             "title": "Apply",
-            "description": "Dispense 3 to 5 drops directly onto the targeted joint, shoulder, lower back, or muscle area.",
+            "description": "Massage gently for 2-3 mints using your fingertips until it's absorbed.",
             "fallback_image": "routine-step-apply.jpg",
             "custom_step_color": "",
             "custom_title_color": ""
@@ -672,7 +672,7 @@
           "settings": {
             "step_number": "STEP 03",
             "title": "Apply",
-            "description": "Dispense 3 to 5 drops directly onto the targeted joint, shoulder, lower back, or muscle area.",
+            "description": "For the better results repeats three times daily.",
             "image": "shopify://shop_images/Ostrich_oil_bottle_on_savanna_2K_20260924171940.jpg",
             "fallback_image": "routine-step-apply.jpg",
             "custom_step_color": "",
