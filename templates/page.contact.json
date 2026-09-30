@@ -289,7 +289,7 @@
               "type": "icon",
               "settings": {
                 "icon": "heart",
-                "image_upload": "shopify://shop_images/icons8-location-100_1.png",
+                "image_upload": "shopify://shop_images/icons8-phone-100_1.png",
                 "width": 32,
                 "link": "",
                 "open_in_new_tab": false,
@@ -465,7 +465,7 @@
                 "text_PPDkG8": {
                   "type": "text",
                   "settings": {
-                    "text": "<p>asarwellness@gmail.com<br/>03040014222<br/></p>",
+                    "text": "<p>Shafi Plaza OP Bank, P-36 Alfalah Millat Chowk, Ashrafabad, Faisalabad<br/></p>",
                     "width": "100%",
                     "max_width": "normal",
                     "alignment": "center",
@@ -541,7 +541,7 @@
               "type": "icon",
               "settings": {
                 "icon": "heart",
-                "image_upload": "shopify://shop_images/icons8-location-100_1.png",
+                "image_upload": "shopify://shop_images/icons8-clock-30.png",
                 "width": 32,
                 "link": "",
                 "open_in_new_tab": false,
@@ -552,7 +552,7 @@
             "text_tKxEDw": {
               "type": "text",
               "settings": {
-                "text": "<p>asarwellness@gmail.com<br/>03040014222<br/></p>",
+                "text": "<p>Mon – Saturday<br/>9:00 AM – 6:00 PM</p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "center",
