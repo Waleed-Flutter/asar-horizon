@@ -673,8 +673,7 @@
             "image": "shopify://shop_images/OstrichOilProduct.jpg",
             "fallback_image": "routine-step-apply.jpg",
             "custom_step_color": "",
-            "custom_title_color": "",
-            "visual_type": "image"
+            "custom_title_color": ""
           }
         },
         "step_RYhiNy": {
@@ -685,8 +684,7 @@
             "description": "Gently massage until absorbed.",
             "fallback_image": "routine-step-massage.jpg",
             "custom_step_color": "",
-            "custom_title_color": "",
-            "visual_type": "image"
+            "custom_title_color": ""
           }
         },
         "step_BRdQbW": {
@@ -698,31 +696,25 @@
             "image": "shopify://shop_images/Ostrich_oil_bottle_on_savanna_2K_20260924171940.jpg",
             "fallback_image": "routine-step-apply.jpg",
             "custom_step_color": "",
-            "custom_title_color": "",
-            "visual_type": "morning_evening",
-            "morning_label": "MORNING",
-            "evening_label": "EVENING"
+            "custom_title_color": ""
           }
         },
         "trust_point_1": {
           "type": "trust_point",
           "settings": {
-            "text": "For external use only.",
-            "icon": "shield"
+            "text": "For external use only."
           }
         },
         "trust_point_2": {
           "type": "trust_point",
           "settings": {
-            "text": "Patch test before first use.",
-            "icon": "target"
+            "text": "Patch test before first use."
           }
         },
         "trust_point_3": {
           "type": "trust_point",
           "settings": {
-            "text": "Avoid eyes and broken skin.",
-            "icon": "prohibited"
+            "text": "Avoid eyes and broken skin."
           }
         }
       },

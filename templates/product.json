@@ -394,7 +394,7 @@
                 "accordion_row_bcLcyF": {
                   "type": "_accordion-row",
                   "settings": {
-                    "heading": "Manufacturing",
+                    "heading": "Ingredients",
                     "open_by_default": false,
                     "icon": "none",
                     "width": 20
@@ -403,7 +403,7 @@
                     "text_YRekyy": {
                       "type": "text",
                       "settings": {
-                        "text": "<p>Our products are manufactured both locally and globally. We carefully select our manufacturing partners to ensure our products are high quality and a fair value.</p>",
+                        "text": "<p>The heart of Asar Pure Ostrich Oil is pure ostrich oil, prized for its intense moisturizing power and rapid absorption into the skin. Naturally rich in omega fatty acids (3, 6, and 9), it deeply nourishes while supporting joint and bone wellness. Our signature blend combines this with:<br/><br/><strong>1:</strong> Capsicum Oleoresin – enhances blood flow and circulation.<br/><br/><strong>2:</strong>Wintergreen Oil – soothes discomfort and calms inflammation.<br/><br/><strong>3: </strong>Eucalyptus Oil – eases muscle tension and promotes relaxation.<br/><br/><strong>4:</strong> Pure Ostrich Oil – the foundation of our formula.</p>",
                         "width": "100%",
                         "max_width": "normal",
                         "alignment": "left",
