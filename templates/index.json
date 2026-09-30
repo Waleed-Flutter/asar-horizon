@@ -920,7 +920,7 @@
         "card_desc_color": "#4b5563",
         "card_desc_size": 14,
         "background_color": "#ffffff",
-        "padding_top": 60,
+        "padding_top": 80,
         "padding_bottom": 20
       }
     },
