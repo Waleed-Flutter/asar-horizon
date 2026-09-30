@@ -212,8 +212,8 @@
         "cta_bg": "#7a2a2b",
         "cta_color": "#ffffff",
         "cta_border_color": "#7a2a2b",
-        "cta_hover_bg": "#5c1f20",
-        "cta_hover_color": "#ffffff",
+        "cta_hover_bg": "#FEE6D4",
+        "cta_hover_color": "#7A2A2B",
         "cta_radius": 14,
         "show_arrow": true,
         "bg_color": "#ffffff",
@@ -516,7 +516,7 @@
                   "settings": {
                     "input_style": "custom",
                     "input_background_color": "{{ settings.color_palette.background }}",
-                    "input_text_color": "#FEE6D4",
+                    "input_text_color": "#fee6d4",
                     "input_border_color": "{{ settings.color_palette.foreground }}",
                     "border_width": 1,
                     "border_radius": 0
@@ -527,10 +527,10 @@
                   "type": "add-to-cart",
                   "static": true,
                   "settings": {
-                    "style_class": "button-secondary",
+                    "style_class": "button-custom",
                     "custom_button_background": "{{ settings.color_palette.foreground }}",
                     "custom_button_text": "{{ settings.color_palette.background }}",
-                    "custom_button_border": "{{ settings.color_palette.background }}"
+                    "custom_button_border": "#7A2A2B"
                   },
                   "blocks": {}
                 },
@@ -568,14 +568,14 @@
         "padding-block-start": 40,
         "padding-block-end": 40,
         "atc_button_bg": "#7a2a2b",
-        "atc_button_color": "#FEE6D4",
+        "atc_button_color": "#fee6d4",
         "atc_button_border_color": "#7a2a2b",
-        "atc_button_hover_bg": "#FEE6D4",
-        "atc_button_hover_color": "#7A2A2B",
+        "atc_button_hover_bg": "#fee6d4",
+        "atc_button_hover_color": "#7a2a2b",
         "atc_button_radius": 14,
-        "qty_bg_color": "#7A2A2B",
+        "qty_bg_color": "#7a2a2b",
         "qty_text_color": "{{ settings.color_palette.background }}",
-        "qty_border_color": "#FEE6D4",
+        "qty_border_color": "#fee6d4",
         "qty_radius": 14,
         "variant_label_color": "#111827",
         "variant_pill_bg": "#ffffff",
