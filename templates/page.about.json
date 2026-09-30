@@ -27,6 +27,7 @@
             "letter_spacing": "normal",
             "case": "none",
             "wrap": "pretty",
+            "text_color": "#000000",
             "background": false,
             "background_color": "#00000026",
             "corner_radius": 0,
@@ -39,7 +40,9 @@
         },
         "page-content": {
           "type": "page-content",
-          "settings": {},
+          "settings": {
+            "text_color": ""
+          },
           "blocks": {}
         }
       },
@@ -50,12 +53,97 @@
       "settings": {
         "content_direction": "column",
         "gap": 32,
+        "background_color": "",
         "padding-block-start": 40,
         "padding-block-end": 80
+      }
+    },
+    "section_7EExVA": {
+      "type": "section",
+      "blocks": {
+        "text_7m9WCJ": {
+          "type": "text",
+          "name": "t:names.text",
+          "settings": {
+            "text": "<p><strong>Vision</strong></p><p>At Ostruce, we envision a world where people live together in peace and unity, linked by a sustainable ecosystem nurtured by mindfulness, gratitude, and empathy. We aim to enjoy nature's many gifts, especially the organic, halal wonders like the Ostrich, and get the most out of them, ensuring a cruelty-free process. With the motto \"Farq Tou Parta Hai\" (Every Step Counts), we hope that our work will serve as a means of sowing the seeds of positive change in the world.</p><p><strong>Mission</strong></p><p>We promote sustainable lifestyles through Ostruce's diverse array of premium nature-based products. Our commitment to environmental harmony compels us to create one-of-a-kind products from nature. From innovative pain relief to personal care, our eco-friendly and responsible sourcing is evident in every product using our signature Ostrich Oil. This precious elixir, extracted with great care, has numerous benefits that enrich lives. Hence, we envision a world in which luxury and ecological sustainability coexist.</p><p>Our determination and hard work have earned us the trust of over 100,000 customers.</p><p><em><strong>Our Story \"Farq Tou Parta Hai\" Starts Here</strong></em></p><p>In Pakistan, a visionary named Mr. Shahid Jamal Kazi discovered a forgotten secret of nature. It's a tale about an extraordinary bird, the Ostrich, that could change an entire community's land and lives.</p><p>Mr. Kazi's fascination with the Ostrich began as he stumbled upon ancient manuscripts explaining Ostrich's grace, resilience, and mystical aura. He saw an opportunity to rewrite history, to weave a new narrative that intertwined humans and Ostriches in harmonious coexistence. He viewed Ostriches as partners in sustainability and prosperity, not just wildlife. He worked tirelessly to change the perception of these majestic birds, from exotic creatures to community members. Hence, he successfully legalized Ostrich Farming in 2012. This landmark decision reclassified Ostriches as livestock, opening new possibilities. Since then, we have been the leading market player and have played a vital role in manufacturing and marketing ostrich products nationwide, including ostrich meat, feathers, ostrich leather products, and ostrich oil, which was a byproduct initially.&nbsp;</p><p>He passed his leadership to his visionary son, Mr. Ahmad Shahid Kazi, who innovates and excels at building on his predecessor's work. With an extraordinary team, he founded Ostruce, symbolizing the unity of nature and human endeavor.</p><p>Even after 12 years of hard work, our goal of creating a market for organic products and empowering farmers and the entire supply chain remains unchanged. As a result, we can help them adopt sustainable farming methods and transition to a cooperative structure while providing them with humane guidance on caring for their livestock. Yet, we are proud to share that the Ostrich Oil used in Ostruce products is Halal Certified and prepared with strictly cruelty-free methodologies.</p><p><strong>Why do Ostruce Products work so well?</strong></p><p>When it comes to efficacy, purity matters! We produce the purest Ostrich Oil because:</p><ul><li>Ostriches are raised in a free-range environment & fed with wholesome grains</li><li>No hormones or steroids are used in them</li><li>Our R&D department tests all ingredients carefully</li><li>Our consultation team ensures you get the product only if needed.</li></ul>",
+            "width": "fit-content",
+            "max_width": "none",
+            "alignment": "left",
+            "type_preset": "rte",
+            "font": "var(--font-body--family)",
+            "font_size": "",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "text_color": "#000000",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "button_BrpjbG": {
+          "type": "button",
+          "name": "t:names.button",
+          "settings": {
+            "label": "Shop now",
+            "link": "shopify://collections/all",
+            "open_in_new_tab": false,
+            "style_class": "button",
+            "custom_button_background": "{{ settings.color_palette.foreground }}",
+            "custom_button_text": "{{ settings.color_palette.background }}",
+            "custom_button_border": "{{ settings.color_palette.background }}",
+            "link_text_color": "",
+            "width": "fit-content",
+            "custom_width": 100,
+            "width_mobile": "fit-content",
+            "custom_width_mobile": 100
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "text_7m9WCJ",
+        "button_BrpjbG"
+      ],
+      "name": "t:names.rich_text_section",
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 25,
+        "section_width": "page-width",
+        "section_height": "small",
+        "section_height_custom": 50,
+        "background_media": "none",
+        "background_color": "",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_color": "",
+        "border_radius": 0,
+        "padding-block-start": 48,
+        "padding-block-end": 48
       }
     }
   },
   "order": [
-    "main"
+    "main",
+    "section_7EExVA"
   ]
 }
