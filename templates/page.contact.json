@@ -27,6 +27,7 @@
             "letter_spacing": "normal",
             "case": "none",
             "wrap": "pretty",
+            "text_color": "#000000",
             "background": false,
             "background_color": "#00000026",
             "corner_radius": 0,
@@ -52,6 +53,7 @@
             "letter_spacing": "normal",
             "case": "none",
             "wrap": "pretty",
+            "text_color": "",
             "background": false,
             "background_color": "#00000026",
             "corner_radius": 0,
@@ -70,6 +72,7 @@
       "settings": {
         "content_direction": "column",
         "gap": 32,
+        "background_color": "",
         "padding-block-start": 40,
         "padding-block-end": 0
       }
@@ -81,9 +84,16 @@
           "type": "contact-form",
           "settings": {
             "width": "custom",
-            "custom_width": 50,
+            "custom_width": 70,
             "width_mobile": "custom",
             "custom_width_mobile": 100,
+            "background_color": "",
+            "input_style": "custom",
+            "input_background_color": "#7A2A2B",
+            "input_text_color": "{{ settings.color_palette.background }}",
+            "input_border_color": "{{ settings.color_palette.foreground }}",
+            "border_width": 1,
+            "border_radius": 14,
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
@@ -95,7 +105,10 @@
               "static": true,
               "settings": {
                 "label": "Submit",
-                "style_class": "button",
+                "style_class": "button-custom",
+                "custom_button_background": "#7A2A2B",
+                "custom_button_text": "{{ settings.color_palette.background }}",
+                "custom_button_border": "{{ settings.color_palette.background }}",
                 "width": "fit-content",
                 "custom_width": 100,
                 "width_mobile": "fit-content",
@@ -124,6 +137,7 @@
         "section_height": "",
         "section_height_custom": 50,
         "background_media": "none",
+        "background_color": "",
         "video_position": "cover",
         "background_image_position": "cover",
         "toggle_overlay": false,
@@ -133,9 +147,10 @@
         "border": "none",
         "border_width": 1,
         "border_opacity": 100,
+        "border_color": "",
         "border_radius": 0,
-        "padding-block-start": 32,
-        "padding-block-end": 84
+        "padding-block-start": 52,
+        "padding-block-end": 52
       }
     }
   },
