@@ -921,7 +921,7 @@
         "card_desc_size": 14,
         "background_color": "#ffffff",
         "padding_top": 80,
-        "padding_bottom": 20
+        "padding_bottom": 80
       }
     },
     "faq_accordion": {
