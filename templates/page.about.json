@@ -197,7 +197,7 @@
         "image_kKJtzz": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/OstrichOilProduct.jpg",
+            "image": "shopify://shop_images/1.jpg",
             "link": "",
             "image_ratio": "square",
             "width": "custom",
@@ -332,7 +332,7 @@
         "section_height": "",
         "section_height_custom": 50,
         "background_media": "none",
-        "background_color": "",
+        "background_color": "#FEE6D4",
         "video_position": "cover",
         "background_image_position": "cover",
         "toggle_overlay": false,
@@ -450,7 +450,7 @@
         "image_MW89k9": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/OstrichOilProduct.jpg",
+            "image": "shopify://shop_images/Ostrich_oil_bottle_on_savanna_2K_20260924171940.jpg",
             "link": "",
             "image_ratio": "square",
             "width": "custom",
@@ -489,7 +489,7 @@
         "section_height": "",
         "section_height_custom": 50,
         "background_media": "none",
-        "background_color": "",
+        "background_color": "#FEE6D4",
         "video_position": "cover",
         "background_image_position": "cover",
         "toggle_overlay": false,
