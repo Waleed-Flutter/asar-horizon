@@ -40,7 +40,7 @@
           "static": true,
           "settings": {
             "width": "custom",
-            "custom_width": 50,
+            "custom_width": 100,
             "input_style": "custom",
             "input_background_color": "#7A2A2B",
             "input_text_color": "{{ settings.color_palette.background }}",
