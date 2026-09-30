@@ -43,7 +43,7 @@
             "slideshow_mobile_controls_style": "dots",
             "thumbnail_position": "left",
             "thumbnail_width": 72,
-            "thumbnail_radius": 15,
+            "thumbnail_radius": 14,
             "aspect_ratio": "1",
             "constrain_to_viewport": true,
             "media_fit": "contain",
@@ -247,7 +247,7 @@
                   "static": true,
                   "settings": {
                     "input_style": "custom",
-                    "input_background_color": "#7A2A2B",
+                    "input_background_color": "#7a2a2b",
                     "input_text_color": "{{ settings.color_palette.background }}",
                     "input_border_color": "{{ settings.color_palette.foreground }}",
                     "border_width": 1,
@@ -269,7 +269,16 @@
                 "accelerated-checkout": {
                   "type": "accelerated-checkout",
                   "static": true,
-                  "settings": {},
+                  "settings": {
+                    "show_checkout_button": true,
+                    "button_style": "default",
+                    "custom_button_background": "#257942",
+                    "custom_button_text": "#ffffff",
+                    "custom_button_border": "#257942",
+                    "custom_button_hover_background": "#1e6336",
+                    "custom_button_hover_text": "#ffffff",
+                    "custom_button_radius": 30
+                  },
                   "blocks": {}
                 }
               },
