@@ -246,12 +246,12 @@
                   "type": "quantity",
                   "static": true,
                   "settings": {
-                    "input_style": "default",
-                    "input_background_color": "{{ settings.color_palette.background }}",
-                    "input_text_color": "{{ settings.color_palette.foreground }}",
+                    "input_style": "custom",
+                    "input_background_color": "#7A2A2B",
+                    "input_text_color": "{{ settings.color_palette.background }}",
                     "input_border_color": "{{ settings.color_palette.foreground }}",
                     "border_width": 1,
-                    "border_radius": 0
+                    "border_radius": 14
                   },
                   "blocks": {}
                 },
