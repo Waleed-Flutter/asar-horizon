@@ -559,8 +559,8 @@
       "name": "t:names.featured_product_information",
       "settings": {
         "product": "asar-ostrich-oil",
-        "content_width": "content-full-width",
-        "desktop_media_position": "left",
+        "content_width": "content-center-aligned",
+        "desktop_media_position": "right",
         "equal_columns": true,
         "limit_details_width": true,
         "gap": 48,
