@@ -81,7 +81,7 @@
         "content_direction": "column",
         "gap": 32,
         "background_color": "",
-        "padding-block-start": 40,
+        "padding-block-start": 52,
         "padding-block-end": 0
       }
     },
@@ -332,7 +332,7 @@
         "section_height": "",
         "section_height_custom": 50,
         "background_media": "none",
-        "background_color": "#FEE6D4",
+        "background_color": "{{ settings.color_palette.background }}",
         "video_position": "cover",
         "background_image_position": "cover",
         "toggle_overlay": false,
