@@ -950,7 +950,7 @@
         "faq_item_jjyRG7": {
           "type": "faq_item",
           "settings": {
-            "question": "Where can I buy Ostruce products?",
+            "question": "Where can I buy Asar products?",
             "answer": "You can shop directly asarwellness.com with delivery options nationwide.",
             "open_by_default": false,
             "custom_question_color": ""
@@ -1024,7 +1024,7 @@
         "icon_color": "#7a2a2b",
         "icon_active_color": "#7a2a2b",
         "icon_bg": "",
-        "answer_color": "#4b5563",
+        "answer_color": "#000000",
         "answer_size": 15,
         "allow_multiple_open": false,
         "max_width": 820,
