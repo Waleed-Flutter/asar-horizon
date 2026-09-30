@@ -584,7 +584,7 @@
         "atc_button_radius": 14,
         "show_buy_it_now": true,
         "stack_buy_buttons": false,
-        "buy_now_bg": "#7a2a2b",
+        "buy_now_bg": "#257942",
         "buy_now_color": "#ffffff",
         "buy_now_border_color": "#7a2a2b",
         "buy_now_hover_bg": "#fee6d4",
