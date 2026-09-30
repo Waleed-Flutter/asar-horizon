@@ -588,7 +588,7 @@
         "buy_now_color": "#ffffff",
         "buy_now_border_color": "#7A2A2B",
         "buy_now_hover_bg": "#FEE6D4",
-        "buy_now_hover_color": "#ffffff",
+        "buy_now_hover_color": "#7A2A2B",
         "buy_now_radius": 14,
         "qty_bg_color": "#7a2a2b",
         "qty_text_color": "{{ settings.color_palette.background }}",
