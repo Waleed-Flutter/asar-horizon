@@ -14,17 +14,22 @@
   if request.visual_preview_mode and product == blank
     assign product = collections.all.products.first
   endif
+
+  assign show_checkout = true
+  if block.settings.show_checkout_button == false
+    assign show_checkout = false
+  endif
 %}
 
 {% capture accelerated_checkout_button %}
-  {% if product != blank and form_obj != blank %}
+  {% if show_checkout and product != blank and form_obj != blank %}
     {{ form_obj | payment_button }}
   {% endif %}
 {% endcapture %}
 
-{% if accelerated_checkout_button != blank %}
+{% if show_checkout and accelerated_checkout_button != blank %}
   <div
-    class="accelerated-checkout-block"
+    class="accelerated-checkout-block accelerated-checkout-block--{{ block.id }}"
     ref="acceleratedCheckoutButtonContainer"
     {{ block.shopify_attributes }}
     {% if request.visual_preview_mode %}
@@ -34,6 +39,33 @@
       hidden
     {% endunless %}
   >
+    {% if block.settings.button_style == 'custom' %}
+      <style>
+        .accelerated-checkout-block--{{ block.id }} button.shopify-payment-button__button,
+        .accelerated-checkout-block--{{ block.id }} button.shopify-payment-button__button--unbranded,
+        .accelerated-checkout-block--{{ block.id }} .shopify-payment-button__button--unbranded {
+          background-color: {{ block.settings.custom_button_background | default: '#257942' }} !important;
+          color: {{ block.settings.custom_button_text | default: '#ffffff' }} !important;
+          border: 1px solid {{ block.settings.custom_button_border | default: '#257942' }} !important;
+          border-radius: {{ block.settings.custom_button_radius | default: 30 }}px !important;
+          font-weight: 600 !important;
+          box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08) !important;
+          transition: all 0.25s ease !important;
+        }
+        .accelerated-checkout-block--{{ block.id }} button.shopify-payment-button__button:hover,
+        .accelerated-checkout-block--{{ block.id }} button.shopify-payment-button__button--unbranded:hover:not([disabled]),
+        .accelerated-checkout-block--{{ block.id }} .shopify-payment-button__button--unbranded:hover:not([disabled]) {
+          background-color: {{ block.settings.custom_button_hover_background | default: '#1e6336' }} !important;
+          color: {{ block.settings.custom_button_hover_text | default: '#ffffff' }} !important;
+          border-color: {{ block.settings.custom_button_hover_background | default: '#1e6336' }} !important;
+          transform: translateY(-2px);
+          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.16) !important;
+        }
+        .accelerated-checkout-block--{{ block.id }} shopify-accelerated-checkout {
+          --shopify-accelerated-checkout-button-border-radius: {{ block.settings.custom_button_radius | default: 30 }}px !important;
+        }
+      </style>
+    {% endif %}
     {{ accelerated_checkout_button }}
   </div>
 {% endif %}
@@ -43,6 +75,76 @@
 {% schema %}
 {
   "name": "t:names.accelerated_checkout",
-  "tag": null
+  "tag": null,
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_checkout_button",
+      "label": "Show dynamic checkout button",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button style",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "custom",
+          "label": "Custom colors"
+        }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "color",
+      "id": "custom_button_background",
+      "label": "Background color",
+      "default": "#257942",
+      "visible_if": "{{ block.settings.button_style == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "custom_button_text",
+      "label": "Text color",
+      "default": "#ffffff",
+      "visible_if": "{{ block.settings.button_style == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "custom_button_border",
+      "label": "Border color",
+      "default": "#257942",
+      "visible_if": "{{ block.settings.button_style == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "custom_button_hover_background",
+      "label": "Hover background color",
+      "default": "#1e6336",
+      "visible_if": "{{ block.settings.button_style == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "custom_button_hover_text",
+      "label": "Hover text color",
+      "default": "#ffffff",
+      "visible_if": "{{ block.settings.button_style == 'custom' }}"
+    },
+    {
+      "type": "range",
+      "id": "custom_button_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "default": 30,
+      "visible_if": "{{ block.settings.button_style == 'custom' }}"
+    }
+  ]
 }
 {% endschema %}

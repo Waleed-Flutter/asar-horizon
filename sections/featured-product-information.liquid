@@ -31,6 +31,17 @@
   assign atc_hover_color = section.settings.atc_button_hover_color | default: '#ffffff'
   assign atc_radius = section.settings.atc_button_radius | default: 30
 
+  assign buy_now_bg = section.settings.buy_now_bg | default: '#257942'
+  assign buy_now_color = section.settings.buy_now_color | default: '#ffffff'
+  assign buy_now_border = section.settings.buy_now_border_color | default: buy_now_bg
+  assign buy_now_hover_bg = section.settings.buy_now_hover_bg | default: '#1e6336'
+  assign buy_now_hover_color = section.settings.buy_now_hover_color | default: '#ffffff'
+  assign buy_now_radius = section.settings.buy_now_radius | default: atc_radius
+
+  assign compare_price_col = section.settings.compare_price_color | default: '#9ca3af'
+  assign sale_badge_bg = section.settings.sale_badge_bg | default: '#991b1b'
+  assign sale_badge_color = section.settings.sale_badge_color | default: '#ffffff'
+
   assign qty_bg = section.settings.qty_bg_color | default: '#f4f6f4'
   assign qty_color = section.settings.qty_text_color | default: '#111827'
   assign qty_border = section.settings.qty_border_color | default: 'rgba(0, 0, 0, 0.08)'
@@ -54,12 +65,14 @@
 %}
 
 <style>
-  /* Section background */
-  #shopify-section-{{ section.id }} .product-information {
-    {% if section.settings.background_color != blank %}
+  /* Section background & wrappers */
+  {% if section.settings.background_color != blank %}
+    #shopify-section-{{ section.id }},
+    #shopify-section-{{ section.id }} .product-information,
+    #shopify-section-{{ section.id }} .section-background {
       background-color: {{ section.settings.background_color }} !important;
-    {% endif %}
-  }
+    }
+  {% endif %}
 
   /* Add to Cart Button */
   #shopify-section-{{ section.id }} .add-to-cart-button,
@@ -79,6 +92,7 @@
   #shopify-section-{{ section.id }} .product-form-buttons button.button-primary:hover {
     background-color: {{ atc_hover_bg }} !important;
     color: {{ atc_hover_color }} !important;
+    border-color: {{ atc_hover_bg }} !important;
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18) !important;
   }
@@ -91,10 +105,67 @@
     color: {{ atc_hover_color }} !important;
   }
 
-  /* Accelerated Checkout Buttons */
-  #shopify-section-{{ section.id }} shopify-accelerated-checkout {
-    --shopify-accelerated-checkout-button-border-radius: {{ atc_radius }}px !important;
-  }
+  /* Buy It Now & Accelerated Checkout Buttons */
+  {% if section.settings.show_buy_it_now == false %}
+    #shopify-section-{{ section.id }} .accelerated-checkout-block,
+    #shopify-section-{{ section.id }} shopify-accelerated-checkout,
+    #shopify-section-{{ section.id }} .shopify-payment-button {
+      display: none !important;
+    }
+    #shopify-section-{{ section.id }} .add-to-cart-button {
+      flex: 1 1 100% !important;
+      width: 100% !important;
+    }
+  {% else %}
+    #shopify-section-{{ section.id }} button.shopify-payment-button__button,
+    #shopify-section-{{ section.id }} button.shopify-payment-button__button--unbranded,
+    #shopify-section-{{ section.id }} .shopify-payment-button__button--unbranded,
+    #shopify-section-{{ section.id }} .shopify-payment-button [role="button"] {
+      background-color: {{ buy_now_bg }} !important;
+      color: {{ buy_now_color }} !important;
+      border: 1px solid {{ buy_now_border }} !important;
+      border-radius: {{ buy_now_radius }}px !important;
+      font-weight: 600 !important;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08) !important;
+      transition: all 0.25s ease !important;
+      min-height: 48px !important;
+    }
+    #shopify-section-{{ section.id }} button.shopify-payment-button__button:hover,
+    #shopify-section-{{ section.id }} button.shopify-payment-button__button--unbranded:hover:not([disabled]),
+    #shopify-section-{{ section.id }} .shopify-payment-button__button--unbranded:hover:not([disabled]),
+    #shopify-section-{{ section.id }} .shopify-payment-button [role="button"]:hover {
+      background-color: {{ buy_now_hover_bg }} !important;
+      color: {{ buy_now_hover_color }} !important;
+      border-color: {{ buy_now_hover_bg }} !important;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.16) !important;
+    }
+    #shopify-section-{{ section.id }} shopify-accelerated-checkout {
+      --shopify-accelerated-checkout-button-border-radius: {{ buy_now_radius }}px !important;
+      --shopify-accelerated-checkout-button-block-size: 48px !important;
+    }
+    #shopify-section-{{ section.id }} .shopify-payment-button__more-options {
+      color: {{ desc_col }} !important;
+    }
+  {% endif %}
+
+  /* Button Stacking / Full Width */
+  {% if section.settings.stack_buy_buttons %}
+    #shopify-section-{{ section.id }} .product-form-buttons {
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 12px !important;
+    }
+    #shopify-section-{{ section.id }} .product-form-buttons > *:not(.quantity-selector-wrapper, .quantity-rules, .quantity-label) {
+      flex: 1 1 100% !important;
+      width: 100% !important;
+    }
+    #shopify-section-{{ section.id }} .add-to-cart-button,
+    #shopify-section-{{ section.id }} .accelerated-checkout-block,
+    #shopify-section-{{ section.id }} .shopify-payment-button {
+      width: 100% !important;
+    }
+  {% endif %}
 
   /* Quantity Selector */
   #shopify-section-{{ section.id }} .quantity-selector,
@@ -103,7 +174,10 @@
     border-color: {{ qty_border }} !important;
     border-radius: {{ qty_radius }}px !important;
   }
-  #shopify-section-{{ section.id }} .quantity-selector__input,
+  #shopify-section-{{ section.id }} .quantity-selector__input {
+    background-color: transparent !important;
+    color: {{ qty_color }} !important;
+  }
   #shopify-section-{{ section.id }} .quantity-selector__button,
   #shopify-section-{{ section.id }} .quantity-selector svg {
     color: {{ qty_color }} !important;
@@ -132,6 +206,9 @@
     color: {{ variant_active_color }} !important;
     border-color: {{ variant_active_border }} !important;
   }
+  #shopify-section-{{ section.id }} .variant-picker input[type="radio"] + label:hover:not(:checked) {
+    border-color: {{ variant_active_border }} !important;
+  }
 
   /* Product Title */
   #shopify-section-{{ section.id }} .product-title,
@@ -157,6 +234,20 @@
   }
   #shopify-section-{{ section.id }} .price-item--sale {
     color: {{ sale_price_col }} !important;
+  }
+  #shopify-section-{{ section.id }} .price-item--regular.compare-at-price,
+  #shopify-section-{{ section.id }} s.price-item,
+  #shopify-section-{{ section.id }} .price__compare {
+    color: {{ compare_price_col }} !important;
+    opacity: 0.8;
+  }
+
+  /* Product Badges */
+  #shopify-section-{{ section.id }} .badge--sale,
+  #shopify-section-{{ section.id }} .product-badge--sale {
+    background-color: {{ sale_badge_bg }} !important;
+    color: {{ sale_badge_color }} !important;
+    border-radius: {{ atc_radius }}px !important;
   }
 
   /* Product Description */
@@ -198,6 +289,10 @@
       {% if section.settings.product_title_size_mobile != blank %}
         font-size: {{ section.settings.product_title_size_mobile }}px !important;
       {% endif %}
+    }
+    #shopify-section-{{ section.id }} .product-information {
+      padding-block-start: {{ section.settings['padding-block-start'] | default: 40 | times: 0.65 | round }}px !important;
+      padding-block-end: {{ section.settings['padding-block-end'] | default: 40 | times: 0.65 | round }}px !important;
     }
   }
 </style>
@@ -328,7 +423,7 @@
     },
     {
       "type": "header",
-      "content": "Add To Cart & Checkout Buttons"
+      "content": "Add To Cart Button"
     },
     {
       "type": "color",
@@ -367,7 +462,63 @@
       "max": 50,
       "step": 2,
       "unit": "px",
-      "label": "Button Border Radius",
+      "label": "Add to Cart Border Radius",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Buy It Now (Dynamic Checkout)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_buy_it_now",
+      "label": "Show 'Buy It Now' Button",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "stack_buy_buttons",
+      "label": "Stack Add to Cart and Buy It Now buttons full width",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "buy_now_bg",
+      "label": "Buy It Now Background Color",
+      "default": "#257942"
+    },
+    {
+      "type": "color",
+      "id": "buy_now_color",
+      "label": "Buy It Now Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "buy_now_border_color",
+      "label": "Buy It Now Border Color",
+      "default": "#257942"
+    },
+    {
+      "type": "color",
+      "id": "buy_now_hover_bg",
+      "label": "Buy It Now Hover Background",
+      "default": "#1e6336"
+    },
+    {
+      "type": "color",
+      "id": "buy_now_hover_color",
+      "label": "Buy It Now Hover Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "buy_now_radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Buy It Now Border Radius",
       "default": 30
     },
     {
@@ -505,6 +656,28 @@
       "id": "product_sale_price_color",
       "label": "Sale Price Color",
       "default": "#991b1b"
+    },
+    {
+      "type": "color",
+      "id": "compare_price_color",
+      "label": "Compare-At (Strikethrough) Price Color",
+      "default": "#9ca3af"
+    },
+    {
+      "type": "header",
+      "content": "Product Badges"
+    },
+    {
+      "type": "color",
+      "id": "sale_badge_bg",
+      "label": "Sale Badge Background Color",
+      "default": "#991b1b"
+    },
+    {
+      "type": "color",
+      "id": "sale_badge_color",
+      "label": "Sale Badge Text Color",
+      "default": "#ffffff"
     },
     {
       "type": "range",
