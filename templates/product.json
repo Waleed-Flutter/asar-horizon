@@ -162,32 +162,6 @@
                 "price_tVjtKg"
               ]
             },
-            "divider_VJhene": {
-              "type": "_divider",
-              "name": "t:names.divider",
-              "settings": {
-                "thickness": 1,
-                "corner_radius": "square",
-                "divider_color": "{{ settings.color_palette.color3 }}",
-                "width_percent": 100,
-                "padding-block-start": 0,
-                "padding-block-end": 0
-              },
-              "blocks": {}
-            },
-            "review_T8g48V": {
-              "type": "review",
-              "name": "t:names.product_review_stars",
-              "settings": {
-                "stars_style": "outline",
-                "show_number": true,
-                "text_color": "#7A2A2B",
-                "type_preset": "paragraph",
-                "width": "100%",
-                "alignment": "left"
-              },
-              "blocks": {}
-            },
             "text_aEtTtq": {
               "type": "text",
               "name": "t:names.product_description",
@@ -453,8 +427,6 @@
           },
           "block_order": [
             "group_icgrde",
-            "divider_VJhene",
-            "review_T8g48V",
             "text_aEtTtq",
             "variant_picker_R3rGDr",
             "buy_buttons_eYQEYi",
