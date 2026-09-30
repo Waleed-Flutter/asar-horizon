@@ -132,7 +132,7 @@
               "settings": {
                 "text": "<p>At <strong>ASAR Holistic Wellness</strong>, we believe that true well-being begins where the outside world fades and you reconnect with yourself. In a fast-paced world that constantly asks you to move quicker, we serve as your daily anchor for holistic alignment..</p><p>We are dedicated to redefining health and personal care through intelligent formulation. By uniting ancient traditions with modern momentum, we create a sacred space where your mind, body, and spirit can thrive in every season</p>",
                 "width": "100%",
-                "max_width": "normal",
+                "max_width": "none",
                 "alignment": "center",
                 "type_preset": "rte",
                 "font": "var(--font-body--family)",
