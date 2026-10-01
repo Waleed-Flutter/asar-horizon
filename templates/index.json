@@ -19,17 +19,17 @@
         "badge_bg": "#7a2a2b",
         "badge_color": "{{ settings.color_palette.background }}",
         "badge_radius": 14,
-        "heading": "Everyday Comfort, Thoughtfully Made.",
+        "heading": "Quiet Care for Everyday Life.",
         "heading_color": "#000000",
-        "heading_size": 48,
+        "heading_size": 64,
         "heading_size_mobile": 32,
-        "subtext": "<p>Experience natural balance with our handcrafted herbal drops made with pure, organic botanical extracts for deep, restorative muscle and joint comfort.</p>",
+        "subtext": "<p>Discover authentic wellness with Asar's premium herbal drops—thoughtfully crafted from pure organic botanicals to nurture your body and support natural healing</p>",
         "text_color": "#000000",
         "feature_icon_color": "#7a2a2b",
         "feature_icon_bg": "",
         "feature_text_color": "#111827",
         "feature_font_size": 14,
-        "btn_primary_text": "Shop Best Sellers",
+        "btn_primary_text": "Shop Now",
         "btn_primary_link": "/collections/all",
         "btn_primary_bg": "#7a2a2b",
         "btn_primary_color": "#ffffff",
@@ -446,16 +446,26 @@
                 "product_description_nPUTyt"
               ]
             },
-            "review_QcMFAf": {
-              "type": "review",
-              "name": "t:names.product_review_stars",
+            "variant_picker_xMfWMT": {
+              "type": "variant-picker",
+              "name": "t:names.product_variant_picker",
               "settings": {
-                "stars_style": "shaded",
-                "show_number": true,
-                "text_color": "",
-                "type_preset": "paragraph",
-                "width": "100%",
-                "alignment": "left"
+                "variant_style": "buttons",
+                "show_swatches": false,
+                "option_label_text_color": "",
+                "variant_style_class": "custom",
+                "custom_variant_background": "#626060",
+                "custom_variant_text": "{{ settings.color_palette.background }}",
+                "custom_variant_border": "{{ settings.color_palette.foreground }}",
+                "selected_variant_style_class": "custom",
+                "custom_selected_variant_background": "#7a2a2b",
+                "custom_selected_variant_text": "{{ settings.color_palette.background }}",
+                "custom_selected_variant_border": "{{ settings.color_palette.foreground }}",
+                "alignment": "left",
+                "padding-block-start": 0,
+                "padding-block-end": 8,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
               },
               "blocks": {}
             },
@@ -517,7 +527,7 @@
                   "settings": {
                     "show_checkout_button": true,
                     "button_style": "custom",
-                    "custom_button_background": "#28894A",
+                    "custom_button_background": "#28894a",
                     "custom_button_text": "#ffffff",
                     "custom_button_border": "#257942",
                     "custom_button_hover_background": "#1e6336",
@@ -533,7 +543,7 @@
           "block_order": [
             "text_fHJ8Pn",
             "group_qhAeHa",
-            "review_QcMFAf",
+            "variant_picker_xMfWMT",
             "buy_buttons_tBLJiH"
           ]
         }
@@ -563,7 +573,7 @@
         "buy_now_bg": "#257942",
         "buy_now_color": "#ffffff",
         "buy_now_border_color": "#7a2a2b",
-        "buy_now_hover_bg": "#7A2A2B",
+        "buy_now_hover_bg": "#7a2a2b",
         "buy_now_hover_color": "{{ settings.color_palette.background }}",
         "buy_now_radius": 14,
         "qty_bg_color": "#7a2a2b",
