@@ -86,6 +86,189 @@
     color: {{ section.settings.copyright_color | default: '#a3bfa8' }};
     font-size: {{ section.settings.copyright_size | default: 13 }}px;
   }
+
+  /* Mobile View Responsive Styling */
+  @media (max-width: 768px) {
+    #shopify-section-{{ section.id }} footer.hb-footer {
+      padding-top: {{ section.settings.mobile_padding_top | default: 48 }}px !important;
+      padding-bottom: {{ section.settings.mobile_padding_bottom | default: 32 }}px !important;
+    }
+
+    #shopify-section-{{ section.id }} .hb-footer-grid {
+      {% if section.settings.mobile_columns == '2' %}
+        grid-template-columns: repeat(2, 1fr) !important;
+      {% else %}
+        grid-template-columns: 1fr !important;
+      {% endif %}
+      gap: {{ section.settings.mobile_col_gap | default: 28 }}px !important;
+      margin-bottom: 32px !important;
+    }
+
+    {% if section.settings.mobile_columns == '2' %}
+      #shopify-section-{{ section.id }} .hb-footer-col:first-child {
+        grid-column: 1 / -1 !important;
+      }
+    {% endif %}
+
+    {% if section.settings.show_mobile_dividers %}
+      #shopify-section-{{ section.id }} .hb-footer-col:not(:last-child) {
+        border-bottom: 1px solid {{ section.settings.mobile_divider_color | default: 'rgba(255, 255, 255, 0.12)' }} !important;
+        padding-bottom: {{ section.settings.mobile_col_gap | default: 28 }}px !important;
+      }
+    {% endif %}
+
+    #shopify-section-{{ section.id }} .hb-footer-links {
+      gap: {{ section.settings.mobile_link_spacing | default: 12 }}px !important;
+    }
+
+    /* Mobile Content Alignment */
+    {% if section.settings.mobile_alignment == 'center' %}
+      #shopify-section-{{ section.id }} .hb-footer-col {
+        text-align: center !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+      }
+
+      #shopify-section-{{ section.id }} .hb-footer-brand {
+        display: flex !important;
+        justify-content: center !important;
+        width: 100% !important;
+      }
+
+      #shopify-section-{{ section.id }} .hb-footer-brand img,
+      #shopify-section-{{ section.id }} .hb-footer-brand svg {
+        margin-left: auto !important;
+        margin-right: auto !important;
+        display: block !important;
+      }
+
+      #shopify-section-{{ section.id }} .hb-footer-about {
+        text-align: center !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        max-width: 480px !important;
+      }
+
+      #shopify-section-{{ section.id }} .hb-footer-col h4 {
+        text-align: center !important;
+        width: 100% !important;
+        margin-bottom: 16px !important;
+      }
+
+      #shopify-section-{{ section.id }} .hb-footer-links {
+        align-items: center !important;
+        text-align: center !important;
+        width: 100% !important;
+        padding: 0 !important;
+      }
+
+      #shopify-section-{{ section.id }} .hb-footer-links li {
+        text-align: center !important;
+        width: 100% !important;
+        display: block !important;
+      }
+
+      #shopify-section-{{ section.id }} .hb-footer-links a {
+        text-align: center !important;
+        display: inline-block !important;
+      }
+
+      #shopify-section-{{ section.id }} .hb-footer-links a:hover {
+        transform: scale(1.04) !important;
+      }
+
+      #shopify-section-{{ section.id }} .hb-footer-social {
+        justify-content: center !important;
+        width: 100% !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+      }
+    {% else %}
+      #shopify-section-{{ section.id }} .hb-footer-col {
+        text-align: left !important;
+        align-items: flex-start !important;
+      }
+
+      #shopify-section-{{ section.id }} .hb-footer-brand {
+        display: flex !important;
+        justify-content: flex-start !important;
+      }
+
+      #shopify-section-{{ section.id }} .hb-footer-brand img,
+      #shopify-section-{{ section.id }} .hb-footer-brand svg {
+        margin-left: 0 !important;
+        margin-right: auto !important;
+      }
+
+      #shopify-section-{{ section.id }} .hb-footer-about {
+        text-align: left !important;
+        margin-left: 0 !important;
+      }
+
+      #shopify-section-{{ section.id }} .hb-footer-links {
+        align-items: flex-start !important;
+        text-align: left !important;
+      }
+
+      #shopify-section-{{ section.id }} .hb-footer-social {
+        justify-content: flex-start !important;
+      }
+    {% endif %}
+
+    /* Specific Mobile Logo Alignment overrides */
+    {% if section.settings.mobile_logo_alignment == 'center' %}
+      #shopify-section-{{ section.id }} .hb-footer-brand {
+        justify-content: center !important;
+      }
+      #shopify-section-{{ section.id }} .hb-footer-brand img,
+      #shopify-section-{{ section.id }} .hb-footer-brand svg {
+        margin-left: auto !important;
+        margin-right: auto !important;
+      }
+    {% elsif section.settings.mobile_logo_alignment == 'left' %}
+      #shopify-section-{{ section.id }} .hb-footer-brand {
+        justify-content: flex-start !important;
+      }
+      #shopify-section-{{ section.id }} .hb-footer-brand img,
+      #shopify-section-{{ section.id }} .hb-footer-brand svg {
+        margin-left: 0 !important;
+        margin-right: auto !important;
+      }
+    {% endif %}
+
+    /* Mobile Brand Logo Width */
+    #shopify-section-{{ section.id }} .hb-footer-brand img,
+    #shopify-section-{{ section.id }} .hb-footer-brand svg {
+      width: {{ section.settings.mobile_logo_width | default: 150 }}px !important;
+      max-width: 100% !important;
+      height: auto !important;
+    }
+
+    /* Mobile Bottom Bar Alignment */
+    #shopify-section-{{ section.id }} .hb-footer-bottom {
+      flex-direction: column !important;
+      gap: 16px !important;
+      padding-top: 24px !important;
+      {% case section.settings.mobile_bottom_alignment %}
+        {% when 'left' %}
+          text-align: left !important;
+          align-items: flex-start !important;
+        {% when 'center' %}
+          text-align: center !important;
+          align-items: center !important;
+        {% else %}
+          text-align: center !important;
+          align-items: center !important;
+      {% endcase %}
+    }
+
+    #shopify-section-{{ section.id }} .hb-payment-badges {
+      justify-content: center !important;
+      width: 100% !important;
+    }
+  }
 {%- endstyle -%}
 
 {%- capture social_icons -%}
@@ -143,9 +326,10 @@
             <div class="hb-footer-col" {{ block.shopify_attributes }}>
               <div class="hb-footer-brand">
                 {% if block.settings.logo != blank %}
-                  {{ block.settings.logo | image_url: width: 300 | image_tag: loading: 'lazy', alt: shop.name, style: 'max-width: 100%; height: auto;' }}
+                  {%- assign brand_logo_w = block.settings.logo_width | default: 150 -%}
+                  {{ block.settings.logo | image_url: width: 500 | image_tag: loading: 'lazy', alt: shop.name, style: 'width: ' | append: brand_logo_w | append: 'px; max-width: 100%; height: auto;' }}
                 {% else %}
-                  <img src="{{ 'horizon-logo.svg' | asset_url }}" alt="{{ shop.name }}" width="{{ block.settings.logo_width | default: 150 }}" height="38">
+                  <img src="{{ 'horizon-logo.svg' | asset_url }}" alt="{{ shop.name }}" style="width: {{ block.settings.logo_width | default: 150 }}px; max-width: 100%; height: auto;" width="{{ block.settings.logo_width | default: 150 }}" height="38">
                 {% endif %}
               </div>
               {% if block.settings.about_text != blank %}
@@ -280,6 +464,141 @@
       "id": "border_top_color",
       "label": "Top Divider Border Color",
       "default": "#204b2e"
+    },
+    {
+      "type": "header",
+      "content": "Mobile View Styling & Alignment"
+    },
+    {
+      "type": "select",
+      "id": "mobile_alignment",
+      "label": "Mobile Content Alignment",
+      "options": [
+        {
+          "value": "center",
+          "label": "Center (Centered Logo, Text, Links & Icons)"
+        },
+        {
+          "value": "left",
+          "label": "Left (Standard Left Align)"
+        }
+      ],
+      "default": "center",
+      "info": "Aligns the brand logo, description, column headings, menu links, and social icons in the center on mobile screens."
+    },
+    {
+      "type": "select",
+      "id": "mobile_logo_alignment",
+      "label": "Mobile Brand Logo Alignment",
+      "options": [
+        {
+          "value": "inherit",
+          "label": "Match Content Alignment"
+        },
+        {
+          "value": "center",
+          "label": "Always Center"
+        },
+        {
+          "value": "left",
+          "label": "Always Left"
+        }
+      ],
+      "default": "inherit"
+    },
+    {
+      "type": "range",
+      "id": "mobile_logo_width",
+      "min": 60,
+      "max": 280,
+      "step": 5,
+      "unit": "px",
+      "label": "Mobile Brand Logo Width",
+      "default": 150
+    },
+    {
+      "type": "select",
+      "id": "mobile_columns",
+      "label": "Mobile Layout Columns",
+      "options": [
+        {
+          "value": "1",
+          "label": "1 Column (Full Width Stacked)"
+        },
+        {
+          "value": "2",
+          "label": "2 Columns (Compact Grid for Links)"
+        }
+      ],
+      "default": "1"
+    },
+    {
+      "type": "range",
+      "id": "mobile_col_gap",
+      "min": 16,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "label": "Mobile Column Gap / Spacing",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "mobile_link_spacing",
+      "min": 6,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Mobile Links Vertical Spacing",
+      "default": 12
+    },
+    {
+      "type": "select",
+      "id": "mobile_bottom_alignment",
+      "label": "Mobile Bottom Bar Alignment",
+      "options": [
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "left",
+          "label": "Left"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_mobile_dividers",
+      "label": "Show Divider Lines Between Sections on Mobile",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "mobile_divider_color",
+      "label": "Mobile Divider Lines Color",
+      "default": "rgba(255, 255, 255, 0.12)"
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_top",
+      "min": 20,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Mobile Top Padding",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_bottom",
+      "min": 16,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "label": "Mobile Bottom Padding",
+      "default": 32
     },
     {
       "type": "header",
