@@ -379,7 +379,7 @@
                     "letter_spacing": "normal",
                     "case": "none",
                     "wrap": "pretty",
-                    "text_color": "",
+                    "text_color": "#7A2A2B",
                     "background": false,
                     "background_color": "#00000026",
                     "corner_radius": 0,
@@ -645,84 +645,6 @@
         "bg_color": "#ffffff",
         "padding_top": 20,
         "padding_bottom": 20
-      }
-    },
-    "daily_routine_steps": {
-      "type": "daily-routine-steps",
-      "blocks": {
-        "step_kEc96N": {
-          "type": "step",
-          "settings": {
-            "step_number": "STEP 01",
-            "title": "Apply",
-            "description": "Apply 5-7 drops directly to Affected Area.",
-            "image": "shopify://shop_images/OstrichOilProduct.jpg",
-            "fallback_image": "routine-step-apply.jpg",
-            "custom_step_color": "",
-            "custom_title_color": ""
-          }
-        },
-        "step_RYhiNy": {
-          "type": "step",
-          "settings": {
-            "step_number": "STEP 02",
-            "title": "Apply",
-            "description": "Massage gently for 2-3 mints using your fingertips until it's absorbed.",
-            "fallback_image": "routine-step-apply.jpg",
-            "custom_step_color": "",
-            "custom_title_color": ""
-          }
-        },
-        "step_BRdQbW": {
-          "type": "step",
-          "settings": {
-            "step_number": "STEP 03",
-            "title": "Apply",
-            "description": "For the better results repeats three times daily.",
-            "image": "shopify://shop_images/Ostrich_oil_bottle_on_savanna_2K_20260924171940.jpg",
-            "fallback_image": "routine-step-apply.jpg",
-            "custom_step_color": "",
-            "custom_title_color": ""
-          }
-        }
-      },
-      "block_order": [
-        "step_kEc96N",
-        "step_RYhiNy",
-        "step_BRdQbW"
-      ],
-      "settings": {
-        "eyebrow": "How to use",
-        "eyebrow_color": "#7a2a2b",
-        "eyebrow_size": 13,
-        "heading": "Simple Enough for Every Day.",
-        "heading_color": "#111827",
-        "heading_size": 40,
-        "heading_size_mobile": 28,
-        "subheading": "",
-        "subheading_color": "#4b5563",
-        "subheading_size": 16,
-        "card_bg": "#ffffff",
-        "card_border_color": "#e5e7eb",
-        "card_hover_border_color": "#7a2a2b",
-        "card_radius": 16,
-        "card_shadow": true,
-        "img_hover_zoom": true,
-        "step_num_color": "#7a2a2b",
-        "step_num_size": 14,
-        "step_title_color": "#111827",
-        "step_title_size": 18,
-        "step_desc_color": "#4b5563",
-        "step_desc_size": 14,
-        "show_trust_bar": true,
-        "trust_bar_bg": "#e8f5e9",
-        "trust_bar_color": "#1b5e20",
-        "trust_bar_icon_color": "#257942",
-        "trust_bar_radius": 50,
-        "trust_bar_size": 14,
-        "background_color": "#ffffff",
-        "padding_top": 80,
-        "padding_bottom": 84
       }
     },
     "pain_points_grid": {
@@ -1026,7 +948,6 @@
     "feature_organic_story",
     "featured_product_information_iNXkXV",
     "product_spotlight_trio",
-    "daily_routine_steps",
     "pain_points_grid",
     "ingredients_botanical_showcase_M8gcWG",
     "why_choose_grid",
