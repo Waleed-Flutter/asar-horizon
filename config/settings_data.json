@@ -13,6 +13,7 @@
     "botanical_dark_green": "#7A2A2B",
     "botanical_mint_color": "{{ settings.color_palette.background }}",
     "logo": "shopify://shop_images/5.png",
+    "logo_inverse": "shopify://shop_images/Asar_Wellness_Logo.png",
     "logo_height": 36,
     "logo_height_mobile": 28,
     "page_text_color": "#FEE6D4",
