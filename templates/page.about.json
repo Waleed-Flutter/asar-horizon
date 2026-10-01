@@ -147,8 +147,8 @@
                 "corner_radius": 0,
                 "padding-block-start": 0,
                 "padding-block-end": 0,
-                "padding-inline-start": 100,
-                "padding-inline-end": 98
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
               },
               "blocks": {}
             }
@@ -514,8 +514,8 @@
             "icon": "shield",
             "title": "Clean & Safe Formulas",
             "description": "100% free of petroleum, mineral oil, synthetic fragrances, and artificial chemicals. Gentle enough for sensitive skin.",
-            "custom_icon_bg": "#7A2A2B",
-            "custom_icon_color": "#FEE6D4",
+            "custom_icon_bg": "#7a2a2b",
+            "custom_icon_color": "#fee6d4",
             "custom_title_color": ""
           }
         },
@@ -525,8 +525,8 @@
             "icon": "globe",
             "title": "Transparent Sourcing",
             "description": "Every botanical drop is traceable to ethical organic growers with batch certificates of analysis available on request.",
-            "custom_icon_bg": "#7A2A2B",
-            "custom_icon_color": "#FEE6D4",
+            "custom_icon_bg": "#7a2a2b",
+            "custom_icon_color": "#fee6d4",
             "custom_title_color": ""
           }
         },
@@ -536,8 +536,8 @@
             "icon": "clipboard",
             "title": "Third-Party Tested",
             "description": "Every single harvest is rigorously verified for purity, potency, and zero contaminants by accredited independent laboratories.",
-            "custom_icon_bg": "#7A2A2B",
-            "custom_icon_color": "#FEE6D4",
+            "custom_icon_bg": "#7a2a2b",
+            "custom_icon_color": "#fee6d4",
             "custom_title_color": ""
           }
         },
@@ -547,8 +547,8 @@
             "icon": "box",
             "title": "Eco-Friendly Bottling",
             "description": "Amber UV-blocking glass preserves volatile essential plant molecules, packaged in 100% recyclable, sustainable boxes.",
-            "custom_icon_bg": "#7A2A2B",
-            "custom_icon_color": "#FEE6D4",
+            "custom_icon_bg": "#7a2a2b",
+            "custom_icon_color": "#fee6d4",
             "custom_title_color": ""
           }
         },
@@ -558,8 +558,8 @@
             "icon": "heart",
             "title": "Cruelty-Free Always",
             "description": "Never tested on animals. Ethically crafted with care, kindness, and deep reverence for nature and living beings.",
-            "custom_icon_bg": "#7A2A2B",
-            "custom_icon_color": "#FEE6D4",
+            "custom_icon_bg": "#7a2a2b",
+            "custom_icon_color": "#fee6d4",
             "custom_title_color": ""
           }
         },
@@ -569,8 +569,8 @@
             "icon": "truck",
             "title": "Fast Reliable Shipping",
             "description": "Orders dispatched within 24 hours in secure, discreet packaging with real-time tracking and 30-day money-back satisfaction.",
-            "custom_icon_bg": "#7A2A2B",
-            "custom_icon_color": "#FEE6D4",
+            "custom_icon_bg": "#7a2a2b",
+            "custom_icon_color": "#fee6d4",
             "custom_title_color": ""
           }
         }
@@ -586,7 +586,7 @@
       "name": "Why Choose Grid",
       "settings": {
         "eyebrow": "WHY ASAR",
-        "eyebrow_color": "#7A2A2B",
+        "eyebrow_color": "#7a2a2b",
         "eyebrow_size": 13,
         "heading": "Ancient Wellness, Without the Guesswork.",
         "heading_color": "#111827",
@@ -598,12 +598,12 @@
         "columns_desktop": 3,
         "card_bg": "#ffffff",
         "card_border_color": "#e5e7eb",
-        "card_hover_border_color": "#7A2A2B",
+        "card_hover_border_color": "#7a2a2b",
         "card_radius": 16,
         "card_shadow": true,
         "card_hover_lift": true,
         "icon_box_bg": "#e8f5e9",
-        "icon_box_color": "#7A2A2B",
+        "icon_box_color": "#7a2a2b",
         "icon_box_size": 48,
         "icon_box_radius": 12,
         "card_title_color": "#111827",
