@@ -13,6 +13,10 @@
   assign badge_text = section.settings.cart_badge_color | default: '#ffffff'
   assign border_color = section.settings.header_border_color | default: 'rgba(0, 0, 0, 0.06)'
   assign drawer_bg = section.settings.drawer_bg | default: '#ffffff'
+  assign drawer_header_bg = section.settings.drawer_header_bg
+  if drawer_header_bg == blank
+    assign drawer_header_bg = drawer_bg
+  endif
   assign drawer_link_color = section.settings.drawer_links_color | default: '#111827'
   assign drawer_close_icon_color = section.settings.drawer_close_icon_color | default: drawer_link_color
   assign drawer_close_bg = section.settings.drawer_close_bg_color | default: 'rgba(0, 0, 0, 0.06)'
@@ -20,6 +24,17 @@
   assign drawer_btn_bg = section.settings.drawer_button_bg | default: hover_color
   assign drawer_btn_color = section.settings.drawer_button_color | default: '#ffffff'
   assign drawer_btn_rad = section.settings.drawer_button_radius | default: 30
+
+  assign show_drawer_logo = section.settings.show_drawer_logo
+  if show_drawer_logo == nil
+    assign show_drawer_logo = true
+  endif
+  assign drawer_logo_img = section.settings.drawer_logo | default: header_logo
+  assign drawer_logo_w = section.settings.drawer_logo_width | default: section.settings.logo_width_mobile | default: 130
+  assign drawer_logo_filter = section.settings.drawer_logo_filter | default: 'none'
+  assign drawer_logo_bg = section.settings.drawer_logo_bg
+  assign drawer_logo_padding = section.settings.drawer_logo_padding | default: 0
+  assign drawer_logo_radius = section.settings.drawer_logo_radius | default: 6
 %}
 
 <header class="hb-header-nav{% if section.settings.enable_sticky %} hb-sticky{% endif %}" id="hbHeader" style="
@@ -111,12 +126,60 @@
 <!-- Mobile Navigation Drawer -->
 <div class="hb-mobile-drawer-overlay" id="hbMobileDrawerOverlay"></div>
 <aside class="hb-mobile-drawer" id="hbMobileDrawer" aria-label="Mobile Navigation" style="background-color: {{ drawer_bg }};">
-  <div class="hb-mobile-drawer-header" style="border-bottom: 1px solid {{ drawer_border_color }};">
-    <div class="hb-mobile-brand">
-      {% if header_logo != blank %}
-        <img src="{{ header_logo | image_url: width: 300 }}" alt="{{ shop.name }}" style="width: {{ section.settings.logo_width_mobile | default: 130 }}px; height: auto;" width="{{ section.settings.logo_width_mobile | default: 130 }}" height="32">
-      {% else %}
-        <img src="{{ 'horizon-logo.svg' | asset_url }}" alt="{{ shop.name }}" style="width: {{ section.settings.logo_width_mobile | default: 130 }}px; height: auto;" width="{{ section.settings.logo_width_mobile | default: 130 }}" height="32">
+  <div class="hb-mobile-drawer-header" style="background-color: {{ drawer_header_bg }}; border-bottom: 1px solid {{ drawer_border_color }};">
+    <div class="hb-mobile-brand" style="
+      display: inline-flex;
+      align-items: center;
+      {% if drawer_logo_bg != blank %}
+        background-color: {{ drawer_logo_bg }};
+        padding: {{ drawer_logo_padding }}px {{ drawer_logo_padding | times: 1.5 | round }}px;
+        border-radius: {{ drawer_logo_radius }}px;
+      {% endif %}
+    ">
+      {% if show_drawer_logo %}
+        <a href="{{ routes.root_url }}" style="display: inline-flex; align-items: center; text-decoration: none;">
+          {% if drawer_logo_img != blank %}
+            <img
+              src="{{ drawer_logo_img | image_url: width: 400 }}"
+              alt="{{ shop.name | escape }}"
+              style="
+                width: {{ drawer_logo_w }}px;
+                max-width: 100%;
+                height: auto;
+                display: block;
+                {% case drawer_logo_filter %}
+                  {% when 'invert_white' %}
+                    filter: brightness(0) invert(1);
+                  {% when 'invert_black' %}
+                    filter: brightness(0);
+                  {% when 'brightness' %}
+                    filter: brightness(1.4) contrast(1.1);
+                  {% when 'drop_shadow' %}
+                    filter: drop-shadow(0 2px 6px rgba(255, 255, 255, 0.5));
+                  {% else %}
+                    filter: none;
+                {% endcase %}
+              "
+              width="{{ drawer_logo_w }}"
+              height="32"
+              loading="eager"
+            >
+          {% else %}
+            <img
+              src="{{ 'horizon-logo.svg' | asset_url }}"
+              alt="{{ shop.name | escape }}"
+              style="
+                width: {{ drawer_logo_w }}px;
+                max-width: 100%;
+                height: auto;
+                display: block;
+                {% if drawer_logo_filter == 'invert_white' %}filter: brightness(0) invert(1);{% endif %}
+              "
+              width="{{ drawer_logo_w }}"
+              height="32"
+            >
+          {% endif %}
+        </a>
       {% endif %}
     </div>
     <button class="hb-mobile-drawer-close" id="hbMobileMenuClose" aria-label="Close Navigation Menu" type="button" style="color: {{ drawer_close_icon_color }} !important; background-color: {{ drawer_close_bg }} !important;">
@@ -514,6 +577,93 @@
       "id": "cart_badge_color",
       "label": "Cart Count Badge Text Color",
       "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Mobile Drawer Logo & Header"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_drawer_logo",
+      "label": "Show Logo in Mobile Menu",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "drawer_logo",
+      "label": "Mobile Menu Custom Logo",
+      "info": "Upload a contrasting or white logo specifically for the mobile drawer. Defaults to main logo if blank."
+    },
+    {
+      "type": "range",
+      "id": "drawer_logo_width",
+      "min": 50,
+      "max": 240,
+      "step": 5,
+      "unit": "px",
+      "label": "Mobile Menu Logo Width",
+      "default": 130
+    },
+    {
+      "type": "select",
+      "id": "drawer_logo_filter",
+      "label": "Logo Color Effect / Filter",
+      "options": [
+        {
+          "value": "none",
+          "label": "Original (No filter)"
+        },
+        {
+          "value": "invert_white",
+          "label": "Pure White (Ideal for dark/burgundy backgrounds)"
+        },
+        {
+          "value": "invert_black",
+          "label": "Solid Black / Charcoal"
+        },
+        {
+          "value": "brightness",
+          "label": "Brighter (+40% Brightness)"
+        },
+        {
+          "value": "drop_shadow",
+          "label": "Subtle Light Glow / Shadow"
+        }
+      ],
+      "default": "none",
+      "info": "Automatically adjusts logo colors so it stands out against dark or light drawer backgrounds."
+    },
+    {
+      "type": "color",
+      "id": "drawer_logo_bg",
+      "label": "Logo Background Card / Pill (Optional)",
+      "info": "Optional background behind the logo (e.g. white pill) on a dark menu."
+    },
+    {
+      "type": "range",
+      "id": "drawer_logo_padding",
+      "min": 0,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "label": "Logo Card Padding",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "drawer_logo_radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Logo Card Border Radius",
+      "default": 6
+    },
+    {
+      "type": "color",
+      "id": "drawer_header_bg",
+      "label": "Mobile Menu Header Bar Background (Optional)",
+      "info": "Leave blank to match overall drawer background."
     },
     {
       "type": "header",
