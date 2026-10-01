@@ -89,7 +89,7 @@
             "custom_width_mobile": 100,
             "background_color": "",
             "input_style": "custom",
-            "input_background_color": "#7A2A2B",
+            "input_background_color": "#7a2a2b",
             "input_text_color": "{{ settings.color_palette.background }}",
             "input_border_color": "{{ settings.color_palette.foreground }}",
             "border_width": 1,
@@ -106,7 +106,7 @@
               "settings": {
                 "label": "Submit",
                 "style_class": "button-custom",
-                "custom_button_background": "#7A2A2B",
+                "custom_button_background": "#7a2a2b",
                 "custom_button_text": "{{ settings.color_palette.background }}",
                 "custom_button_border": "{{ settings.color_palette.background }}",
                 "width": "fit-content",
@@ -264,7 +264,7 @@
             "height": "fill",
             "custom_height": 100,
             "background_media": "none",
-            "background_color": "#7A2A2B",
+            "background_color": "#7a2a2b",
             "video_position": "cover",
             "background_image_position": "cover",
             "toggle_overlay": false,
@@ -279,8 +279,8 @@
             "link": "",
             "open_in_new_tab": false,
             "placeholder": "",
-            "padding-block-start": 0,
-            "padding-block-end": 0,
+            "padding-block-start": 32,
+            "padding-block-end": 32,
             "padding-inline-start": 24,
             "padding-inline-end": 0
           },
@@ -293,7 +293,7 @@
                 "width": 32,
                 "link": "",
                 "open_in_new_tab": false,
-                "icon_color": "#FEE6D4"
+                "icon_color": "#fee6d4"
               },
               "blocks": {}
             },
@@ -350,7 +350,7 @@
                     "letter_spacing": "normal",
                     "case": "none",
                     "wrap": "pretty",
-                    "text_color": "#FEE6D4",
+                    "text_color": "#fee6d4",
                     "background": false,
                     "background_color": "#00000026",
                     "corner_radius": 0,
@@ -388,9 +388,9 @@
             "width_mobile": "fill",
             "custom_width_mobile": 100,
             "height": "fill",
-            "custom_height": 100,
+            "custom_height": 38,
             "background_media": "none",
-            "background_color": "#7A2A2B",
+            "background_color": "#7a2a2b",
             "video_position": "cover",
             "background_image_position": "cover",
             "toggle_overlay": false,
@@ -405,8 +405,8 @@
             "link": "",
             "open_in_new_tab": false,
             "placeholder": "",
-            "padding-block-start": 0,
-            "padding-block-end": 0,
+            "padding-block-start": 32,
+            "padding-block-end": 32,
             "padding-inline-start": 0,
             "padding-inline-end": 0
           },
@@ -419,7 +419,7 @@
                 "width": 32,
                 "link": "",
                 "open_in_new_tab": false,
-                "icon_color": "#FEE6D4"
+                "icon_color": "#fee6d4"
               },
               "blocks": {}
             },
@@ -476,7 +476,7 @@
                     "letter_spacing": "normal",
                     "case": "none",
                     "wrap": "pretty",
-                    "text_color": "#FEE6D4",
+                    "text_color": "#fee6d4",
                     "background": false,
                     "background_color": "#00000026",
                     "corner_radius": 0,
@@ -516,7 +516,7 @@
             "height": "fill",
             "custom_height": 100,
             "background_media": "none",
-            "background_color": "#7A2A2B",
+            "background_color": "#7a2a2b",
             "video_position": "cover",
             "background_image_position": "cover",
             "toggle_overlay": false,
@@ -545,7 +545,7 @@
                 "width": 32,
                 "link": "",
                 "open_in_new_tab": false,
-                "icon_color": "#FEE6D4"
+                "icon_color": "#fee6d4"
               },
               "blocks": {}
             },
@@ -563,7 +563,7 @@
                 "letter_spacing": "normal",
                 "case": "none",
                 "wrap": "pretty",
-                "text_color": "#FEE6D4",
+                "text_color": "#fee6d4",
                 "background": false,
                 "background_color": "#00000026",
                 "corner_radius": 0,
