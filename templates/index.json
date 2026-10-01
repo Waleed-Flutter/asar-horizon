@@ -653,7 +653,7 @@
         "pain_card_MUcaGM": {
           "type": "pain_card",
           "settings": {
-            "tag": "Upper Body",
+            "tag": "",
             "title": "Desk Workers & Professionals",
             "description": "Neck, shoulders and back can feel the strain of sitting and working for hours.",
             "link": "",
@@ -665,7 +665,7 @@
         "pain_card_UeRHqm": {
           "type": "pain_card",
           "settings": {
-            "tag": "Upper Body",
+            "tag": "",
             "title": "Active Lifestyles & Fitness",
             "description": "Active days and workouts can leave muscles feeling tired and tense.",
             "link": "",
@@ -677,7 +677,7 @@
         "pain_card_UKCjJz": {
           "type": "pain_card",
           "settings": {
-            "tag": "Upper Body",
+            "tag": "",
             "title": "Everyday Joint Stiffness",
             "description": "Climbing stairs, bending, standing or namaz movement can feel uncomfortable.",
             "link": "",
@@ -689,7 +689,7 @@
         "pain_card_aHntBF": {
           "type": "pain_card",
           "settings": {
-            "tag": "Upper Body",
+            "tag": "",
             "title": "Family Everyday Wellness",
             "description": "For everyday muscle soreness and stiffness after life's daily routines.",
             "link": "",
@@ -701,7 +701,7 @@
         "pain_card_DxQ8wM": {
           "type": "pain_card",
           "settings": {
-            "tag": "Upper Body",
+            "tag": "",
             "title": "Busy Parents & Homemakers",
             "description": "Daily household tasks can leave your back, shoulders, and muscles feeling tired.",
             "link": "",
@@ -713,7 +713,7 @@
         "pain_card_dtNQKx": {
           "type": "pain_card",
           "settings": {
-            "tag": "1",
+            "tag": "",
             "title": "Drivers & Frequent Travelers",
             "description": "Long drives and travel can leave your back, neck, and legs feeling stiff.",
             "link": "",
@@ -758,7 +758,7 @@
         "tag_border_color": "",
         "tag_radius": 20,
         "tag_font_size": 12,
-        "bottom_note": "Clinically informed botanicals designed for rapid cutaneous absorption.",
+        "bottom_note": "",
         "bottom_note_color": "#6b7280",
         "bottom_note_size": 14,
         "bg_color": "{{ settings.color_palette.background }}",
