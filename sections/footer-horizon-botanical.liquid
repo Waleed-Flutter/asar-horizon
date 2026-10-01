@@ -327,7 +327,8 @@
               <div class="hb-footer-brand">
                 {% if block.settings.logo != blank %}
                   {%- assign brand_logo_w = block.settings.logo_width | default: 150 -%}
-                  {{ block.settings.logo | image_url: width: 500 | image_tag: loading: 'lazy', alt: shop.name, style: 'width: ' | append: brand_logo_w | append: 'px; max-width: 100%; height: auto;' }}
+                  {%- capture brand_style -%}width: {{ brand_logo_w }}px; max-width: 100%; height: auto;{%- endcapture -%}
+                  {{ block.settings.logo | image_url: width: 500 | image_tag: loading: 'lazy', alt: shop.name, style: brand_style }}
                 {% else %}
                   <img src="{{ 'horizon-logo.svg' | asset_url }}" alt="{{ shop.name }}" style="width: {{ block.settings.logo_width | default: 150 }}px; max-width: 100%; height: auto;" width="{{ block.settings.logo_width | default: 150 }}" height="38">
                 {% endif %}
