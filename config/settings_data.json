@@ -121,6 +121,7 @@
           "cart_badge_bg": "#7a2a2b",
           "cart_badge_color": "#ffffff",
           "show_drawer_logo": true,
+          "drawer_logo": "shopify://shop_images/Asar_Wellness_Logo.png",
           "drawer_logo_width": 130,
           "drawer_logo_filter": "none",
           "drawer_logo_bg": "",
