@@ -460,9 +460,90 @@
         "padding-block-start": 50,
         "padding-block-end": 100
       }
+    },
+    "daily_routine_steps_Rkz4jy": {
+      "type": "daily-routine-steps",
+      "blocks": {
+        "step_AHbtFq": {
+          "type": "step",
+          "settings": {
+            "step_number": "",
+            "title": "Joint Stiffness",
+            "description": "For everyday movement.",
+            "image": "shopify://shop_images/WhatsApp_Image_2026-09-29_at_5.57.56_PM.jpg",
+            "fallback_image": "routine-step-apply.jpg",
+            "custom_step_color": "",
+            "custom_title_color": ""
+          }
+        },
+        "step_hwWqnh": {
+          "type": "step",
+          "settings": {
+            "step_number": "",
+            "title": "Muscle Fatigue",
+            "description": "After work, activity or exercise.",
+            "image": "shopify://shop_images/WhatsApp_Image_2026-09-29_at_6.01.21_PM.jpg",
+            "fallback_image": "routine-step-massage.jpg",
+            "custom_step_color": "",
+            "custom_title_color": ""
+          }
+        },
+        "step_FdGbCj": {
+          "type": "step",
+          "settings": {
+            "step_number": "",
+            "title": "Back & Body Discomfort",
+            "description": "For everyday physical strain.",
+            "image": "shopify://shop_images/WhatsApp_Image_2026-09-29_at_6.01.21_PM_ac9e4bea-2a4d-424b-a31c-a84c9480d939.jpg",
+            "fallback_image": "routine-step-relief.jpg",
+            "custom_step_color": "",
+            "custom_title_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "step_AHbtFq",
+        "step_hwWqnh",
+        "step_FdGbCj"
+      ],
+      "name": "Daily Routine Steps",
+      "settings": {
+        "eyebrow": "",
+        "eyebrow_color": "#257942",
+        "eyebrow_size": 13,
+        "heading": "Simple Enough for Every Day.",
+        "heading_color": "#111827",
+        "heading_size": 40,
+        "heading_size_mobile": 28,
+        "subheading": "Incorporate soothing botanical nourishment into your morning routine or post-work relaxation in three effortless steps.",
+        "subheading_color": "#4b5563",
+        "subheading_size": 16,
+        "card_bg": "#ffffff",
+        "card_border_color": "#e5e7eb",
+        "card_hover_border_color": "#257942",
+        "card_radius": 16,
+        "card_shadow": true,
+        "img_hover_zoom": true,
+        "step_num_color": "#257942",
+        "step_num_size": 14,
+        "step_title_color": "#111827",
+        "step_title_size": 18,
+        "step_desc_color": "#4b5563",
+        "step_desc_size": 14,
+        "show_trust_bar": true,
+        "trust_bar_bg": "#e8f5e9",
+        "trust_bar_color": "#1b5e20",
+        "trust_bar_icon_color": "#257942",
+        "trust_bar_radius": 50,
+        "trust_bar_size": 14,
+        "background_color": "#ffffff",
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "daily_routine_steps_Rkz4jy"
   ]
 }
