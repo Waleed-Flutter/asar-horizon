@@ -1,0 +1,294 @@
+{%- comment -%}
+  Custom Fonts Engine
+  Supports:
+  1. External Web Font Stylesheets (Google Fonts, Adobe Typekit, etc.)
+  2. Uploaded Custom Font Files (.woff2, .woff, .ttf, .otf) with dynamic @font-face generation
+  3. Global site-wide font override (Headings & Body)
+  4. Heading font override (H1-H6, product titles, section headers)
+  5. Body font override (body text, paragraphs, buttons, navigation, cart, footer, reviews)
+  6. Accent font override (subheadings, badges, tags)
+  7. Advanced custom CSS / @font-face rules
+{%- endcomment -%}
+
+{%- liquid
+  assign font_stylesheet = settings.custom_font_stylesheet_url | strip
+
+  assign global_font_name = settings.global_custom_font_name | strip | remove: '"' | remove: "'"
+  assign heading_font_name = settings.custom_heading_font_name | strip | remove: '"' | remove: "'"
+  assign body_font_name = settings.custom_body_font_name | strip | remove: '"' | remove: "'"
+  assign accent_font_name = settings.custom_accent_font_name | strip | remove: '"' | remove: "'"
+
+  assign enable_global = false
+  if settings.enable_global_custom_font and global_font_name != blank
+    assign enable_global = true
+  elsif settings.global_custom_font_url != blank and global_font_name != blank
+    assign enable_global = true
+  endif
+
+  assign enable_heading = false
+  if settings.enable_custom_heading_font or heading_font_name != blank or settings.custom_heading_font_url != blank
+    if heading_font_name != blank
+      assign enable_heading = true
+    endif
+  endif
+
+  assign enable_body = false
+  if settings.enable_custom_body_font or body_font_name != blank or settings.custom_body_font_url != blank
+    if body_font_name != blank
+      assign enable_body = true
+    endif
+  endif
+
+  assign enable_accent = false
+  if settings.enable_custom_accent_font or accent_font_name != blank or settings.custom_accent_font_url != blank
+    if accent_font_name != blank
+      assign enable_accent = true
+    endif
+  endif
+-%}
+
+{%- if font_stylesheet != blank -%}
+  {%- if font_stylesheet contains 'fonts.googleapis.com' -%}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  {%- elsif font_stylesheet contains 'use.typekit.net' -%}
+    <link rel="preconnect" href="https://use.typekit.net" crossorigin>
+  {%- endif -%}
+  <link rel="stylesheet" href="{{ font_stylesheet }}">
+{%- endif -%}
+
+{%- style -%}
+  {%- comment -%} Dynamic @font-face for Global Font File {%- endcomment -%}
+  {%- if settings.global_custom_font_url != blank and global_font_name != blank -%}
+    {%- liquid
+      assign g_url = settings.global_custom_font_url | strip
+      if g_url contains 'http://' or g_url contains 'https://' or g_url contains '//'
+        assign g_src = g_url
+      elsif g_url contains 'assets/'
+        assign g_clean = g_url | remove: 'assets/'
+        assign g_src = g_clean | asset_url
+      else
+        assign g_src = g_url | file_url
+      endif
+
+      assign g_format = 'woff2'
+      if g_url contains '.woff2'
+        assign g_format = 'woff2'
+      elsif g_url contains '.woff'
+        assign g_format = 'woff'
+      elsif g_url contains '.ttf'
+        assign g_format = 'truetype'
+      elsif g_url contains '.otf'
+        assign g_format = 'opentype'
+      endif
+    -%}
+    @font-face {
+      font-family: '{{ global_font_name }}';
+      src: url('{{ g_src }}') format('{{ g_format }}');
+      font-weight: {{ settings.global_custom_font_weight | default: '400' }};
+      font-style: normal;
+      font-display: swap;
+    }
+  {%- endif -%}
+
+  {%- comment -%} Dynamic @font-face for Heading Font File {%- endcomment -%}
+  {%- if settings.custom_heading_font_url != blank and heading_font_name != blank -%}
+    {%- liquid
+      assign h_url = settings.custom_heading_font_url | strip
+      if h_url contains 'http://' or h_url contains 'https://' or h_url contains '//'
+        assign h_src = h_url
+      elsif h_url contains 'assets/'
+        assign h_clean = h_url | remove: 'assets/'
+        assign h_src = h_clean | asset_url
+      else
+        assign h_src = h_url | file_url
+      endif
+
+      assign h_format = 'woff2'
+      if h_url contains '.woff2'
+        assign h_format = 'woff2'
+      elsif h_url contains '.woff'
+        assign h_format = 'woff'
+      elsif h_url contains '.ttf'
+        assign h_format = 'truetype'
+      elsif h_url contains '.otf'
+        assign h_format = 'opentype'
+      endif
+    -%}
+    @font-face {
+      font-family: '{{ heading_font_name }}';
+      src: url('{{ h_src }}') format('{{ h_format }}');
+      font-weight: {{ settings.custom_heading_font_weight | default: '600' }};
+      font-style: normal;
+      font-display: swap;
+    }
+  {%- endif -%}
+
+  {%- comment -%} Dynamic @font-face for Body Font File {%- endcomment -%}
+  {%- if settings.custom_body_font_url != blank and body_font_name != blank -%}
+    {%- liquid
+      assign b_url = settings.custom_body_font_url | strip
+      if b_url contains 'http://' or b_url contains 'https://' or b_url contains '//'
+        assign b_src = b_url
+      elsif b_url contains 'assets/'
+        assign b_clean = b_url | remove: 'assets/'
+        assign b_src = b_clean | asset_url
+      else
+        assign b_src = b_url | file_url
+      endif
+
+      assign b_format = 'woff2'
+      if b_url contains '.woff2'
+        assign b_format = 'woff2'
+      elsif b_url contains '.woff'
+        assign b_format = 'woff'
+      elsif b_url contains '.ttf'
+        assign b_format = 'truetype'
+      elsif b_url contains '.otf'
+        assign b_format = 'opentype'
+      endif
+    -%}
+    @font-face {
+      font-family: '{{ body_font_name }}';
+      src: url('{{ b_src }}') format('{{ b_format }}');
+      font-weight: {{ settings.custom_body_font_weight | default: '400' }};
+      font-style: normal;
+      font-display: swap;
+    }
+  {%- endif -%}
+
+  {%- comment -%} Dynamic @font-face for Accent Font File {%- endcomment -%}
+  {%- if settings.custom_accent_font_url != blank and accent_font_name != blank -%}
+    {%- liquid
+      assign a_url = settings.custom_accent_font_url | strip
+      if a_url contains 'http://' or a_url contains 'https://' or a_url contains '//'
+        assign a_src = a_url
+      elsif a_url contains 'assets/'
+        assign a_clean = a_url | remove: 'assets/'
+        assign a_src = a_clean | asset_url
+      else
+        assign a_src = a_url | file_url
+      endif
+
+      assign a_format = 'woff2'
+      if a_url contains '.woff2'
+        assign a_format = 'woff2'
+      elsif a_url contains '.woff'
+        assign a_format = 'woff'
+      elsif a_url contains '.ttf'
+        assign a_format = 'truetype'
+      elsif a_url contains '.otf'
+        assign a_format = 'opentype'
+      endif
+    -%}
+    @font-face {
+      font-family: '{{ accent_font_name }}';
+      src: url('{{ a_src }}') format('{{ a_format }}');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+  {%- endif -%}
+
+  :root {
+    {%- if enable_global -%}
+      --font-body--family: '{{ global_font_name }}', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-heading--family: '{{ global_font_name }}', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-subheading--family: '{{ global_font_name }}', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-accent--family: '{{ global_font_name }}', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-paragraph--family: '{{ global_font_name }}', sans-serif;
+      --font-h1--family: '{{ global_font_name }}', sans-serif;
+      --font-h2--family: '{{ global_font_name }}', sans-serif;
+      --font-h3--family: '{{ global_font_name }}', sans-serif;
+      --font-h4--family: '{{ global_font_name }}', sans-serif;
+      --font-h5--family: '{{ global_font_name }}', sans-serif;
+      --font-h6--family: '{{ global_font_name }}', sans-serif;
+      --font-body-family: '{{ global_font_name }}', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-heading-family: '{{ global_font_name }}', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --hb-font-main: '{{ global_font_name }}', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --asar-font-serif: '{{ global_font_name }}', sans-serif;
+      --asar-font-sans: '{{ global_font_name }}', sans-serif;
+      --asar-font-badge: '{{ global_font_name }}', sans-serif;
+      --button-font-family-primary: '{{ global_font_name }}', sans-serif;
+      --button-font-family-secondary: '{{ global_font_name }}', sans-serif;
+    {%- else -%}
+      {%- if enable_heading -%}
+        --font-heading--family: '{{ heading_font_name }}', Georgia, serif;
+        --font-heading-family: '{{ heading_font_name }}', Georgia, serif;
+        --font-h1--family: '{{ heading_font_name }}', Georgia, serif;
+        --font-h2--family: '{{ heading_font_name }}', Georgia, serif;
+        --font-h3--family: '{{ heading_font_name }}', Georgia, serif;
+        --font-h4--family: '{{ heading_font_name }}', Georgia, serif;
+        --font-h5--family: '{{ heading_font_name }}', Georgia, serif;
+        --font-h6--family: '{{ heading_font_name }}', Georgia, serif;
+        --asar-font-serif: '{{ heading_font_name }}', Georgia, serif;
+        --asar-font-badge: '{{ heading_font_name }}', Georgia, serif;
+        --font-heading--weight: {{ settings.custom_heading_font_weight | default: '600' }};
+        --font-heading-weight: {{ settings.custom_heading_font_weight | default: '600' }};
+      {%- endif -%}
+
+      {%- if enable_body -%}
+        --font-body--family: '{{ body_font_name }}', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        --font-body-family: '{{ body_font_name }}', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        --font-paragraph--family: '{{ body_font_name }}', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        --hb-font-main: '{{ body_font_name }}', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        --asar-font-sans: '{{ body_font_name }}', sans-serif;
+        --font-body--weight: {{ settings.custom_body_font_weight | default: '400' }};
+        --font-body-weight: {{ settings.custom_body_font_weight | default: '400' }};
+        --button-font-family-primary: '{{ body_font_name }}', sans-serif;
+        --button-font-family-secondary: '{{ body_font_name }}', sans-serif;
+      {%- endif -%}
+
+      {%- if enable_accent -%}
+        --font-subheading--family: '{{ accent_font_name }}', sans-serif;
+        --font-accent--family: '{{ accent_font_name }}', sans-serif;
+      {%- endif -%}
+    {%- endif -%}
+  }
+
+  {%- if enable_global -%}
+    body, html, input, textarea, select, button,
+    h1, h2, h3, h4, h5, h6,
+    .h1, .h2, .h3, .h4, .h5, .h6,
+    p, span, a, label, li,
+    .hb-wrapper, .hb-title, .hb-body, .hb-text,
+    .jdgm-rev-widg, .jdgm-rev,
+    .product-title, .header, .footer,
+    cart-drawer, .cart-drawer {
+      font-family: '{{ global_font_name }}', -apple-system, BlinkMacSystemFont, sans-serif !important;
+    }
+  {%- else -%}
+    {%- if enable_heading -%}
+      h1, h2, h3, h4, h5, h6,
+      .h1, .h2, .h3, .h4, .h5, .h6,
+      .heading, .title,
+      .hb-title, .hb-heading, .hb-step-title, .hb-ing-title, .hb-why-title,
+      .product__title, .product-title,
+      .section-heading, .collection__title,
+      .jdgm-rev__author, .jdgm-widget-title,
+      .cart-drawer__title {
+        font-family: '{{ heading_font_name }}', Georgia, serif !important;
+        font-weight: {{ settings.custom_heading_font_weight | default: '600' }};
+      }
+    {%- endif -%}
+
+    {%- if enable_body -%}
+      body, p, li, a, input, textarea, select, button,
+      .hb-body, .hb-text, .hb-step-desc, .hb-why-desc, .hb-ing-role,
+      .product__description, .jdgm-rev__body,
+      .menu-drawer, .header__menu-item, .footer__menu-item {
+        font-family: '{{ body_font_name }}', -apple-system, BlinkMacSystemFont, sans-serif !important;
+      }
+    {%- endif -%}
+
+    {%- if enable_accent -%}
+      .badge, .tag, .hb-badge, .caption, .subheading, .hb-ing-tag {
+        font-family: '{{ accent_font_name }}', sans-serif !important;
+      }
+    {%- endif -%}
+  {%- endif -%}
+
+  {%- if settings.custom_font_css != blank -%}
+    {{ settings.custom_font_css }}
+  {%- endif -%}
+{%- endstyle -%}
