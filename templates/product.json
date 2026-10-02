@@ -213,7 +213,7 @@
                 "custom_variant_text": "{{ settings.color_palette.background }}",
                 "custom_variant_border": "{{ settings.color_palette.foreground }}",
                 "selected_variant_style_class": "custom",
-                "custom_selected_variant_background": "#7A2A2B",
+                "custom_selected_variant_background": "#7a2a2b",
                 "custom_selected_variant_text": "{{ settings.color_palette.background }}",
                 "custom_selected_variant_border": "{{ settings.color_palette.foreground }}",
                 "alignment": "left",
@@ -284,7 +284,7 @@
                     "custom_button_background": "#257942",
                     "custom_button_text": "#ffffff",
                     "custom_button_border": "#257942",
-                    "custom_button_hover_background": "#7A2A2B",
+                    "custom_button_hover_background": "#7a2a2b",
                     "custom_button_hover_text": "#ffffff",
                     "custom_button_radius": 14
                   },
@@ -457,6 +457,88 @@
         "gap": 48,
         "enable_sticky_add_to_cart": true,
         "background_color": "",
+        "padding-block-start": 50,
+        "padding-block-end": 100
+      }
+    },
+    "179094252274f5018c": {
+      "type": "_blocks",
+      "blocks": {
+        "judge_me_reviews_review_widget_D9qwDV": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "sample_data",
+            "max_width": 1200,
+            "show_shop_reviews": true,
+            "empty_state": "empty_widget"
+          }
+        },
+        "judge_me_reviews_videos_carousel_djeBd6": {
+          "type": "shopify://apps/judge-me-reviews/blocks/videos_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "show_sample_reviews": true,
+            "reviews_selection": "all",
+            "products": [
+              "asar-ostrich-oil"
+            ],
+            "filter_pinned": true,
+            "filter_featured": true,
+            "filter_custom_tags": "",
+            "star_rating": "all",
+            "review_type": "photo_and_video",
+            "max_reviews": 20,
+            "show_reviewer_name": false,
+            "stars_size": "medium",
+            "text_size": "medium",
+            "arrows_position": "hidden",
+            "max_width": 1100,
+            "corner_styling": "round",
+            "header_text_color": "#000000",
+            "card_color": "#7D7D7D",
+            "stars_color": "#D7C66A",
+            "text_color": "#FFFFFF",
+            "arrows_color": "#000000",
+            "show_drop_shadow": true,
+            "show_border": true,
+            "border_color": "#7A2A2B",
+            "autoplay_media": true,
+            "transition_speed": 5,
+            "carousel_style": "highlight",
+            "header_text": "Customer Reviews",
+            "show_average_rating": true,
+            "rating_display": "default"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_D9qwDV",
+        "judge_me_reviews_videos_carousel_djeBd6"
+      ],
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "background_media": "none",
+        "background_color": "",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_color": "",
+        "border_radius": 0,
         "padding-block-start": 0,
         "padding-block-end": 0
       }
@@ -606,6 +688,7 @@
   },
   "order": [
     "main",
+    "179094252274f5018c",
     "product_recommendations_qggXJq"
   ]
 }

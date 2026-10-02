@@ -249,6 +249,11 @@
         "type": "shopify://apps/scroll-to-top-pro/blocks/app-embed/48ed35da-915e-406b-b5ab-7b699e6e1635",
         "disabled": false,
         "settings": {}
+      },
+      "14060646107696862457": {
+        "type": "shopify://apps/judge-me-reviews/blocks/judgeme_core/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+        "disabled": false,
+        "settings": {}
       }
     },
     "color_palette": {
