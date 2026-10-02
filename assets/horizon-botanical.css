@@ -1312,7 +1312,7 @@
 
 
 /* ==========================================================================
-   11. JUDGE.ME MODERN CARD GRID STYLING
+   11. JUDGE.ME HORIZONTAL CARD GRID STYLING (MATCHING EXACT REFERENCE)
    ========================================================================== */
 
 /* Main Container */
@@ -1326,53 +1326,90 @@
 
 /* Header & Summary */
 .jdgm-rev-widg__header {
-  border-bottom: 1px solid #eef2ee !important;
-  padding-bottom: 30px !important;
-  margin-bottom: 36px !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: space-between !important;
+  align-items: flex-start !important;
+  border-bottom: 1px solid #f0f2f0 !important;
+  padding-bottom: 24px !important;
+  margin-bottom: 28px !important;
 }
 
 .jdgm-rev-widg__title {
-  font-size: 30px !important;
-  font-weight: 800 !important;
+  font-size: 22px !important;
+  font-weight: 700 !important;
   color: #111827 !important;
-  letter-spacing: -0.02em !important;
-  margin-bottom: 14px !important;
-  line-height: 1.25 !important;
+  margin: 0 0 6px 0 !important;
+  line-height: 1.2 !important;
   visibility: visible !important;
 }
 
 .jdgm-rev-widg__summary {
   display: flex !important;
   align-items: center !important;
-  gap: 12px !important;
-  flex-wrap: wrap !important;
+  gap: 8px !important;
+  margin-bottom: 14px !important;
 }
 
 .jdgm-rev-widg__summary-stars .jdgm-star {
-  color: #7a2a2b !important;
-  font-size: 20px !important;
+  color: #2ca24d !important;
+  font-size: 17px !important;
 }
 
 .jdgm-rev-widg__summary-text {
-  font-size: 15px !important;
+  font-size: 14px !important;
   font-weight: 600 !important;
-  color: #4b5563 !important;
+  color: #374151 !important;
   visibility: visible !important;
 }
 
-/* "Write a Review" Button */
+/* Photo thumbnails under header on the left */
+.jdgm-all-reviews-media-slider,
+.jdgm-rev-widg .jdgm-gallery {
+  display: flex !important;
+  gap: 10px !important;
+  margin-top: 10px !important;
+  width: 100% !important;
+}
+
+.jdgm-gallery__thumbnail-wrapper,
+.jdgm-all-reviews-media__item {
+  width: 64px !important;
+  height: 64px !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+  border: 1px solid #e5e7eb !important;
+}
+
+.jdgm-gallery__thumbnail-wrapper img,
+.jdgm-all-reviews-media__item img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+/* Right action buttons */
+.jdgm-rev-widg__actions,
+.jdgm-rev-widg__header-actions {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  margin-left: auto !important;
+}
+
+/* Green "Write a review" button */
 .jdgm-write-rev-link,
 a.jdgm-write-rev-link {
-  background-color: #7a2a2b !important;
+  background-color: #2ca24d !important;
   color: #ffffff !important;
   border-radius: 50px !important;
-  padding: 12px 28px !important;
-  font-weight: 700 !important;
-  font-size: 14px !important;
-  border: 1px solid #7a2a2b !important;
-  box-shadow: 0 4px 14px rgba(122, 42, 43, 0.22) !important;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  padding: 9px 24px !important;
+  font-weight: 600 !important;
+  font-size: 13.5px !important;
+  border: 1px solid #2ca24d !important;
+  transition: all 0.2s ease !important;
   text-decoration: none !important;
+  box-shadow: none !important;
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -1380,172 +1417,191 @@ a.jdgm-write-rev-link {
 
 .jdgm-write-rev-link:hover,
 a.jdgm-write-rev-link:hover {
-  background-color: #5c1e20 !important;
-  border-color: #5c1e20 !important;
-  transform: translateY(-2px) !important;
-  box-shadow: 0 6px 20px rgba(122, 42, 43, 0.32) !important;
+  background-color: #23863e !important;
+  border-color: #23863e !important;
+  transform: translateY(-1px) !important;
 }
 
-/* Transform Reviews List into a 2-Column Responsive Card Grid */
+/* Filter and Sort buttons */
+.jdgm-sort-dropdown,
+.jdgm-filter-dropdown,
+.jdgm-rev-widg__sort-wrapper select,
+.jdgm-sort-btn {
+  border-radius: 8px !important;
+  border: 1px solid #d1d5db !important;
+  background-color: #ffffff !important;
+  padding: 8px 12px !important;
+  font-size: 13px !important;
+  color: #374151 !important;
+}
+
+/* 3-Column Horizontal Grid for Reviews */
 .jdgm-rev-widg__reviews {
   display: grid !important;
-  grid-template-columns: repeat(2, 1fr) !important;
-  gap: 24px !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 20px !important;
   align-items: stretch !important;
   padding: 0 !important;
   margin: 0 !important;
 }
 
-@media (max-width: 860px) {
+@media (max-width: 1024px) {
   .jdgm-rev-widg__reviews {
-    grid-template-columns: 1fr !important;
+    grid-template-columns: repeat(2, 1fr) !important;
     gap: 18px !important;
   }
 }
 
-/* Individual Review Card */
+@media (max-width: 680px) {
+  .jdgm-rev-widg__reviews {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+}
+
+/* Each Review Card (Horizontal Grid Cards) */
 .jdgm-rev {
   background-color: #ffffff !important;
-  border: 1px solid #eef2ee !important;
-  border-radius: 18px !important;
-  padding: 26px 28px !important;
-  box-shadow: 0 3px 16px rgba(0, 0, 0, 0.03) !important;
+  border: 1px solid #eef0ee !important;
+  border-radius: 12px !important;
+  padding: 22px 22px !important;
+  box-sizing: border-box !important;
   display: flex !important;
   flex-direction: column !important;
-  justify-content: space-between !important;
+  justify-content: flex-start !important;
   position: relative !important;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
   margin: 0 !important;
-  box-sizing: border-box !important;
-  border-top: 1px solid #eef2ee !important;
+  border-top: 1px solid #eef0ee !important;
+  box-shadow: none !important;
+  transition: all 0.25s ease !important;
 }
 
 .jdgm-rev:hover {
-  transform: translateY(-3px) !important;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08) !important;
-  border-color: #dde4dd !important;
+  border-color: #d1d5db !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04) !important;
 }
 
-/* Review Header */
+/* Header inside Card: Vertical Stack (Stars, then Author, then Date) */
 .jdgm-rev__header {
   display: flex !important;
-  align-items: center !important;
-  flex-wrap: wrap !important;
-  gap: 12px !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  padding: 0 !important;
   margin-bottom: 12px !important;
-  position: relative !important;
-  padding-right: 90px !important;
+  width: 100% !important;
 }
 
-/* Reviewer Avatar Circle */
+/* Hide bulky circle avatar to match reference */
 .jdgm-rev__icon {
-  width: 44px !important;
-  height: 44px !important;
-  border-radius: 50% !important;
-  background-color: #f7ede8 !important;
-  color: #7a2a2b !important;
-  font-weight: 800 !important;
-  font-size: 16px !important;
+  display: none !important;
+}
+
+/* 1. Green Stars at the top */
+.jdgm-rev__rating {
+  order: 1 !important;
   display: inline-flex !important;
   align-items: center !important;
-  justify-content: center !important;
-  text-transform: uppercase !important;
-  flex-shrink: 0 !important;
-  border: 1px solid rgba(122, 42, 43, 0.15) !important;
+  gap: 3px !important;
+  margin: 0 0 10px 0 !important;
+  padding: 0 !important;
 }
 
-/* Author Name & Badges */
+.jdgm-rev__rating .jdgm-star {
+  color: #2ca24d !important; /* Reference Vibrant Green */
+  font-size: 18px !important;
+}
+
+/* 2. Reviewer Name */
 .jdgm-rev__author-wrapper {
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 2px !important;
+  order: 2 !important;
+  display: block !important;
+  margin-bottom: 2px !important;
 }
 
 .jdgm-rev__author {
   font-weight: 700 !important;
-  font-size: 15.5px !important;
+  font-size: 15px !important;
   color: #111827 !important;
-  line-height: 1.2 !important;
+  line-height: 1.3 !important;
 }
 
-.jdgm-rev__buyer-badge {
-  color: #257942 !important;
-  font-size: 12px !important;
-  font-weight: 600 !important;
-  display: inline-flex !important;
-  align-items: center !important;
-}
-
-/* Rating Stars */
-.jdgm-rev__rating {
-  display: inline-flex !important;
-  align-items: center !important;
-  gap: 3px !important;
-  width: 100% !important;
-  margin-top: 6px !important;
-}
-
-.jdgm-rev__rating .jdgm-star {
-  color: #7a2a2b !important;
-  font-size: 16px !important;
-}
-
-/* Date / Timestamp */
+/* 3. Date below author */
 .jdgm-rev__timestamp {
-  position: absolute !important;
-  top: 6px !important;
-  right: 0 !important;
-  font-size: 12.5px !important;
-  color: #9ca3af !important;
-  font-weight: 500 !important;
-}
-
-/* Review Content & Body */
-.jdgm-rev__content {
-  flex-grow: 1 !important;
-  margin-top: 8px !important;
-}
-
-.jdgm-rev__title {
-  font-size: 16px !important;
-  font-weight: 700 !important;
-  color: #111827 !important;
-  margin-bottom: 8px !important;
+  order: 3 !important;
+  position: static !important;
   display: block !important;
-  line-height: 1.35 !important;
+  font-size: 12.5px !important;
+  color: #6b7280 !important;
+  font-weight: 400 !important;
+  margin: 0 0 8px 0 !important;
 }
 
-.jdgm-rev__body p {
-  font-size: 14.5px !important;
-  line-height: 1.65 !important;
-  color: #4b5563 !important;
+/* Verified Buyer Badge if present */
+.jdgm-rev__buyer-badge {
+  order: 4 !important;
+  color: #2ca24d !important;
+  font-size: 11.5px !important;
+  font-weight: 600 !important;
+  margin-bottom: 6px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+/* Review Text Content */
+.jdgm-rev__content {
+  display: flex !important;
+  flex-direction: column !important;
+  flex-grow: 1 !important;
   margin: 0 !important;
 }
 
-/* Customer Photos inside Card */
+.jdgm-rev__title {
+  font-weight: 700 !important;
+  font-size: 14.5px !important;
+  color: #111827 !important;
+  margin: 0 0 6px 0 !important;
+  line-height: 1.3 !important;
+}
+
+.jdgm-rev__title:empty {
+  display: none !important;
+}
+
+.jdgm-rev__body {
+  margin: 0 0 14px 0 !important;
+  flex-grow: 1 !important;
+}
+
+.jdgm-rev__body p {
+  font-size: 13.5px !important;
+  line-height: 1.55 !important;
+  color: #374151 !important;
+  margin: 0 !important;
+}
+
+/* Customer Photo Thumbnail at bottom-left */
 .jdgm-rev__pics {
+  margin-top: auto !important;
+  padding-top: 10px !important;
+  border-top: none !important;
   display: flex !important;
-  gap: 12px !important;
-  flex-wrap: wrap !important;
-  margin-top: 18px !important;
-  padding-top: 16px !important;
-  border-top: 1px solid #f3f4f6 !important;
+  gap: 8px !important;
+  justify-content: flex-start !important;
 }
 
 .jdgm-rev__pic-link {
-  width: 90px !important;
-  height: 90px !important;
-  border-radius: 12px !important;
+  width: 68px !important;
+  height: 68px !important;
+  border-radius: 10px !important;
   overflow: hidden !important;
   border: 1px solid #e5e7eb !important;
-  transition: transform 0.25s ease, box-shadow 0.25s ease !important;
   display: inline-block !important;
-  cursor: pointer !important;
+  flex-shrink: 0 !important;
+  transition: transform 0.2s ease !important;
 }
 
 .jdgm-rev__pic-link:hover {
   transform: scale(1.05) !important;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12) !important;
 }
 
 .jdgm-rev__pic-img {
@@ -1560,11 +1616,11 @@ a.jdgm-write-rev-link:hover {
 .jdgm-write-rev-form {
   grid-column: 1 / -1 !important;
   background-color: #ffffff !important;
-  border-radius: 18px !important;
+  border-radius: 14px !important;
   border: 1px solid #e5e7eb !important;
-  padding: 28px !important;
+  padding: 24px !important;
   margin-bottom: 24px !important;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04) !important;
 }
 
 /* Pagination Spans Full Width */
@@ -1572,16 +1628,5 @@ a.jdgm-write-rev-link:hover {
 .jdgm-rev-widg__paginate-spinner-wrapper {
   grid-column: 1 / -1 !important;
   text-align: center !important;
-  margin-top: 28px !important;
-}
-
-/* Gallery Thumbnails */
-.jdgm-gallery__thumbnail-wrapper {
-  border-radius: 10px !important;
-  overflow: hidden !important;
-}
-
-.jdgm-all-reviews-media-slider {
-  margin-top: 20px !important;
-  padding: 12px 0 !important;
+  margin-top: 24px !important;
 }
