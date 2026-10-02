@@ -509,7 +509,7 @@
       "name": "Daily Routine Steps",
       "settings": {
         "eyebrow": "The Pain We Built This For",
-        "eyebrow_color": "#7A2A2B",
+        "eyebrow_color": "#7a2a2b",
         "eyebrow_size": 13,
         "heading": "Made for the Moments Your Body Needs a Little More Care.",
         "heading_color": "#111827",
@@ -520,11 +520,11 @@
         "subheading_size": 16,
         "card_bg": "#ffffff",
         "card_border_color": "#e5e7eb",
-        "card_hover_border_color": "#7A2A2B",
+        "card_hover_border_color": "#7a2a2b",
         "card_radius": 14,
         "card_shadow": false,
         "img_hover_zoom": false,
-        "step_num_color": "#7A2A2B",
+        "step_num_color": "#7a2a2b",
         "step_num_size": 14,
         "step_title_color": "#000000",
         "step_title_size": 18,
@@ -532,8 +532,8 @@
         "step_desc_size": 14,
         "show_trust_bar": true,
         "trust_bar_bg": "#e8f5e9",
-        "trust_bar_color": "#7A2A2B",
-        "trust_bar_icon_color": "#7A2A2B",
+        "trust_bar_color": "#7a2a2b",
+        "trust_bar_icon_color": "#7a2a2b",
         "trust_bar_radius": 50,
         "trust_bar_size": 14,
         "background_color": "#ffffff",
@@ -607,7 +607,7 @@
       "name": "Botanical Ingredients",
       "settings": {
         "eyebrow": "WHAT'S INSIDE",
-        "eyebrow_color": "#7A2A2B",
+        "eyebrow_color": "#7a2a2b",
         "eyebrow_size": 13,
         "heading": "Nature powered solutions .Created with Ancient Wisdom.",
         "heading_color": "#000000",
@@ -621,7 +621,7 @@
         "circle_size": 104,
         "circle_bg": "#ffffff",
         "circle_border_color": "#ffffff",
-        "circle_hover_border_color": "#7A2A2B",
+        "circle_hover_border_color": "#7a2a2b",
         "circle_border_width": 3,
         "circle_radius": 50,
         "circle_shadow": true,
@@ -638,10 +638,35 @@
     "17909465968ad99ed4": {
       "type": "_blocks",
       "blocks": {
+        "judge_me_reviews_review_snippet_widget_GGb74H": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_snippet_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "reviews_selection": "auto",
+            "products": [],
+            "filter_pinned": false,
+            "filter_featured": false,
+            "filter_custom_tags": "",
+            "min_star_rating": "inherit",
+            "show_review_media": true,
+            "max_reviews": 5,
+            "review_length": "medium",
+            "text_size": "medium",
+            "max_width": 1100,
+            "max_image_size": "small",
+            "arrows_visibility": "always_shown",
+            "transition_speed": 5,
+            "corner_styling": "inherit",
+            "text_color": "",
+            "card_color": "",
+            "stars_color": "",
+            "arrows_color": "",
+            "arrows_background_color": ""
+          }
+        },
         "judge_me_reviews_review_widget_6AHjw4": {
           "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
           "settings": {
-            "review_data": "sample_data",
+            "review_data": "real_data",
             "max_width": 1200,
             "show_shop_reviews": false,
             "empty_state": "empty_widget"
@@ -649,6 +674,7 @@
         }
       },
       "block_order": [
+        "judge_me_reviews_review_snippet_widget_GGb74H",
         "judge_me_reviews_review_widget_6AHjw4"
       ],
       "settings": {
