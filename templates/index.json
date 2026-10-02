@@ -189,7 +189,7 @@
       "type": "feature-organic-story",
       "settings": {
         "layout": "image_first",
-        "image": "shopify://shop_images/Ostrich_oil_bottle_product_shoot_2K_20261002162847_jpg.jpg",
+        "image": "shopify://shop_images/OstrichOilProduct.jpg",
         "image_radius": 16,
         "image_shadow": true,
         "show_badge": false,
