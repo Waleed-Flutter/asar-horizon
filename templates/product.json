@@ -540,10 +540,105 @@
         "padding_top": 40,
         "padding_bottom": 40
       }
+    },
+    "ingredients_botanical_showcase_9zDEPf": {
+      "type": "ingredients-botanical-showcase",
+      "blocks": {
+        "ingredient_hhrj3c": {
+          "type": "ingredient",
+          "settings": {
+            "fallback_image": "ingredient-peppermint.jpg",
+            "title": "Peppermint",
+            "description": "",
+            "custom_title_color": "",
+            "custom_circle_border": ""
+          }
+        },
+        "ingredient_EKKQz9": {
+          "type": "ingredient",
+          "settings": {
+            "image": "shopify://shop_images/4006d4b31feb442c480ff6dc723b906a.jpg",
+            "fallback_image": "ingredient-lipids.jpg",
+            "title": "Capsicum Oleoresin",
+            "description": "",
+            "custom_title_color": "",
+            "custom_circle_border": ""
+          }
+        },
+        "ingredient_4YVeMn": {
+          "type": "ingredient",
+          "settings": {
+            "fallback_image": "ingredient-wintergreen.jpg",
+            "title": "Wintergreen",
+            "description": "",
+            "custom_title_color": "",
+            "custom_circle_border": ""
+          }
+        },
+        "ingredient_MBEVQa": {
+          "type": "ingredient",
+          "settings": {
+            "image": "shopify://shop_images/7083d18ad9ffc1dd97f5124f5328da64.jpg",
+            "fallback_image": "ingredient-arnica.jpg",
+            "title": "Ostrich Oil",
+            "description": "",
+            "custom_title_color": "",
+            "custom_circle_border": ""
+          }
+        },
+        "ingredient_bcKfnT": {
+          "type": "ingredient",
+          "settings": {
+            "fallback_image": "ingredient-camphor.jpg",
+            "title": "Eucalyptus",
+            "description": "",
+            "custom_title_color": "",
+            "custom_circle_border": ""
+          }
+        }
+      },
+      "block_order": [
+        "ingredient_hhrj3c",
+        "ingredient_EKKQz9",
+        "ingredient_4YVeMn",
+        "ingredient_MBEVQa",
+        "ingredient_bcKfnT"
+      ],
+      "name": "Botanical Ingredients",
+      "settings": {
+        "eyebrow": "WHAT'S INSIDE",
+        "eyebrow_color": "#7A2A2B",
+        "eyebrow_size": 13,
+        "heading": "Nature powered solutions .Created with Ancient Wisdom.",
+        "heading_color": "#000000",
+        "heading_size": 38,
+        "heading_size_mobile": 28,
+        "subheading": "",
+        "subheading_color": "#000000",
+        "subheading_size": 16,
+        "columns_desktop": 5,
+        "columns_mobile": "2",
+        "circle_size": 104,
+        "circle_bg": "#ffffff",
+        "circle_border_color": "#ffffff",
+        "circle_hover_border_color": "#7A2A2B",
+        "circle_border_width": 3,
+        "circle_radius": 50,
+        "circle_shadow": true,
+        "circle_hover_zoom": true,
+        "title_color": "#111827",
+        "title_size": 15,
+        "desc_color": "#6b7280",
+        "desc_size": 13,
+        "background_color": "#ffffff",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
     }
   },
   "order": [
     "main",
-    "daily_routine_steps_Rkz4jy"
+    "daily_routine_steps_Rkz4jy",
+    "ingredients_botanical_showcase_9zDEPf"
   ]
 }

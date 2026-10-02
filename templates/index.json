@@ -854,7 +854,7 @@
         "circle_hover_zoom": true,
         "title_color": "#111827",
         "title_size": 15,
-        "desc_color": "#6b7280",
+        "desc_color": "#000000",
         "desc_size": 13,
         "background_color": "#ffffff",
         "padding_top": 80,
