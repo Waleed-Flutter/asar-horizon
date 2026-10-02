@@ -7,24 +7,7 @@
   dir="{{ request.locale.direction | default: 'ltr' }}"
 >
   <head>
-    <link rel="preload" href="https://cdn.shopify.com/s/files/1/0730/5861/5370/files/Bellefair-Regular.woff2?v=1790949938" as="font" type="font/woff2" crossorigin>
-
-<style>
-  @font-face {
-    font-family: 'Bellefair';
-    src: url('https://cdn.shopify.com/s/files/1/0730/5861/5370/files/Bellefair-Regular.woff2?v=1790949938') format('woff2');
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-  }
-
-  h1, h2, h3, h4, h5, h6,
-  p, span, div, ul, ol, li, a, button,
-  input, select, option, label, legend, textarea, small {
-    font-family: 'Bellefair', serif !important;
-  }
-</style>
-
+    
     {%- if settings.favicon != blank -%}
       <link
         rel="icon"
