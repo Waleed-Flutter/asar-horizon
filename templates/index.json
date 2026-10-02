@@ -565,7 +565,7 @@
         "atc_button_bg": "#7a2a2b",
         "atc_button_color": "{{ settings.color_palette.background }}",
         "atc_button_border_color": "#7a2a2b",
-        "atc_button_hover_bg": "#fee6d4",
+        "atc_button_hover_bg": "#7A2A2B",
         "atc_button_hover_color": "#7a2a2b",
         "atc_button_radius": 14,
         "show_buy_it_now": true,
