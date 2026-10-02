@@ -45,7 +45,7 @@
         "btn_secondary_hover_color": "#1e6336",
         "btn_secondary_hover_bg": "",
         "btn_secondary_radius": 30,
-        "hero_image": "shopify://shop_images/ASAR_Ostrich_Oil_bottle_photogra__2K_20261002190023_jpg.jpg",
+        "hero_image": "shopify://shop_images/ASAR_Ostrich_Oil_bottle_display_2K_20261002182733_jpg.jpg",
         "image_radius": 16,
         "bg_color": "#ffffff",
         "padding_top": 60,
@@ -189,7 +189,7 @@
       "type": "feature-organic-story",
       "settings": {
         "layout": "image_first",
-        "image": "shopify://shop_images/OstrichOilProduct.jpg",
+        "image": "shopify://shop_images/ASAR_Ostrich_Oil_photography_2K_20261002185742_jpg.jpg",
         "image_radius": 16,
         "image_shadow": true,
         "show_badge": false,
@@ -607,7 +607,7 @@
     "product_spotlight_trio": {
       "type": "product-spotlight-trio",
       "settings": {
-        "image": "shopify://shop_images/Ostrich_Oil_Product_2.jpg",
+        "image": "shopify://shop_images/ASAR_Ostrich_Oil_bottle_on_2K_20261002185826_jpg.jpg",
         "image_radius": 16,
         "eyebrow": "DAILY RELIEF BLENDS",
         "eyebrow_color": "#7a2a2b",
