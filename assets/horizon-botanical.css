@@ -1309,3 +1309,279 @@
     gap: 16px;
   }
 }
+
+
+/* ==========================================================================
+   11. JUDGE.ME MODERN CARD GRID STYLING
+   ========================================================================== */
+
+/* Main Container */
+.jdgm-rev-widg {
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+  padding: 44px 20px !important;
+  box-sizing: border-box !important;
+  font-family: inherit !important;
+}
+
+/* Header & Summary */
+.jdgm-rev-widg__header {
+  border-bottom: 1px solid #eef2ee !important;
+  padding-bottom: 30px !important;
+  margin-bottom: 36px !important;
+}
+
+.jdgm-rev-widg__title {
+  font-size: 30px !important;
+  font-weight: 800 !important;
+  color: #111827 !important;
+  letter-spacing: -0.02em !important;
+  margin-bottom: 14px !important;
+  line-height: 1.25 !important;
+  visibility: visible !important;
+}
+
+.jdgm-rev-widg__summary {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  flex-wrap: wrap !important;
+}
+
+.jdgm-rev-widg__summary-stars .jdgm-star {
+  color: #7a2a2b !important;
+  font-size: 20px !important;
+}
+
+.jdgm-rev-widg__summary-text {
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  color: #4b5563 !important;
+  visibility: visible !important;
+}
+
+/* "Write a Review" Button */
+.jdgm-write-rev-link,
+a.jdgm-write-rev-link {
+  background-color: #7a2a2b !important;
+  color: #ffffff !important;
+  border-radius: 50px !important;
+  padding: 12px 28px !important;
+  font-weight: 700 !important;
+  font-size: 14px !important;
+  border: 1px solid #7a2a2b !important;
+  box-shadow: 0 4px 14px rgba(122, 42, 43, 0.22) !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  text-decoration: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.jdgm-write-rev-link:hover,
+a.jdgm-write-rev-link:hover {
+  background-color: #5c1e20 !important;
+  border-color: #5c1e20 !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(122, 42, 43, 0.32) !important;
+}
+
+/* Transform Reviews List into a 2-Column Responsive Card Grid */
+.jdgm-rev-widg__reviews {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 24px !important;
+  align-items: stretch !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+@media (max-width: 860px) {
+  .jdgm-rev-widg__reviews {
+    grid-template-columns: 1fr !important;
+    gap: 18px !important;
+  }
+}
+
+/* Individual Review Card */
+.jdgm-rev {
+  background-color: #ffffff !important;
+  border: 1px solid #eef2ee !important;
+  border-radius: 18px !important;
+  padding: 26px 28px !important;
+  box-shadow: 0 3px 16px rgba(0, 0, 0, 0.03) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  position: relative !important;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+  border-top: 1px solid #eef2ee !important;
+}
+
+.jdgm-rev:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08) !important;
+  border-color: #dde4dd !important;
+}
+
+/* Review Header */
+.jdgm-rev__header {
+  display: flex !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+  gap: 12px !important;
+  margin-bottom: 12px !important;
+  position: relative !important;
+  padding-right: 90px !important;
+}
+
+/* Reviewer Avatar Circle */
+.jdgm-rev__icon {
+  width: 44px !important;
+  height: 44px !important;
+  border-radius: 50% !important;
+  background-color: #f7ede8 !important;
+  color: #7a2a2b !important;
+  font-weight: 800 !important;
+  font-size: 16px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-transform: uppercase !important;
+  flex-shrink: 0 !important;
+  border: 1px solid rgba(122, 42, 43, 0.15) !important;
+}
+
+/* Author Name & Badges */
+.jdgm-rev__author-wrapper {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 2px !important;
+}
+
+.jdgm-rev__author {
+  font-weight: 700 !important;
+  font-size: 15.5px !important;
+  color: #111827 !important;
+  line-height: 1.2 !important;
+}
+
+.jdgm-rev__buyer-badge {
+  color: #257942 !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+/* Rating Stars */
+.jdgm-rev__rating {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 3px !important;
+  width: 100% !important;
+  margin-top: 6px !important;
+}
+
+.jdgm-rev__rating .jdgm-star {
+  color: #7a2a2b !important;
+  font-size: 16px !important;
+}
+
+/* Date / Timestamp */
+.jdgm-rev__timestamp {
+  position: absolute !important;
+  top: 6px !important;
+  right: 0 !important;
+  font-size: 12.5px !important;
+  color: #9ca3af !important;
+  font-weight: 500 !important;
+}
+
+/* Review Content & Body */
+.jdgm-rev__content {
+  flex-grow: 1 !important;
+  margin-top: 8px !important;
+}
+
+.jdgm-rev__title {
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  color: #111827 !important;
+  margin-bottom: 8px !important;
+  display: block !important;
+  line-height: 1.35 !important;
+}
+
+.jdgm-rev__body p {
+  font-size: 14.5px !important;
+  line-height: 1.65 !important;
+  color: #4b5563 !important;
+  margin: 0 !important;
+}
+
+/* Customer Photos inside Card */
+.jdgm-rev__pics {
+  display: flex !important;
+  gap: 12px !important;
+  flex-wrap: wrap !important;
+  margin-top: 18px !important;
+  padding-top: 16px !important;
+  border-top: 1px solid #f3f4f6 !important;
+}
+
+.jdgm-rev__pic-link {
+  width: 90px !important;
+  height: 90px !important;
+  border-radius: 12px !important;
+  overflow: hidden !important;
+  border: 1px solid #e5e7eb !important;
+  transition: transform 0.25s ease, box-shadow 0.25s ease !important;
+  display: inline-block !important;
+  cursor: pointer !important;
+}
+
+.jdgm-rev__pic-link:hover {
+  transform: scale(1.05) !important;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12) !important;
+}
+
+.jdgm-rev__pic-img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
+}
+
+/* Write Review Form Full-Width Card */
+.jdgm-form-wrapper,
+.jdgm-write-rev-form {
+  grid-column: 1 / -1 !important;
+  background-color: #ffffff !important;
+  border-radius: 18px !important;
+  border: 1px solid #e5e7eb !important;
+  padding: 28px !important;
+  margin-bottom: 24px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Pagination Spans Full Width */
+.jdgm-paginate,
+.jdgm-rev-widg__paginate-spinner-wrapper {
+  grid-column: 1 / -1 !important;
+  text-align: center !important;
+  margin-top: 28px !important;
+}
+
+/* Gallery Thumbnails */
+.jdgm-gallery__thumbnail-wrapper {
+  border-radius: 10px !important;
+  overflow: hidden !important;
+}
+
+.jdgm-all-reviews-media-slider {
+  margin-top: 20px !important;
+  padding: 12px 0 !important;
+}

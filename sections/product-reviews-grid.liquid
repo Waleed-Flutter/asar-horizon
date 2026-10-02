@@ -1,0 +1,617 @@
+{{ 'horizon-botanical.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  #shopify-section-{{ section.id }} {
+    background-color: {{ section.settings.background_color | default: '#fafbfa' }} !important;
+    padding-top: {{ section.settings.padding_top | default: 72 }}px !important;
+    padding-bottom: {{ section.settings.padding_bottom | default: 72 }}px !important;
+  }
+
+  @media (max-width: 768px) {
+    #shopify-section-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top | default: 72 | times: 0.65 | round }}px !important;
+      padding-bottom: {{ section.settings.padding_bottom | default: 72 | times: 0.65 | round }}px !important;
+    }
+  }
+
+  #shopify-section-{{ section.id }} .hb-reviews-header {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 44px;
+    padding: 0 16px;
+  }
+
+  #shopify-section-{{ section.id }} .hb-reviews-eyebrow {
+    color: {{ section.settings.eyebrow_color | default: '#7A2A2B' }};
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 12px;
+    display: inline-block;
+  }
+
+  #shopify-section-{{ section.id }} .hb-reviews-title {
+    color: {{ section.settings.heading_color | default: '#111827' }};
+    font-size: {{ section.settings.heading_size | default: 36 }}px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+    margin: 0 0 12px;
+  }
+
+  @media (max-width: 768px) {
+    #shopify-section-{{ section.id }} .hb-reviews-title {
+      font-size: 26px;
+    }
+  }
+
+  #shopify-section-{{ section.id }} .hb-reviews-subheading {
+    color: {{ section.settings.subheading_color | default: '#4b5563' }};
+    font-size: 15px;
+    line-height: 1.6;
+    margin: 0 0 16px;
+  }
+
+  #shopify-section-{{ section.id }} .hb-reviews-summary-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 50px;
+    padding: 6px 18px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    margin-top: 6px;
+  }
+
+  #shopify-section-{{ section.id }} .hb-reviews-summary-score {
+    font-weight: 800;
+    font-size: 15px;
+    color: #111827;
+  }
+
+  #shopify-section-{{ section.id }} .hb-reviews-summary-stars {
+    color: {{ section.settings.star_color | default: '#7A2A2B' }};
+    letter-spacing: 2px;
+    font-size: 14px;
+    display: inline-flex;
+  }
+
+  #shopify-section-{{ section.id }} .hb-reviews-summary-label {
+    font-size: 13px;
+    color: #6b7280;
+    font-weight: 500;
+  }
+
+  /* Reviews Cards Grid */
+  #shopify-section-{{ section.id }} .hb-reviews-grid {
+    display: grid !important;
+    grid-template-columns: repeat({{ section.settings.columns_desktop | default: 2 }}, 1fr) !important;
+    gap: {{ section.settings.grid_gap | default: 24 }}px !important;
+    align-items: stretch !important;
+  }
+
+  @media (max-width: 900px) {
+    #shopify-section-{{ section.id }} .hb-reviews-grid {
+      grid-template-columns: repeat({{ section.settings.columns_mobile | default: 1 }}, 1fr) !important;
+      gap: 18px !important;
+    }
+  }
+
+  #shopify-section-{{ section.id }} .hb-review-card {
+    background-color: {{ section.settings.card_bg | default: '#ffffff' }} !important;
+    border: 1px solid {{ section.settings.card_border_color | default: '#eef0ee' }} !important;
+    border-radius: {{ section.settings.card_radius | default: 18 }}px !important;
+    padding: 26px 28px !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    position: relative !important;
+    {% if section.settings.card_shadow %}
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.03) !important;
+    {% else %}
+      box-shadow: none !important;
+    {% endif %}
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  }
+
+  #shopify-section-{{ section.id }} .hb-review-card:hover {
+    transform: translateY(-3px) !important;
+    border-color: #dde4dd !important;
+    {% if section.settings.card_shadow %}
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08) !important;
+    {% endif %}
+  }
+
+  /* Card Header */
+  #shopify-section-{{ section.id }} .hb-review-card-header {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    margin-bottom: 12px !important;
+    position: relative !important;
+  }
+
+  #shopify-section-{{ section.id }} .hb-review-avatar {
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 50% !important;
+    background-color: #f7ede8 !important;
+    color: {{ section.settings.star_color | default: '#7A2A2B' }} !important;
+    font-weight: 800 !important;
+    font-size: 16px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-transform: uppercase !important;
+    flex-shrink: 0 !important;
+    border: 1px solid rgba(122, 42, 43, 0.15) !important;
+  }
+
+  #shopify-section-{{ section.id }} .hb-review-meta {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 2px !important;
+    flex-grow: 1 !important;
+  }
+
+  #shopify-section-{{ section.id }} .hb-review-author {
+    font-weight: 700 !important;
+    font-size: 15.5px !important;
+    color: #111827 !important;
+    line-height: 1.2 !important;
+  }
+
+  #shopify-section-{{ section.id }} .hb-review-verified {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+    color: #257942 !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+  }
+
+  #shopify-section-{{ section.id }} .hb-review-date {
+    font-size: 12px !important;
+    color: #9ca3af !important;
+    font-weight: 500 !important;
+    margin-left: auto !important;
+  }
+
+  /* Star Rating */
+  #shopify-section-{{ section.id }} .hb-review-stars {
+    display: flex !important;
+    align-items: center !important;
+    gap: 3px !important;
+    color: {{ section.settings.star_color | default: '#7A2A2B' }} !important;
+    font-size: 16px !important;
+    margin-bottom: 12px !important;
+  }
+
+  /* Card Body */
+  #shopify-section-{{ section.id }} .hb-review-title {
+    font-weight: 700 !important;
+    font-size: 16px !important;
+    color: #111827 !important;
+    margin: 0 0 8px !important;
+    line-height: 1.35 !important;
+  }
+
+  #shopify-section-{{ section.id }} .hb-review-body {
+    font-size: 14.5px !important;
+    line-height: 1.65 !important;
+    color: #4b5563 !important;
+    margin: 0 0 16px !important;
+    flex-grow: 1 !important;
+  }
+
+  /* Customer Photo */
+  #shopify-section-{{ section.id }} .hb-review-photo-wrapper {
+    margin-top: 14px !important;
+    padding-top: 14px !important;
+    border-top: 1px solid #f3f4f6 !important;
+    display: flex !important;
+    gap: 10px !important;
+    align-items: center !important;
+  }
+
+  #shopify-section-{{ section.id }} .hb-review-photo {
+    width: 84px !important;
+    height: 84px !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+    border: 1px solid #e5e7eb !important;
+    object-fit: cover !important;
+    cursor: pointer !important;
+    transition: transform 0.25s ease !important;
+  }
+
+  #shopify-section-{{ section.id }} .hb-review-photo:hover {
+    transform: scale(1.06) !important;
+  }
+
+  #shopify-section-{{ section.id }} .hb-review-product-tag {
+    font-size: 12px !important;
+    color: #6b7280 !important;
+    background-color: #f3f4f6 !important;
+    border-radius: 6px !important;
+    padding: 4px 8px !important;
+    display: inline-block !important;
+    margin-top: 8px !important;
+  }
+
+  /* App blocks container inside section */
+  #shopify-section-{{ section.id }} .hb-reviews-app-slot {
+    margin-top: 32px !important;
+  }
+{%- endstyle -%}
+
+<section class="hb-reviews-section">
+  <div class="hb-container">
+    {% if section.settings.heading != blank or section.settings.eyebrow != blank %}
+      <div class="hb-reviews-header">
+        {% if section.settings.eyebrow != blank %}
+          <span class="hb-reviews-eyebrow">{{ section.settings.eyebrow }}</span>
+        {% endif %}
+        {% if section.settings.heading != blank %}
+          <h2 class="hb-reviews-title">{{ section.settings.heading }}</h2>
+        {% endif %}
+        {% if section.settings.subheading != blank %}
+          <p class="hb-reviews-subheading">{{ section.settings.subheading }}</p>
+        {% endif %}
+
+        {% if section.settings.show_summary %}
+          <div class="hb-reviews-summary-badge">
+            <span class="hb-reviews-summary-score">{{ section.settings.summary_rating | default: '5.0' }}</span>
+            <div class="hb-reviews-summary-stars">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <span class="hb-reviews-summary-label">{{ section.settings.summary_text | default: 'Based on 250+ reviews' }}</span>
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    {% assign review_blocks = section.blocks | where: "type", "review_card" %}
+    {% if review_blocks.size > 0 %}
+      <div class="hb-reviews-grid">
+        {% for block in review_blocks %}
+          {%- assign initial = block.settings.reviewer_name | slice: 0, 1 | upcase -%}
+          <div class="hb-review-card" {{ block.shopify_attributes }}>
+            <div class="hb-review-card-top">
+              <div class="hb-review-card-header">
+                <div class="hb-review-avatar">{{ initial | default: 'A' }}</div>
+                <div class="hb-review-meta">
+                  <div class="hb-review-author">{{ block.settings.reviewer_name }}</div>
+                  {% if block.settings.verified_buyer %}
+                    <span class="hb-review-verified">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                      Verified Buyer
+                    </span>
+                  {% endif %}
+                </div>
+                {% if block.settings.review_date != blank %}
+                  <span class="hb-review-date">{{ block.settings.review_date }}</span>
+                {% endif %}
+              </div>
+
+              <div class="hb-review-stars">
+                {%- assign star_count = block.settings.rating | default: 5 -%}
+                {% for i in (1..star_count) %}
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                {% endfor %}
+              </div>
+
+              {% if block.settings.review_title != blank %}
+                <h4 class="hb-review-title">{{ block.settings.review_title }}</h4>
+              {% endif %}
+
+              <div class="hb-review-body">
+                <p>{{ block.settings.review_text }}</p>
+              </div>
+            </div>
+
+            {% if block.settings.reviewer_photo != blank or block.settings.product_label != blank %}
+              <div class="hb-review-card-bottom">
+                {% if block.settings.reviewer_photo != blank %}
+                  <div class="hb-review-photo-wrapper">
+                    {{ block.settings.reviewer_photo | image_url: width: 300 | image_tag: loading: 'lazy', class: 'hb-review-photo', alt: block.settings.reviewer_name }}
+                  </div>
+                {% endif %}
+                {% if block.settings.product_label != blank %}
+                  <span class="hb-review-product-tag">{{ block.settings.product_label }}</span>
+                {% endif %}
+              </div>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {% for block in section.blocks %}
+      {% if block.type == '@app' %}
+        <div class="hb-reviews-app-slot" {{ block.shopify_attributes }}>
+          {% render block %}
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product Reviews Grid",
+  "tag": "section",
+  "class": "product-reviews-grid-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Header & Summary"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Text",
+      "default": "CUSTOMER EXPERIENCES"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow Color",
+      "default": "#7A2A2B"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading",
+      "default": "Real Relief from Real People"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#111827"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 24,
+      "max": 52,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Font Size",
+      "default": 36
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Over 98% of users report soothing comfort for back, knee, and joint discomfort."
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading Color",
+      "default": "#4b5563"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_summary",
+      "label": "Show Rating Summary Badge",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "summary_rating",
+      "label": "Rating Score",
+      "default": "5.0"
+    },
+    {
+      "type": "text",
+      "id": "summary_text",
+      "label": "Rating Summary Label",
+      "default": "Based on 250+ reviews"
+    },
+    {
+      "type": "header",
+      "content": "Card Grid Layout"
+    },
+    {
+      "type": "select",
+      "id": "columns_desktop",
+      "label": "Desktop Columns",
+      "options": [
+        { "value": "2", "label": "2 Columns" },
+        { "value": "3", "label": "3 Columns" }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Mobile Columns",
+      "options": [
+        { "value": "1", "label": "1 Column" },
+        { "value": "2", "label": "2 Columns" }
+      ],
+      "default": "1"
+    },
+    {
+      "type": "range",
+      "id": "grid_gap",
+      "min": 16,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "label": "Grid Gap / Spacing",
+      "default": 24
+    },
+    {
+      "type": "header",
+      "content": "Card Styling & Colors"
+    },
+    {
+      "type": "color",
+      "id": "card_bg",
+      "label": "Card Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_border_color",
+      "label": "Card Border Color",
+      "default": "#eef0ee"
+    },
+    {
+      "type": "range",
+      "id": "card_radius",
+      "min": 8,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "label": "Card Border Radius",
+      "default": 18
+    },
+    {
+      "type": "checkbox",
+      "id": "card_shadow",
+      "label": "Card Subtle Drop Shadow",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "star_color",
+      "label": "Star & Brand Accent Color",
+      "default": "#7A2A2B"
+    },
+    {
+      "type": "header",
+      "content": "Section Background & Padding"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Section Background Color",
+      "default": "#fafbfa"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 24,
+      "max": 140,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 24,
+      "max": 140,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 72
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@app"
+    },
+    {
+      "type": "review_card",
+      "name": "Customer Review Card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "reviewer_name",
+          "label": "Reviewer Name",
+          "default": "Ahmar Yaseen"
+        },
+        {
+          "type": "checkbox",
+          "id": "verified_buyer",
+          "label": "Verified Buyer Badge",
+          "default": true
+        },
+        {
+          "type": "range",
+          "id": "rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "label": "Star Rating",
+          "default": 5
+        },
+        {
+          "type": "text",
+          "id": "review_date",
+          "label": "Date / Location",
+          "default": "Verified Purchase"
+        },
+        {
+          "type": "text",
+          "id": "review_title",
+          "label": "Review Title / Headline",
+          "default": "Incredible relief for office back pain"
+        },
+        {
+          "type": "textarea",
+          "id": "review_text",
+          "label": "Review Content",
+          "default": "I was doubtful at first, but this oil really helps with my back pain after long office hours. Easy to use and very effective."
+        },
+        {
+          "type": "image_picker",
+          "id": "reviewer_photo",
+          "label": "Review Photo"
+        },
+        {
+          "type": "text",
+          "id": "product_label",
+          "label": "Product Tag",
+          "default": "Asar Pure Ostrich Oil • 30ml"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Reviews Grid",
+      "blocks": [
+        {
+          "type": "review_card",
+          "settings": {
+            "reviewer_name": "Ahmar Yaseen",
+            "verified_buyer": true,
+            "rating": 5,
+            "review_date": "Verified Customer",
+            "review_title": "Back pain relief after long office hours",
+            "review_text": "I was doubtful at first, but this oil really helps with my back pain after long office hours. Easy to use and very effective.",
+            "product_label": "Asar Pure Ostrich Oil • 30ml"
+          }
+        },
+        {
+          "type": "review_card",
+          "settings": {
+            "reviewer_name": "Sajid Hassan",
+            "verified_buyer": true,
+            "rating": 5,
+            "review_date": "Verified Customer",
+            "review_title": "Remarkable difference in knee joint stiffness",
+            "review_text": "Been applying this twice daily for 2 weeks. The absorption is very fast without leaving greasy residue. Highly recommend for joint pain.",
+            "product_label": "Asar Pure Ostrich Oil • 30ml"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
