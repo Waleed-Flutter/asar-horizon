@@ -482,8 +482,8 @@
             "text_size": "medium",
             "image_ratio": "1",
             "reviews_shown": 4,
-            "show_reviewer_name": true,
-            "show_product_name": true,
+            "show_reviewer_name": false,
+            "show_product_name": false,
             "hide_arrows_mobile": true,
             "arrows_position": "sides",
             "max_width": 1100,
@@ -496,7 +496,7 @@
             "transition_speed": 5,
             "header_text": "Customers are saying",
             "show_average_rating": true,
-            "rating_display": "default"
+            "rating_display": "show_trust_badge"
           }
         },
         "judge_me_reviews_videos_carousel_djeBd6": {
