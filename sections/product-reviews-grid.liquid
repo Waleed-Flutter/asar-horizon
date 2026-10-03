@@ -2,16 +2,24 @@
 
 {%- style -%}
   #shopify-section-{{ section.id }} {
-    background-color: {{ section.settings.background_color | default: '#ffffff' }} !important;
-    padding-top: {{ section.settings.padding_top | default: 60 }}px !important;
-    padding-bottom: {{ section.settings.padding_bottom | default: 60 }}px !important;
+    background-color: {{ section.settings.background_color | default: '#ffffff' }};
+    padding-top: {{ section.settings.padding_top | default: 60 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | default: 60 }}px;
   }
 
   @media (max-width: 768px) {
     #shopify-section-{{ section.id }} {
-      padding-top: {{ section.settings.padding_top | default: 60 | times: 0.65 | round }}px !important;
-      padding-bottom: {{ section.settings.padding_bottom | default: 60 | times: 0.65 | round }}px !important;
+      padding-top: {{ section.settings.padding_top | default: 60 | times: 0.65 | round }}px;
+      padding-bottom: {{ section.settings.padding_bottom | default: 60 | times: 0.65 | round }}px;
     }
+  }
+
+  #shopify-section-{{ section.id }} .hb-reviews-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   }
 
   #shopify-section-{{ section.id }} .hb-reviews-header {
@@ -33,7 +41,7 @@
 
   #shopify-section-{{ section.id }} .hb-reviews-title {
     color: {{ section.settings.heading_color | default: '#111827' }};
-    font-size: {{ section.settings.heading_size | default: 22 }}px;
+    font-size: {{ section.settings.heading_size | default: 24 }}px;
     font-weight: 700;
     letter-spacing: -0.01em;
     line-height: 1.25;
@@ -44,21 +52,22 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
   }
 
   #shopify-section-{{ section.id }} .hb-reviews-summary-score {
     font-weight: 700;
-    font-size: 15px;
+    font-size: 16px;
     color: #111827;
   }
 
   #shopify-section-{{ section.id }} .hb-reviews-summary-count {
     font-size: 13.5px;
-    color: #4b5563;
-    font-weight: 500;
+    color: #6b7280;
+    font-weight: 400;
   }
 
+  /* Photo Strip Under Header */
   #shopify-section-{{ section.id }} .hb-reviews-thumbnails-strip {
     display: flex;
     gap: 10px;
@@ -72,6 +81,14 @@
     overflow: hidden;
     border: 1px solid #e5e7eb;
     flex-shrink: 0;
+    cursor: pointer;
+    background: #f9fafb;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  #shopify-section-{{ section.id }} .hb-reviews-thumb-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
   }
 
   #shopify-section-{{ section.id }} .hb-reviews-thumb-item img {
@@ -86,29 +103,92 @@
     align-items: center;
     gap: 10px;
     margin-left: auto;
+    flex-wrap: wrap;
   }
 
+  /* Write a Review Button */
   #shopify-section-{{ section.id }} .hb-reviews-write-btn {
     background-color: {{ section.settings.button_bg | default: '#2ca24d' }} !important;
-    color: #ffffff !important;
-    border-radius: 50px !important;
-    padding: 9px 24px !important;
+    color: {{ section.settings.button_text_color | default: '#ffffff' }} !important;
+    border-radius: 9999px !important;
+    padding: 10px 24px !important;
     font-weight: 600 !important;
-    font-size: 13.5px !important;
-    border: none !important;
+    font-size: 14px !important;
+    border: 1px solid {{ section.settings.button_bg | default: '#2ca24d' }} !important;
     text-decoration: none !important;
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
     transition: all 0.2s ease !important;
+    cursor: pointer !important;
+    box-shadow: none !important;
+    line-height: normal !important;
   }
 
   #shopify-section-{{ section.id }} .hb-reviews-write-btn:hover {
-    background-color: #23863e !important;
-    transform: translateY(-1px) !important;
+    filter: brightness(0.92);
+    transform: translateY(-1px);
   }
 
-  /* Horizontal Cards Grid */
+  /* Filter and Sort Buttons */
+  #shopify-section-{{ section.id }} .hb-icon-btn {
+    width: 38px;
+    height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #374151;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+  }
+
+  #shopify-section-{{ section.id }} .hb-icon-btn:hover {
+    border-color: #9ca3af;
+    background: #f9fafb;
+  }
+
+  /* Dropdown Menus for Filter and Sort */
+  .hb-dropdown-menu {
+    position: absolute;
+    top: 44px;
+    right: 0;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    min-width: 170px;
+    z-index: 100;
+    display: none;
+    flex-direction: column;
+    padding: 6px 0;
+  }
+
+  .hb-dropdown-menu.active {
+    display: flex;
+  }
+
+  .hb-dropdown-item {
+    padding: 8px 16px;
+    font-size: 13.5px;
+    color: #374151;
+    background: none;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    transition: background 0.15s ease;
+    width: 100%;
+  }
+
+  .hb-dropdown-item:hover {
+    background: #f3f4f6;
+    color: #111827;
+  }
+
+  /* 3-Column Horizontal Grid */
   #shopify-section-{{ section.id }} .hb-reviews-grid {
     display: grid !important;
     grid-template-columns: repeat({{ section.settings.columns_desktop | default: 3 }}, 1fr) !important;
@@ -116,32 +196,33 @@
     align-items: stretch !important;
   }
 
-  @media (max-width: 1024px) {
+  @media (max-width: 990px) {
     #shopify-section-{{ section.id }} .hb-reviews-grid {
       grid-template-columns: repeat(2, 1fr) !important;
-      gap: 18px !important;
-    }
-  }
-
-  @media (max-width: 680px) {
-    #shopify-section-{{ section.id }} .hb-reviews-grid {
-      grid-template-columns: repeat({{ section.settings.columns_mobile | default: 1 }}, 1fr) !important;
       gap: 16px !important;
     }
   }
 
-  /* Each Review Card (Matching Reference) */
+  @media (max-width: 640px) {
+    #shopify-section-{{ section.id }} .hb-reviews-grid {
+      grid-template-columns: repeat({{ section.settings.columns_mobile | default: 1 }}, 1fr) !important;
+      gap: 14px !important;
+    }
+  }
+
+  /* Review Card (Matching Reference) */
   #shopify-section-{{ section.id }} .hb-review-card {
     background-color: {{ section.settings.card_bg | default: '#ffffff' }} !important;
     border: 1px solid {{ section.settings.card_border_color | default: '#eef0ee' }} !important;
     border-radius: {{ section.settings.card_radius | default: 12 }}px !important;
-    padding: 22px 22px !important;
+    padding: 22px !important;
     box-sizing: border-box !important;
     display: flex !important;
     flex-direction: column !important;
     justify-content: flex-start !important;
     position: relative !important;
     transition: all 0.25s ease !important;
+    height: 100% !important;
   }
 
   #shopify-section-{{ section.id }} .hb-review-card:hover {
@@ -149,26 +230,31 @@
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04) !important;
   }
 
-  /* 1. Green Stars at the top */
+  /* 1. Green Stars */
   #shopify-section-{{ section.id }} .hb-review-stars {
     display: flex !important;
     align-items: center !important;
     gap: 3px !important;
     color: {{ section.settings.star_color | default: '#2ca24d' }} !important;
-    font-size: 18px !important;
     margin-bottom: 10px !important;
+  }
+
+  #shopify-section-{{ section.id }} .hb-review-stars svg {
+    fill: currentColor;
+    width: 18px;
+    height: 18px;
   }
 
   /* 2. Reviewer Name */
   #shopify-section-{{ section.id }} .hb-review-author {
     font-weight: 700 !important;
-    font-size: 15px !important;
+    font-size: 15.5px !important;
     color: #111827 !important;
     line-height: 1.3 !important;
-    margin-bottom: 2px !important;
+    margin-bottom: 3px !important;
   }
 
-  /* 3. Date below author */
+  /* 3. Date */
   #shopify-section-{{ section.id }} .hb-review-date {
     font-size: 12.5px !important;
     color: #6b7280 !important;
@@ -189,36 +275,291 @@
     margin: 0 !important;
   }
 
-  /* 5. Customer Photo Thumbnail at bottom-left */
+  #shopify-section-{{ section.id }} .hb-review-more-btn {
+    color: #111827;
+    font-weight: 600;
+    text-decoration: underline;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 13.5px;
+    margin-top: 4px;
+    display: inline-block;
+  }
+
+  /* 5. Customer Photo at Bottom Left */
   #shopify-section-{{ section.id }} .hb-review-photo-wrapper {
     margin-top: auto !important;
     display: flex !important;
     justify-content: flex-start !important;
   }
 
-  #shopify-section-{{ section.id }} .hb-review-photo {
+  #shopify-section-{{ section.id }} .hb-review-photo-link {
     width: 68px !important;
     height: 68px !important;
     border-radius: 10px !important;
     overflow: hidden !important;
     border: 1px solid #e5e7eb !important;
-    object-fit: cover !important;
-    display: block !important;
+    display: inline-block !important;
+    cursor: pointer !important;
+    background: #f9fafb;
     transition: transform 0.2s ease !important;
   }
 
-  #shopify-section-{{ section.id }} .hb-review-photo:hover {
+  #shopify-section-{{ section.id }} .hb-review-photo-link:hover {
     transform: scale(1.05) !important;
   }
 
-  /* App Block Slot */
-  #shopify-section-{{ section.id }} .hb-reviews-app-slot {
-    margin-top: 16px !important;
+  #shopify-section-{{ section.id }} .hb-review-photo {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+  }
+
+  /* ===================== MODAL POPUPS ===================== */
+  .hb-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 100000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    box-sizing: border-box;
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+
+  .hb-modal-overlay.active {
+    display: flex;
+    opacity: 1;
+  }
+
+  .hb-modal-box {
+    background: #ffffff;
+    border-radius: 16px;
+    max-width: 520px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 28px;
+    box-sizing: border-box;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    position: relative;
+    transform: scale(0.95);
+    transition: transform 0.25s ease;
+  }
+
+  .hb-modal-overlay.active .hb-modal-box {
+    transform: scale(1);
+  }
+
+  .hb-modal-close {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    background: #f3f4f6;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: #4b5563;
+    transition: background 0.2s ease;
+  }
+
+  .hb-modal-close:hover {
+    background: #e5e7eb;
+    color: #111827;
+  }
+
+  .hb-form-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #111827;
+    margin: 0 0 16px 0;
+  }
+
+  .hb-form-group {
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hb-form-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 6px;
+  }
+
+  .hb-form-stars {
+    display: flex;
+    gap: 6px;
+    cursor: pointer;
+  }
+
+  .hb-form-star-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    color: #d1d5db;
+    transition: color 0.15s ease, transform 0.15s ease;
+  }
+
+  .hb-form-star-btn svg {
+    width: 26px;
+    height: 26px;
+    fill: currentColor;
+  }
+
+  .hb-form-star-btn.active,
+  .hb-form-star-btn.hover {
+    color: #2ca24d;
+    transform: scale(1.1);
+  }
+
+  .hb-form-input,
+  .hb-form-textarea {
+    width: 100%;
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+    font-size: 14px;
+    box-sizing: border-box;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s ease;
+  }
+
+  .hb-form-input:focus,
+  .hb-form-textarea:focus {
+    border-color: #2ca24d;
+    box-shadow: 0 0 0 3px rgba(44, 162, 77, 0.15);
+  }
+
+  .hb-form-textarea {
+    resize: vertical;
+    min-height: 90px;
+  }
+
+  .hb-file-upload-area {
+    width: 100%;
+    border: 2px dashed #d1d5db;
+    border-radius: 10px;
+    padding: 16px;
+    text-align: center;
+    box-sizing: border-box;
+    cursor: pointer;
+    background: #f9fafb;
+    transition: all 0.2s ease;
+    display: block;
+  }
+
+  .hb-file-upload-area:hover {
+    border-color: #2ca24d;
+    background: #f0fdf4;
+  }
+
+  .hb-file-upload-area input {
+    display: none;
+  }
+
+  .hb-upload-preview {
+    margin-top: 10px;
+    display: none;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .hb-upload-preview img {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    object-fit: cover;
+    border: 1px solid #e5e7eb;
+  }
+
+  .hb-form-submit-btn {
+    width: 100%;
+    background: #2ca24d;
+    color: #ffffff;
+    border: none;
+    border-radius: 50px;
+    padding: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 10px;
+  }
+
+  .hb-form-submit-btn:hover {
+    background: #23863e;
+  }
+
+  .hb-form-success {
+    display: none;
+    text-align: center;
+    padding: 24px 10px;
+  }
+
+  .hb-form-success-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #e8f5e9;
+    color: #2ca24d;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+
+  /* Lightbox */
+  .hb-lightbox-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 100000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+
+  .hb-lightbox-overlay.active {
+    display: flex;
+  }
+
+  .hb-lightbox-img {
+    max-width: 90vw;
+    max-height: 85vh;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    object-fit: contain;
   }
 {%- endstyle -%}
 
 <section class="hb-reviews-section">
-  <div class="hb-container">
+  <div class="hb-reviews-container">
     <div class="hb-reviews-header">
       <div class="hb-reviews-header-left">
         {% if section.settings.heading != blank %}
@@ -231,60 +572,117 @@
 
         {% if section.settings.show_header_thumbs %}
           <div class="hb-reviews-thumbnails-strip">
+            {%- assign header_photo_count = 0 -%}
             {% for block in section.blocks %}
-              {% if block.type == 'review_card' and block.settings.reviewer_photo != blank %}
-                <div class="hb-reviews-thumb-item">
-                  {{ block.settings.reviewer_photo | image_url: width: 140 | image_tag: loading: 'lazy', alt: block.settings.reviewer_name }}
-                </div>
+              {% if block.type == 'review_card' %}
+                {%- assign card_photo = block.settings.reviewer_photo -%}
+                {%- if card_photo != blank -%}
+                  {%- assign header_photo_count = header_photo_count | plus: 1 -%}
+                  <div class="hb-reviews-thumb-item" onclick="openHbReviewsLightbox('{{ card_photo | image_url: width: 1000 }}')">
+                    {{ card_photo | image_url: width: 140 | image_tag: loading: 'lazy', alt: block.settings.reviewer_name }}
+                  </div>
+                {%- elsif block.settings.fallback_photo != 'none' -%}
+                  {%- assign header_photo_count = header_photo_count | plus: 1 -%}
+                  {%- capture fallback_src -%}customer-review-photo-{{ forloop.index | default: 1 }}.jpg{%- endcapture -%}
+                  <div class="hb-reviews-thumb-item" onclick="openHbReviewsLightbox('{{ fallback_src | asset_url }}')">
+                    <img src="{{ fallback_src | asset_url }}" alt="Review photo {{ forloop.index }}" loading="lazy">
+                  </div>
+                {%- endif -%}
               {% endif %}
             {% endfor %}
+
+            {%- if header_photo_count == 0 -%}
+              <!-- Fallback sample customer photos matching reference -->
+              <div class="hb-reviews-thumb-item" onclick="openHbReviewsLightbox('{{ 'customer-review-photo-1.jpg' | asset_url }}')">
+                <img src="{{ 'customer-review-photo-1.jpg' | asset_url }}" alt="Customer photo 1" loading="lazy">
+              </div>
+              <div class="hb-reviews-thumb-item" onclick="openHbReviewsLightbox('{{ 'customer-review-photo-2.jpg' | asset_url }}')">
+                <img src="{{ 'customer-review-photo-2.jpg' | asset_url }}" alt="Customer photo 2" loading="lazy">
+              </div>
+              <div class="hb-reviews-thumb-item" onclick="openHbReviewsLightbox('{{ 'customer-review-photo-3.jpg' | asset_url }}')">
+                <img src="{{ 'customer-review-photo-3.jpg' | asset_url }}" alt="Customer photo 3" loading="lazy">
+              </div>
+            {%- endif -%}
           </div>
         {% endif %}
       </div>
 
       <div class="hb-reviews-header-right">
         {% if section.settings.button_text != blank %}
-          <a href="#" class="hb-reviews-write-btn" onclick="try{if(window.jdgm&&typeof jdgm.showReviewForm==='function'){jdgm.showReviewForm();}}catch(e){};return false;">{{ section.settings.button_text }}</a>
+          <button type="button" class="hb-reviews-write-btn" id="hb-btn-write-{{ section.id }}">
+            {{ section.settings.button_text }}
+          </button>
+        {% endif %}
+
+        {% if section.settings.show_filter_sort %}
+          <div style="position: relative;">
+            <button type="button" class="hb-icon-btn" id="hb-filter-btn-{{ section.id }}" title="Filter reviews">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg>
+            </button>
+            <div class="hb-dropdown-menu" id="hb-filter-menu-{{ section.id }}">
+              <button type="button" class="hb-dropdown-item" onclick="filterHbReviews('{{ section.id }}', 'all')">All Reviews</button>
+              <button type="button" class="hb-dropdown-item" onclick="filterHbReviews('{{ section.id }}', '5')">5 Stars Only</button>
+              <button type="button" class="hb-dropdown-item" onclick="filterHbReviews('{{ section.id }}', 'photos')">With Photos</button>
+            </div>
+          </div>
+
+          <div style="position: relative;">
+            <button type="button" class="hb-icon-btn" id="hb-sort-btn-{{ section.id }}" title="Sort reviews">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 15l5 5 5-5M7 9l5-5 5 5"/></svg>
+            </button>
+            <div class="hb-dropdown-menu" id="hb-sort-menu-{{ section.id }}">
+              <button type="button" class="hb-dropdown-item" onclick="sortHbReviews('{{ section.id }}', 'newest')">Most Recent</button>
+              <button type="button" class="hb-dropdown-item" onclick="sortHbReviews('{{ section.id }}', 'highest')">Highest Rating</button>
+            </div>
+          </div>
         {% endif %}
       </div>
     </div>
 
     {% assign review_blocks = section.blocks | where: "type", "review_card" %}
-    {% if review_blocks.size > 0 %}
-      <div class="hb-reviews-grid">
-        {% for block in review_blocks %}
-          <div class="hb-review-card" {{ block.shopify_attributes }}>
-            <!-- 1. Green Stars at Top -->
-            <div class="hb-review-stars">
-              {%- assign star_count = block.settings.rating | default: 5 -%}
-              {% for i in (1..star_count) %}
-                <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-              {% endfor %}
-            </div>
-
-            <!-- 2. Reviewer Name -->
-            <div class="hb-review-author">{{ block.settings.reviewer_name }}</div>
-
-            <!-- 3. Date -->
-            {% if block.settings.review_date != blank %}
-              <div class="hb-review-date">{{ block.settings.review_date }}</div>
-            {% endif %}
-
-            <!-- 4. Review Content -->
-            <div class="hb-review-body">
-              <p>{{ block.settings.review_text }}</p>
-            </div>
-
-            <!-- 5. Customer Photo at Bottom Left -->
-            {% if block.settings.reviewer_photo != blank %}
-              <div class="hb-review-photo-wrapper">
-                {{ block.settings.reviewer_photo | image_url: width: 200 | image_tag: loading: 'lazy', class: 'hb-review-photo', alt: block.settings.reviewer_name }}
-              </div>
-            {% endif %}
+    <div class="hb-reviews-grid" id="hb-reviews-grid-{{ section.id }}">
+      {% for block in review_blocks %}
+        <div class="hb-review-card" data-rating="{{ block.settings.rating | default: 5 }}" data-has-photo="{% if block.settings.reviewer_photo != blank or block.settings.fallback_photo != 'none' %}true{% else %}false{% endif %}" {{ block.shopify_attributes }}>
+          <!-- 1. Green Stars at Top -->
+          <div class="hb-review-stars">
+            {%- assign star_count = block.settings.rating | default: 5 -%}
+            {% for i in (1..star_count) %}
+              <svg width="18" height="18" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            {% endfor %}
           </div>
-        {% endfor %}
-      </div>
-    {% endif %}
+
+          <!-- 2. Reviewer Name -->
+          <div class="hb-review-author">{{ block.settings.reviewer_name }}</div>
+
+          <!-- 3. Date -->
+          {% if block.settings.review_date != blank %}
+            <div class="hb-review-date">{{ block.settings.review_date }}</div>
+          {% endif %}
+
+          <!-- 4. Review Content -->
+          <div class="hb-review-body">
+            <p>{{ block.settings.review_text }}</p>
+          </div>
+
+          <!-- 5. Customer Photo at Bottom Left -->
+          {%- assign card_img = block.settings.reviewer_photo -%}
+          {%- if card_img != blank -%}
+            <div class="hb-review-photo-wrapper">
+              <div class="hb-review-photo-link" onclick="openHbReviewsLightbox('{{ card_img | image_url: width: 1000 }}')">
+                {{ card_img | image_url: width: 200 | image_tag: loading: 'lazy', class: 'hb-review-photo', alt: block.settings.reviewer_name }}
+              </div>
+            </div>
+          {%- elsif block.settings.fallback_photo != 'none' -%}
+            {%- capture card_fallback -%}customer-review-photo-{{ forloop.index | default: 1 }}.jpg{%- endcapture -%}
+            <div class="hb-review-photo-wrapper">
+              <div class="hb-review-photo-link" onclick="openHbReviewsLightbox('{{ card_fallback | asset_url }}')">
+                <img src="{{ card_fallback | asset_url }}" class="hb-review-photo" alt="{{ block.settings.reviewer_name }} photo" loading="lazy">
+              </div>
+            </div>
+          {%- endif -%}
+        </div>
+      {% endfor %}
+    </div>
 
     {% for block in section.blocks %}
       {% if block.type == '@app' %}
@@ -294,7 +692,327 @@
       {% endif %}
     {% endfor %}
   </div>
+
+  <!-- WRITE A REVIEW MODAL -->
+  <div class="hb-modal-overlay" id="hb-modal-{{ section.id }}">
+    <div class="hb-modal-box">
+      <button type="button" class="hb-modal-close" aria-label="Close" onclick="closeHbWriteModal('{{ section.id }}')">&times;</button>
+      
+      <div id="hb-form-body-{{ section.id }}">
+        <h3 class="hb-form-title">Write a Review</h3>
+
+        <!-- Star Rating Picker -->
+        <div class="hb-form-group">
+          <label class="hb-form-label">Overall Rating *</label>
+          <div class="hb-form-stars" id="hb-star-picker-{{ section.id }}">
+            {% for s in (1..5) %}
+              <button type="button" class="hb-form-star-btn active" data-val="{{ s }}" aria-label="{{ s }} stars">
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              </button>
+            {% endfor %}
+          </div>
+          <input type="hidden" id="hb-rating-val-{{ section.id }}" value="5">
+        </div>
+
+        <!-- Reviewer Name -->
+        <div class="hb-form-group">
+          <label class="hb-form-label" for="hb-input-name-{{ section.id }}">Your Name *</label>
+          <input type="text" id="hb-input-name-{{ section.id }}" class="hb-form-input" placeholder="e.g. Sana or Ali" required>
+        </div>
+
+        <!-- Reviewer Email -->
+        <div class="hb-form-group">
+          <label class="hb-form-label" for="hb-input-email-{{ section.id }}">Email Address *</label>
+          <input type="email" id="hb-input-email-{{ section.id }}" class="hb-form-input" placeholder="your@email.com" required>
+        </div>
+
+        <!-- Review Comments -->
+        <div class="hb-form-group">
+          <label class="hb-form-label" for="hb-input-text-{{ section.id }}">Review Comments *</label>
+          <textarea id="hb-input-text-{{ section.id }}" class="hb-form-textarea" placeholder="How did this product help you?" required></textarea>
+        </div>
+
+        <!-- Photo Upload -->
+        <div class="hb-form-group">
+          <label class="hb-form-label">Add Photos (Optional)</label>
+          <label class="hb-file-upload-area" for="hb-photo-input-{{ section.id }}">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2ca24d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 4px;"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+            <div style="font-size: 13.5px; font-weight: 600; color: #374151;">Click to Upload or Drag Photos Here</div>
+            <div style="font-size: 12px; color: #6b7280; margin-top: 2px;">PNG, JPG up to 10MB</div>
+            <input type="file" id="hb-photo-input-{{ section.id }}" accept="image/*">
+          </label>
+          <div class="hb-upload-preview" id="hb-preview-{{ section.id }}"></div>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="button" class="hb-form-submit-btn" id="hb-submit-btn-{{ section.id }}">Submit Review</button>
+      </div>
+
+      <!-- Success Confirmation -->
+      <div id="hb-form-done-{{ section.id }}" class="hb-form-success">
+        <div class="hb-form-success-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        </div>
+        <h3 style="font-size: 19px; font-weight: 700; color: #111827; margin: 0 0 8px;">Review Submitted!</h3>
+        <p style="font-size: 14px; color: #4b5563; margin: 0 0 20px;">Thank you for your feedback! Your review and photo have been added.</p>
+        <button type="button" class="hb-form-submit-btn" style="width: auto; padding: 9px 24px;" onclick="closeHbWriteModal('{{ section.id }}')">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- LIGHTBOX MODAL FOR ENLARGED PHOTO -->
+  <div class="hb-lightbox-overlay" id="hb-lightbox" onclick="closeHbReviewsLightbox()">
+    <div style="position: relative;" onclick="event.stopPropagation();">
+      <button type="button" class="hb-modal-close" style="top: -16px; right: -16px; background: #ffffff;" aria-label="Close" onclick="closeHbReviewsLightbox()">&times;</button>
+      <img id="hb-lightbox-img" class="hb-lightbox-img" src="" alt="Enlarged review photo">
+    </div>
+  </div>
 </section>
+
+<script>
+  (function() {
+    var sectionId = '{{ section.id }}';
+    var modal = document.getElementById('hb-modal-' + sectionId);
+    var writeBtn = document.getElementById('hb-btn-write-' + sectionId);
+    var submitBtn = document.getElementById('hb-submit-btn-' + sectionId);
+    var starPicker = document.getElementById('hb-star-picker-' + sectionId);
+    var ratingInput = document.getElementById('hb-rating-val-' + sectionId);
+    var photoInput = document.getElementById('hb-photo-input-' + sectionId);
+    var previewContainer = document.getElementById('hb-preview-' + sectionId);
+    var uploadedPhotoData = '';
+
+    // Open Write Modal
+    if (writeBtn && modal) {
+      writeBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      });
+    }
+
+    // Close modal function
+    window.closeHbWriteModal = function(id) {
+      var m = document.getElementById('hb-modal-' + id);
+      if (m) {
+        m.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    };
+
+    // Close on overlay click
+    if (modal) {
+      modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+          closeHbWriteModal(sectionId);
+        }
+      });
+    }
+
+    // Star Picker Interaction
+    if (starPicker) {
+      var starBtns = starPicker.querySelectorAll('.hb-form-star-btn');
+      starBtns.forEach(function(btn) {
+        btn.addEventListener('mouseenter', function() {
+          var hoverVal = parseInt(this.getAttribute('data-val'), 10);
+          starBtns.forEach(function(b) {
+            var bVal = parseInt(b.getAttribute('data-val'), 10);
+            if (bVal <= hoverVal) {
+              b.classList.add('hover');
+            } else {
+              b.classList.remove('hover');
+            }
+          });
+        });
+
+        btn.addEventListener('click', function() {
+          var clickVal = parseInt(this.getAttribute('data-val'), 10);
+          ratingInput.value = clickVal;
+          starBtns.forEach(function(b) {
+            var bVal = parseInt(b.getAttribute('data-val'), 10);
+            if (bVal <= clickVal) {
+              b.classList.add('active');
+            } else {
+              b.classList.remove('active');
+            }
+          });
+        });
+      });
+
+      starPicker.addEventListener('mouseleave', function() {
+        starBtns.forEach(function(b) {
+          b.classList.remove('hover');
+        });
+      });
+    }
+
+    // Photo Input Preview via FileReader
+    if (photoInput) {
+      photoInput.addEventListener('change', function() {
+        var file = this.files[0];
+        if (file) {
+          var reader = new FileReader();
+          reader.onload = function(e) {
+            uploadedPhotoData = e.target.result;
+            if (previewContainer) {
+              previewContainer.innerHTML = '<img src="' + uploadedPhotoData + '" alt="Upload preview">';
+              previewContainer.style.display = 'flex';
+            }
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+    }
+
+    // Submit Review
+    if (submitBtn) {
+      submitBtn.addEventListener('click', function() {
+        var nameInput = document.getElementById('hb-input-name-' + sectionId);
+        var emailInput = document.getElementById('hb-input-email-' + sectionId);
+        var textInput = document.getElementById('hb-input-text-' + sectionId);
+
+        if (!nameInput.value.trim()) {
+          alert('Please enter your name.');
+          nameInput.focus();
+          return;
+        }
+        if (!emailInput.value.trim() || !emailInput.value.includes('@')) {
+          alert('Please enter a valid email address.');
+          emailInput.focus();
+          return;
+        }
+        if (!textInput.value.trim()) {
+          alert('Please write your review comment.');
+          textInput.focus();
+          return;
+        }
+
+        var starVal = parseInt(ratingInput.value, 10) || 5;
+        var today = new Date();
+        var dateFormatted = ('0' + (today.getMonth() + 1)).slice(-2) + '/' + ('0' + today.getDate()).slice(-2) + '/' + today.getFullYear();
+
+        // Create Star SVGs
+        var starsHtml = '';
+        for (var i = 0; i < starVal; i++) {
+          starsHtml += '<svg width="18" height="18" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>';
+        }
+
+        var photoHtml = '';
+        if (uploadedPhotoData) {
+          photoHtml = '<div class="hb-review-photo-wrapper"><div class="hb-review-photo-link" onclick="openHbReviewsLightbox(\'' + uploadedPhotoData + '\')"><img src="' + uploadedPhotoData + '" class="hb-review-photo" alt="' + nameInput.value + ' photo"></div></div>';
+        }
+
+        // Build new card
+        var card = document.createElement('div');
+        card.className = 'hb-review-card';
+        card.setAttribute('data-rating', starVal);
+        card.setAttribute('data-has-photo', uploadedPhotoData ? 'true' : 'false');
+        card.innerHTML = 
+          '<div class="hb-review-stars">' + starsHtml + '</div>' +
+          '<div class="hb-review-author">' + nameInput.value.trim() + '</div>' +
+          '<div class="hb-review-date">' + dateFormatted + '</div>' +
+          '<div class="hb-review-body"><p>' + textInput.value.trim() + '</p></div>' +
+          photoHtml;
+
+        var grid = document.getElementById('hb-reviews-grid-' + sectionId);
+        if (grid) {
+          grid.insertBefore(card, grid.firstChild);
+        }
+
+        // Show Success View
+        var formBody = document.getElementById('hb-form-body-' + sectionId);
+        var formDone = document.getElementById('hb-form-done-' + sectionId);
+        if (formBody && formDone) {
+          formBody.style.display = 'none';
+          formDone.style.display = 'block';
+        }
+
+        // Also trigger Judge.me if present
+        try {
+          var jdgmLink = document.querySelector('.jdgm-write-rev-link');
+          if (jdgmLink) jdgmLink.click();
+        } catch(err){}
+      });
+    }
+
+    // Filter & Sort Dropdown Toggles
+    var filterBtn = document.getElementById('hb-filter-btn-' + sectionId);
+    var filterMenu = document.getElementById('hb-filter-menu-' + sectionId);
+    var sortBtn = document.getElementById('hb-sort-btn-' + sectionId);
+    var sortMenu = document.getElementById('hb-sort-menu-' + sectionId);
+
+    if (filterBtn && filterMenu) {
+      filterBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        if (sortMenu) sortMenu.classList.remove('active');
+        filterMenu.classList.toggle('active');
+      });
+    }
+
+    if (sortBtn && sortMenu) {
+      sortBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        if (filterMenu) filterMenu.classList.remove('active');
+        sortMenu.classList.toggle('active');
+      });
+    }
+
+    document.addEventListener('click', function() {
+      if (filterMenu) filterMenu.classList.remove('active');
+      if (sortMenu) sortMenu.classList.remove('active');
+    });
+
+    // Filter Function
+    window.filterHbReviews = function(secId, type) {
+      var g = document.getElementById('hb-reviews-grid-' + secId);
+      if (!g) return;
+      var cards = g.querySelectorAll('.hb-review-card');
+      cards.forEach(function(c) {
+        if (type === 'all') {
+          c.style.display = 'flex';
+        } else if (type === '5') {
+          c.style.display = (c.getAttribute('data-rating') === '5') ? 'flex' : 'none';
+        } else if (type === 'photos') {
+          c.style.display = (c.getAttribute('data-has-photo') === 'true') ? 'flex' : 'none';
+        }
+      });
+    };
+
+    // Sort Function
+    window.sortHbReviews = function(secId, sortType) {
+      var g = document.getElementById('hb-reviews-grid-' + secId);
+      if (!g) return;
+      var cards = Array.from(g.querySelectorAll('.hb-review-card'));
+      if (sortType === 'highest') {
+        cards.sort(function(a, b) {
+          return parseInt(b.getAttribute('data-rating'), 10) - parseInt(a.getAttribute('data-rating'), 10);
+        });
+      } else {
+        // default newest (reverse)
+        cards.reverse();
+      }
+      cards.forEach(function(c) { g.appendChild(c); });
+    };
+
+    // Global Lightbox Functions
+    window.openHbReviewsLightbox = function(src) {
+      var lb = document.getElementById('hb-lightbox');
+      var img = document.getElementById('hb-lightbox-img');
+      if (lb && img) {
+        img.src = src;
+        lb.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    };
+
+    window.closeHbReviewsLightbox = function() {
+      var lb = document.getElementById('hb-lightbox');
+      if (lb) {
+        lb.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    };
+  })();
+</script>
 
 {% schema %}
 {
@@ -326,7 +1044,7 @@
       "step": 1,
       "unit": "px",
       "label": "Heading Font Size",
-      "default": 22
+      "default": 24
     },
     {
       "type": "text",
@@ -347,6 +1065,12 @@
       "default": true
     },
     {
+      "type": "checkbox",
+      "id": "show_filter_sort",
+      "label": "Show Filter & Sort Buttons",
+      "default": true
+    },
+    {
       "type": "text",
       "id": "button_text",
       "label": "Write a Review Button Text",
@@ -357,6 +1081,12 @@
       "id": "button_bg",
       "label": "Write a Review Button Color",
       "default": "#2ca24d"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button Text Color",
+      "default": "#ffffff"
     },
     {
       "type": "header",
@@ -494,7 +1224,18 @@
         {
           "type": "image_picker",
           "id": "reviewer_photo",
-          "label": "Customer Photo"
+          "label": "Customer Photo (Optional Upload)"
+        },
+        {
+          "type": "select",
+          "id": "fallback_photo",
+          "label": "Photo Display",
+          "options": [
+            { "value": "auto", "label": "Use Uploaded Photo or Customer Bottle Photo" },
+            { "value": "none", "label": "No Photo" }
+          ],
+          "default": "auto",
+          "info": "Upload your own customer image above, or leave set to auto to show the customer bottle photo."
         }
       ]
     }
@@ -509,7 +1250,8 @@
             "reviewer_name": "Sana",
             "review_date": "09/11/2026",
             "rating": 5,
-            "review_text": "I bought Tibra Pain Ease Oil a week ago because I was having pain in my knee. I used this oil and got amazing results. The warm sensation really penetrates and soothes the affected area. I highly recommend this oil."
+            "review_text": "I bought Tibra Pain Ease Oil a week ago because I was having pain in my knee. I used this oil and got amazing results. The warm sensation really penetrates and soothes the affected area. I highly recommend this oil.",
+            "fallback_photo": "auto"
           }
         },
         {
@@ -518,7 +1260,8 @@
             "reviewer_name": "Anonymous",
             "review_date": "09/09/2026",
             "rating": 5,
-            "review_text": "Maine week pehle yeh oil apni mother ke liye mangwaya tha for her knee and joint pain. Honestly results bohot zabardast hain, bas ek week mein unko kafi relief mila hai and improvement nazar aa rahi hai. Highly recommended!"
+            "review_text": "Maine week pehle yeh oil apni mother ke liye mangwaya tha for her knee and joint pain. Honestly results bohot zabardast hain, bas ek week mein unko kafi relief mila hai and improvement nazar aa rahi hai. Highly recommended!",
+            "fallback_photo": "auto"
           }
         },
         {
@@ -527,7 +1270,8 @@
             "reviewer_name": "Salah",
             "review_date": "08/24/2026",
             "rating": 5,
-            "review_text": "Amazing oil its perfect for pain relief in joints."
+            "review_text": "Amazing oil its perfect for pain relief in joints.",
+            "fallback_photo": "auto"
           }
         }
       ]
