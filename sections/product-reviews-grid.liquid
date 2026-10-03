@@ -1,5 +1,11 @@
 {{ 'horizon-botanical.css' | asset_url | stylesheet_tag }}
 
+{%- liquid
+  assign brand_btn_bg = section.settings.button_bg | default: '#7A2A2B'
+  assign brand_btn_text = section.settings.button_text_color | default: '#ffffff'
+  assign brand_star_color = section.settings.star_color | default: '#7A2A2B'
+-%}
+
 {%- style -%}
   #shopify-section-{{ section.id }} {
     background-color: {{ section.settings.background_color | default: '#ffffff' }};
@@ -72,6 +78,7 @@
     display: flex;
     gap: 10px;
     margin-top: 6px;
+    flex-wrap: wrap;
   }
 
   #shopify-section-{{ section.id }} .hb-reviews-thumb-item {
@@ -108,13 +115,13 @@
 
   /* Write a Review Button */
   #shopify-section-{{ section.id }} .hb-reviews-write-btn {
-    background-color: {{ section.settings.button_bg | default: '#2ca24d' }} !important;
-    color: {{ section.settings.button_text_color | default: '#ffffff' }} !important;
+    background-color: {{ brand_btn_bg }} !important;
+    color: {{ brand_btn_text }} !important;
     border-radius: 9999px !important;
     padding: 10px 24px !important;
     font-weight: 600 !important;
     font-size: 14px !important;
-    border: 1px solid {{ section.settings.button_bg | default: '#2ca24d' }} !important;
+    border: 1px solid {{ brand_btn_bg }} !important;
     text-decoration: none !important;
     display: inline-flex !important;
     align-items: center !important;
@@ -230,12 +237,12 @@
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04) !important;
   }
 
-  /* 1. Green Stars */
+  /* 1. Review Stars */
   #shopify-section-{{ section.id }} .hb-review-stars {
     display: flex !important;
     align-items: center !important;
     gap: 3px !important;
-    color: {{ section.settings.star_color | default: '#2ca24d' }} !important;
+    color: {{ brand_star_color }} !important;
     margin-bottom: 10px !important;
   }
 
@@ -411,7 +418,7 @@
     cursor: pointer;
   }
 
-  .hb-form-star-btn {
+  #shopify-section-{{ section.id }} .hb-form-star-btn {
     background: none;
     border: none;
     padding: 0;
@@ -420,15 +427,15 @@
     transition: color 0.15s ease, transform 0.15s ease;
   }
 
-  .hb-form-star-btn svg {
+  #shopify-section-{{ section.id }} .hb-form-star-btn svg {
     width: 26px;
     height: 26px;
     fill: currentColor;
   }
 
-  .hb-form-star-btn.active,
-  .hb-form-star-btn.hover {
-    color: #2ca24d;
+  #shopify-section-{{ section.id }} .hb-form-star-btn.active,
+  #shopify-section-{{ section.id }} .hb-form-star-btn.hover {
+    color: {{ brand_star_color }} !important;
     transform: scale(1.1);
   }
 
@@ -442,13 +449,13 @@
     box-sizing: border-box;
     font-family: inherit;
     outline: none;
-    transition: border-color 0.2s ease;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
   }
 
-  .hb-form-input:focus,
-  .hb-form-textarea:focus {
-    border-color: #2ca24d;
-    box-shadow: 0 0 0 3px rgba(44, 162, 77, 0.15);
+  #shopify-section-{{ section.id }} .hb-form-input:focus,
+  #shopify-section-{{ section.id }} .hb-form-textarea:focus {
+    border-color: {{ brand_btn_bg }} !important;
+    box-shadow: 0 0 0 3px rgba(122, 42, 43, 0.15) !important;
   }
 
   .hb-form-textarea {
@@ -469,9 +476,14 @@
     display: block;
   }
 
-  .hb-file-upload-area:hover {
-    border-color: #2ca24d;
-    background: #f0fdf4;
+  #shopify-section-{{ section.id }} .hb-file-upload-area:hover {
+    border-color: {{ brand_btn_bg }} !important;
+    background: #fdf8f8 !important;
+  }
+
+  #shopify-section-{{ section.id }} .hb-file-upload-icon {
+    stroke: {{ brand_btn_bg }} !important;
+    margin-bottom: 4px;
   }
 
   .hb-file-upload-area input {
@@ -493,11 +505,11 @@
     border: 1px solid #e5e7eb;
   }
 
-  .hb-form-submit-btn {
+  #shopify-section-{{ section.id }} .hb-form-submit-btn {
     width: 100%;
-    background: #2ca24d;
-    color: #ffffff;
-    border: none;
+    background: {{ brand_btn_bg }} !important;
+    color: {{ brand_btn_text }} !important;
+    border: 1px solid {{ brand_btn_bg }} !important;
     border-radius: 50px;
     padding: 12px;
     font-size: 15px;
@@ -507,8 +519,8 @@
     margin-top: 10px;
   }
 
-  .hb-form-submit-btn:hover {
-    background: #23863e;
+  #shopify-section-{{ section.id }} .hb-form-submit-btn:hover {
+    filter: brightness(0.9);
   }
 
   .hb-form-success {
@@ -517,16 +529,20 @@
     padding: 24px 10px;
   }
 
-  .hb-form-success-icon {
-    width: 48px;
-    height: 48px;
+  #shopify-section-{{ section.id }} .hb-form-success-icon {
+    width: 52px;
+    height: 52px;
     border-radius: 50%;
-    background: #e8f5e9;
-    color: #2ca24d;
+    background: #fbf0f0 !important;
+    color: {{ brand_btn_bg }} !important;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
+  }
+
+  #shopify-section-{{ section.id }} .hb-form-success-icon svg {
+    stroke: {{ brand_btn_bg }} !important;
   }
 
   /* Lightbox */
@@ -571,7 +587,7 @@
         </div>
 
         {% if section.settings.show_header_thumbs %}
-          <div class="hb-reviews-thumbnails-strip">
+          <div class="hb-reviews-thumbnails-strip" id="hb-header-thumbs-{{ section.id }}">
             {%- assign header_photo_count = 0 -%}
             {% for block in section.blocks %}
               {% if block.type == 'review_card' %}
@@ -643,7 +659,7 @@
     <div class="hb-reviews-grid" id="hb-reviews-grid-{{ section.id }}">
       {% for block in review_blocks %}
         <div class="hb-review-card" data-rating="{{ block.settings.rating | default: 5 }}" data-has-photo="{% if block.settings.reviewer_photo != blank or block.settings.fallback_photo != 'none' %}true{% else %}false{% endif %}" {{ block.shopify_attributes }}>
-          <!-- 1. Green Stars at Top -->
+          <!-- 1. Review Stars -->
           <div class="hb-review-stars">
             {%- assign star_count = block.settings.rating | default: 5 -%}
             {% for i in (1..star_count) %}
@@ -736,7 +752,7 @@
         <div class="hb-form-group">
           <label class="hb-form-label">Add Photos (Optional)</label>
           <label class="hb-file-upload-area" for="hb-photo-input-{{ section.id }}">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2ca24d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 4px;"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+            <svg class="hb-file-upload-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
             <div style="font-size: 13.5px; font-weight: 600; color: #374151;">Click to Upload or Drag Photos Here</div>
             <div style="font-size: 12px; color: #6b7280; margin-top: 2px;">PNG, JPG up to 10MB</div>
             <input type="file" id="hb-photo-input-{{ section.id }}" accept="image/*">
@@ -751,11 +767,11 @@
       <!-- Success Confirmation -->
       <div id="hb-form-done-{{ section.id }}" class="hb-form-success">
         <div class="hb-form-success-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
         </div>
-        <h3 style="font-size: 19px; font-weight: 700; color: #111827; margin: 0 0 8px;">Review Submitted!</h3>
+        <h3 style="font-size: 20px; font-weight: 700; color: #111827; margin: 0 0 8px;">Review Submitted!</h3>
         <p style="font-size: 14px; color: #4b5563; margin: 0 0 20px;">Thank you for your feedback! Your review and photo have been added.</p>
-        <button type="button" class="hb-form-submit-btn" style="width: auto; padding: 9px 24px;" onclick="closeHbWriteModal('{{ section.id }}')">Close</button>
+        <button type="button" class="hb-form-submit-btn" style="width: auto; padding: 10px 28px;" onclick="closeHbWriteModal('{{ section.id }}')">Close</button>
       </div>
     </div>
   </div>
@@ -772,6 +788,9 @@
 <script>
   (function() {
     var sectionId = '{{ section.id }}';
+    var brandStarColor = '{{ brand_star_color }}';
+    var storageKey = 'asar_saved_reviews_' + sectionId;
+
     var modal = document.getElementById('hb-modal-' + sectionId);
     var writeBtn = document.getElementById('hb-btn-write-' + sectionId);
     var submitBtn = document.getElementById('hb-submit-btn-' + sectionId);
@@ -781,10 +800,136 @@
     var previewContainer = document.getElementById('hb-preview-' + sectionId);
     var uploadedPhotoData = '';
 
+    // HTML escape helper
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str).replace(/[&<>"']/g, function(m) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m];
+      });
+    }
+
+    // Canvas image compressor (keeps localStorage efficient)
+    function compressImageFile(file, callback) {
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        var img = new Image();
+        img.onload = function() {
+          var canvas = document.createElement('canvas');
+          var maxDim = 800;
+          var w = img.width;
+          var h = img.height;
+          if (w > maxDim || h > maxDim) {
+            if (w > h) {
+              h = Math.round((h * maxDim) / w);
+              w = maxDim;
+            } else {
+              w = Math.round((w * maxDim) / h);
+              h = maxDim;
+            }
+          }
+          canvas.width = w;
+          canvas.height = h;
+          var ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, w, h);
+          callback(canvas.toDataURL('image/jpeg', 0.82));
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // Build Card DOM element
+    function createCardElement(rev) {
+      var card = document.createElement('div');
+      card.className = 'hb-review-card';
+      card.setAttribute('data-rating', rev.rating || 5);
+      card.setAttribute('data-has-photo', rev.photo ? 'true' : 'false');
+      if (rev.id) {
+        card.setAttribute('data-review-id', rev.id);
+      }
+
+      var starsHtml = '';
+      var count = parseInt(rev.rating, 10) || 5;
+      for (var i = 0; i < count; i++) {
+        starsHtml += '<svg width="18" height="18" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>';
+      }
+
+      var photoHtml = '';
+      if (rev.photo) {
+        photoHtml = '<div class="hb-review-photo-wrapper"><div class="hb-review-photo-link" onclick="openHbReviewsLightbox(\'' + rev.photo + '\')"><img src="' + rev.photo + '" class="hb-review-photo" alt="' + escapeHtml(rev.name) + ' photo"></div></div>';
+      }
+
+      card.innerHTML = 
+        '<div class="hb-review-stars" style="color: ' + brandStarColor + ';">' + starsHtml + '</div>' +
+        '<div class="hb-review-author">' + escapeHtml(rev.name) + '</div>' +
+        '<div class="hb-review-date">' + escapeHtml(rev.date) + '</div>' +
+        '<div class="hb-review-body"><p>' + escapeHtml(rev.text) + '</p></div>' +
+        photoHtml;
+
+      return card;
+    }
+
+    // Add photo to header strip
+    function addPhotoToHeaderStrip(photoUrl, name) {
+      var strip = document.getElementById('hb-header-thumbs-' + sectionId);
+      if (strip && photoUrl) {
+        var thumb = document.createElement('div');
+        thumb.className = 'hb-reviews-thumb-item';
+        thumb.onclick = function() { openHbReviewsLightbox(photoUrl); };
+        thumb.innerHTML = '<img src="' + photoUrl + '" alt="' + escapeHtml(name) + ' review photo" loading="lazy">';
+        strip.insertBefore(thumb, strip.firstChild);
+      }
+    }
+
+    // Update count text in header
+    function updateReviewCountDisplay(addedCount) {
+      var countEl = document.querySelector('#shopify-section-' + sectionId + ' .hb-reviews-summary-count');
+      if (countEl && addedCount > 0) {
+        var defaultCount = parseInt('{{ section.settings.summary_text | default: "3" }}', 10) || 3;
+        countEl.textContent = (defaultCount + addedCount) + ' reviews';
+      }
+    }
+
+    // Restore saved reviews on page load
+    function restoreSavedReviews() {
+      var grid = document.getElementById('hb-reviews-grid-' + sectionId);
+      if (!grid) return;
+
+      var saved = [];
+      try {
+        saved = JSON.parse(localStorage.getItem(storageKey) || '[]');
+      } catch(e) { saved = []; }
+
+      if (saved && saved.length > 0) {
+        // Prepend in reverse order so newest is at the top
+        for (var i = saved.length - 1; i >= 0; i--) {
+          var rev = saved[i];
+          if (!grid.querySelector('[data-review-id="' + rev.id + '"]')) {
+            var card = createCardElement(rev);
+            grid.insertBefore(card, grid.firstChild);
+            if (rev.photo) {
+              addPhotoToHeaderStrip(rev.photo, rev.name);
+            }
+          }
+        }
+        updateReviewCountDisplay(saved.length);
+      }
+    }
+
+    // Run restore immediately & on DOMContentLoaded
+    restoreSavedReviews();
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', restoreSavedReviews);
+    }
+
     // Open Write Modal
     if (writeBtn && modal) {
       writeBtn.addEventListener('click', function(e) {
         e.preventDefault();
+        var formBody = document.getElementById('hb-form-body-' + sectionId);
+        var formDone = document.getElementById('hb-form-done-' + sectionId);
+        if (formBody) formBody.style.display = 'block';
+        if (formDone) formDone.style.display = 'none';
         modal.classList.add('active');
         document.body.style.overflow = 'hidden';
       });
@@ -796,6 +941,10 @@
       if (m) {
         m.classList.remove('active');
         document.body.style.overflow = '';
+        var formBody = document.getElementById('hb-form-body-' + id);
+        var formDone = document.getElementById('hb-form-done-' + id);
+        if (formBody) formBody.style.display = 'block';
+        if (formDone) formDone.style.display = 'none';
       }
     };
 
@@ -845,25 +994,23 @@
       });
     }
 
-    // Photo Input Preview via FileReader
+    // Photo Input Preview via FileReader with Canvas compression
     if (photoInput) {
       photoInput.addEventListener('change', function() {
         var file = this.files[0];
         if (file) {
-          var reader = new FileReader();
-          reader.onload = function(e) {
-            uploadedPhotoData = e.target.result;
+          compressImageFile(file, function(compressedData) {
+            uploadedPhotoData = compressedData;
             if (previewContainer) {
               previewContainer.innerHTML = '<img src="' + uploadedPhotoData + '" alt="Upload preview">';
               previewContainer.style.display = 'flex';
             }
-          };
-          reader.readAsDataURL(file);
+          });
         }
       });
     }
 
-    // Submit Review
+    // Submit Review Handler
     if (submitBtn) {
       submitBtn.addEventListener('click', function() {
         var nameInput = document.getElementById('hb-input-name-' + sectionId);
@@ -890,35 +1037,43 @@
         var today = new Date();
         var dateFormatted = ('0' + (today.getMonth() + 1)).slice(-2) + '/' + ('0' + today.getDate()).slice(-2) + '/' + today.getFullYear();
 
-        // Create Star SVGs
-        var starsHtml = '';
-        for (var i = 0; i < starVal; i++) {
-          starsHtml += '<svg width="18" height="18" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>';
+        var reviewObj = {
+          id: 'rev_' + Date.now(),
+          name: nameInput.value.trim(),
+          rating: starVal,
+          date: dateFormatted,
+          text: textInput.value.trim(),
+          photo: uploadedPhotoData || ''
+        };
+
+        // 1. Save to LocalStorage
+        var savedList = [];
+        try {
+          savedList = JSON.parse(localStorage.getItem(storageKey) || '[]');
+        } catch(e) { savedList = []; }
+        savedList.unshift(reviewObj);
+        try {
+          localStorage.setItem(storageKey, JSON.stringify(savedList));
+        } catch(e) {
+          console.warn('Could not save to localStorage:', e);
         }
 
-        var photoHtml = '';
-        if (uploadedPhotoData) {
-          photoHtml = '<div class="hb-review-photo-wrapper"><div class="hb-review-photo-link" onclick="openHbReviewsLightbox(\'' + uploadedPhotoData + '\')"><img src="' + uploadedPhotoData + '" class="hb-review-photo" alt="' + nameInput.value + ' photo"></div></div>';
-        }
-
-        // Build new card
-        var card = document.createElement('div');
-        card.className = 'hb-review-card';
-        card.setAttribute('data-rating', starVal);
-        card.setAttribute('data-has-photo', uploadedPhotoData ? 'true' : 'false');
-        card.innerHTML = 
-          '<div class="hb-review-stars">' + starsHtml + '</div>' +
-          '<div class="hb-review-author">' + nameInput.value.trim() + '</div>' +
-          '<div class="hb-review-date">' + dateFormatted + '</div>' +
-          '<div class="hb-review-body"><p>' + textInput.value.trim() + '</p></div>' +
-          photoHtml;
-
+        // 2. Prepend to DOM
         var grid = document.getElementById('hb-reviews-grid-' + sectionId);
         if (grid) {
+          var card = createCardElement(reviewObj);
           grid.insertBefore(card, grid.firstChild);
         }
 
-        // Show Success View
+        // 3. Add to Header photo strip
+        if (reviewObj.photo) {
+          addPhotoToHeaderStrip(reviewObj.photo, reviewObj.name);
+        }
+
+        // 4. Update Header review count
+        updateReviewCountDisplay(savedList.length);
+
+        // 5. Show Success View
         var formBody = document.getElementById('hb-form-body-' + sectionId);
         var formDone = document.getElementById('hb-form-done-' + sectionId);
         if (formBody && formDone) {
@@ -926,11 +1081,16 @@
           formDone.style.display = 'block';
         }
 
-        // Also trigger Judge.me if present
-        try {
-          var jdgmLink = document.querySelector('.jdgm-write-rev-link');
-          if (jdgmLink) jdgmLink.click();
-        } catch(err){}
+        // 6. Reset Form
+        nameInput.value = '';
+        emailInput.value = '';
+        textInput.value = '';
+        uploadedPhotoData = '';
+        if (photoInput) photoInput.value = '';
+        if (previewContainer) {
+          previewContainer.innerHTML = '';
+          previewContainer.style.display = 'none';
+        }
       });
     }
 
@@ -987,7 +1147,7 @@
           return parseInt(b.getAttribute('data-rating'), 10) - parseInt(a.getAttribute('data-rating'), 10);
         });
       } else {
-        // default newest (reverse)
+        // Reverse for newest
         cards.reverse();
       }
       cards.forEach(function(c) { g.appendChild(c); });
@@ -1079,14 +1239,22 @@
     {
       "type": "color",
       "id": "button_bg",
-      "label": "Write a Review Button Color",
-      "default": "#2ca24d"
+      "label": "Button & Accent Color",
+      "default": "#7A2A2B",
+      "info": "Used for 'Write a review' button, submit button in modal, and accent colors."
     },
     {
       "type": "color",
       "id": "button_text_color",
       "label": "Button Text Color",
       "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "star_color",
+      "label": "Stars Color",
+      "default": "#7A2A2B",
+      "info": "Used for review stars on cards and in the write review modal."
     },
     {
       "type": "header",
@@ -1148,12 +1316,6 @@
       "unit": "px",
       "label": "Card Border Radius",
       "default": 12
-    },
-    {
-      "type": "color",
-      "id": "star_color",
-      "label": "Stars Color",
-      "default": "#2ca24d"
     },
     {
       "type": "header",
