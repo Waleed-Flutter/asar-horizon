@@ -926,8 +926,69 @@
     // ==========================================
     function extractJudgemeReviews() {
       var list = [];
-      
-      // 1. Try extracting from Judge.me server JSON-LD
+      var seenKeys = {};
+
+      function addReview(rev) {
+        if (!rev || !rev.name) return;
+        var rName = rev.name.trim();
+        var rText = (rev.text || '').trim();
+        if (rName.toLowerCase() === 'test' && (!rText || rText.indexOf('Asar Pure Ostrich Oil') !== -1 || rText === 'Testing review with picture attachment' || rText === 'Testing picture url' || rText === 'Testing base64 picture')) {
+          return;
+        }
+        var dedupeKey = rName.toLowerCase() + '_' + rText.toLowerCase().substring(0, 30);
+        if (seenKeys[dedupeKey]) {
+          if (rev.photo && !seenKeys[dedupeKey].photo) {
+            seenKeys[dedupeKey].photo = rev.photo;
+          }
+          return;
+        }
+        seenKeys[dedupeKey] = rev;
+        list.push(rev);
+      }
+
+      // 1. PRIMARY: Parse from SSR DOM .jdgm-rev elements (contains all live reviews rendered by Judge.me)
+      var revEls = document.querySelectorAll('.jdgm-rev');
+      revEls.forEach(function(el, idx) {
+        var nameEl = el.querySelector('.jdgm-rev__author');
+        var ratingEl = el.querySelector('.jdgm-rev__rating');
+        var dateEl = el.querySelector('time.jdgm-rev__timestamp');
+        var bodyEl = el.querySelector('.jdgm-rev__body');
+        var picEl = el.querySelector('.jdgm-rev__pic-link') || el.querySelector('.jdgm-rev__pic-img');
+
+        var rName = nameEl ? nameEl.textContent.trim() : 'Customer';
+        var rText = bodyEl ? bodyEl.textContent.trim() : '';
+
+        var rScore = 5;
+        if (ratingEl && ratingEl.getAttribute('data-score')) {
+          rScore = parseInt(ratingEl.getAttribute('data-score'), 10) || 5;
+        }
+        var rDate = '';
+        if (dateEl) {
+          var dt = dateEl.getAttribute('datetime') || dateEl.getAttribute('data-content');
+          if (dt) {
+            var d = new Date(dt);
+            if (!isNaN(d.getTime())) {
+              rDate = ('0' + (d.getMonth() + 1)).slice(-2) + '/' + ('0' + d.getDate()).slice(-2) + '/' + d.getFullYear();
+            }
+          }
+        }
+        var rPhoto = '';
+        if (picEl) {
+          rPhoto = picEl.getAttribute('href') || picEl.getAttribute('data-src') || picEl.getAttribute('src') || '';
+        }
+
+        addReview({
+          id: el.getAttribute('data-review-id') || ('jdgm_dom_' + idx),
+          name: rName,
+          rating: rScore,
+          date: rDate,
+          text: rText,
+          photo: rPhoto,
+          verified: true
+        });
+      });
+
+      // 2. ALSO check Judge.me server JSON-LD for any reviews with photos
       var jldScripts = document.querySelectorAll('script.jdgm-server-jld');
       jldScripts.forEach(function(sc) {
         try {
@@ -956,12 +1017,8 @@
               var revName = (r.author && r.author.name) ? r.author.name : 'Customer';
               var revBody = r.reviewBody || '';
 
-              if (revName.toLowerCase() === 'test' && (!revBody || revBody.indexOf('Asar Pure Ostrich Oil') !== -1)) {
-                return;
-              }
-
-              list.push({
-                id: 'jdgm_' + (idx + 1),
+              addReview({
+                id: 'jdgm_jld_' + (idx + 1),
                 name: revName,
                 rating: ratingVal,
                 date: dStr,
@@ -973,51 +1030,6 @@
           }
         } catch(e) {}
       });
-
-      // 2. Fallback: Parse from SSR DOM .jdgm-rev elements if JSON-LD was empty
-      if (list.length === 0) {
-        var revEls = document.querySelectorAll('.jdgm-rev');
-        revEls.forEach(function(el, idx) {
-          var nameEl = el.querySelector('.jdgm-rev__author');
-          var ratingEl = el.querySelector('.jdgm-rev__rating');
-          var dateEl = el.querySelector('time.jdgm-rev__timestamp');
-          var bodyEl = el.querySelector('.jdgm-rev__body');
-          var picEl = el.querySelector('.jdgm-rev__pic-link') || el.querySelector('.jdgm-rev__pic-img');
-
-          var rName = nameEl ? nameEl.textContent.trim() : 'Customer';
-          var rText = bodyEl ? bodyEl.textContent.trim() : '';
-          if (rName.toLowerCase() === 'test' && (!rText || rText.indexOf('Asar Pure Ostrich Oil') !== -1)) return;
-
-          var rScore = 5;
-          if (ratingEl && ratingEl.getAttribute('data-score')) {
-            rScore = parseInt(ratingEl.getAttribute('data-score'), 10) || 5;
-          }
-          var rDate = '';
-          if (dateEl) {
-            var dt = dateEl.getAttribute('datetime') || dateEl.getAttribute('data-content');
-            if (dt) {
-              var d = new Date(dt);
-              if (!isNaN(d.getTime())) {
-                rDate = ('0' + (d.getMonth() + 1)).slice(-2) + '/' + ('0' + d.getDate()).slice(-2) + '/' + d.getFullYear();
-              }
-            }
-          }
-          var rPhoto = '';
-          if (picEl) {
-            rPhoto = picEl.getAttribute('href') || picEl.getAttribute('data-src') || picEl.getAttribute('src') || '';
-          }
-
-          list.push({
-            id: el.getAttribute('data-review-id') || ('jdgm_dom_' + idx),
-            name: rName,
-            rating: rScore,
-            date: rDate,
-            text: rText,
-            photo: rPhoto,
-            verified: true
-          });
-        });
-      }
 
       return list;
     }
@@ -1060,14 +1072,27 @@
         });
       }
 
-      // Prepend any locally submitted user reviews (most recent at top)
+      // Prepend any locally submitted user reviews (most recent at top, deduplicated against Judge.me reviews)
       if (savedList && savedList.length > 0) {
+        var updatedSavedList = [];
         for (var i = savedList.length - 1; i >= 0; i--) {
           var sRev = savedList[i];
-          if (!grid.querySelector('[data-review-id="' + sRev.id + '"]')) {
-            var sCard = createCardElement(sRev);
-            grid.insertBefore(sCard, grid.firstChild);
+          var alreadyInJdgm = jdgmList.some(function(j) {
+            return (j.name || '').trim().toLowerCase() === (sRev.name || '').trim().toLowerCase() &&
+                   (j.text || '').trim().toLowerCase() === (sRev.text || '').trim().toLowerCase();
+          });
+          if (!alreadyInJdgm) {
+            updatedSavedList.unshift(sRev);
+            if (!grid.querySelector('[data-review-id="' + sRev.id + '"]')) {
+              var sCard = createCardElement(sRev);
+              grid.insertBefore(sCard, grid.firstChild);
+            }
           }
+        }
+        if (updatedSavedList.length !== savedList.length) {
+          try {
+            localStorage.setItem(storageKey, JSON.stringify(updatedSavedList));
+          } catch(e) {}
         }
       }
 
@@ -1252,9 +1277,8 @@
         formData.append('rating', starVal);
         formData.append('body', textVal);
 
-        var file = photoInput.files ? photoInput.files[0] : null;
-        if (file) {
-          formData.append('picture', file);
+        if (uploadedPhotoData) {
+          formData.append('picture', uploadedPhotoData);
         }
 
         // Post to Judge.me API in background
