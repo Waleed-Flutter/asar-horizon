@@ -825,6 +825,53 @@
     var photoInput = document.getElementById('hb-photo-input-' + sectionId);
     var previewContainer = document.getElementById('hb-preview-' + sectionId);
     var uploadedPhotoData = '';
+    var selectedFile = null;
+
+    // Helper to upload image directly to Judge.me S3 storage via presigned data
+    function uploadImageToJudgeme(file, shopDomain, callback) {
+      if (!file) {
+        return callback(null);
+      }
+      fetch('https://api.judge.me/api/v1/pictures/presigned_data?shop_domain=' + encodeURIComponent(shopDomain) + '&platform=shopify')
+        .then(function(res) {
+          if (!res.ok) throw new Error('Presigned fetch status: ' + res.status);
+          return res.json();
+        })
+        .then(function(presigned) {
+          if (!presigned || !presigned.url || !presigned.key_prefix) {
+            throw new Error('Invalid presigned data');
+          }
+          var cleanName = (Date.now() + '_' + (file.name || 'photo.jpg')).replace(/[^a-z0-9-_.]/gi, '');
+          var s3Key = presigned.key_prefix + cleanName;
+          var s3FormData = new FormData();
+          s3FormData.append('key', s3Key);
+          if (presigned.fields) {
+            for (var k in presigned.fields) {
+              if (presigned.fields.hasOwnProperty(k)) {
+                s3FormData.append(k, presigned.fields[k]);
+              }
+            }
+          }
+          s3FormData.append('file', file);
+
+          return fetch(presigned.url, {
+            method: 'POST',
+            body: s3FormData
+          }).then(function(s3Res) {
+            if (!s3Res.ok && s3Res.status !== 201) {
+              throw new Error('S3 upload status: ' + s3Res.status);
+            }
+            return s3Key;
+          });
+        })
+        .then(function(s3Key) {
+          callback(s3Key);
+        })
+        .catch(function(err) {
+          console.warn('[Judge.me] S3 image upload notice:', err);
+          callback(null);
+        });
+    }
 
     // HTML escape helper
     function escapeHtml(str) {
@@ -932,7 +979,7 @@
         if (!rev || !rev.name) return;
         var rName = rev.name.trim();
         var rText = (rev.text || '').trim();
-        if (rName.toLowerCase() === 'test' && (!rText || rText.indexOf('Asar Pure Ostrich Oil') !== -1 || rText === 'Testing review with picture attachment' || rText === 'Testing picture url' || rText === 'Testing base64 picture')) {
+        if (rName.toLowerCase().indexOf('test') === 0) {
           return;
         }
         var dedupeKey = rName.toLowerCase() + '_' + rText.toLowerCase().substring(0, 30);
@@ -1072,28 +1119,51 @@
         });
       }
 
-      // Prepend any locally submitted user reviews (most recent at top, deduplicated against Judge.me reviews)
+      // Merge locally submitted user reviews (preserve photos across refreshes)
       if (savedList && savedList.length > 0) {
         var updatedSavedList = [];
         for (var i = savedList.length - 1; i >= 0; i--) {
           var sRev = savedList[i];
-          var alreadyInJdgm = jdgmList.some(function(j) {
-            return (j.name || '').trim().toLowerCase() === (sRev.name || '').trim().toLowerCase() &&
-                   (j.text || '').trim().toLowerCase() === (sRev.text || '').trim().toLowerCase();
-          });
-          if (!alreadyInJdgm) {
-            updatedSavedList.unshift(sRev);
+          if (!sRev || !sRev.name) continue;
+
+          var matchingJdgm = null;
+          for (var j = 0; j < jdgmList.length; j++) {
+            if ((jdgmList[j].name || '').trim().toLowerCase() === (sRev.name || '').trim().toLowerCase() &&
+                (jdgmList[j].text || '').trim().toLowerCase() === (sRev.text || '').trim().toLowerCase()) {
+              matchingJdgm = jdgmList[j];
+              break;
+            }
+          }
+
+          if (matchingJdgm) {
+            // Review exists in Judge.me
+            if (sRev.photo && !matchingJdgm.photo) {
+              // Judge.me has the text but hasn't published the photo yet -> attach photo to the card!
+              matchingJdgm.photo = sRev.photo;
+              var card = grid.querySelector('[data-review-id="' + matchingJdgm.id + '"]');
+              if (card && !card.querySelector('.hb-review-photo')) {
+                var pWrap = document.createElement('div');
+                pWrap.className = 'hb-review-photo-wrapper';
+                pWrap.innerHTML = '<div class="hb-review-photo-link" onclick="openHbReviewsLightbox(\'' + sRev.photo + '\')"><img src="' + sRev.photo + '" class="hb-review-photo" alt="' + escapeHtml(matchingJdgm.name) + ' photo" loading="lazy"></div>';
+                card.appendChild(pWrap);
+                card.setAttribute('data-has-photo', 'true');
+              }
+              // Keep in localStorage so the photo does not vanish on refresh while Judge.me processes it
+              updatedSavedList.unshift(sRev);
+            }
+          } else {
+            // Not yet in Judge.me SSR HTML -> Prepend as standalone card
             if (!grid.querySelector('[data-review-id="' + sRev.id + '"]')) {
               var sCard = createCardElement(sRev);
               grid.insertBefore(sCard, grid.firstChild);
             }
+            updatedSavedList.unshift(sRev);
           }
         }
-        if (updatedSavedList.length !== savedList.length) {
-          try {
-            localStorage.setItem(storageKey, JSON.stringify(updatedSavedList));
-          } catch(e) {}
-        }
+
+        try {
+          localStorage.setItem(storageKey, JSON.stringify(updatedSavedList));
+        } catch(e) {}
       }
 
       // Sync photos into header thumbnail strip
@@ -1220,6 +1290,7 @@
       photoInput.addEventListener('change', function() {
         var file = this.files[0];
         if (file) {
+          selectedFile = file;
           compressImageFile(file, function(compressedData) {
             uploadedPhotoData = compressedData;
             if (previewContainer) {
@@ -1227,6 +1298,13 @@
               previewContainer.style.display = 'flex';
             }
           });
+        } else {
+          selectedFile = null;
+          uploadedPhotoData = '';
+          if (previewContainer) {
+            previewContainer.innerHTML = '';
+            previewContainer.style.display = 'none';
+          }
         }
       });
     }
@@ -1267,35 +1345,37 @@
         submitBtn.disabled = true;
         submitBtn.textContent = 'Submitting Review...';
 
-        // Prepare FormData for Judge.me Official API
-        var formData = new FormData();
-        formData.append('shop_domain', shopDomain);
-        formData.append('platform', 'shopify');
-        formData.append('id', productId);
-        formData.append('name', nameVal);
-        formData.append('email', emailVal);
-        formData.append('rating', starVal);
-        formData.append('body', textVal);
+        uploadImageToJudgeme(selectedFile, shopDomain, function(s3Key) {
+          // Prepare FormData for Judge.me Official API
+          var formData = new FormData();
+          formData.append('shop_domain', shopDomain);
+          formData.append('platform', 'shopify');
+          formData.append('id', productId);
+          formData.append('name', nameVal);
+          formData.append('email', emailVal);
+          formData.append('rating', starVal);
+          formData.append('body', textVal);
 
-        if (uploadedPhotoData) {
-          formData.append('picture', uploadedPhotoData);
-        }
+          if (s3Key) {
+            formData.append('picture_keys[0]', s3Key);
+          }
 
-        // Post to Judge.me API in background
-        fetch('https://judge.me/api/v1/reviews', {
-          method: 'POST',
-          body: formData
-        })
-        .then(function(res) {
-          return res.json().catch(function() { return {}; });
-        })
-        .then(function(resData) {
-          console.log('[Judge.me] Review submission response:', resData);
-          completeSubmission();
-        })
-        .catch(function(err) {
-          console.warn('[Judge.me] Review submission notice:', err);
-          completeSubmission();
+          // Post to Judge.me API in background
+          fetch('https://judge.me/api/v1/reviews', {
+            method: 'POST',
+            body: formData
+          })
+          .then(function(res) {
+            return res.json().catch(function() { return {}; });
+          })
+          .then(function(resData) {
+            console.log('[Judge.me] Review submission response:', resData);
+            completeSubmission();
+          })
+          .catch(function(err) {
+            console.warn('[Judge.me] Review submission notice:', err);
+            completeSubmission();
+          });
         });
 
         function completeSubmission() {
