@@ -683,43 +683,6 @@
     },
     "product_reviews_grid_CUpP84": {
       "type": "product-reviews-grid",
-      "blocks": {
-        "review_card_c986mm": {
-          "type": "review_card",
-          "settings": {
-            "reviewer_name": "Sana",
-            "review_date": "09/11/2026",
-            "rating": 5,
-            "review_text": "I bought Tibra Pain Ease Oil a week ago because I was having pain in my knee. I used this oil and got amazing results. The warm sensation really penetrates and soothes the affected area. I highly recommend this oil.",
-            "fallback_photo": "auto"
-          }
-        },
-        "review_card_iyiRk8": {
-          "type": "review_card",
-          "settings": {
-            "reviewer_name": "Anonymous",
-            "review_date": "09/09/2026",
-            "rating": 5,
-            "review_text": "Maine week pehle yeh oil apni mother ke liye mangwaya tha for her knee and joint pain. Honestly results bohot zabardast hain, bas ek week mein unko kafi relief mila hai and improvement nazar aa rahi hai. Highly recommended!",
-            "fallback_photo": "auto"
-          }
-        },
-        "review_card_m6Wizc": {
-          "type": "review_card",
-          "settings": {
-            "reviewer_name": "Salah",
-            "review_date": "08/24/2026",
-            "rating": 5,
-            "review_text": "Amazing oil its perfect for pain relief in joints.",
-            "fallback_photo": "auto"
-          }
-        }
-      },
-      "block_order": [
-        "review_card_c986mm",
-        "review_card_iyiRk8",
-        "review_card_m6Wizc"
-      ],
       "name": "Product Reviews Grid",
       "settings": {
         "heading": "Customer Reviews",
@@ -730,9 +693,9 @@
         "show_header_thumbs": true,
         "show_filter_sort": true,
         "button_text": "Write a review",
-        "button_bg": "#7A2A2B",
+        "button_bg": "#7a2a2b",
         "button_text_color": "#ffffff",
-        "star_color": "#7A2A2B",
+        "star_color": "#7a2a2b",
         "columns_desktop": "3",
         "columns_mobile": "1",
         "grid_gap": 20,
