@@ -339,6 +339,92 @@
     display: block !important;
   }
 
+  /* ===================== SLIDE / PAGINATION NAVIGATION ===================== */
+  #shopify-section-{{ section.id }} .hb-reviews-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 36px;
+    padding-top: 10px;
+  }
+
+  #shopify-section-{{ section.id }} .hb-page-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid #e5e7eb;
+    background: #ffffff;
+    color: #374151;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  }
+
+  #shopify-section-{{ section.id }} .hb-page-btn:hover:not(:disabled) {
+    background: #f9fafb;
+    border-color: #d1d5db;
+    color: #111827;
+    transform: translateY(-1px);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+  }
+
+  #shopify-section-{{ section.id }} .hb-page-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  #shopify-section-{{ section.id }} .hb-page-numbers {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  #shopify-section-{{ section.id }} .hb-page-num {
+    min-width: 38px;
+    height: 38px;
+    padding: 0 10px;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    background: transparent;
+    font-size: 14px;
+    font-weight: 500;
+    color: #4b5563;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  #shopify-section-{{ section.id }} .hb-page-num:hover:not(.active) {
+    background: #f3f4f6;
+    color: #111827;
+  }
+
+  #shopify-section-{{ section.id }} .hb-page-num.active {
+    background: {{ section.settings.button_bg | default: '#7A2A2B' }};
+    color: {{ section.settings.button_text_color | default: '#ffffff' }};
+    font-weight: 600;
+    border-color: {{ section.settings.button_bg | default: '#7A2A2B' }};
+    box-shadow: 0 2px 6px rgba(122, 42, 43, 0.25);
+  }
+
+  @keyframes hbFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
   /* ===================== MODAL POPUPS ===================== */
   .hb-modal-overlay {
     position: fixed;
@@ -722,6 +808,17 @@
           {%- endif -%}
         </div>
       {% endfor %}
+    </div>
+
+    <!-- SLIDE / PAGINATION NAVIGATION (Shows 6 reviews at a time) -->
+    <div class="hb-reviews-pagination" id="hb-reviews-pagination-{{ section.id }}" style="display: none;">
+      <button type="button" class="hb-page-btn hb-page-prev" id="hb-page-prev-{{ section.id }}" aria-label="Previous slide of reviews">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      </button>
+      <div class="hb-page-numbers" id="hb-page-numbers-{{ section.id }}"></div>
+      <button type="button" class="hb-page-btn hb-page-next" id="hb-page-next-{{ section.id }}" aria-label="Next slide of reviews">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </button>
     </div>
 
     {% for block in section.blocks %}
@@ -1192,6 +1289,142 @@
         var avg = (totalRating / totalCards).toFixed(1);
         updateHeaderStats(avg, totalCards);
       }
+
+      // Update 6-reviews-per-slide pagination
+      updateReviewsPagination();
+    }
+
+    // ==========================================
+    // 6-REVIEWS-PER-SLIDE PAGINATION LOGIC
+    // ==========================================
+    var currentReviewsPage = 1;
+    var reviewsPerPage = 6;
+
+    function updateReviewsPagination() {
+      var grid = document.getElementById('hb-reviews-grid-' + sectionId);
+      var paginationWrap = document.getElementById('hb-reviews-pagination-' + sectionId);
+      var numbersWrap = document.getElementById('hb-page-numbers-' + sectionId);
+      var prevBtn = document.getElementById('hb-page-prev-' + sectionId);
+      var nextBtn = document.getElementById('hb-page-next-' + sectionId);
+
+      if (!grid || !paginationWrap) return;
+
+      var allCards = Array.from(grid.querySelectorAll('.hb-review-card'));
+      var visibleCards = allCards.filter(function(c) {
+        return !c.hasAttribute('data-filtered-out');
+      });
+      var totalVisible = visibleCards.length;
+      var totalPages = Math.ceil(totalVisible / reviewsPerPage);
+
+      if (totalPages <= 1) {
+        paginationWrap.style.display = 'none';
+        visibleCards.forEach(function(c) {
+          c.style.display = 'flex';
+        });
+        return;
+      }
+
+      paginationWrap.style.display = 'flex';
+
+      if (currentReviewsPage > totalPages) currentReviewsPage = totalPages;
+      if (currentReviewsPage < 1) currentReviewsPage = 1;
+
+      var startIndex = (currentReviewsPage - 1) * reviewsPerPage;
+      var endIndex = startIndex + reviewsPerPage;
+
+      visibleCards.forEach(function(card, idx) {
+        if (idx >= startIndex && idx < endIndex) {
+          card.style.display = 'flex';
+          card.style.animation = 'hbFadeIn 0.35s ease forwards';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      if (prevBtn) {
+        prevBtn.disabled = (currentReviewsPage === 1);
+      }
+      if (nextBtn) {
+        nextBtn.disabled = (currentReviewsPage === totalPages);
+      }
+
+      if (numbersWrap) {
+        numbersWrap.innerHTML = '';
+        for (var p = 1; p <= totalPages; p++) {
+          var numBtn = document.createElement('button');
+          numBtn.type = 'button';
+          numBtn.className = 'hb-page-num' + (p === currentReviewsPage ? ' active' : '');
+          numBtn.textContent = p;
+          numBtn.setAttribute('aria-label', 'Go to reviews slide ' + p);
+          (function(targetPage) {
+            numBtn.addEventListener('click', function() {
+              goToReviewsPage(targetPage);
+            });
+          })(p);
+          numbersWrap.appendChild(numBtn);
+        }
+      }
+    }
+
+    function goToReviewsPage(page) {
+      currentReviewsPage = page;
+      updateReviewsPagination();
+      var grid = document.getElementById('hb-reviews-grid-' + sectionId);
+      if (grid) {
+        var header = document.querySelector('#shopify-section-' + sectionId + ' .hb-reviews-header');
+        if (header) {
+          header.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else {
+          grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+    }
+
+    var prevPageBtn = document.getElementById('hb-page-prev-' + sectionId);
+    var nextPageBtn = document.getElementById('hb-page-next-' + sectionId);
+
+    if (prevPageBtn) {
+      prevPageBtn.addEventListener('click', function() {
+        if (currentReviewsPage > 1) {
+          goToReviewsPage(currentReviewsPage - 1);
+        }
+      });
+    }
+
+    if (nextPageBtn) {
+      nextPageBtn.addEventListener('click', function() {
+        var grid = document.getElementById('hb-reviews-grid-' + sectionId);
+        if (!grid) return;
+        var visibleCards = Array.from(grid.querySelectorAll('.hb-review-card:not([data-filtered-out])'));
+        var totalPages = Math.ceil(visibleCards.length / reviewsPerPage);
+        if (currentReviewsPage < totalPages) {
+          goToReviewsPage(currentReviewsPage + 1);
+        }
+      });
+    }
+
+    // Touch swipe navigation for mobile/tablet
+    var touchStartX = 0;
+    var touchEndX = 0;
+    var reviewsGridEl = document.getElementById('hb-reviews-grid-' + sectionId);
+    if (reviewsGridEl) {
+      reviewsGridEl.addEventListener('touchstart', function(e) {
+        touchStartX = e.changedTouches[0].screenX;
+      }, { passive: true });
+
+      reviewsGridEl.addEventListener('touchend', function(e) {
+        touchEndX = e.changedTouches[0].screenX;
+        var diff = touchStartX - touchEndX;
+        if (Math.abs(diff) > 50) {
+          var visibleCards = Array.from(reviewsGridEl.querySelectorAll('.hb-review-card:not([data-filtered-out])'));
+          var totalPages = Math.ceil(visibleCards.length / reviewsPerPage);
+          if (diff > 0 && currentReviewsPage < totalPages) {
+            goToReviewsPage(currentReviewsPage + 1);
+          } else if (diff < 0 && currentReviewsPage > 1) {
+            goToReviewsPage(currentReviewsPage - 1);
+          }
+        }
+      }, { passive: true });
     }
 
     // Main sync coordinator
@@ -1423,6 +1656,10 @@
           var allCardsCount = grid ? grid.querySelectorAll('.hb-review-card').length : 1;
           updateHeaderStats('5.0', allCardsCount);
 
+          // Update pagination to show new card on slide 1
+          currentReviewsPage = 1;
+          updateReviewsPagination();
+
           // 5. Show Success View
           var formBody = document.getElementById('hb-form-body-' + sectionId);
           var formDone = document.getElementById('hb-form-done-' + sectionId);
@@ -1481,13 +1718,25 @@
       var cards = g.querySelectorAll('.hb-review-card');
       cards.forEach(function(c) {
         if (type === 'all') {
-          c.style.display = 'flex';
+          c.removeAttribute('data-filtered-out');
         } else if (type === '5') {
-          c.style.display = (c.getAttribute('data-rating') === '5') ? 'flex' : 'none';
+          if (c.getAttribute('data-rating') === '5') {
+            c.removeAttribute('data-filtered-out');
+          } else {
+            c.setAttribute('data-filtered-out', 'true');
+            c.style.display = 'none';
+          }
         } else if (type === 'photos') {
-          c.style.display = (c.getAttribute('data-has-photo') === 'true') ? 'flex' : 'none';
+          if (c.getAttribute('data-has-photo') === 'true') {
+            c.removeAttribute('data-filtered-out');
+          } else {
+            c.setAttribute('data-filtered-out', 'true');
+            c.style.display = 'none';
+          }
         }
       });
+      currentReviewsPage = 1;
+      updateReviewsPagination();
     };
 
     // Sort Function
@@ -1504,6 +1753,8 @@
         cards.reverse();
       }
       cards.forEach(function(c) { g.appendChild(c); });
+      currentReviewsPage = 1;
+      updateReviewsPagination();
     };
 
     // Global Lightbox Functions
