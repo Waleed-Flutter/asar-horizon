@@ -968,32 +968,29 @@
       }
     }
 
+    // Strip HTML tags helper
+    function stripHtml(html) {
+      if (!html) return '';
+      var tmp = document.createElement('div');
+      tmp.innerHTML = html;
+      return tmp.textContent || tmp.innerText || '';
+    }
+
+    // Format date string helper
+    function formatDateStr(dateStr) {
+      if (!dateStr) return '';
+      var d = new Date(dateStr);
+      if (isNaN(d.getTime())) return dateStr;
+      return ('0' + (d.getMonth() + 1)).slice(-2) + '/' + ('0' + d.getDate()).slice(-2) + '/' + d.getFullYear();
+    }
+
     // ==========================================
-    // EXTRACT REAL REVIEWS FROM JUDGE.ME
+    // EXTRACT APPROVED REVIEWS FROM JUDGE.ME SSR DOM
     // ==========================================
-    function extractJudgemeReviews() {
+    function extractJudgemeFromDOM() {
       var list = [];
       var seenKeys = {};
 
-      function addReview(rev) {
-        if (!rev || !rev.name) return;
-        var rName = rev.name.trim();
-        var rText = (rev.text || '').trim();
-        if (rName.toLowerCase().indexOf('test') === 0) {
-          return;
-        }
-        var dedupeKey = rName.toLowerCase() + '_' + rText.toLowerCase().substring(0, 30);
-        if (seenKeys[dedupeKey]) {
-          if (rev.photo && !seenKeys[dedupeKey].photo) {
-            seenKeys[dedupeKey].photo = rev.photo;
-          }
-          return;
-        }
-        seenKeys[dedupeKey] = rev;
-        list.push(rev);
-      }
-
-      // 1. PRIMARY: Parse from SSR DOM .jdgm-rev elements (contains all live reviews rendered by Judge.me)
       var revEls = document.querySelectorAll('.jdgm-rev');
       revEls.forEach(function(el, idx) {
         var nameEl = el.querySelector('.jdgm-rev__author');
@@ -1005,6 +1002,8 @@
         var rName = nameEl ? nameEl.textContent.trim() : 'Customer';
         var rText = bodyEl ? bodyEl.textContent.trim() : '';
 
+        if (rName.toLowerCase().indexOf('test') === 0) return;
+
         var rScore = 5;
         if (ratingEl && ratingEl.getAttribute('data-score')) {
           rScore = parseInt(ratingEl.getAttribute('data-score'), 10) || 5;
@@ -1012,19 +1011,18 @@
         var rDate = '';
         if (dateEl) {
           var dt = dateEl.getAttribute('datetime') || dateEl.getAttribute('data-content');
-          if (dt) {
-            var d = new Date(dt);
-            if (!isNaN(d.getTime())) {
-              rDate = ('0' + (d.getMonth() + 1)).slice(-2) + '/' + ('0' + d.getDate()).slice(-2) + '/' + d.getFullYear();
-            }
-          }
+          if (dt) rDate = formatDateStr(dt);
         }
         var rPhoto = '';
         if (picEl) {
           rPhoto = picEl.getAttribute('href') || picEl.getAttribute('data-src') || picEl.getAttribute('src') || '';
         }
 
-        addReview({
+        var dedupeKey = rName.toLowerCase() + '_' + rText.toLowerCase().substring(0, 30);
+        if (seenKeys[dedupeKey]) return;
+        seenKeys[dedupeKey] = true;
+
+        list.push({
           id: el.getAttribute('data-review-id') || ('jdgm_dom_' + idx),
           name: rName,
           rating: rScore,
@@ -1035,96 +1033,95 @@
         });
       });
 
-      // 2. ALSO check Judge.me server JSON-LD for any reviews with photos
-      var jldScripts = document.querySelectorAll('script.jdgm-server-jld');
-      jldScripts.forEach(function(sc) {
-        try {
-          var data = JSON.parse(sc.textContent);
-          if (data && data.review && Array.isArray(data.review)) {
-            data.review.forEach(function(r, idx) {
-              var photos = [];
-              if (r.image && Array.isArray(r.image)) {
-                photos = r.image;
-              } else if (typeof r.image === 'string' && r.image) {
-                photos = [r.image];
-              }
-              var dStr = '';
-              if (r.datePublished) {
-                var d = new Date(r.datePublished);
-                if (!isNaN(d.getTime())) {
-                  dStr = ('0' + (d.getMonth() + 1)).slice(-2) + '/' + ('0' + d.getDate()).slice(-2) + '/' + d.getFullYear();
-                } else {
-                  dStr = r.datePublished;
-                }
-              }
-              var ratingVal = 5;
-              if (r.reviewRating && r.reviewRating.ratingValue) {
-                ratingVal = parseInt(r.reviewRating.ratingValue, 10) || 5;
-              }
-              var revName = (r.author && r.author.name) ? r.author.name : 'Customer';
-              var revBody = r.reviewBody || '';
-
-              addReview({
-                id: 'jdgm_jld_' + (idx + 1),
-                name: revName,
-                rating: ratingVal,
-                date: dStr,
-                text: revBody,
-                photo: photos.length > 0 ? photos[0] : '',
-                verified: true
-              });
-            });
-          }
-        } catch(e) {}
-      });
-
       return list;
     }
 
     // ==========================================
-    // SYNC AND RENDER ALL REVIEWS (JUDGE.ME + BLOCKS + SAVED)
+    // FETCH REAL-TIME APPROVED REVIEWS FROM JUDGE.ME WIDGET API
     // ==========================================
-    function syncAndRenderReviews() {
+    function fetchJudgemeLiveReviews(callback) {
+      var apiUrl = 'https://api.judge.me/reviews/reviews_for_widget?shop_domain=' + encodeURIComponent(shopDomain) + '&platform=shopify&product_id=' + encodeURIComponent(productId) + '&per_page=30';
+      fetch(apiUrl)
+        .then(function(res) {
+          if (!res.ok) throw new Error('Live API status ' + res.status);
+          return res.json();
+        })
+        .then(function(data) {
+          if (!data || !Array.isArray(data.reviews)) {
+            return callback([], null);
+          }
+          var list = [];
+          data.reviews.forEach(function(r) {
+            var rName = (r.reviewer_name || 'Customer').trim();
+            if (rName.toLowerCase().indexOf('test') === 0) return;
+
+            var rPhoto = '';
+            if (r.pictures_urls && r.pictures_urls.length > 0) {
+              rPhoto = r.pictures_urls[0].original || r.pictures_urls[0].small || '';
+            }
+
+            list.push({
+              id: r.uuid || ('jdgm_api_' + Math.random().toString(36).substr(2, 9)),
+              name: rName,
+              rating: parseInt(r.rating, 10) || 5,
+              date: formatDateStr(r.created_at),
+              text: stripHtml(r.body_html || ''),
+              photo: rPhoto,
+              verified: r.verified_buyer !== false
+            });
+          });
+
+          var stats = {
+            average_rating: data.average_rating || '5.0',
+            number_of_reviews: (typeof data.number_of_reviews === 'number') ? data.number_of_reviews : list.length
+          };
+          callback(list, stats);
+        })
+        .catch(function(err) {
+          console.warn('[Judge.me] Live API fetch notice:', err);
+          callback([], null);
+        });
+    }
+
+    // ==========================================
+    // RENDER REVIEWS INTO GRID AND SYNC STATS
+    // ==========================================
+    function renderReviewsList(jdgmList, isLiveApiUpdate) {
       var grid = document.getElementById('hb-reviews-grid-' + sectionId);
       if (!grid) return;
 
-      var jdgmList = extractJudgemeReviews();
+      var existingBlockCards = Array.from(grid.querySelectorAll('.hb-review-card[data-review-id^="block_"]'));
 
-      // Read local storage saved reviews
+      // Clean non-block cards
+      var nonBlockCards = grid.querySelectorAll('.hb-review-card:not([data-review-id^="block_"])');
+      nonBlockCards.forEach(function(c) { c.remove(); });
+
+      // Insert Judge.me reviews in order
+      if (jdgmList && jdgmList.length > 0) {
+        jdgmList.forEach(function(rev) {
+          var card = createCardElement(rev);
+          if (existingBlockCards.length > 0) {
+            grid.insertBefore(card, existingBlockCards[0]);
+          } else {
+            grid.appendChild(card);
+          }
+        });
+      }
+
+      // Check saved reviews from localStorage (only recent submissions under 15 minutes)
       var savedList = [];
       try {
         savedList = JSON.parse(localStorage.getItem(storageKey) || '[]');
       } catch(e) { savedList = []; }
 
-      // Read existing block cards
-      var existingBlockCards = Array.from(grid.querySelectorAll('.hb-review-card[data-review-id^="block_"]'));
-
-      // If Judge.me reviews exist, prepend them before blocks
-      if (jdgmList.length > 0) {
-        // Clear only non-block cards first
-        var nonBlockCards = grid.querySelectorAll('.hb-review-card:not([data-review-id^="block_"])');
-        nonBlockCards.forEach(function(c) { c.remove(); });
-
-        // Insert Judge.me reviews in order
-        jdgmList.forEach(function(rev) {
-          if (!grid.querySelector('[data-review-id="' + rev.id + '"]')) {
-            var card = createCardElement(rev);
-            // Insert before blocks
-            if (existingBlockCards.length > 0) {
-              grid.insertBefore(card, existingBlockCards[0]);
-            } else {
-              grid.appendChild(card);
-            }
+      var now = Date.now();
+      var validSaved = [];
+      if (Array.isArray(savedList)) {
+        savedList.forEach(function(sRev) {
+          // Only preserve recent submissions (under 15 mins)
+          if (!sRev || !sRev.name || !sRev.timestamp || (now - sRev.timestamp > 15 * 60 * 1000)) {
+            return;
           }
-        });
-      }
-
-      // Merge locally submitted user reviews (preserve photos across refreshes)
-      if (savedList && savedList.length > 0) {
-        var updatedSavedList = [];
-        for (var i = savedList.length - 1; i >= 0; i--) {
-          var sRev = savedList[i];
-          if (!sRev || !sRev.name) continue;
 
           var matchingJdgm = null;
           for (var j = 0; j < jdgmList.length; j++) {
@@ -1136,9 +1133,9 @@
           }
 
           if (matchingJdgm) {
-            // Review exists in Judge.me
+            // Already published in Judge.me
             if (sRev.photo && !matchingJdgm.photo) {
-              // Judge.me has the text but hasn't published the photo yet -> attach photo to the card!
+              // Attach local photo if Judge.me CDN hasn't rendered it yet
               matchingJdgm.photo = sRev.photo;
               var card = grid.querySelector('[data-review-id="' + matchingJdgm.id + '"]');
               if (card && !card.querySelector('.hb-review-photo')) {
@@ -1148,23 +1145,21 @@
                 card.appendChild(pWrap);
                 card.setAttribute('data-has-photo', 'true');
               }
-              // Keep in localStorage so the photo does not vanish on refresh while Judge.me processes it
-              updatedSavedList.unshift(sRev);
+              validSaved.push(sRev);
             }
-          } else {
-            // Not yet in Judge.me SSR HTML -> Prepend as standalone card
-            if (!grid.querySelector('[data-review-id="' + sRev.id + '"]')) {
-              var sCard = createCardElement(sRev);
-              grid.insertBefore(sCard, grid.firstChild);
-            }
-            updatedSavedList.unshift(sRev);
+          } else if (!isLiveApiUpdate) {
+            // Pending preview (only before live API has confirmed list)
+            var sCard = createCardElement(sRev);
+            grid.insertBefore(sCard, grid.firstChild);
+            validSaved.push(sRev);
           }
-        }
-
-        try {
-          localStorage.setItem(storageKey, JSON.stringify(updatedSavedList));
-        } catch(e) {}
+        });
       }
+
+      // Keep localStorage pruned of any old, hidden, or deleted reviews
+      try {
+        localStorage.setItem(storageKey, JSON.stringify(validSaved));
+      } catch(e) {}
 
       // Sync photos into header thumbnail strip
       var strip = document.getElementById('hb-header-thumbs-' + sectionId);
@@ -1173,7 +1168,7 @@
         var seenPhotos = [];
         allCards.forEach(function(c) {
           var img = c.querySelector('.hb-review-photo');
-          if (img && img.src && !seenPhotos.includes(img.src)) {
+          if (img && img.src && !seenPhotos.some(function(sp) { return sp.url === img.src; })) {
             seenPhotos.push({
               url: img.src,
               name: (c.querySelector('.hb-review-author') ? c.querySelector('.hb-review-author').textContent.trim() : 'Customer')
@@ -1181,19 +1176,17 @@
           }
         });
 
-        if (seenPhotos.length > 0) {
-          strip.innerHTML = '';
-          seenPhotos.forEach(function(p) {
-            var thumb = document.createElement('div');
-            thumb.className = 'hb-reviews-thumb-item';
-            thumb.onclick = function() { openHbReviewsLightbox(p.url); };
-            thumb.innerHTML = '<img src="' + p.url + '" alt="' + escapeHtml(p.name) + ' review photo" loading="lazy">';
-            strip.appendChild(thumb);
-          });
-        }
+        strip.innerHTML = '';
+        seenPhotos.forEach(function(p) {
+          var thumb = document.createElement('div');
+          thumb.className = 'hb-reviews-thumb-item';
+          thumb.onclick = function() { openHbReviewsLightbox(p.url); };
+          thumb.innerHTML = '<img src="' + p.url + '" alt="' + escapeHtml(p.name) + ' review photo" loading="lazy">';
+          strip.appendChild(thumb);
+        });
       }
 
-      // Calculate total count and score
+      // Calculate stats
       var totalCards = grid.querySelectorAll('.hb-review-card').length;
       if (totalCards > 0) {
         var totalRating = 0;
@@ -1203,6 +1196,25 @@
         var avg = (totalRating / totalCards).toFixed(1);
         updateHeaderStats(avg, totalCards);
       }
+    }
+
+    // Main sync coordinator
+    function syncAndRenderReviews() {
+      // Step 1: Render immediately from SSR DOM (fast initial paint)
+      var domList = extractJudgemeFromDOM();
+      if (domList.length > 0) {
+        renderReviewsList(domList, false);
+      }
+
+      // Step 2: Fetch official live API for real-time status (handles newly approved & hidden reviews instantly)
+      fetchJudgemeLiveReviews(function(liveList, stats) {
+        if (liveList && liveList.length > 0) {
+          renderReviewsList(liveList, true);
+          if (stats && stats.average_rating) {
+            updateHeaderStats(stats.average_rating, stats.number_of_reviews);
+          }
+        }
+      });
     }
 
     // Run sync on load and after DOM is ready
@@ -1385,7 +1397,8 @@
             rating: starVal,
             date: dateFormatted,
             text: textVal,
-            photo: uploadedPhotoData || ''
+            photo: uploadedPhotoData || '',
+            timestamp: Date.now()
           };
 
           // 1. Save to LocalStorage so customer retains it on refresh
