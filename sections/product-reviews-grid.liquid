@@ -232,12 +232,16 @@
     border-radius: {{ section.settings.card_radius | default: 12 }}px !important;
     padding: 22px !important;
     box-sizing: border-box !important;
-    display: flex !important;
+    display: flex;
     flex-direction: column !important;
     justify-content: flex-start !important;
     position: relative !important;
     transition: all 0.25s ease !important;
     height: 100% !important;
+  }
+
+  #shopify-section-{{ section.id }} .hb-review-card.hb-card-hidden {
+    display: none !important;
   }
 
   #shopify-section-{{ section.id }} .hb-review-card:hover {
@@ -1317,14 +1321,20 @@
       var totalPages = Math.ceil(totalVisible / reviewsPerPage);
 
       if (totalPages <= 1) {
-        paginationWrap.style.display = 'none';
-        visibleCards.forEach(function(c) {
-          c.style.display = 'flex';
+        paginationWrap.style.setProperty('display', 'none', 'important');
+        allCards.forEach(function(c) {
+          if (c.hasAttribute('data-filtered-out')) {
+            c.classList.add('hb-card-hidden');
+            c.style.setProperty('display', 'none', 'important');
+          } else {
+            c.classList.remove('hb-card-hidden');
+            c.style.setProperty('display', 'flex', 'important');
+          }
         });
         return;
       }
 
-      paginationWrap.style.display = 'flex';
+      paginationWrap.style.setProperty('display', 'flex', 'important');
 
       if (currentReviewsPage > totalPages) currentReviewsPage = totalPages;
       if (currentReviewsPage < 1) currentReviewsPage = 1;
@@ -1332,12 +1342,21 @@
       var startIndex = (currentReviewsPage - 1) * reviewsPerPage;
       var endIndex = startIndex + reviewsPerPage;
 
+      allCards.forEach(function(c) {
+        if (c.hasAttribute('data-filtered-out')) {
+          c.classList.add('hb-card-hidden');
+          c.style.setProperty('display', 'none', 'important');
+        }
+      });
+
       visibleCards.forEach(function(card, idx) {
         if (idx >= startIndex && idx < endIndex) {
-          card.style.display = 'flex';
+          card.classList.remove('hb-card-hidden');
+          card.style.setProperty('display', 'flex', 'important');
           card.style.animation = 'hbFadeIn 0.35s ease forwards';
         } else {
-          card.style.display = 'none';
+          card.classList.add('hb-card-hidden');
+          card.style.setProperty('display', 'none', 'important');
         }
       });
 
