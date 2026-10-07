@@ -1002,8 +1002,6 @@
         var rName = nameEl ? nameEl.textContent.trim() : 'Customer';
         var rText = bodyEl ? bodyEl.textContent.trim() : '';
 
-        if (rName.toLowerCase().indexOf('test') === 0) return;
-
         var rScore = 5;
         if (ratingEl && ratingEl.getAttribute('data-score')) {
           rScore = parseInt(ratingEl.getAttribute('data-score'), 10) || 5;
@@ -1040,8 +1038,8 @@
     // FETCH REAL-TIME APPROVED REVIEWS FROM JUDGE.ME WIDGET API
     // ==========================================
     function fetchJudgemeLiveReviews(callback) {
-      var apiUrl = 'https://api.judge.me/reviews/reviews_for_widget?shop_domain=' + encodeURIComponent(shopDomain) + '&platform=shopify&product_id=' + encodeURIComponent(productId) + '&per_page=30';
-      fetch(apiUrl)
+      var apiUrl = 'https://api.judge.me/reviews/reviews_for_widget?shop_domain=' + encodeURIComponent(shopDomain) + '&platform=shopify&product_id=' + encodeURIComponent(productId) + '&per_page=30&_=' + Date.now();
+      fetch(apiUrl, { cache: 'no-store' })
         .then(function(res) {
           if (!res.ok) throw new Error('Live API status ' + res.status);
           return res.json();
@@ -1053,8 +1051,6 @@
           var list = [];
           data.reviews.forEach(function(r) {
             var rName = (r.reviewer_name || 'Customer').trim();
-            if (rName.toLowerCase().indexOf('test') === 0) return;
-
             var rPhoto = '';
             if (r.pictures_urls && r.pictures_urls.length > 0) {
               rPhoto = r.pictures_urls[0].original || r.pictures_urls[0].small || '';
@@ -1208,7 +1204,7 @@
 
       // Step 2: Fetch official live API for real-time status (handles newly approved & hidden reviews instantly)
       fetchJudgemeLiveReviews(function(liveList, stats) {
-        if (liveList && liveList.length > 0) {
+        if (Array.isArray(liveList)) {
           renderReviewsList(liveList, true);
           if (stats && stats.average_rating) {
             updateHeaderStats(stats.average_rating, stats.number_of_reviews);
