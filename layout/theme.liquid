@@ -7,7 +7,10 @@
   dir="{{ request.locale.direction | default: 'ltr' }}"
 >
   <head>
-    
+
+<meta name="facebook-domain-verification" content="a6slgp4fokvond8s06vusjmqeid0lm" />
+
+
     {%- if settings.favicon != blank -%}
       <link
         rel="icon"
@@ -57,8 +60,6 @@
         {% endif %}
       }
     </style>
-
-    {% render 'custom-fonts' %}
 
     {{ content_for_header }}
   </head>
